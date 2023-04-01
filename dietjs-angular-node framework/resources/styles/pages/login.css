@@ -1,0 +1,120 @@
+#header{
+	position: relative;
+	z-index: 1;
+}
+
+
+#content:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+#content .center{
+	width: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+
+#content .center-in{
+	text-align: center;
+	padding: 15px 20px;
+	margin:30px auto; max-width:400px; background:rgba(0,0,0,.1);
+}
+
+#content .center-in h1{
+	font-size: 41px;
+	color: #00BAFF;
+	font-weight: 400; margin:0 0 20px;
+}
+
+#content .center-in p{
+	font-size: 24px;
+	color: #A5A5A5;
+	font-weight: 200;
+	clear: both;
+	line-height: 34px;
+}
+
+#content .center-in a{
+	font-size: 14px;
+	line-height: 40px; display:inline-block; text-align:right; text-decoration: underline; width:100%;
+	
+}
+
+#content .center-in a:hover{
+	text-decoration: none;
+	border-bottom-color: #007DC5;
+}
+
+#content .center-in a:active{
+	border-bottom-color: red;
+}
+
+#footer{
+	position: fixed;
+	bottom: 0;
+}
+#content.login form{
+	max-width: 100%;
+	margin: 0 auto; border-top: 1px solid #ffffff; padding: 20px 0 0;
+}
+#content.login form input{
+	width: 100%; border:2px solid #cccccc;
+	clear: both; box-shadow: none;
+	float: left;
+	margin-bottom: 15px;
+}
+
+#content.login form input[type="text"]{
+	background: #ffffff url("../../images/msgic.png") no-repeat scroll 96% center; padding: 7px 45px 7px 10px;
+}
+
+
+#content.login form input[type="password"]{
+	background: #ffffff url("../../images/lock.png") no-repeat scroll 96% center; padding: 7px 45px 7px 10px;
+}
+
+#content.login form button{
+	width: 100%;
+}
+
+#content.login .error{
+	color: #FFF;
+	border-radius: 3px;
+	margin-top: 15px;
+	padding: 6px 0;
+	text-align: center;
+	float: left;
+	width: 100%;
+	border: 1px solid #F51D1D;
+	font-weight: bold;
+	box-shadow: 2px 2px 0 #FFD7D7;
+	background: #FF5252;
+}
+
+#content.login form p {
+    background: rgba(0, 0, 0, 0) url("../../images/ordivide1.png") repeat-x scroll center center;
+    font-size: 20px;
+    line-height: 22px;
+    margin: 15px 0 0; display: inline-block; width: 100%;
+    text-align: center;
+}
+
+#content.login form p span {
+    background: #D9D8D7;
+    display: inline-block;
+    padding: 0 5px; vertical-align: top; margin: -3px 0 0;
+}
+
+#content.login .break{
+	margin: 20px 0 10px -25px;
+	clear: both;
+}
+
+#content.login .top.break{
+	margin: 10px 0 20px -25px;
+}

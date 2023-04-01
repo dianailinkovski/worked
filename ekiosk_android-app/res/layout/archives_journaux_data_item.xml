@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    
+    android:layout_width="@dimen/grid_item_size_width"
+    android:layout_height="@dimen/grid_item_size"
+    android:orientation="vertical"
+    android:gravity="center"
+    
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+     
+    >
+	
+    <RelativeLayout
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:background="@drawable/dropshadow2"
+    	android:paddingTop="5dp" 
+    	android:paddingBottom="5dp"
+    	>
+
+	    <ImageView
+	        android:id="@+id/nciv_pug"
+	        android:layout_width="@dimen/grid_item_icon_size_width"
+	        android:layout_height="@dimen/grid_item_icon_size"
+	        android:layout_marginLeft="7dp"
+	        android:layout_marginTop="@dimen/grid_item_margin_size"
+	        android:background="@drawable/border"
+	        android:scaleType="centerCrop" />
+	    
+	    <TextView
+	        android:id="@+id/data_item_text"
+	        android:layout_width="match_parent"
+	        android:layout_height="@dimen/grid_item_text_view_size"
+	        android:layout_below="@+id/nciv_pug"
+	        
+	        android:ellipsize="end"
+	        android:gravity="center"
+	        android:maxLines="2"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:text="Browser with 2 lines"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	    
+	</RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:src="@drawable/ic_abonnement" />
+
+</RelativeLayout>

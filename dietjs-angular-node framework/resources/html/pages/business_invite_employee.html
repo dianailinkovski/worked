@@ -1,0 +1,17 @@
+<div class="center">
+	<div class="center-in">
+		<h1>Invite Staff</h1>
+		<p>Enter the email of the person you want to invite for {{-this.account.business.name}}.</p>
+		
+		<form action="/businesses/employees/invite" method="post">
+			<input id="email" type="text" name="email" placeholder="Email Address"/>
+			<script>document.getElementById('email').focus()</script>
+			<button type="submit">Send Invitation</button>
+			
+			{{if this.errors:}}
+				<div class="error" style="display: none;">The email you provided isn't valid or it doesn't exist in our database.</div>
+			{{end}}
+		</form>
+		
+	</div>
+</div>

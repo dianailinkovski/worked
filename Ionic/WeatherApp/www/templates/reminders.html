@@ -1,0 +1,44 @@
+<ion-view title="{{'REMINDERS' | translate}}" hide-back-button="true" class="blue-bar">
+  <ion-nav-buttons side="left">
+    <button menu-and-drawer-toggle class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header width-control reminders-page">
+    <div class="list">
+        <p class="page-instructions extra-top">{{reminderText.message}}</p>
+        <ion-toggle ng-model="reminderTimes.reminder" class="toggle-blue item-toggle">
+          {{'DAILY' | translate}}
+          <div class="select-outer" ng-click="datePickerOpen()">
+            <div class="select-time">
+                <h3 ng-model="reminderTimes.selected.real">{{reminderTimes.selected.real}}</h3>
+                <h3 class="select-colon">:</h3>
+                <h3 ng-model="reminderMins.selected.time">{{reminderMins.selected.time}}</h3>
+                <h3 ng-model="reminderTimes.selected.short">{{reminderTimes.selected.short | translate}}</h3>
+            </div>
+        </div>
+        </ion-toggle>
+        <ion-toggle ng-model="inactivityTimes.reminder" class="toggle-blue item-toggle">
+            <div class="select-label">
+                 {{'AFTER' | translate}} {{inactivityTimes.frequency}} {{'DAYS_INACTIVE' | translate}}
+                 <div class="select-outer" ng-click="datePicker2Open()">
+                    <div class="select-time">
+                        <h3 ng-model="inactivityTimes.selected.real">{{inactivityTimes.selected.real}}</h3>
+                        <h3 class="select-colon">:</h3>
+                        <h3 ng-model="inactivityMins.selected.time">{{inactivityMins.selected.time}}</h3>
+                        <h3 ng-model="inactivityTimes.selected.short">{{inactivityTimes.selected.short || translate}}</h3>
+                    </div>
+                </div>
+                <div style="margin-top:5px">
+                    <p class="frequency-label">{{'FREQUENCY' | translate}} </p>
+                    <div class="item-select">
+                    <select ng-model="inactivityTimes.frequency" ng-options="numOption for numOption in inactivityOptions">
+                    </select>
+                    </div>
+                </div>
+            </div>
+        </ion-toggle>
+    </div>
+    <div class="item item-divider item-text-wrap">
+        <h4>{{'REM_TIP_1' | translate}}</h4><h4 style="margin-top:15px">{{'REM_TIP_2' | translate}}</h4>
+    </div>
+  </ion-content>
+</ion-view>

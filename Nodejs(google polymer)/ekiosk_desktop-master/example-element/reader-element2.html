@@ -1,0 +1,487 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/core-animated-pages/core-animated-pages.html" rel="import">
+<link href="../components/core-animated-pages/transitions/slide-from-right.html" rel="import">
+<link href="../components/core-header-panel/core-header-panel.html" rel="import">
+<link href="../components/core-toolbar/core-toolbar.html" rel="import">
+<link href="../components/core-icon-button/core-icon-button.html" rel="import">
+<link href="../components/core-selector/core-selector.html" rel="import">
+<link href="../components/paper-icon-button/paper-icon-button.html" rel="import">
+<link href="../components/polymer-gestures/polymer-gestures.html" rel="import">
+
+
+<script src="../reader/src/shared/util.js"></script>
+<script src="../reader/src/display/api.js"></script>
+<script src="../reader/src/display/metadata.js"></script>
+<script src="../reader/src/display/canvas.js"></script>
+<script src="../reader/src/display/webgl.js"></script>
+<script src="../reader/src/display/pattern_helper.js"></script>
+<script src="../reader/src/display/font_loader.js"></script>
+<script src="../reader/src/display/annotation_helper.js"></script>
+
+<script>
+// Specify the main script used to create a new PDF.JS web worker.
+// In production, leave this undefined or change it to point to the
+// combined `pdf.worker.js` file.
+PDFJS.workerSrc = '../reader/src/worker_loader.js';
+</script>
+
+<polymer-element name="reader-element">
+	
+	<template>
+		
+		<style>
+			reader-element {
+				height:100%;
+				width:100%;
+				display:block;
+			}
+			#dualpage {
+				height:100%;
+				width:100%;
+				display:block;
+			}
+			
+			.pdfpage {
+				/*
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				*/
+				
+				
+				/*
+				min-width: 100%;
+				min-height: 100%;
+				background-size:contain;
+				background-repeat: no-repeat;
+				transition: background-size 0.5s, backgroundPosition 0.5s;
+				*/
+				/*background-position: 50%;*/
+			}
+			
+			.pdfpage img {
+				/*
+				max-width: 100%;
+				max-height: 100%;
+				*/
+			}
+			
+			.previousPage {
+				height: 100%;
+				width: 70px;
+				background-image: url('../img/Rounded_shift_left_arrow.png');
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: 50%;
+			}
+			
+			.nextPage {
+				height: 100%;
+				width: 70px;
+				background-image: url('../img/Rounded_shift_right_arrow.png');
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: 50%;
+			}
+			
+			/*
+			.pdfpage {
+				max-width: 100%;
+				max-height: 100%;
+				width: 100%;
+				height: 100%;
+				overflow:hidden;
+				text-align:center;
+			}
+			.pdfpage img {
+				background-size: 100%;
+				max-width: 100%;
+				max-height: 100%;
+				margin-top:0px;
+				margin-left:0px;
+			}
+			*/
+			
+		</style>
+		
+        <core-header-panel main fit>
+            <core-toolbar class="transparent-teal">
+                <core-icon-button on-tap="{{back}}" start-justified>Retour</core-icon-button>
+                <span flex style="text-align:center;">Nom du journal</span>
+                <core-selector selected="1" layout horizontal end-justified>
+                    <paper-icon-button fill isToggle on-tap="{{setTo300}}">300%</paper-icon-button>
+                    <paper-icon-button fill isToggle on-tap="{{setTo200}}">200%</paper-icon-button>
+                    <paper-icon-button fill isToggle on-tap="{{setTo100}}">100%</paper-icon-button>
+                    <paper-icon-button fill isToggle on-tap="{{setToFit}}">Fit</paper-icon-button>
+                </core-selector>
+              </core-toolbar>
+            
+            <div class="content">
+                <div id="wrapper-pdf" layout horizontal hidden></div>
+                <div id="wrapper-pdf2" layout horizontal hidden></div>
+                    
+                    <div layout horizontal center-justified center fit>
+                    	
+                        <div class="previousPage" on-tap="{{previousPage}}"></div>
+                        
+                    	<core-animated-pages id="dualpage" selected="{{selectedPage}}" transitions="slide-from-right">
+                    		<section>Loading</section>
+                    	</core-animated-pages>
+                    	
+                        <div class="nextPage" on-tap="{{nextPage}}"></div>
+                        
+                </div>
+            </div>
+        </core-header-panel>
+        
+        
+        
+	</template>
+	
+	<script>
+	Polymer('reader-element', {
+		  
+		  ready: function() {
+			console.log("ready-reader");
+			
+			var currentRef = this;
+			
+			PDFJS.getDocument("../reader/issue.pdf").then(function getPdfForm(pdf) {
+				var currentRef2 = currentRef;
+				// Rendering all pages starting from first
+				//var viewer = document.getElementById('viewer');
+				
+				var viewer = currentRef.shadowRoot.getElementById('wrapper-pdf');
+				var pageNumber = 1;
+				currentRef2.renderPage(viewer, pdf, pageNumber++, function pageRenderingComplete() {
+					if (pageNumber > pdf.numPages) {
+						getAllCanvas(currentRef2);
+						return; // All pages rendered
+					}
+					// Continue rendering of the next page
+					currentRef2.renderPage(viewer, pdf, pageNumber++, pageRenderingComplete);
+				});
+			});
+		  },
+		  
+	      selectedPage: 0,
+		  masterWidth:1339,
+		  masterHeight:1870/2,
+		  
+		  zoomScale:0,
+		  originalPositionWidth:0,
+		  originalPositionHeight:0,
+		  clicked: 0, 
+		  lastEvent: null,
+		  
+		  back: function() {
+			  
+		  },
+		  
+		  previousPage: function() {
+			  this.setToFit();
+			  this.selectedPage = this.selectedPage-1;
+		  },
+		  
+		  nextPage: function() {
+			  this.setToFit();
+			  this.selectedPage = this.selectedPage+1;
+		  },
+		  setTo100: function() {
+			  console.log('100');
+			  var currentSelectedDiv = this.shadowRoot.querySelector('section[active]').querySelector('.test');
+			  $(currentSelectedDiv).panzoom("zoom", 2.0, { silent: true });
+			  
+		  },
+		  
+		  setToFit: function() {
+			  console.log('fit');
+			  var currentSelectedDiv = this.shadowRoot.querySelector('section[active]').querySelector('.test');
+			  $(currentSelectedDiv).panzoom("zoom", 0.1);
+			  
+		  },
+		  
+		  
+		renderPage: function (div, pdf, pageNumber, callback) {
+			
+			pdf.getPage(pageNumber).then(function(page) {
+				var scale = 1.5;
+				var viewport = page.getViewport(scale);
+				
+				var pageDisplayWidth = viewport.width;
+				var pageDisplayHeight = viewport.height;
+				
+				var pageDivHolder = document.createElement('div');
+				pageDivHolder.className = 'pdfpage';
+				//pageDivHolder.style.width = pageDisplayWidth + 'px';
+				//pageDivHolder.style.height = pageDisplayHeight + 'px';
+				div.appendChild(pageDivHolder);
+				
+				// Prepare canvas using PDF page dimensions
+				var canvas = document.createElement('canvas');
+				var context = canvas.getContext('2d');
+				canvas.width = pageDisplayWidth;
+				canvas.height = pageDisplayHeight;
+				pageDivHolder.appendChild(canvas);
+				
+				// Render PDF page into canvas context
+				var renderContext = {
+					canvasContext: context,
+					viewport: viewport
+				};
+				page.render(renderContext).promise.then(callback);
+				
+				//setupForm(formDiv, page, viewport);
+			});
+		},
+		  
+    });
+	
+	
+	
+	// Fetch the PDF document from the URL using promices
+	
+	function getAllCanvas(currentRef) {
+		console.log('complete');
+		var viewer = currentRef.shadowRoot.getElementById('wrapper-pdf2');
+		
+		var canvas = currentRef.shadowRoot.querySelectorAll('canvas');
+		
+		//console.log(canvas);
+		
+		var dualImage;
+		var c;
+		var ctx;
+		
+		
+		var pageDivHolder = document.createElement('div');
+		pageDivHolder.className = 'pdfpage';
+		//pageDivHolder.style.width = pageDisplayWidth + 'px';
+		//pageDivHolder.style.height = pageDisplayHeight + 'px';
+		viewer.appendChild(pageDivHolder);
+		
+		// Prepare canvas using PDF page dimensions
+		c = document.createElement('canvas');
+		c.className="canvas-dualpage";
+		ctx = c.getContext('2d');
+		var temp = new Image();
+		temp.src = canvas[0].toDataURL();
+		c.width = temp.width*2;
+		c.height = temp.height;
+		pageDivHolder.appendChild(c);
+		
+		for (x = 0; x < canvas.length; ++x) {
+			
+			var currentCanvas = canvas[x];
+			//var currentContext = currentCanvas.getContext('2d');
+			var tempImg = new Image();
+			tempImg.src = currentCanvas.toDataURL();
+			//viewer.appendChild(tempImg);
+			
+			
+			if(x%2 == 1) {
+				var section = document.createElement('section');
+				viewer.appendChild(section);
+				var pageDivHolder = document.createElement('div');
+				//pageDivHolder.className = 'pdfpage';
+				//pageDivHolder.style.width = pageDisplayWidth + 'px';
+				//pageDivHolder.style.height = pageDisplayHeight + 'px';
+				section.appendChild(pageDivHolder);
+				
+				// Prepare canvas using PDF page dimensions
+				c = document.createElement('canvas');
+				c.className="canvas-dualpage";
+				ctx = c.getContext('2d');
+				c.width = tempImg.width*2;
+				c.height = tempImg.height;
+				pageDivHolder.appendChild(c);
+				
+			}
+			
+			
+			
+			var offset = 0;
+			
+			if(x%2 == 0) {
+				offset = currentCanvas.width;
+			}
+			
+			//var imageData = currentContext.getImageData(0,0,1339,1870);
+			//ctx.drawImage(imageData,0,0);
+			//ctx.putImageData(c,0,0, offset);
+			
+			
+			ctx.drawImage(tempImg, 0, 0, tempImg.width,tempImg.height ,offset,0, tempImg.width,tempImg.height);
+			
+			
+		}
+		
+		console.log('END of render Dual page');
+		var oldviewer = currentRef.shadowRoot.getElementById('wrapper-pdf');
+		oldviewer.parentNode.removeChild(oldviewer);
+		
+		convertToImg(currentRef);
+		
+	}
+	
+	function convertToImg(currentRef) {
+		
+		var viewer = currentRef.shadowRoot.getElementById('dualpage');
+		
+		var canvas = currentRef.shadowRoot.querySelectorAll('.canvas-dualpage');
+		
+		
+		for (x = 0; x < canvas.length; ++x) {
+			//console.log(x);
+			
+			var currentCanvas = canvas[x];
+			
+			currentRef.originalWidth = currentCanvas.width;
+			currentRef.originalHeight = currentCanvas.height;
+			
+			
+			
+			var section = document.createElement('section');
+			viewer.appendChild(section);
+			
+			var pageDivHolder2 = document.createElement('div');
+			pageDivHolder2.className = 'test';
+			section.appendChild(pageDivHolder2);
+			
+			var pageDivHolder = document.createElement('div');
+			pageDivHolder.className = 'pdfpage';
+			//pageDivHolder.style.backgroundPositionX = currentCanvas.width/2+"px";
+			//pageDivHolder.style.backgroundPositionY = currentCanvas.height/2+"px";
+			pageDivHolder2.appendChild(pageDivHolder);
+			//pageDivHolder.style.backgroundImage = "url(" + currentCanvas.toDataURL() + ")";
+			//console.log(pageDivHolder);
+			
+			var imgElement = document.createElement('img');
+			imgElement.className = 'img-pdfpage';
+			imgElement.src = currentCanvas.toDataURL();
+			pageDivHolder.appendChild(imgElement);
+			
+			
+			
+			//var $section = $(section);
+			//var $panzoom = $section.find('.panzoom').panzoom();
+			//console.log($section);
+			//console.log($(pageDivHolder));
+			//console.log($(wrap(pageDivHolder)));
+			//var $panzoom = $(wrap(pageDivHolder)).panzoom();
+			var $panzoom = $(pageDivHolder2).panzoom({
+				}).panzoom("zoom", 0.1);
+			
+			/*
+			console.log($panzoom);
+			console.log($panzoom.parent());
+			
+			$panzoom.parent().on('mousewheel.focal', function( e ) {
+				console.log('mousewheel');
+				console.log($panzoom);
+				e.preventDefault();
+				var delta = e.delta || e.originalEvent.wheelDelta;
+				var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+				$(pageDivHolder2).panzoom('zoom', zoomOut, {
+					increment: 0.1,
+					animate: false,
+					focal: e
+				});
+			});
+			*/
+			
+			
+			/*
+			pageDivHolder.addEventListener('mousedown', function(e) {
+				currentRef.clicked = 1;
+				currentRef.lastEvent = e;
+				console.log('mousedown');
+			});
+			
+			pageDivHolder.addEventListener('mouseup', function(e) {
+				currentRef.clicked = 0;
+				//currentRef.lastEvent = null;
+				console.log('mouseup');
+			});
+			
+			pageDivHolder.addEventListener('mousemove', function(e) {
+				if(currentRef.clicked == 1) {
+					
+					var x = currentRef.lastEvent.x - e.x;
+					var y = currentRef.lastEvent.y - e.y;
+					currentRef.lastEvent = e;
+					
+					var currentSelectedDiv = currentRef.shadowRoot.querySelector('section[active]').querySelector('.pdfpage');
+			  		//currentSelectedDiv.style.backgroundPosition = x+"px "+y+"px";
+					
+					var lastX = currentSelectedDiv.style.backgroundPositionX;
+					var lastY = currentSelectedDiv.style.backgroundPositionY;
+					lastX = lastX.replace("px", "");
+					lastY = lastY.replace("px", "");
+					if(lastX == '') lastX = 0;
+					if(lastY == '') lastY = 0;
+					
+					var nextX = parseFloat(lastX) - (parseFloat(x));
+					var nextY = parseFloat(lastY) - (parseFloat(y));
+					
+					console.log(nextX);
+					
+					currentSelectedDiv.style.backgroundPositionX = nextX+"px";
+					currentSelectedDiv.style.backgroundPositionY = nextY+"px";
+					
+				}
+				
+			});
+			
+			*/
+			//var currentContext = currentCanvas.getContext('2d');
+			//var tempImg = new Image();
+			//tempImg.src = currentCanvas.toDataURL();
+			//pageDivHolder.appendChild(tempImg);
+			
+		}
+		
+		
+		var oldviewer = currentRef.shadowRoot.getElementById('wrapper-pdf2');
+		oldviewer.parentNode.removeChild(oldviewer);
+		
+		
+		console.log('step 3 end');
+		/*
+		var allPages = viewer.querySelectorAll('.img-pdfpage');
+		console.log(allPages);
+		for (x = 0; x < allPages.length; ++x) {
+			var page = allPages[x];
+			console.log(x);
+			console.log(page);
+			console.log($(page))
+			
+			
+			
+				
+		}
+		
+		*/
+		/*
+		var allPages = viewer.querySelectorAll('.img-pdfpage');
+		
+		(function(document) {
+				console.log('---');
+				console.log($('.img-pdfpage'));
+				for (x = 0; x < allPages.length; ++x) {
+					console.log($(allPages[x]));
+					$(allPages[x]).panzoom();
+				}
+				console.log('---');
+			})(wrap(document));
+		*/
+		currentRef.selectedPage = 1;
+		
+	}
+	
+	
+	
+  	</script>
+    
+</polymer-element>

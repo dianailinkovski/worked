@@ -1,0 +1,27 @@
+function Mentor() {
+  this.mysql = require('mysql');
+  this.connection = this.mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : '',
+    database : 'vbox'
+  });
+  this.result = false;
+  this.err = false;
+}
+
+Mentor.prototype = {
+  execute: function(q){
+    this.connection.connect();
+    this.connection.query(q, function(err, rows, fields){
+      if (err) {
+        this.err = err;
+        this.result = false;
+      }else{
+        this.result = rows;
+      }
+    })
+  }
+  
+
+}

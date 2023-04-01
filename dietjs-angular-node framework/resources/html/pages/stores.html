@@ -1,0 +1,104 @@
+<div class="wrap">
+	<h1>Create New Store</h1>
+	<div class="stores">
+	{{-@post '/businesses/stores', class:'store' }}
+		<div class="in">
+			<i class="fa fa-map-marker map"></i>
+			<!--ul class="rate">
+				<li><img src="../../images/solidrate.png"></li>
+				<li><img src="../../images/solidrate.png"></li>
+				<li><img src="../../images/solidrate.png"></li>
+				<li><img src="../../images/solidrate.png"></li>
+				<li><img src="../../images/solidrate.png"></li>
+			</ul-->
+			<div class="detail name">
+				<!--i class="fa fa-info-circle"></i-->
+				{{-this.input 'New Store Name', 'name', 'text'}}
+			</div>
+			
+			<div id="location_holder">
+				<div class="detail location">
+					<!--i class="fa fa-location-arrow"></i-->
+					{{-this.input 'Store Location', 'formatted_address', 'text'}}
+				</div>
+				{{-this.input false, 'country_short', 'hidden' }}
+				{{-this.input false, 'country_long', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_1_short', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_1_long', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_2_short', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_2_long', 'hidden' }}
+				{{-this.input false, 'locality_short', 'hidden' }}
+				{{-this.input false, 'locality_long', 'hidden' }}
+				{{-this.input false, 'postal_code_short', 'hidden' }}
+				{{-this.input false, 'postal_code_long', 'hidden' }}
+				{{-this.input false, 'neighborhood_short', 'hidden' }}
+				{{-this.input false, 'neighborhood_long', 'hidden' }}
+				{{-this.input false, 'route_short', 'hidden' }}
+				{{-this.input false, 'route_long', 'hidden' }}
+				{{-this.input false, 'street_number_short', 'hidden' }}
+				{{-this.input false, 'street_number_long', 'hidden' }}
+				{{-this.input false, 'latitude', 'hidden' }}
+				{{-this.input false, 'longitude', 'hidden' }}
+				{{-this.input 1, 'form', 'hidden' }}
+			</div>
+			<div class="actions">
+				<button type="submit fa fa-save">Create Store</button>
+			</div>
+		</div>
+	{{-@end}}
+	</div>
+	
+
+	<div id="store-list">
+		<h1>Stores</h1>
+		{{-console.log this.errors}}
+		<div class="stores">
+			{{for store in this.stores:}}
+				{{-@post '/businesses/stores', values: store, class:'store' }}
+					<div class="in">
+						<i class="fa fa-map-marker map"></i>
+						<ul class="rate">
+							<li><img src="../../images/solidrate.png"></li>
+							<li><img src="../../images/solidrate.png"></li>
+							<li><img src="../../images/solidrate.png"></li>
+							<li><img src="../../images/solidrate.png"></li>
+							<li><img src="../../images/solidrate.png"></li>
+						</ul>
+						<div class="detail name">
+							<!--i class="fa fa-info-circle"></i-->
+							{{-this.input 'Store Name', 'name', 'text', store.id}}
+						</div>
+						<div class="detail location">
+							<!--i class="fa fa-location-arrow"></i-->
+							{{-this.input 'Store Location', 'formatted_address', 'text', store.id}}
+						</div>
+						{{-this.input false, 'id', 'hidden', store.id }}
+						{{-this.input false, 'country_short', 'hidden', store.id }}
+						{{-this.input false, 'country_long', 'hidden', store.id }}
+						{{-this.input false, 'administrative_area_level_1_short', 'hidden', store.id }}
+						{{-this.input false, 'administrative_area_level_1_long', 'hidden', store.id }}
+						{{-this.input false, 'administrative_area_level_2_short', 'hidden', store.id }}
+						{{-this.input false, 'administrative_area_level_2_long', 'hidden', store.id }}
+						{{-this.input false, 'locality_short', 'hidden', store.id }}
+						{{-this.input false, 'locality_long', 'hidden', store.id }}
+						{{-this.input false, 'postal_code_short', 'hidden', store.id }}
+						{{-this.input false, 'postal_code_long', 'hidden', store.id }}
+						{{-this.input false, 'neighborhood_short', 'hidden', store.id }}
+						{{-this.input false, 'neighborhood_long', 'hidden', store.id }}
+						{{-this.input false, 'route_short', 'hidden', store.id }}
+						{{-this.input false, 'route_long', 'hidden', store.id }}
+						{{-this.input false, 'street_number_short', 'hidden', store.id }}
+						{{-this.input false, 'street_number_long', 'hidden', store.id }}
+						{{-this.input false, 'latitude', 'hidden', store.id }}
+						{{-this.input false, 'longitude', 'hidden', store.id }}
+						<div class="actions">
+							
+							<a href="/businesses/stores/delete?id={{-store.id}}"class="silver button fa fa-trash-o" onclick="return confirm('Are you sure?')">remove</a>
+							<button type="submit" class="">Save</button>
+						</div>
+					</div>
+				{{-@end}}
+			{{end}}
+		</div>
+	</div>
+</div>

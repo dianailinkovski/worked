@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">    
+    
+    <link href="css/style.css" rel="stylesheet">
+
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	 
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+	<script src="lib/mobiscroll.custom-2.15.0.min.js"></script>
+
+	<script src="lib/ionic-rating/ionic-rating.js"></script>
+
+
+	<script src="lib/pnotify/pnotify.core.js"></script>
+	<script src="lib/pnotify/pnotify.confirm.js"></script>
+	<script src="lib/pnotify/pnotify.buttons.js"></script>
+	<script src="lib/angular-pnotify/src/angular-pnotify.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+	
+	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+	<script src="capital.js"></script>
+	
+	<!--<script src="lib/ng-map.min.js"></script>-->
+    <!-- your app's js -->
+		<script src="http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&key=AIzaSyAU-EgF0l5o8DXx2YuPWb_hrKGBttnQx1c&sensor=true"></script>
+	<script src="js/infobox.js"></script>
+	
+	<script src="lib/angular-google-places-autocomplete/src/autocomplete.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+	<!--<script src="js/directives/map_controller.js"></script>
+	<script src="js/directives/map.js"></script>
+	<script src="js/directives/marker.js"></script>
+	<script src="js/directives/shape.js"></script>
+	<script src="js/directives/info-window.js"></script>-->
+	<script src="js/services.js"></script>
+	<script src="js/sortable.js"></script>	
+  </head>
+
+  <body id="bodyId" ng-app="weatherapp" class="platform-android platform-cordova platform-webview">
+    <ion-nav-view></ion-nav-view>	
+
+  </body>
+  <script>
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+		  //  alert("deviceReady");
+		   if(navigatior.splashscreen)
+		   		navigator.splashscreen.hide();
+	   //loadScript();
+	   //var domElement = document.getElementById("bodyId");
+	   //angular.bootstrap(domElement, ["safecab"]);
+	}
+
+
+	document.addEventListener("backbutton", onBackKeyDown, false);
+
+	function onBackKeyDown() {
+		// Handle the back button
+	}
+</script>
+</html>

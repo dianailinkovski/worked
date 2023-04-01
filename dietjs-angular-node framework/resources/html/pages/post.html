@@ -1,0 +1,47 @@
+{{post = this.post}}
+<div class="post">
+	<a href="/accounts/{{-post.author.id}}" class="avatar">
+		{{if this.post.isBusiness:}}
+			<img src="{{-post.author.avatar}}" alt="Avatar"/>
+		{{else:}}
+			<img src="{{-post.author.avatar()}}" alt="Avatar"/>
+		{{end}}
+	</a>
+	<div class="post-contents">
+		<div class="top">
+			<div class="left">
+				{{if this.post.isBusiness:}}
+					<a href="/{{-post.author.address}}" class="author">{{-post.author.name}}</a>
+					
+				{{else:}}
+					<a href="/accounts/{{-post.author.id}}" class="author">{{-post.author.full_name}}</a>
+					
+				{{end}}
+							</div>
+			<div class="right">
+				{{if this.account and this.account.business and this.account.business.id is post.author.id:}}
+					<a href="/posts/delete?id={{-post.id}}" class="delete" onclick="return confirm('Are you sure?');">delete</a>
+				{{else if this.account and this.account.id is post.author.id:}}
+					<a href="/posts/delete?id={{-post.id}}" class="delete" onclick="return confirm('Are you sure?');">delete</a>
+				{{end}}
+				<div class="time">
+                  {{- dates.months[new Date(parseInt(post.time)).getMonth()]}}
+					{{- new Date(parseInt(post.time)).getDate() }},
+					{{- new Date(parseInt(post.time)).getFullYear() }}
+				</div>
+			</div>
+		</div>
+		<div class="message">{{-nl2br post.message}}</div>
+		<div class="likedislike"><span class="like" onclick="hitLike('1','{{-this.post.id}}')" style="color: #197512; cursor: pointer"><i class="fa fa-thumbs-up"></i>&nbsp;<span id="like{{-this.post.id}}"></span></span> &nbsp;|&nbsp; <span class="like"  onclick="hitLike('-1','{{-this.post.id}}')"  style="color: #f00; cursor: pointer"><i class="fa fa-thumbs-down"></i> &nbsp;<span id="dislike{{-this.post.id}}"></span></span></div>
+        <script>
+            $.get("/totallikedislike", {"postId":"{{-this.post.id}}"},function(resl){
+                resl = $.parseJSON(resl)
+                $("#like"+resl.postId).html(resl.totalLike)
+                
+                $("#dislike"+resl.postId).html(resl.totalDislike)
+                
+            })
+        </script>
+
+	</div>
+</div>

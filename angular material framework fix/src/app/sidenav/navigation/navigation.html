@@ -1,0 +1,55 @@
+<md-toolbar class="navigation-header md-whiteframe-1dp" layout="row" layout-align="start center">
+    <div class="logo" layout="row" layout-align="start center">
+        <span class="logo-image">W</span>
+        <span class="logo-text">WhenApp</span>
+    </div>
+</md-toolbar>
+
+<ms-nav ms-scroll="vm.msScrollOptions" class="scrollable">
+
+    <ms-nav-item ms-nav-title>
+        <span>Agendas</span>
+    </ms-nav-item>
+
+    <ms-nav-item ms-nav-toggle>
+        <a ms-nav-button md-ink-ripple>
+            <span class="ms-nav-label" ui-sref="app.calendar">Felipe Soares</span>
+        </a>
+
+        <a ms-nav-button md-ink-ripple ui-sref="app.calendar">
+            <span class="ms-nav-label" >John Soares</span>
+        </a>
+
+    </ms-nav-item>
+
+
+
+    <ms-nav-item ms-nav-title>
+        <span translate="NAVIGATION.SETTINGS">Configurações</span>
+    </ms-nav-item>
+
+    <ms-nav-item ms-nav-toggle>
+        <a ms-nav-button md-ink-ripple>
+            <i class="icon-tile-four s16"></i>
+            <span class="ms-nav-label" translate="NAVIGATION.SUBJECTS">Assuntos</span>
+            <i class="icon-chevron-down s16 arrow"></i>
+        </a>
+
+        <ms-nav-toggle-items>
+            <ms-nav-item>
+                <a ms-nav-button ng-click="onCreateSubject()" ui-sref-active="active md-accent-bg" md-ink-ripple>
+                    <span class="ms-nav-label" translate="NAVIGATION.CREATE">Criar</span>
+                </a>
+            </ms-nav-item>
+
+            <ms-nav-item>
+                <a ms-nav-button ui-sref="app.dashboard-server" ui-sref-active="active md-accent-bg" md-ink-ripple>
+                    <span class="ms-nav-label" translate="NAVIGATION.DELETE">Apagar</span>
+                </a>
+            </ms-nav-item>
+
+
+        </ms-nav-toggle-items>
+    </ms-nav-item>
+
+</ms-nav>

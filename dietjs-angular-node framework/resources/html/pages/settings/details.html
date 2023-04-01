@@ -1,0 +1,71 @@
+{{-@post '/accounts/save'}}
+	<!-- title -->
+	<h1>Change Details</h1>
+	<div class="break short"></div>
+	
+	<!-- name -->
+	<fieldset class="FLname">
+		<h3>Name</h3>
+		{{-this.input 'First Name', 'first_name', 'text'}}
+		{{-this.input 'Last Name', 'last_name', 'text'}}
+	</fieldset>	
+	
+	<!-- email-->
+	<fieldset>
+		<h3>Email</h3>
+		<input type="text" disabled="disabled" value="{{-this.inputs.email}}" />
+	</fieldset>
+	
+	<!-- contact number -->
+	<fieldset>
+		<h3>Contact Number</h3>
+		{{-this.input 'Phone Number', 'contact_number', 'text'}}
+	</fieldset>
+	
+	<!-- location -->
+	<fieldset id="location_holder" >
+		<h3>Location</h3>
+		{{-this.input 'Your Location', 'formatted_address', 'text'}}
+		
+		{{-this.input false, 'country_short', 'hidden' }}
+		{{-this.input false, 'country_long', 'hidden' }}
+		{{-this.input false, 'administrative_area_level_1_short', 'hidden' }}
+		{{-this.input false, 'administrative_area_level_1_long', 'hidden' }}
+		{{-this.input false, 'administrative_area_level_2_short', 'hidden' }}
+		{{-this.input false, 'administrative_area_level_2_long', 'hidden' }}
+		{{-this.input false, 'locality_short', 'hidden' }}
+		{{-this.input false, 'locality_long', 'hidden' }}
+		{{-this.input false, 'postal_code_short', 'hidden' }}
+		{{-this.input false, 'postal_code_long', 'hidden' }}
+		{{-this.input false, 'neighborhood_short', 'hidden' }}
+		{{-this.input false, 'neighborhood_long', 'hidden' }}
+		{{-this.input false, 'route_short', 'hidden' }}
+		{{-this.input false, 'route_long', 'hidden' }}
+		{{-this.input false, 'street_number_short', 'hidden' }}
+		{{-this.input false, 'street_number_long', 'hidden' }}
+	</fieldset>
+	
+	<fieldset>	
+		<h3>Gender</h3>
+		<!-- gender -->
+		<div id="gender-select">
+			{{-this.input 'Male', 'gender', 'radio', 'male' }}
+			{{-this.input 'Female', 'gender', 'radio', 'female' }}
+			<!--
+			<div class="radio male validetta-bubble-left">
+				<input id="gender-male" type="radio" name="gender" value="male" data-validetta="required" checked="true" />
+				<label for="gender-male">Male</label>
+			</div>
+			<div class="radio female">
+				<input id="gender-female" type="radio" name="gender" value="female" data-validetta="required" />
+				<label for="gender-female">Female</label>
+			</div>-->
+		</div>
+	</fieldset>
+	<div class="break short"></div>
+	
+	<!-- actions -->
+	<div id="signup-actions">
+		<button type="submit" class="accept">save details</button>
+	</div>
+{{-@end}}

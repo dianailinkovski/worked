@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+  <title>Bibliothèque - eKiosk</title>
+
+  <script src="components/platform/platform.js"></script>
+  <script>
+	var Datastore = require('nedb');
+	var db = new Datastore({  
+		filename : getUserDataPath() + '/fratmat.db',
+		autoload: true
+	});
+	
+	function getDB() {
+		return db;
+	}
+	
+	function saveUser(firstName, lastName) {  
+		db.insert({
+			firstName: firstName,
+			lastName: lastName
+		}, function(err, newDoc) {
+			if (err) {
+				console.log(err);
+			} else {
+				showUser(newDoc);
+			}
+		});
+	}
+	
+	function saveIssue(issue) {  
+		db.insert({
+			action: issue['action'],
+			artist: issue['artist'],
+			album: issue['album'],
+			color: issue['color']
+		}, function(err, newDoc) {
+			if (err) {
+				console.log(err);
+			} else {
+				showUser(newDoc);
+			}
+		});
+	}
+	
+	function deleteIssue(id){
+		console.log("deleteIssue");
+		db.remove({ _id: id }, {}, function (err, numRemoved) {
+		  // numRemoved = 1
+		  console.log(err);
+		  console.log(numRemoved);
+		});
+	}
+	
+	function getRecentsIssues() {  
+		var recentPendant = localStorage.getItem("StorageRecentPendant");
+		console.log("StorageRecentPendant = "+recentPendant);
+		var temp = new Array();
+		if (recentPendant == 3) {
+			db.find({}).sort({ "downloadDate": -1 }).exec(function (err, docs) {
+				for (var i = 0; i < docs.length; i++) {
+					temp[i] = docs[i];
+				}
+			});
+		}
+		else {
+			var nbJour = (recentPendant+1)*7;
+			
+			var unix = Math.round(new Date().getTime() / 1000) - (nbJour*24*60*60);
+			
+			db.find({"downloadDate":{$gte:unix}}).sort({ "downloadDate": -1 }).exec(function (err, docs) {
+				for (var i = 0; i < docs.length; i++) {
+					temp[i] = docs[i];
+				}
+			});
+		}
+		return temp;
+	}
+	
+	function getAllIssues() {  
+		var temp = new Array();
+		db.find({}).sort({ "downloadDate": -1 }).exec(function (err, docs) {
+			for (var i = 0; i < docs.length; i++) {
+				temp[i] = docs[i];
+			}
+		});
+		return temp;
+	}
+	
+	function getAllFavoris() {  
+		var temp = new Array();
+		db.find({"favoris": 1}).sort({ "downloadDate": -1 }).exec(function (err, docs) {
+			for (var i = 0; i < docs.length; i++) {
+				temp[i] = docs[i];
+			}
+		});
+		return temp;
+	}
+	
+	function getAllAbonnement() {
+		var temp = new Array();
+		db.find({"isSubscription": 1}).sort({ "downloadDate": -1 }).exec(function (err, docs) {
+			for (var i = 0; i < docs.length; i++) {
+				temp[i] = docs[i];
+			}
+		});
+		return temp;
+	}
+
+	function showUser(docs) {
+		console.log(docs['album']);
+	}
+	
+	function getUserDataPath() {  
+		var path = require('path');
+		return path.dirname(process.execPath);
+	}
+	
+	
+	/*
+	var temp = {action: '1', artist: 'Tycho', album: 'Fragments', color: '#f4db33' };
+	
+	saveIssue(temp);
+	
+	temp =  {action: '2', artist: 'Tycho', album: 'Past Prologue', color: '#972ff8' };
+	
+	saveIssue(temp);
+	
+	temp =  {action: '3', artist: 'Tycho', album: 'Spectre', color: '#7dd6fe' };
+	
+	saveIssue(temp);
+	
+	temp =  {action: '0', artist: 'Tycho', album: 'Awake', color: '#dc3c84' };
+	
+	saveIssue(temp);
+	saveIssue(temp);
+	saveIssue(temp);
+	
+	console.log(getAllTheThings());
+	*/
+	
+	//saveUser('firstName1', 'lastName1');
+	//saveUser('firstName2', 'lastName2');
+	//saveUser('firstName3', 'lastName3');
+	//saveUser('firstName4', 'lastName4');
+	
+	//getAllTheThings();
+	if(typeof(Storage) !== "undefined") {
+		// Code for localStorage/sessionStorage.
+		// Store
+		//localStorage.setItem("lastname", "Smith");
+		// GetFromStore
+		//localStorage.getItem("lastname");
+
+		console.log("Storage supported");
+	} else {
+		// Sorry! No Web Storage support..
+		console.log("Storage NOT supported");
+	}
+  </script>
+  <!--
+  <link href="db.html" rel="import">
+  -->
+  <link href="example-element/bibliothequeLayout-element.html" rel="import">
+  
+  
+  <style>
+    body {
+      font-family: 'Roboto 2', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      background: #f1f1f1;
+    }
+
+    .green {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 350px;
+      background: #70c26f;
+    }
+  </style>
+  
+  
+  
+</head>
+<body>
+
+	
+  
+  <!--<div class="green"></div>-->
+  <bibliothequeLayout-element></bibliothequeLayout-element>
+  
+</body>
+</html>

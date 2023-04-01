@@ -1,0 +1,266 @@
+header .container {
+	*z-index: 20;
+}
+header .logo {
+	width: 139px;
+	height: 45px;
+	padding: 0 18px 0 0;
+}
+header .logo img {
+	position: absolute;
+	z-index: 40;
+	background: #fff;
+}
+#qaWidget .cta {
+	*width: 50px;
+}
+.dropdown .dropdownMenu {
+	background: transparent url(../images/dropdown-bg.png) top right no-repeat !important;
+	padding-right: 8px !important;
+	margin-right: -8px;
+}
+.dropdown .dropdownBg {
+	position: relative;
+	background: none !important;
+}
+.dropdown .shadowBottomL {
+	position: absolute;
+	bottom: -8px;
+	left: 10;
+	background: url(../images/dropdown-bottom-L.png) 0 0 no-repeat;
+	width: 7px;
+	height: 8px;
+}
+.dropdown .shadowBottom {
+	position: absolute;
+	left: 7px;
+	bottom: -8px;
+	background: url(../images/dropdown-bottom.png) top right no-repeat;
+	width: 100%;
+	height: 8px;
+}
+#productsNav .dropdownToggle {
+	position: absolute;
+	top: 0;
+	right: -1px;
+	z-index: 30;
+}
+#productsNav .dropdownMenu {
+	padding: 0;
+	*padding: 30px 0 0 0;
+}
+#productsNav .spacer {
+	background: #fff;
+	width: 100%;
+	height: 30px;
+	margin-left: -17px;
+	*position: absolute;
+	*top: -30px;
+	*z-index: 10;
+	*margin-left: 0px;
+}
+#productsNav .spacer span {
+	*width: 16px;
+}
+.tabNav .dropdownMenu {
+	background: url(../images/dropdown-tab-bg.png) bottom right no-repeat !important;
+	width: 100%;
+	padding: 5px 0 !important;
+	margin: 0;
+}
+.tabNav .dropdownBg {
+}
+.tabNav .dropdown .shadowBottomL {
+	position: absolute;
+	bottom: 0;
+	left: -10px;
+	background: url(../images/dropdown-tab-shadow-L.png) bottom left no-repeat !important;
+	width: 10px;
+	height: 100%;
+}
+.tabNav .dropdownMenu a {
+	display: block;
+	width: 83%;
+	padding: 0 5% 5px 5%;
+}
+
+.buttonArea {
+	height: 40px;
+}
+.button {
+	background-image: none;
+	border: none;
+	padding: 0;
+}
+.button .buttonR, .button input {
+	float: left;
+	background-image: none;
+	background: transparent url(../images/sprite-sticky_ie.png) right -180px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	padding: 0 10px 0 4px;
+}
+.button .buttonCornerL {
+	float: left;
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -180px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	width: 6px;
+}
+.redButton .buttonR, .redButton input,
+input.redButton, button.redButton,
+.actionArea .resetButton button, .actionArea .resetButton input[type=button] {
+	float: left;
+	background-image: none;
+	background: transparent url(../images/sprite-sticky_ie.png) right -150px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	padding: 0 10px 0 4px;
+}
+.redButton .buttonCornerL {
+	float: left;
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -150px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	width: 6px;
+}
+.bigButton .buttonR {
+	background: transparent url(../images/sprite-sticky_ie.png) right -210px no-repeat;
+	line-height: 36px;
+	height: 36px;
+}
+.bigButton .buttonCornerL {
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -210px no-repeat;
+	line-height: 36px;
+	height: 36px;
+}
+
+.customSelect .select {
+	background: #fcb926 url(../images/sprite-sticky_x.png) 0 -50px repeat-x;
+}
+
+.tabNav li {
+	margin-left: 0;
+}
+.tabNav .ui-tabs-selected {
+}
+.tabItem {
+	float: left;
+	background: transparent url(../images/sprite-sticky_ie.png) right 0 no-repeat;
+	border: none;
+	padding: 0 20px 0 14px;
+	margin-left: 0;
+}
+.bigTabs .tabItem {
+	background: transparent url(../images/sprite-sticky_ie.png) right 0 no-repeat;
+}
+.ui-state-hover .tabItem {
+	background: transparent url(../images/sprite-sticky_ie.png) right -50px no-repeat;
+}
+.bigTabs .ui-state-hover .tabItem {
+	background: transparent url(../images/sprite-sticky_ie.png) right -100px no-repeat;
+}
+.ui-tabs-selected .tabItem {
+	background: transparent url(../images/sprite-sticky_ie.png) right -50px no-repeat;
+}
+.bigTabs .ui-tabs-selected .tabItem {
+	background: transparent url(../images/sprite-sticky_ie.png) right -100px no-repeat;
+}
+.tabNav .tabCornerL {
+	float: left;
+	background: transparent url(../images/sprite-sticky_ie.png) 0 0 no-repeat;
+	width: 6px;
+	height: 25px;
+}
+.bigTabs .tabNav .tabCornerL {
+	background: transparent url(../images/sprite-sticky_ie.png) 0 0 no-repeat;
+	height: 35px;
+}
+.ui-state-hover .tabCornerL {
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -50px no-repeat;
+}
+.bigTabs .ui-state-hover .tabCornerL {
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -100px no-repeat;
+}
+.ui-tabs-selected .tabCornerL {
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -50px no-repeat;
+	height: 30px;
+}
+.bigTabs .ui-tabs-selected .tabCornerL {
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -100px no-repeat;
+	height: 40px;
+}
+.tabContent .content {
+	position: relative;
+	overflow: visible;
+}
+.productActionArea {
+	background: #b4b4b4 url(../images/sprite-sticky_x.png) 0 -80px repeat-x;
+}
+.actionArea {
+	position: relative;
+	line-height: 18px;
+	*padding: 10px 28px 10px 28px;
+}
+.actionArea input[type=text] {
+	line-height: 18px;
+	height: 18px;
+}
+.actionArea select {
+	margin: 0;
+}
+.topLeft, .topRight, .bottomLeft, .bottomRight {
+	position: absolute;
+	background-color: transparent;
+	background-image: url(../images/sprite-sticky_ie.png);
+	background-repeat: no-repeat;
+	z-index: 10;
+	width: 10px;
+	height: 10px;
+}
+.topLeft {
+	background-position: -80px -260px;
+	top: -1px;
+	left: -1px;
+}
+.topRight {
+	background-position: -105px -260px;
+	top: -1px;
+	right: -1px;
+}
+.bottomLeft {
+	background-position: -120px -265px;
+	bottom: -1px;
+	left: -1px;
+}
+.bottomRight {
+	background-position: -145px -265px;
+	bottom: -1px;
+	right: -1px;
+}
+.actionArea .topLeft {
+	background-position: 0 -260px;
+}
+.actionArea .topRight {
+	background-position: -25px -260px;
+}
+.whiteArea .topLeft {
+	background-position: -240px -260px;
+	top: 0;
+	left: 0;
+}
+.whiteArea .topRight {
+	background-position: -265px -260px;
+	top: 0;
+	right: 0;
+}
+.whiteArea .bottomLeft {
+	background-position: -280px -265px;
+	bottom: 0;
+	left: 0;
+}
+.whiteArea .bottomRight {
+	background-position: -305px -265px;
+	bottom: 0;
+	right: 0;
+}

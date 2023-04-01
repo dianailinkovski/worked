@@ -1,0 +1,43 @@
+  {{if this.page is 'welcome':}}
+<div id="footer" class="home-footer" {{if this.page is 'businesses' or this.page is 'classifieds':}}{{-if this.part is 'content' then 'class="website"' else 'class="mobile"' }}{{end}} >
+  {{else:}}
+<div id="footer" class="inner-footer" {{if this.page is 'businesses' or this.page is 'classifieds':}}{{-if this.part is 'content' then 'class="website"' else 'class="mobile"' }}{{end}} >
+  {{end}}
+
+
+  
+	<div class="website">
+			<div id="footer-menu">
+				<ul class="foot-menu">
+					<li><a href="/">Home</a></li>
+					<li><a href="/company/about">About</a></li>
+					<li><a href="/company/pricing">Pricing</a></li>
+					<li><a href="/company/contact">Contact</a></li>
+					<li><a href="/company/faq">FAQ</a></li>
+					<li><a href="/company/howitworks">How it works</a></li>
+					<li>
+						{{if this.account:}}
+							<a href="/businesses/create">Create Business</a>
+						{{else:}}
+							<a href="/accounts/login">Login</a>
+						{{end}}
+					</li>
+				</ul>
+				<div class="right foot-social">
+					<!--div class="fb-like" data-href="https://www.facebook.com/livevbox" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div-->
+					<ul>
+						<li><a href="#" class="face"></a></li>
+						<li><a href="#" class="google"></a></li>
+						<li><a href="#" class="tweet"></a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="footer-copyright">Copyright 2015 VBOX, All rights reserved</div>
+		</div>
+	
+	<div class="mobile">
+		<a href="/classifieds"><i class="fa fa-user"></i><span>Classifieds</span></a>
+		<a href="/businesses" ><i class="fa fa fa-briefcase"></i><span>Businesses</span></a>
+		<a href="/classifieds/place"><i class="fa fa-pencil-square-o"></i><span>Place Ad</span></a>
+	</div>
+</div>

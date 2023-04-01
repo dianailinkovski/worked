@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:id="@+id/relativeLayout" >
+	
+    
+    
+	<ScrollView
+	    android:id="@+id/scrollView"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	     >
+	    
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:id="@+id/mainLinearLayout" >
+		
+		    <LinearLayout
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="20dp"
+		        android:orientation="horizontal" >
+		
+		        <RelativeLayout
+		            android:layout_width="132dp"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginRight="10dp"
+		            android:layout_marginTop="15dp" >
+		        
+					<com.ngser.ekiosk.kiosque.NetworkedCacheableImageView
+				        android:id="@+id/imageView1"
+				        android:layout_width="132dp"
+				        android:layout_height="180dp"
+				        android:layout_centerInParent="true"
+				        android:scaleType="centerCrop" />
+					
+			        <ProgressBar
+			            android:id="@+id/progressBar1"
+			            style="?android:attr/progressBarStyleLarge"
+			            android:layout_width="40dp"
+			            android:layout_height="40dp"
+			            android:layout_centerInParent="true"
+			            android:maxHeight="40dp"
+			            android:maxWidth="40dp"
+			            android:minHeight="40dip"
+			            android:minWidth="40dip" />
+		
+		    	</RelativeLayout>
+		
+		        <LinearLayout
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginRight="10dp"
+		            android:orientation="vertical"
+		            android:gravity="center" >
+		
+		            <TextView
+		                android:id="@+id/titleTextView"
+		                android:layout_width="fill_parent"
+		                android:layout_height="30dp"
+		                android:layout_marginTop="10dp"
+		                android:gravity="center"
+		                android:textSize="20sp"
+		                android:textStyle="bold" />
+		
+		            <TextView
+		                android:id="@+id/categorieTextView"
+		                android:layout_width="fill_parent"
+		                android:layout_height="25dp"
+		                android:gravity="center"
+		                android:textSize="18sp" />
+		            
+		            <View
+					    android:layout_width="fill_parent"
+					    android:layout_height="1dp"
+					    android:background="@android:color/darker_gray"/>
+		            
+		            <TextView
+		                android:id="@+id/dateTextView"
+		                android:layout_width="fill_parent"
+		                android:layout_height="40dp"
+		                android:gravity="center" />
+		            
+		            <View
+		                android:layout_width="fill_parent"
+		                android:layout_height="1dp"
+		                android:layout_marginBottom="10dp"
+		                android:background="@android:color/darker_gray" />
+		            
+		            <TextView
+		                android:id="@+id/prixTextView"
+		                android:layout_width="wrap_content"
+		                android:layout_height="30dp"
+		                android:layout_marginTop="-5dp"
+		                android:gravity="center"
+		                android:textSize="20dp" />
+		            
+		            <TextView
+		                android:id="@+id/notifTextView"
+		                android:layout_width="fill_parent"
+		                android:layout_height="20dp"
+		                android:gravity="center"
+		                android:text="Crédits ekiosk nécessaires"
+		                android:textSize="10sp" />
+					
+		            
+		            <RelativeLayout
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content" >
+			            
+		                <TextView
+		                    android:layout_below="@id/button1"
+		                    android:layout_centerHorizontal="true"
+			                android:id="@+id/button1Detail"
+			                android:layout_width="150dp"
+			                android:layout_height="wrap_content"
+			                android:gravity="center"
+			                android:text="3 téléchargements par achat"
+			                android:background="@drawable/buy_detail_button_background"
+			                android:paddingTop="10dp"
+			                android:layout_marginTop="-10dp" 
+			                android:textSize="10sp" />
+		                
+			            <Button
+			                android:layout_alignParentTop="true"
+			                android:layout_centerHorizontal="true"
+			                android:id="@+id/button1"
+			                android:layout_width="170dp"
+			                android:layout_height="34dp"
+			                android:layout_gravity="center"
+			                android:background="@drawable/buy_button_background"
+			                android:paddingTop="4dp"
+			                android:textColor="#fff" />
+			            
+			            
+					</RelativeLayout>
+		        </LinearLayout>
+		
+		    </LinearLayout>
+		
+		    
+		
+		</LinearLayout>
+	</ScrollView>
+
+	<ProgressBar
+	    android:id="@+id/mainProgressBar"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerInParent="true"
+	    android:minHeight="80dp"
+	    android:minWidth="80dp"
+	    android:visibility="visible" />
+	
+</RelativeLayout>

@@ -1,0 +1,175 @@
+.clear {
+	clear: both;
+}
+
+.center{
+	text-align:center;
+}
+.right {
+	text-align:right;
+}
+/*home page*/
+#home  p{
+	height: 35px;
+    margin-top: 15px;	
+}
+
+#home .mon, #home .degree {
+	font-size: 23px;
+}
+
+#home .lbl{
+	color: #4d1782;
+	font-size: 18px;
+}
+
+.item {
+	margin:0px;
+	border:0px;
+	border-bottom: solid 1px;
+}
+
+#weather .degree{
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  background: green;
+  padding-left: 8px;
+  color: white;
+  border-radius: 34px;
+  -webkit-border-radius: 34px;
+  padding-right: 8px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+#weather .arrow{
+	position: absolute;
+	top:15px;
+	right: 10px;
+}
+
+#filterList {
+	background: #330065;
+	position: relative;
+	top: -335px;
+	z-index: 10;
+}
+#filterList .item {
+	border: none;
+	background: #330065;
+	color: white;
+	padding: 10px;
+	height: 40px;
+}
+
+#filterList .list{
+	padding: 0px;
+}
+
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}
+
+.check-element {
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+
+#country .deg{
+	font-size:25px;
+	color: white;
+	margin-top:20px;
+	font-weight:bold;
+}
+#country .lbl{
+	font-size:17px;
+	color: white;
+	margin-top:5px;
+}
+#country .zoom img{
+  margin-top: -30px;
+  position: absolute;
+  right: 0px;
+  background: white;
+  width: 30px;
+  padding: 3px;
+}
+
+#countryData .item{
+	border: none;
+	height: 35px;
+	color: black;
+}
+#countryData .list{
+	border: none;
+	padding:0px;
+}
+
+#countryData .title{
+  position: absolute;
+  right: 130px;
+  top: 6px;
+}
+#countryData .val{
+  position: absolute;
+  right: 80px;
+  top: 7px;
+}
+
+#countryData .image{
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  padding-left: 5px;
+  border-left: solid 1px grey;
+  width: 52px;
+  height: 35px;
+}
+
+
+#country_map div{
+	height: 100%;
+}
+
+
+#menu {
+	background: #333333;
+}
+
+#menu .scroll, #menu .item-content{
+	background: #333333;
+	color: white;
+}
+#contact {
+	width: 80%;
+	margin-left: 10%;
+}
+#contact img {
+	width: 28px;
+	height: 25px;
+}
+#contact li {
+	padding: 5px;
+}
+#contact li span {
+	position: relative;
+	top:-7px;
+	left: 10px;
+}

@@ -1,0 +1,88 @@
+<ion-view  ng-init="init()">
+ <ion-nav-buttons side="left">
+	<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+ </ion-nav-buttons>
+  <ion-nav-title>
+        <h3 style="color:#FF9600;margin-top:10px;">Safe Cab</h3>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+     <a class="button button-icon icon ion-compose" ng-click="openPopup()">
+	 </a>
+  </ion-nav-buttons>
+  <ion-content>
+		<div class="divMapChat">
+			<div style="width: 80%;float:left;margin-top: 5px;">
+				<input type="text" class="txtsearchbox" id="txtSearchaddress" name="txtSearchaddress" placeholder="Enter a location" g-places-autocomplete ng-model="address">
+			</div>
+			<div style="width:19%;float:left;">
+				<button type="button" id="btnmove" name="btnmove" value="Go To" class="btn-1 btnGoto" style="cursor: pointer;" ng-click="goTo()">
+					Go To</button>
+			</div>
+		</div>
+      <div id="map" data-tap-disabled="true"></div>
+	  <!--<map center="41.07493, -78.371388" zoom="14" on-click="hideAllInfoWindow();" style="height:90%;" control="mapControl">
+        <marker position="41.06493, -78.381388" icon="'img/orange_pin.png'" on-click="showInfoWindow('info1')"></marker>
+		<marker position="41.06793, -78.389388" icon="'img/orange_pin.png'" on-click="showInfoWindow('info2')"></marker>
+		<marker position="41.07963, -78.351888" icon="'img/orange_pin.png'" on-click="showInfoWindow('info3')"></marker>
+		<marker position="41.07473, -78.380388" icon="'img/orange_pin.png'" on-click="showInfoWindow('info4')"></marker>
+		<marker position="41.07183, -78.379388" icon="'img/orange_pin.png'" on-click="showInfoWindow('info5')"></marker>
+		<marker position="41.07593, -78.361348" icon="'img/orange_pin.png'" on-click="showInfoWindow('info6')"></marker>
+		<marker ng-repeat="p in locationList" position="{{[p.lat, p.lng]}}"  icon="'img/orange_pin.png'" on-click="showInfoWindow('info' + p.id)"></marker>
+		
+        <info-window id="info1">
+          <div ng-non-bindable="" class="infobox">
+            <a href="#" ng-click="clicked()">Click Here</a>
+			<div ng-show="showPopup"> sub content</div>
+          </div>
+        </info-window>
+		<info-window id="info2">
+          <div ng-non-bindable="" class="infobox">
+            Lat/Lng: {{this.getPosition()}}<br/>
+            <a href="#" ng-click="clicked()">Click Here</a>
+			<div ng-show="showPopup"> sub content</div>
+          </div>
+        </info-window>
+        <info-window id="info3">
+          <div ng-non-bindable="" class="infobox">
+            Lat/Lng: {{this.getPosition()}}<br/>
+            <a href="#" ng-click="clicked()">Click Here</a>
+			<div ng-show="showPopup"> sub content</div>
+          </div>
+        </info-window>
+		<info-window id="info4">
+          <div ng-non-bindable="" class="infobox">
+            Lat/Lng: {{this.getPosition()}}<br/>
+            <a href="#" ng-click="clicked()">Click Here</a>
+			<div ng-show="showPopup"> sub content</div>
+          </div>
+        </info-window>
+        <info-window id="info5">
+          <div ng-non-bindable="" class="infobox">
+            Lat/Lng: {{this.getPosition()}}<br/>
+            <a href="#" ng-click="clicked()">Click Here</a>
+			<div ng-show="showPopup"> sub content</div>
+          </div>
+        </info-window>
+		<info-window id="info6">
+          <div ng-non-bindable="" class="infobox">
+            Lat/Lng: {{this.getPosition()}}<br/>
+            <a href="#" ng-click="clicked()">Click Here</a>
+			<div ng-show="showPopup"> sub content</div>
+          </div>
+        </info-window>		
+      </map>	  -->
+  </ion-content>
+  <div class="bar bar-footer row tab-buttons-bar">
+        <div class="tabs tabs-icon-top">
+		  <a class="tab-item" href="#/app/map" style="color:#FF9600;font-size:15px;">
+			<i class="icon ion-home"></i>
+			Map
+		  </a>
+		  <a class="tab-item" href="#/app/friendlist" style="color:#FF9600;font-size:15px;">
+			<i class="icon ion-star"></i>
+			Friend List
+		  </a>
+		</div>
+  </div>
+</ion-view>

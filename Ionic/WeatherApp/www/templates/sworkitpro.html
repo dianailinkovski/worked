@@ -1,0 +1,24 @@
+<ion-view title="{{'DOWNLOAD_PRO' | translate}}" class="blue-bar">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-ios-arrow-back" ng-click="goBack()"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header width-control promo-page">
+	  <div class="item item-avatar item-text-wrap">
+	    <img src="img/sworkitpro_logo.png">
+	    <h2>{{'PROFEAT' | translate}}</h2>
+	  </div>
+	  <button class="button button-block condense button-balanced nexercise-blue" ng-if="!userSettings.mfpStatus" style="padding: 0 10px" ng-click="downloadSworkitPro()">
+	          {{'DOWNLOAD_PRO' | translate}}
+	      </button>
+	  <div class="item item-text-wrap">
+		  <h3>{{'PROFEAT_1' | translate}}</h3>
+		  <p>{{'PROFEAT_2' | translate}}</p>
+		  <p>{{'PROFEAT_3' | translate}}</p>
+		  <p>{{'PROFEAT_4' | translate}}</p>
+		  <p>{{'PROFEAT_5' | translate}}</p>
+		  <p>{{'PROFEAT_6' | translate}}</p>
+		  <p>{{'PROFEAT_7' | translate}}</p>
+		  <p>{{'PROFEAT_8' | translate}}</p>		  
+	  </div>
+  </ion-content>
+</ion-view>

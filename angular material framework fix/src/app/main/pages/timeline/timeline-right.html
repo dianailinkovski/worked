@@ -1,0 +1,30 @@
+<div id="timeline" class="timeline-right" ms-timeline>
+
+    <!-- TIMELINE ITEM -->
+    <div class="timeline-item animate" layout="column" layout-align="center center" layout-gt-md="row" layout-align-gt-md="center start"
+         ng-repeat="timelineItem in vm.timeline | limitTo: timelineItemLimit">
+
+        <div class="timeline-card" layout="row" flex="50">
+            <!-- MS-CARD -->
+            <ms-card template="timelineItem.card.template" ng-model="timelineItem.card"></ms-card>
+            <!-- / MS-CARD -->
+        </div>
+
+        <div class="timeline-point">
+            <md-button class="md-fab" aria-label="timeline item icon">
+                <md-icon md-font-icon="{{timelineItem.icon}}"></md-icon>
+            </md-button>
+        </div>
+
+        <div class="timeline-detail" flex="50">
+            <div class="time">
+                {{timelineItem.time}}
+            </div>
+            <div class="event">
+                {{timelineItem.event}}
+            </div>
+        </div>
+    </div>
+    <!-- / TIMELINE ITEM -->
+
+</div>

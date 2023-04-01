@@ -1,0 +1,55 @@
+{{ad = this.ad}}
+{{console.log(ad.seller.agent)}}
+<div class="ad">
+	<div class="in">
+		<a href="/classifieds/{{-ad.id}}" class="picture">
+			{{if ad.pictures.length:}}
+				<img src="/uploads/pictures/original/{{-ad.pictures[0].source}}" alt="picture"/>
+			{{end}}
+			
+
+			{{if ad.seller_type is 'business':}}
+				<div class="seller-picture" href="/{{-ad.seller.address}}"><span class="profile-helper"></span><img src="{{-ad.seller.avatar}}" alt="Business Avatar"/></div>
+				
+			{{else:}}
+				<div class="seller-picture" href="/accounts/{{-ad.seller.id}}"><span class="profile-helper"></span><img src="{{-ad.seller.avatar(25)}}" alt="User Avatar"/></div>
+				
+			{{end}}
+
+		</a>
+		<div class="content">
+			<div class="info">
+				<h2><a href="/classifieds/{{-ad.id}}">{{-ad.title}}</a></h2>
+				{{if ad.description:}}
+					<div class="description">{{-ad.description.substr(0, 90)}}{{-if ad.description.length > 90 then '...'}}</div>
+				{{end}}
+				{{if this.account:}}
+					{{currentId = if this.account.business then this.account.business.id else this.account.id}}
+					<div class="actions">
+						{{if ad.seller.id is currentId :}}
+							<!--<a href="/classifieds/{{-ad.id}}/edit" class="fa fa-edit button">edit</a>
+							<a href="/classifieds/delete?id={{-ad.id}}" class="fa fa-trash-o button silver" onclick="return confirm('Are you sure?')">delete</a>-->
+						{{end}}
+					</div>
+				{{end}}
+			</div>
+			{{if ad.seller.id:}}
+				<div class="seller">
+					{{if ad.seller_type is 'business':}}
+						
+						<div class="seller-name">
+							by <a href="/{{-ad.seller.address}}">{{-ad.seller.name}}</a>
+						</div>
+					{{else:}}
+						<div class="seller-name">
+							by <a href="/accounts/{{-ad.seller.id}}">{{-ad.seller.full_name}}</a>
+						</div>
+					{{end}}
+
+						<a class="chatIdentity button live-state offline" data-user="' + ad.seller.id + '" href="http://192.241.239.235/chat/?r={{-this.account.id}}&id=' + ad.seller.id + '" >Chat</a>
+				</div>
+			{{end}}
+		</div>
+		<div class="price">{{-ad.formatted_price}}</div>
+	</div>
+</div>

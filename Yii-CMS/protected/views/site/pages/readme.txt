@@ -1,0 +1,1 @@
+Placez ici les pages statiques (qui ne contiennent aucun contenu dynamique), à l'exception de la page d'accueil (index.php).

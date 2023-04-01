@@ -1,0 +1,28 @@
+.mod-contest .article-date { margin:0.5em 0; font-size:85%; }
+.mod-contest .article-image { padding-bottom:1em; text-align:center; }
+.mod-contest .article-image a img { display:inline-block; }
+.mod-contest .article-image-caption { font-size:85%; margin:0; }
+.mod-contest .article-abstract p { margin:0 0 2em; }
+
+/* LISTING PAGE */
+.mod-contest.mod-type-listing > article { padding:1em; border-bottom:none; background-color: rgba(0, 0, 0, 0.05); }
+.mod-contest.mod-type-listing > article.odd { background-color:transparent; }
+
+/* DETAIL PAGE */
+.mod-contest.mod-type-detail { margin-bottom:1em; padding-bottom:1em; border-bottom:1px solid #CCC; }
+.mod-contest.mod-type-detail .page-title { text-align:left; }
+.mod-contest.mod-type-detail .article-date { margin-top:-2em; font-size:85%; text-align:left; }
+.mod-contest.mod-type-detail .article-image { position:relative; text-align:left; }
+.mod-contest.mod-type-detail .article-image a { position:static; }
+.mod-contest.mod-type-detail .article-image a img { max-width:100%; margin-right:0; }
+.mod-contest.mod-type-detail .article-image-caption { text-align:left; }
+.mod-contest.mod-type-detail .section-bloc { margin-top:1em; }
+.mod-contest.mod-type-detail .section-bloc p:first-child { margin-top:0; }
+.mod-contest.mod-type-detail > footer { background-color:#EEE; padding:0.5em; margin-top:1.5em; }
+.mod-contest.mod-type-detail > footer p { font-size:0.9em; margin:0; }
+
+
+@media (min-width: 768px) {
+	.mod-contest.mod-type-detail .section-bloc:after { display:none; }
+	.mod-contest.mod-type-detail .section-bloc { margin-top:inherit; }
+}

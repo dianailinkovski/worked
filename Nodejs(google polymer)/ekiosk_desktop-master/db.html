@@ -1,0 +1,35 @@
+var Datastore = require('nedb');  
+var db = new Datastore({  
+  filename : getUserDataPath() + '/fratmat.db',
+  autoload: true
+});
+
+console.log("test db");
+
+function saveUser(firstName, lastName) {  
+  db.insert({
+    firstName: firstName,
+    lastName: lastName
+  }, function(err, newDoc) {
+    if (err) {
+      console.log(err);
+    } else {
+      showUser(newDoc);
+    }
+  });
+}
+
+function getAllTheThings() {  
+  db.find({}, function(err, docs) {
+    for (var i = 0; i < docs.length; i++) {
+      showUser(docs[i]);
+    }
+  });
+}
+
+
+
+function getUserDataPath() {  
+    var path = require('path');
+    return path.dirname(process.execPath);
+}

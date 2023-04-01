@@ -1,0 +1,38 @@
+<ion-view title="Download Nexercise" hide-back-button="true" class="blue-bar">
+  <ion-nav-buttons side="left">
+	<button menu-and-drawer-toggle class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header width-control promo-page">
+	  <div class="item item-avatar item-text-wrap">
+	    <img src="img/nexercise.png">
+	    <h2>Play with friends, earn rewards, get support, lose weight, and track your progress on the largest fitness mobile interactive game of its kind. </h2>
+	  </div>
+	  <button class="button button-block condense button-balanced nexercise-blue" ng-if="!userSettings.mfpStatus" style="padding: 0 10px" ng-click="downloadNexercise()">
+	          Download Free App
+	      </button>
+	  <div class="item item-text-wrap">
+		  <p>Shape Magazine: One of “9 Ways to Use Your Smartphone to Stay Motivated”</p>
+		  <p>Mashable: A “Top Health and Fitness App”</p>
+		  <p>Washingtonian: “The Next Generation of Exercise”</p>
+		  <p>Reuters: “Need motivation to hit the gym? Perhaps some free merchandise will work”</p>
+		  
+	  </div>
+	  <ion-slide-box does-continue="true" auto-play="true" class="promo-images" style="background-color: black;" show-pager="false">
+		  <ion-slide>
+		    <div class="box sceen1"><img src="img/nexerciseapp1.png"/></div>
+		  </ion-slide>
+		  <ion-slide>
+		    <div class="box screen2"><img src="img/nexerciseapp2.png"/></div>
+		  </ion-slide>
+		  <ion-slide>
+		    <div class="box screen3"><img src="img/nexerciseapp3.png"/></div>
+		  </ion-slide>
+		  <ion-slide>
+		    <div class="box screen4"><img src="img/nexerciseapp4.png"/></div>
+		  </ion-slide>
+		  <ion-slide>
+		    <div class="box screen5"><img src="img/nexerciseapp5.png"/></div>
+		  </ion-slide>
+	  </ion-slide-box>
+  </ion-content>
+</ion-view>

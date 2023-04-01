@@ -1,0 +1,39 @@
+<!-- password -->
+{{-@post '/businesses/savePicture', enctype:'multipart/form-data'}}
+	
+	<fieldset>
+		{{if @query.success:}}
+			<div class="success-message">Logo changed successfully.</div>
+		{{end}}
+		
+		{{if @errors and objectLength @errors[1]:}}
+			<div class="error-message">Something went wrong. The profile picture should be smaller than 10mb and bigger than 30x30px.</div>
+		{{end}}
+		<h1>Change Logo</h1>
+		<div class="break"></div>
+		<fieldset class="input-holder">
+			<br>
+			<input type="file" name="picture"  />
+			<br><br>
+			<br>
+		</fieldset>
+		<div class="break"></div>
+		<button type="submit" class="fa fa-upload">Upload Logo</button>
+		<a href="/businesses/removePicture" class="button silver fa fa-minus-circle" style="margin-left: 10px;">Remove Logo</a>
+		<br><br><br>
+		<div class="break"></div>
+		<div class="avatar">
+			<img src="{{-this.account.business.avatar}}" alt="picture"/>
+		</div>
+		
+		{{if @errors:}}	
+			{{-console.log @errors.upload}}
+			<div class="errors">
+			{{for index in @errors:}}
+				<div>Error: {{-@errors[index]}}</div>
+			{{end}}
+			</div>
+		{{end}}
+		
+	</fieldset>
+{{-@end}}

@@ -1,0 +1,61 @@
+<ion-view title="{{thisType | translate}}">
+  <ion-nav-buttons side="secondary">
+    <button class="button-icon icon ion-music-note" ng-if="urxAvailable" ng-click="launchURX()" ng-class="{'blue-text' : isToolTipTime}"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header full-length" id="time-screen" scrollbar-y="false">
+    <p class="page-instructions">{{'HOW_MANY' | translate}}</p>
+    <div class="timer-box">
+      <div class="timer-center">
+        <div class="timer-text">
+          <input type="tel" integer value="{{timeSelected.minutes}}" ng-change="validateTime()" ng-focus="clearTime()" ng-blur="validateTime()" ng-model="timeSelected.minutes" id="minute-selection">
+          <h1 id="timer-minutes" class="uppercase">{{'MINUTES_SM' | translate}}</h1>
+        </div>
+      </div>
+      <progress-arc
+                size="{{size}}"
+                stroke="#dfdfdf"
+                stroke-width="5"
+                complete="calcComplete()"
+                background="#FF8614"
+                counter-clockwise="true"
+                ng-style="{'width': (size + 'px'), 'height' : (size + 'px')}"
+                class="animate-arc"
+                >
+      </progress-arc>
+      <div ng-repeat="minPoint in minuteArray track by $index" class="timer-touch" ng-style="{'top':(returnY(minPoint) + 'px'),'left':(returnX(minPoint) + 'px'),'width':((size/4) + 'px'),'height':((size/4) +'px')}" ng-class="{'flash': !scopeFirstOption}" ng-click="setMinuteTime(minPoint)"><h1 ng-style="{'margin-top':(((size/8)-28) + 'px'),'margin-left':(((size/8)-28) + 'px')}" >{{minPoint}}</h1></div>
+      <div class="time-controls minus-circle" ng-class="{'inactive': timeSelected.minutes <= defaultAdd}">
+        <div class="plus-minus-buttons" id="minus-button">
+          <a class="" ng-click="minusFive()"><i class="icon ion-minus"></i></a>
+        </div>
+      </div>
+      <div class="time-controls plus-circle" ng-class="{'inactive': timeSelected.minutes >= 57}">
+        <div class="plus-minus-buttons" id="plus-button">
+         <a class="" ng-click="plusFive()"><i class="icon ion-plus"></i></a>
+        </div>
+      </div>
+
+    </div>  
+
+    <div type="item-text-wrap" ng-click="customLength()" class="center choose-length uppercase">
+    {{'CUSTOM_LENGTH' | translate}}
+    </div>
+
+    <button class="button button-block nexercise-orange condense uppercase white-text no-border new-button margin-15 uppercase" ng-click="beginWorkout()">
+          {{'BG_WORKOUT' | translate}}
+    </button>
+    <div class="transition-toggle center">
+      <ion-toggle ng-model="advancedTiming.transition" class="toggle-energized item-text-wrap advanced" ng-change="watchTiming()" ng-if="!yogaSelection">
+       <h2>{{'ENABLE_5' | translate}}</h2>
+      </ion-toggle>
+    </div>
+
+    <div class="item item-text-wrap card width-control full-length" ng-if="!yogaSelection" style="padding-bottom:10px">
+      <p class="center" style="color:#333;margin:10px;font-size:16px">{{'ACTIVE_INTERVAL' | translate}}</p>
+       <p ng-if="advancedTiming.customSet">{{'EX_FOR' | translate}} {{advancedTiming.exerciseTime}} {{advancedTiming.exerciseTime == 1 ? ('EX_SEC' | translate) : ('EX_SECS' | translate)}} {{'EX_WITH' | translate}} {{advancedTiming.transitionTime}} {{advancedTiming.transitionTime == 1 ? ('EX_SEC' | translate) : ('EX_SECS' | translate)}} {{'EX_BETWEEN' | translate}} {{'EX_REST' | translate}} {{advancedTiming.breakTime}} {{advancedTiming.breakTime == 1 ? ('EX_SEC' | translate) : ('EX_SECS' | translate)}} {{'EX_AFTER' | translate}} {{advancedTiming.breakFreq}} {{advancedTiming.breakFreq == 1 ? ('EX_EX' | translate) : ('EX_EXS' | translate)}}. {{'EX_RAND' | translate}} {{advancedTiming.randomizationOption ? ('EX_ON' | translate) : ('EX_OFF' | translate)}}.</p>
+       <p ng-if="!advancedTiming.customSet">{{'EX_BACKUP' | translate}}</p>
+    </div>
+
+    <div class="orange-border width-control"><a href="#/app/sworkitpro" class="unlock-pro"><i class="icon ion-locked"></i><h4>{{'PRO_TIMING' | translate}}</h4></a></div>
+    <p ng-if="isToolTipTime" style="margin:0px"><a href="#" data-tooltip="{{urxText}}"></a></p>
+  </ion-content>
+</ion-view>

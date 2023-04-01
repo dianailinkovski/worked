@@ -1,0 +1,40 @@
+<ion-view view-title="{{discoverTitle}}" >
+  <ion-header-bar class="bar-calm">
+	 <button class="button icon-left" ng-click="$ionicGoBack($event)"></button>		
+  </ion-header-bar>
+  <ion-content id="weather">
+	<div style="text-align:center;padding:10px;">
+		<h3>
+		An average temperature of <X>
+		could be found in the countires below during the month of <Y>.
+		</h3>
+	</div>
+	<div style="background: #330065;height: 60px;">
+		<div style="float:left;padding: 10px;">
+			<h4 style="color:white; text-align:center">6 Countries matched</h4>
+		</div>		
+		<div style="float:right;padding: 10px;">
+			<h4 style="color:white; text-align:center" ng-click="showFilter();">
+				Sort by
+				<img style="width: 20px;" ng-src="{{arrowImg}}" />
+			</h4>
+		</div>
+	</div>
+	<ion-list id="countryList" ng-repeat="data in wData">
+		<ion-item ng-click="onClickCountry(data)">
+			<h2>{{data.title}}</h2>
+			<div class="degree">{{data.degree}}&deg;</div>
+			<img class="arrow" ng-src="img/right.png" style="width:15px;"/>
+		</ion-item>
+	</ion-list>
+	<!--<div id="filterList" ng-show="bFilterShow"  class="check-element animate-show">-->
+	<div id="filterList" ng-show="bFilterShow">
+		<ion-list ng-repeat="data in fData">
+			<ion-item ng-click="onClickFilterItem(data)">
+				<div style="position:absolute; right: 25px;" style="margin-right: 0px;">{{data.title}}</div>
+				<img style="position:absolute; right: 5px;width:15px;" class="right" ng-src="img/arrow.png"  ng-show="data.bUse"/>
+			</ion-item>
+		</ion-list>
+	</div>
+  </ion-content>  
+</ion-view>

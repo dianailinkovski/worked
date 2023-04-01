@@ -1,0 +1,167 @@
+$(function(){
+	$('#classifieds .businesses').imagesLoaded(function(){
+		$('#classifieds .businesses').masonry({
+	  		itemSelector: '.business'
+		});
+	});
+	$('select').selectize();
+	
+	// select location
+	$('#search_location').geocomplete().bind("geocode:result", function(event, result){
+		var form = $(this).closest('form');
+		if(result.geometry && result.geometry.location){
+			var geometry = result.geometry.location.toString();
+			var pos = geometry.substr(1, geometry.length-2).split(', ');
+			form.find('input[name="latitude"]').val(pos[0]);
+			form.find('input[name="longitude"]').val(pos[1]);
+		}
+		
+		form.find('input[name="formatted_address"]').val(result.formatted_address);
+		for(var i = 0; i < result.address_components.length; i++){
+			var component = result.address_components[i];
+			var type = component.types[0];
+			form.find('input[name="'+type+'_short"]').val(component.short_name);
+			form.find('input[name="'+type+'_long"]').val(component.long_name);
+		}
+	});
+	
+});
+
+var map;
+function initialize() {
+	console.log('initialize map');
+	var latitude = window.query && window.query.latitude ? query.latitude : 1 ;
+	var longitude = window.query && window.query.longitude ? query.longitude : 1 ;
+	console.log('map lat/long positions:', latitude, longitude);
+	var mapOptions = {
+		zoom: 8,
+		center: new google.maps.LatLng(latitude, longitude)
+	};
+
+	map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	var bounds = new google.maps.LatLngBounds();
+	
+	var infowindow = new google.maps.InfoWindow({
+		maxWidth: 400,
+		minHeight: 100,
+	});
+		console.log(latitude);
+		console.log(longitude);
+	window.businesses.forEach(function(item){
+	
+
+	console.log("sayeed:"+item.category);
+		var pinImg='/images/pin.png';
+		if(item.category >=1 && item.category <=6)
+			pinImg='/images/car.png';
+		else if(item.category >=7 && item.category <=13)
+					pinImg='/images/home.png';
+		else if(item.category >=14 && item.category <=18)
+					pinImg='/images/phone.png';
+		else if(item.category >=19 && item.category <=25)
+					pinImg='/images/home.png';
+		else if(item.category >=26 && item.category <=31)
+					pinImg='/images/food.png';
+		else if(item.category >=32 && item.category <=40)
+					pinImg='/images/animals.png';
+		else if(item.category >=41 && item.category <=46)
+					pinImg='/images/leisure.png';
+		else if(item.category >=47 && item.category <=48)
+					pinImg='/images/job.png';
+		else if(item.category >=49 && item.category <=55)
+					pinImg='/images/edu.png';
+	
+				console.log("PinImg:"+pinImg)
+
+				
+		var position = new google.maps.LatLng(item.latitude, item.longitude);
+		console.log('set marker to', position, item); 
+		bounds.extend(position);
+		var marker = new google.maps.Marker({
+			position: position,
+			map: map,
+			icon: pinImg
+		});
+		console.log(item);
+		makeInfoWindowEvent(map, infowindow, item, marker);
+		map.panTo(position);
+	});
+	if(isset(query.locality_long)){
+		if (!window.businesses.length){
+			map.setZoom(11);
+		} else if(window.businesses.length == 1){ 
+			map.setZoom(11);
+		} else {
+			center = bounds.getCenter();
+			map.fitBounds(bounds);
+		}
+	} else {
+		if (window.businesses.length == 1){
+			map.setZoom(11);
+		} else {
+			map.setZoom(4);
+		}
+	}
+	
+}
+
+function makeInfoWindowEvent(map, infowindow, input, marker) {
+	google.maps.event.addListener(marker, 'click', function(event) {
+		console.log(marker);
+		infowindow.setContent(render('html/parts/business_window.html', {business:input}));
+		console.log(infowindow);
+		window.infowindow = infowindow;
+		window.marker = marker;
+		
+		infowindow.open(map, marker, {disableAutoPan: true});
+		//var latLng = merge(event.latLng, {k:event.latLng})
+		console.log('#event.latLng', event.latLng)
+		infowindow.setPosition(event.latLng);
+		//console.log(event.latLng.k+30, event.latLng.A);
+		//map.panTo(new google.maps.LatLng(event.latLng.k, event.latLng.A));
+		map_recenter(event.latLng, 0, -220)
+	});
+}
+
+function map_recenter(latlng,offsetx,offsety) {
+    var point1 = map.getProjection().fromLatLngToPoint(
+        (latlng instanceof google.maps.LatLng) ? latlng : map.getCenter()
+    );
+    var point2 = new google.maps.Point(
+        ( (typeof(offsetx) == 'number' ? offsetx : 0) / Math.pow(2, map.getZoom()) ) || 0,
+        ( (typeof(offsety) == 'number' ? offsety : 0) / Math.pow(2, map.getZoom()) ) || 0
+    );  
+    map.panTo(map.getProjection().fromPointToLatLng(new google.maps.Point(
+        point1.x - point2.x,
+        point1.y + point2.y
+    )));
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+/*
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', {'packages':['geomap']});
+google.setOnLoadCallback(drawMap);
+window.currentRegion = 'world';
+function drawMap() {
+	var mapData = [['Country', 'Classifieds']]; 
+	
+	for(index in coreData){
+		mapData.push([index, coreData[index]]);
+	}
+	
+	var data = google.visualization.arrayToDataTable(mapData);
+	var geomap = new google.visualization.GeoMap(document.getElementById('map'));
+	
+	geomap.draw(data, {region: window.currentRegion, dataMode: 'regions', showZoomOut: true, showLegend: true});
+	google.visualization.events.addListener(geomap, 'regionClick', function(event){
+		window.prevRegion.push(window.currentRegion);
+		window.currentRegion = event.region;
+		console.log(window.currentRegion, window.prevRegion);
+		drawMap(currentRegion);
+	});
+	google.visualization.events.addListener(geomap, 'zoomOut', function(event){
+		window.currentRegion = window.prevRegion[];
+		drawMap();
+	});
+}*/

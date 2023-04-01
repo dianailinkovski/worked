@@ -1,0 +1,874 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » Default</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/Default.html" title="Default"><i class="icon-folder-open"></i>Default</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i title="Functions" class="icon-custom icon-function"></i> Functions</li>
+<li class="function  "><a href="#function_call" title="call() :: "><span class="description">call()
+        </span><pre>call</pre></a></li>
+<li class="function  "><a href="#function_logMessage" title="logMessage() :: "><span class="description">logMessage()
+        </span><pre>logMessage</pre></a></li>
+<li class="nav-header">
+<i title="Classes" class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#News" title="">News</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#ContentPage" title="">ContentPage</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#Job" title="">Job</a></li>
+<li><a href="#JobForm" title="">JobForm</a></li>
+<li><a href="#JobCv" title="">JobCv</a></li>
+<li><a href="#JobCategory" title="">JobCategory</a></li>
+<li><a href="#AdmincatController" title="The controller the back-end controllers extend from.">AdmincatController</a></li>
+<li><a href="#AdmincvController" title="The controller the back-end controllers extend from.">AdmincvController</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#Event" title="">Event</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#ProductTag" title="">ProductTag</a></li>
+<li><a href="#ProductImage" title="">ProductImage</a></li>
+<li><a href="#Product" title="">Product</a></li>
+<li><a href="#ProductCategory" title="">ProductCategory</a></li>
+<li><a href="#AdmincategoryController" title="The controller the back-end controllers extend from.">AdmincategoryController</a></li>
+<li><a href="#AdmintagController" title="The controller the back-end controllers extend from.">AdmintagController</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#AdminForm" title="">AdminForm</a></li>
+<li><a href="#NewsletterSubscription" title="">NewsletterSubscription</a></li>
+<li><a href="#AdminsubController" title="The controller the back-end controllers extend from.">AdminsubController</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#ApiController" title="">ApiController</a></li>
+<li><a href="#ContestEntryItem" title="">ContestEntryItem</a></li>
+<li><a href="#ContestFieldMulti" title="">ContestFieldMulti</a></li>
+<li><a href="#Contest" title="">Contest</a></li>
+<li><a href="#ContestEntry" title="">ContestEntry</a></li>
+<li><a href="#EntryForm" title="">EntryForm</a></li>
+<li><a href="#ContestField" title="">ContestField</a></li>
+<li><a href="#AdminformController" title="The controller the back-end controllers extend from.">AdminformController</a></li>
+<li><a href="#AdminresultsController" title="The controller the back-end controllers extend from.">AdminresultsController</a></li>
+<li><a href="#AdminconclusionController" title="The controller the back-end controllers extend from.">AdminconclusionController</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#AdminconfirmationController" title="The controller the back-end controllers extend from.">AdminconfirmationController</a></li>
+<li><a href="#AdminintroductionController" title="The controller the back-end controllers extend from.">AdminintroductionController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#Member" title="">Member</a></li>
+<li><a href="#MemberLoginForm" title="">MemberLoginForm</a></li>
+<li><a href="#MemberRecoverForm" title="">MemberRecoverForm</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#Message" title="">Message</a></li>
+<li><a href="#MessageAssoc" title="">MessageAssoc</a></li>
+<li><a href="#AdminController" title="The controller the back-end controllers extend from.">AdminController</a></li>
+<li><a href="#DefaultController" title="The controller the front-end controllers extend from">DefaultController</a></li>
+<li><a href="#AuthChildForm" title="Auth item child form class file.">AuthChildForm</a></li>
+<li><a href="#AssignmentForm" title="Auth item assignment form class file.">AssignmentForm</a></li>
+<li><a href="#GenerateForm" title="Generation form class file.">GenerateForm</a></li>
+<li><a href="#AuthItemForm" title="Authorization item form class file.">AuthItemForm</a></li>
+<li><a href="#AssignmentController" title="Rights assignment controller class file.">AssignmentController</a></li>
+<li><a href="#InstallController" title="Rights installation controller class file.">InstallController</a></li>
+<li><a href="#AuthItemController" title="Rights authorization item controller class file.">AuthItemController</a></li>
+<li><a href="#RWebUser" title="Rights web user class file.">RWebUser</a></li>
+<li><a href="#RightsFilter" title="Rights filter class file.">RightsFilter</a></li>
+<li><a href="#RInstaller" title="Rights installer component class file.">RInstaller</a></li>
+<li><a href="#RAuthItemChildDataProvider" title="Authorization item child data provider class file.">RAuthItemChildDataProvider</a></li>
+<li><a href="#RPermissionDataProvider" title="Rights permission data provider class file.">RPermissionDataProvider</a></li>
+<li><a href="#RAssignmentDataProvider" title="">RAssignmentDataProvider</a></li>
+<li><a href="#RAuthItemParentDataProvider" title="Authorization item parent data provider class file.">RAuthItemParentDataProvider</a></li>
+<li><a href="#RAuthItemDataProvider" title="Authorization item data provider class file.">RAuthItemDataProvider</a></li>
+<li><a href="#RGenerator" title="Rights generator component class file.">RGenerator</a></li>
+<li><a href="#RUserBehavior" title="Rights user behavior class file.">RUserBehavior</a></li>
+<li><a href="#RAuthItemBehavior" title="Rights authorization item behavior class file.">RAuthItemBehavior</a></li>
+<li><a href="#Rights" title="Rights helper class file.">Rights</a></li>
+<li><a href="#RDbAuthManager" title="Rights authorization manager class file.">RDbAuthManager</a></li>
+<li><a href="#RAuthorizer" title="Rights authorizer component class file.">RAuthorizer</a></li>
+<li><a href="#RController" title="Rights base controller class file.">RController</a></li>
+<li><a href="#RightsModule" title="Rights module class file.">RightsModule</a></li>
+<li><a href="#ContactUsWidgetForm" title="">ContactUsWidgetForm</a></li>
+<li><a href="#BlocContact" title="">BlocContact</a></li>
+<li><a href="#BlocDocumentDocument" title="">BlocDocumentDocument</a></li>
+<li><a href="#BlocDocument" title="">BlocDocument</a></li>
+<li><a href="#BlocCitationCitation" title="">BlocCitationCitation</a></li>
+<li><a href="#BlocCitation" title="">BlocCitation</a></li>
+<li><a href="#BlocFeatureFeature" title="">BlocFeatureFeature</a></li>
+<li><a href="#BlocFeature" title="">BlocFeature</a></li>
+<li><a href="#BlocFlickr" title="">BlocFlickr</a></li>
+<li><a href="#BlocYoutube" title="">BlocYoutube</a></li>
+<li><a href="#BlocClouddocument" title="">BlocClouddocument</a></li>
+<li><a href="#BlocImage" title="">BlocImage</a></li>
+<li><a href="#BlocAchievement" title="">BlocAchievement</a></li>
+<li><a href="#BlocGooglemap" title="">BlocGooglemap</a></li>
+<li><a href="#BlocEditor" title="">BlocEditor</a></li>
+<li><a href="#BlocPeople" title="">BlocPeople</a></li>
+<li><a href="#BlocPeoplePeople" title="">BlocPeoplePeople</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/Default.html">Default</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i title="Functions" class="icon-custom icon-function"></i> Functions</h3>
+<a xmlns:php="http://php.net/xsl" id="function_call"></a><div xmlns:php="http://php.net/xsl" class="element clickable function  function_call " data-toggle="collapse" data-target=".function_call .collapse" title="">
+<h2>call()
+        </h2>
+<pre>call($url, $xmlFormat<code> = true</code>) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/Default.html">Default</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<div class="subelement argument"><h4>$xmlFormat</h4></div>
+</div></div>
+</div>
+<a xmlns:php="http://php.net/xsl" id="function_logMessage"></a><div xmlns:php="http://php.net/xsl" class="element clickable function  function_logMessage " data-toggle="collapse" data-target=".function_logMessage .collapse" title="">
+<h2>logMessage()
+        </h2>
+<pre>logMessage($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/Default.html">Default</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<h3>
+<i title="Classes" class="icon-custom icon-class"></i> Classes, interfaces, and traits</h3>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminController" class="element ajax clickable class">
+<h1>AdminController<a href="../classes/AdminController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminForm" class="element ajax clickable class">
+<h1>AdminForm<a href="../classes/AdminForm.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/AdminForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdmincatController" class="element ajax clickable class">
+<h1>AdmincatController<a href="../classes/AdmincatController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdmincatController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdmincategoryController" class="element ajax clickable class">
+<h1>AdmincategoryController<a href="../classes/AdmincategoryController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdmincategoryController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminconclusionController" class="element ajax clickable class">
+<h1>AdminconclusionController<a href="../classes/AdminconclusionController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminconclusionController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminconfirmationController" class="element ajax clickable class">
+<h1>AdminconfirmationController<a href="../classes/AdminconfirmationController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminconfirmationController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdmincvController" class="element ajax clickable class">
+<h1>AdmincvController<a href="../classes/AdmincvController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdmincvController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminformController" class="element ajax clickable class">
+<h1>AdminformController<a href="../classes/AdminformController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminformController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminintroductionController" class="element ajax clickable class">
+<h1>AdminintroductionController<a href="../classes/AdminintroductionController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminintroductionController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminresultsController" class="element ajax clickable class">
+<h1>AdminresultsController<a href="../classes/AdminresultsController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminresultsController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdminsubController" class="element ajax clickable class">
+<h1>AdminsubController<a href="../classes/AdminsubController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdminsubController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AdmintagController" class="element ajax clickable class">
+<h1>AdmintagController<a href="../classes/AdmintagController.html">¶</a>
+</h1>
+<p class="short_description">The controller the back-end controllers extend from.</p>
+<div class="details collapse"></div>
+<a href="../classes/AdmintagController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ApiController" class="element ajax clickable class">
+<h1>ApiController<a href="../classes/ApiController.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ApiController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AssignmentController" class="element ajax clickable class">
+<h1>AssignmentController<a href="../classes/AssignmentController.html">¶</a>
+</h1>
+<p class="short_description">Rights assignment controller class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/AssignmentController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AssignmentForm" class="element ajax clickable class">
+<h1>AssignmentForm<a href="../classes/AssignmentForm.html">¶</a>
+</h1>
+<p class="short_description">Auth item assignment form class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/AssignmentForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AuthChildForm" class="element ajax clickable class">
+<h1>AuthChildForm<a href="../classes/AuthChildForm.html">¶</a>
+</h1>
+<p class="short_description">Auth item child form class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/AuthChildForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AuthItemController" class="element ajax clickable class">
+<h1>AuthItemController<a href="../classes/AuthItemController.html">¶</a>
+</h1>
+<p class="short_description">Rights authorization item controller class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/AuthItemController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="AuthItemForm" class="element ajax clickable class">
+<h1>AuthItemForm<a href="../classes/AuthItemForm.html">¶</a>
+</h1>
+<p class="short_description">Authorization item form class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/AuthItemForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocAchievement" class="element ajax clickable class">
+<h1>BlocAchievement<a href="../classes/BlocAchievement.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocAchievement.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocCitation" class="element ajax clickable class">
+<h1>BlocCitation<a href="../classes/BlocCitation.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocCitation.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocCitationCitation" class="element ajax clickable class">
+<h1>BlocCitationCitation<a href="../classes/BlocCitationCitation.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocCitationCitation.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocClouddocument" class="element ajax clickable class">
+<h1>BlocClouddocument<a href="../classes/BlocClouddocument.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocClouddocument.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocContact" class="element ajax clickable class">
+<h1>BlocContact<a href="../classes/BlocContact.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocContact.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocDocument" class="element ajax clickable class">
+<h1>BlocDocument<a href="../classes/BlocDocument.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocDocument.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocDocumentDocument" class="element ajax clickable class">
+<h1>BlocDocumentDocument<a href="../classes/BlocDocumentDocument.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocDocumentDocument.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocEditor" class="element ajax clickable class">
+<h1>BlocEditor<a href="../classes/BlocEditor.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocEditor.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocFeature" class="element ajax clickable class">
+<h1>BlocFeature<a href="../classes/BlocFeature.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocFeature.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocFeatureFeature" class="element ajax clickable class">
+<h1>BlocFeatureFeature<a href="../classes/BlocFeatureFeature.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocFeatureFeature.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocFlickr" class="element ajax clickable class">
+<h1>BlocFlickr<a href="../classes/BlocFlickr.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocFlickr.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocGooglemap" class="element ajax clickable class">
+<h1>BlocGooglemap<a href="../classes/BlocGooglemap.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocGooglemap.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocImage" class="element ajax clickable class">
+<h1>BlocImage<a href="../classes/BlocImage.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocImage.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocPeople" class="element ajax clickable class">
+<h1>BlocPeople<a href="../classes/BlocPeople.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocPeople.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocPeoplePeople" class="element ajax clickable class">
+<h1>BlocPeoplePeople<a href="../classes/BlocPeoplePeople.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocPeoplePeople.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="BlocYoutube" class="element ajax clickable class">
+<h1>BlocYoutube<a href="../classes/BlocYoutube.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/BlocYoutube.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ContactUsWidgetForm" class="element ajax clickable class">
+<h1>ContactUsWidgetForm<a href="../classes/ContactUsWidgetForm.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ContactUsWidgetForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ContentPage" class="element ajax clickable class">
+<h1>ContentPage<a href="../classes/ContentPage.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ContentPage.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="Contest" class="element ajax clickable class">
+<h1>Contest<a href="../classes/Contest.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Contest.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ContestEntry" class="element ajax clickable class">
+<h1>ContestEntry<a href="../classes/ContestEntry.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ContestEntry.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ContestEntryItem" class="element ajax clickable class">
+<h1>ContestEntryItem<a href="../classes/ContestEntryItem.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ContestEntryItem.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ContestField" class="element ajax clickable class">
+<h1>ContestField<a href="../classes/ContestField.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ContestField.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ContestFieldMulti" class="element ajax clickable class">
+<h1>ContestFieldMulti<a href="../classes/ContestFieldMulti.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ContestFieldMulti.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="DefaultController" class="element ajax clickable class">
+<h1>DefaultController<a href="../classes/DefaultController.html">¶</a>
+</h1>
+<p class="short_description">The controller the front-end controllers extend from</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="EntryForm" class="element ajax clickable class">
+<h1>EntryForm<a href="../classes/EntryForm.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/EntryForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="Event" class="element ajax clickable class">
+<h1>Event<a href="../classes/Event.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Event.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="GenerateForm" class="element ajax clickable class">
+<h1>GenerateForm<a href="../classes/GenerateForm.html">¶</a>
+</h1>
+<p class="short_description">Generation form class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/GenerateForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="InstallController" class="element ajax clickable class">
+<h1>InstallController<a href="../classes/InstallController.html">¶</a>
+</h1>
+<p class="short_description">Rights installation controller class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/InstallController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="Job" class="element ajax clickable class">
+<h1>Job<a href="../classes/Job.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Job.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="JobCategory" class="element ajax clickable class">
+<h1>JobCategory<a href="../classes/JobCategory.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/JobCategory.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="JobCv" class="element ajax clickable class">
+<h1>JobCv<a href="../classes/JobCv.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/JobCv.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="JobForm" class="element ajax clickable class">
+<h1>JobForm<a href="../classes/JobForm.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/JobForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="Member" class="element ajax clickable class">
+<h1>Member<a href="../classes/Member.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Member.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="MemberLoginForm" class="element ajax clickable class">
+<h1>MemberLoginForm<a href="../classes/MemberLoginForm.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/MemberLoginForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="MemberRecoverForm" class="element ajax clickable class">
+<h1>MemberRecoverForm<a href="../classes/MemberRecoverForm.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/MemberRecoverForm.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="Message" class="element ajax clickable class">
+<h1>Message<a href="../classes/Message.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Message.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="MessageAssoc" class="element ajax clickable class">
+<h1>MessageAssoc<a href="../classes/MessageAssoc.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/MessageAssoc.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="News" class="element ajax clickable class">
+<h1>News<a href="../classes/News.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/News.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="NewsletterSubscription" class="element ajax clickable class">
+<h1>NewsletterSubscription<a href="../classes/NewsletterSubscription.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/NewsletterSubscription.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="Product" class="element ajax clickable class">
+<h1>Product<a href="../classes/Product.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Product.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ProductCategory" class="element ajax clickable class">
+<h1>ProductCategory<a href="../classes/ProductCategory.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ProductCategory.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ProductImage" class="element ajax clickable class">
+<h1>ProductImage<a href="../classes/ProductImage.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ProductImage.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="ProductTag" class="element ajax clickable class">
+<h1>ProductTag<a href="../classes/ProductTag.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/ProductTag.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RAssignmentDataProvider" class="element ajax clickable class">
+<h1>RAssignmentDataProvider<a href="../classes/RAssignmentDataProvider.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/RAssignmentDataProvider.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RAuthItemBehavior" class="element ajax clickable class">
+<h1>RAuthItemBehavior<a href="../classes/RAuthItemBehavior.html">¶</a>
+</h1>
+<p class="short_description">Rights authorization item behavior class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RAuthItemBehavior.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RAuthItemChildDataProvider" class="element ajax clickable class">
+<h1>RAuthItemChildDataProvider<a href="../classes/RAuthItemChildDataProvider.html">¶</a>
+</h1>
+<p class="short_description">Authorization item child data provider class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RAuthItemChildDataProvider.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RAuthItemDataProvider" class="element ajax clickable class">
+<h1>RAuthItemDataProvider<a href="../classes/RAuthItemDataProvider.html">¶</a>
+</h1>
+<p class="short_description">Authorization item data provider class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RAuthItemDataProvider.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RAuthItemParentDataProvider" class="element ajax clickable class">
+<h1>RAuthItemParentDataProvider<a href="../classes/RAuthItemParentDataProvider.html">¶</a>
+</h1>
+<p class="short_description">Authorization item parent data provider class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RAuthItemParentDataProvider.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RAuthorizer" class="element ajax clickable class">
+<h1>RAuthorizer<a href="../classes/RAuthorizer.html">¶</a>
+</h1>
+<p class="short_description">Rights authorizer component class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RAuthorizer.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RController" class="element ajax clickable class">
+<h1>RController<a href="../classes/RController.html">¶</a>
+</h1>
+<p class="short_description">Rights base controller class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RController.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RDbAuthManager" class="element ajax clickable class">
+<h1>RDbAuthManager<a href="../classes/RDbAuthManager.html">¶</a>
+</h1>
+<p class="short_description">Rights authorization manager class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RDbAuthManager.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RGenerator" class="element ajax clickable class">
+<h1>RGenerator<a href="../classes/RGenerator.html">¶</a>
+</h1>
+<p class="short_description">Rights generator component class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RGenerator.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RInstaller" class="element ajax clickable class">
+<h1>RInstaller<a href="../classes/RInstaller.html">¶</a>
+</h1>
+<p class="short_description">Rights installer component class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RInstaller.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RPermissionDataProvider" class="element ajax clickable class">
+<h1>RPermissionDataProvider<a href="../classes/RPermissionDataProvider.html">¶</a>
+</h1>
+<p class="short_description">Rights permission data provider class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RPermissionDataProvider.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RUserBehavior" class="element ajax clickable class">
+<h1>RUserBehavior<a href="../classes/RUserBehavior.html">¶</a>
+</h1>
+<p class="short_description">Rights user behavior class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RUserBehavior.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RWebUser" class="element ajax clickable class">
+<h1>RWebUser<a href="../classes/RWebUser.html">¶</a>
+</h1>
+<p class="short_description">Rights web user class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RWebUser.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="Rights" class="element ajax clickable class">
+<h1>Rights<a href="../classes/Rights.html">¶</a>
+</h1>
+<p class="short_description">Rights helper class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/Rights.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RightsFilter" class="element ajax clickable class">
+<h1>RightsFilter<a href="../classes/RightsFilter.html">¶</a>
+</h1>
+<p class="short_description">Rights filter class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RightsFilter.html" class="more">« More »</a>
+</div>
+<div xmlns:php="http://php.net/xsl" id="RightsModule" class="element ajax clickable class">
+<h1>RightsModule<a href="../classes/RightsModule.html">¶</a>
+</h1>
+<p class="short_description">Rights module class file.</p>
+<div class="details collapse"></div>
+<a href="../classes/RightsModule.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:36-04:00.<br></footer></div>
+</div>
+</body>
+</html>

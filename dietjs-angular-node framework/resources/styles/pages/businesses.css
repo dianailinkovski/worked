@@ -1,0 +1,466 @@
+
+#header{
+	position: relative;
+	z-index: 100;
+}
+#content{ 
+}
+
+.businesses{
+	
+	clear: both;
+}
+
+
+.businesses .business{
+	float: left; 
+	width:50%;
+	color: #fff;
+	position: relative;
+	
+	clear: both;
+}
+
+.businesses .business .in{
+	margin: 10px;
+	
+	color: #777;
+	background: #FFF;
+	border-radius: 5px; min-height:330px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.businesses .business .avatar{
+	padding:10px 0 10px;
+	position: relative;
+	float: left;
+	margin-bottom: 10px;
+	width: 100%; min-height: 120px;
+	
+	white-space: nowrap;
+	text-align: center; border-bottom:1px solid #cccccc;
+}
+
+.businesses .business .avatar:before{
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background:rgba(0,0,0,.1);
+	border-radius: 0;
+	z-index: 100;
+	display: inline-block;
+	height: 100%;
+ 	vertical-align: middle;
+}
+
+.businesses .business .avatar img{
+	background: #fff;
+	max-width: 80%;
+	float: none;
+	margin: 0 10%; height:90px;
+	width: auto;
+	clear: both;
+	align-content: center;
+	text-align: center;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+
+.businesses .business h1{
+	font-weight: 900;
+	font-size: 20px; text-transform: capitalize;
+	font-weight: normal;
+	float: left; margin:0; position:absolute; left:30px; top:75px;
+	 max-width:84%; z-index:999;
+}
+
+.businesses .business .rate{ left:31px; top:100px; list-style:none; position:absolute;}
+.businesses .business .rate li{ float:left;}
+.businesses .business .rate li img{ width:17px; margin:0 5px 0 0;}
+
+.businesses .business h1 a{
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.businesses .business h1 a:hover{
+	color: #00baff;
+}
+
+.businesses .business .infos{
+	clear: both; padding: 0 15px 5px; min-height:190px;
+}
+
+.businesses .business .info{
+	font-size: 15px;
+	padding: 3px 0; margin:0;
+	font-weight: normal;
+	padding-left: 25px; border:none;
+	display: block;  
+	position: relative; line-height:18px;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+.businesses .business .info span{ font-family:Lato;  word-wrap: break-word;}
+
+.businesses .business .fa:before{
+	position: absolute;
+	left: 5px;
+	color: #aaa;
+}
+
+.businesses .business .info
+
+.businesses .business .dot{
+	color: #ccc;
+	font-size: 20px;
+	margin: 0 5px;	
+}
+
+#search{
+	float:left; width:100%;
+}
+
+#search .wrap{
+	border-radius: 10px;
+	padding: 1px;
+}
+
+#search .wrap h1{
+	
+	color: #00baff ;
+	margin-bottom:20px;
+	
+	float: left;
+	font-size: 27px;
+	letter-spacing: 0;
+	
+	border-radius: 3px 3px 0 0;
+	
+	margin-top: 10px;
+}
+
+.clear{
+	clear: both;
+}
+
+
+#search .inputs{
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2), 0 0 30px rgba(0, 0, 0, 0.1);
+	float: left;
+	background: #FFF;
+	padding: 2px 6px 2px 2px;
+	width: 100%;
+	border-radius: 0 3px 3px 3px;
+}
+
+#search .inputs .input-holder{
+	float: left;
+	border: 4px solid #FFF;
+	width: 30%;
+	box-sizing: border-box;
+}
+
+#search .inputs .input-holder:first-child{
+	border-radius: 0 0 0 3px;
+}
+
+#search .inputs .input-holder:nth-child(3) { width: 30%; }
+#search .inputs .input-holder:nth-child(4) { width: 20%; }
+
+#search .inputs button{
+	background: #22B6C2;
+	width: 10%;
+	height: 36px;
+	margin-top: 4px;
+}
+
+
+#search_value, #search_location{
+	
+	width: 100%;
+	padding: 8px 15px;
+	border-radius: 4px;
+	border: 2px solid #ccc;
+	box-shadow: none;
+}
+
+ #search_location{ background: #ffffff url("../../images/input-search.png") no-repeat 10px 10px; background-size:14px auto; padding: 8px 15px 8px 30px;}
+
+#search_value:focus, #search_location:focus{
+	box-shadow: inset 0 1px 0 #E2E2E2, 0 0 4px 1px #00A2FF;
+	border: 2px solid #2877A4;
+}
+
+#search .input-holder:first-child input{
+
+}
+
+#search .selectize-input{
+	width: 100% !important;
+	vertical-align: top;
+	margin: 0;
+	background: #FFF;
+	border: 2px solid #D1D1D1;
+	border-radius: 4px;
+	box-shadow: none;
+}
+#search .selectize-control.single .selectize-input:after{
+	margin-top: -2px;
+}
+body{
+	background: #e9eaed !important;
+}
+#classifieds{
+	-webkit-transform: translateZ(0); 
+	float: left;
+	width: 100%;
+
+}
+
+#classifieds .title{
+	font-size: 27px;
+	margin-bottom: 10px;
+	color: #999;
+	line-height:20px; display:inline-block
+	position: relative;
+	margin-top: 20px;
+}
+
+
+#classifieds .title span{
+	color: #00baff;
+	position: relative;
+	z-index: 1;
+	padding-right: 10px;
+	
+}
+
+#map{
+
+	overflow: auto;
+	-webkit-transform: translateZ(0px);
+	background-color: #E5E3DF;
+	height: 557px;
+	position: fixed !important;
+	width: 57%; top:66px;
+	float: left;
+}
+#map-border{
+	position: absolute;
+	top: 75%;
+	margin-top: 46px;
+	left: 0;
+	right: 0;
+	border-top: 1px solid rgba(0,0,0,0.15);
+}
+
+.pagination{
+	float: left;
+	clear: both;
+	margin-top: 10px;
+	margin-bottom: 15px; text-align:center;
+	
+	width: 100%;
+	
+}
+.pagination a{
+	padding: 4px 12px;
+	display:inline-block;
+	margin-right: 3px;
+	color: #555; margin-top:10px;
+	font-size: 15px;
+	box-shadow: inset 0 0 0 2px rgba(0,0,0,0.1);
+	border-radius: 4px;
+}
+
+.pagination a:hover{
+	background: #fff;
+	text-decoration: none;
+}
+.pagination a.selected{
+	background: #007DC5;
+	font-weight: bold;
+	border-color: #007DC5;
+	;
+	color: #fff;
+}
+
+.pagination .icon-left{
+	padding: 7px 14px 7px 12px;
+}
+
+.pagination .icon-right{
+	padding: 4px 12px 4px 14px;
+}
+.pagination i{
+	font-weight: bold;
+	color: #aaa;
+	font-size: 18px;
+}
+/*
+.gm-style-iw{
+	left: 0 !important;
+	top: 0 !important;
+}*/
+
+.ad-window {
+	padding: 15px 15px 0 15px;
+	font-weight: normal;
+}
+
+.ad-window .picture{
+	max-width: 100px;
+	float: left;
+	position: relative;
+	border-radius: 3px;
+}
+.ad-window .picture::before{
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+	border-radius: 3px !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	z-index: 100;
+	position: absolute;
+}
+
+.ad-window .picture:hover::before{
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.ad-window .picture img{
+	width: 100%;
+	border-radius: 3px;
+	float: left;
+}
+
+
+.ad-window .seller{
+	margin-top: 10px;
+	border-top: 1px solid #E7E7E7;
+	padding-top: 15px;
+}
+
+.ad-window .seller img{
+	width: 25px;
+	display: inline;
+	border-radius: 100%;
+}
+
+.ad-window .seller-name{
+	margin-top: 2px;
+	font-size: 14px;
+	margin-left: 6px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.ad-window .info{
+	margin-left: 120px;
+	position: relative;
+	
+}
+
+.ad-window .info .description{
+	color: #777;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+.ad-window .info .price{
+	color: #37A85C;
+	font-weight: bold;
+	text-align: right;
+	font-size: 15px;
+	vertical-align: top;
+	display: inline-block;
+	float: right;
+}
+
+.infowindow{
+	margin: 0;
+}
+.infowindow .business{
+	width: 100%;
+}
+
+.infowindow .business .in{
+	padding: 0 ;
+	margin:0;
+	box-shadow: none;
+}
+.wrap .form-horizontal label{ font-size:16px;}
+.businesses #map .gm-style-iw > div{ height:auto !important;}
+
+.businesses .form-horizontal label{ color:#9d9d9d; text-align: left;}
+.mislery {  border-bottom: 1px solid #cccccc;  margin: -20px 0 15px;  padding: 0 0 10px;}
+.mislery a{ font-size:21px; margin:0 0 0 15px; color:#B8B8B8;}
+.mislery a:hover{ color:#0CC1FA;}
+.businesses .contentpart { max-height:74%; overflow:auto; background:#fff; position:fixed; top:66px; right:0;}
+
+.gm-style > div > div + div + div > div + div + div + div > div:first-child{ height: auto!important; min-height:310px; width: 250px; max-width: 250px;}
+.gm-style > div > div + div + div > div + div + div + div > div:first-child > div > div{ width: 250px; max-width: 250px !important;}
+
+/* @media all and (max-width:768px){ */
+@media all and (max-width:768px){
+	#search{
+		top: 0;
+	}
+	#content{
+		margin: 0;
+	}
+	#map-border{
+		margin-top: -1px;
+	}
+	
+	#classifieds{
+		margin-top: 0;
+	}
+	
+	.businesses .business{
+		width:50%;
+	}
+	
+	#search .wrap{
+		padding: 0 40px !important;
+	}
+	
+	#search .inputs{
+		padding: 10px 0 0 0;
+	}
+	
+	#search .inputs .input-holder.text,
+	#search .inputs .input-holder.select,
+	#search .inputs button{
+		width: 100%;
+		float: left;
+		float: left;
+		margin: 10px 20px 0 20px;
+		clear: both;
+		padding-right: 40px;
+		border: none;
+	}
+	
+	#search .inputs button {
+		background: #22B6C2;
+		width: 100%;
+		float: left;
+		
+	}
+	
+	#search input, form button{
+		width: 100%;
+	}
+}
+
+@media all and (max-width:448px){
+	.businesses .business{
+		width:100%;
+	}
+}

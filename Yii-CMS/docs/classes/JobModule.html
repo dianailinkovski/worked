@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » \JobModule</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div xmlns:php="http://php.net/xsl" class="btn-toolbar">
+<div class="btn-group visibility" data-toggle="buttons-checkbox">
+<button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button>
+</div>
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+</div>
+<ul xmlns:php="http://php.net/xsl" class="side-nav nav nav-list">
+<li class="nav-header">
+<i title="Methods" class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_getAdminMenu" title="getAdminMenu() :: The admin menu items the module will add."><span class="description">The admin menu items the module will add.</span><pre>getAdminMenu()</pre></a></li>
+<li class="method public inherited"><a href="#method_getAdminMenu" title="getAdminMenu() :: The admin menu items the module will add."><span class="description">The admin menu items the module will add.</span><pre>getAdminMenu()</pre></a></li>
+<li class="method public "><a href="#method_getAdminTabs" title="getAdminTabs() :: The tabs that will show up in the admin, serving as a sub-menu."><span class="description">The tabs that will show up in the admin, serving as a sub-menu.</span><pre>getAdminTabs()</pre></a></li>
+<li class="method public inherited"><a href="#method_getAdminTabs" title="getAdminTabs() :: The tabs that will show up in the admin, serving as a sub-menu."><span class="description">The tabs that will show up in the admin, serving as a sub-menu.</span><pre>getAdminTabs()</pre></a></li>
+<li class="method public "><a href="#method_getAssetsUrl" title="getAssetsUrl() :: "><span class="description">getAssetsUrl()
+        </span><pre>getAssetsUrl()</pre></a></li>
+<li class="method public inherited"><a href="#method_getUrlRuleClass" title="getUrlRuleClass() :: "><span class="description">getUrlRuleClass()
+        </span><pre>getUrlRuleClass()</pre></a></li>
+<li class="method public "><a href="#method_getUrlRules" title="getUrlRules() :: "><span class="description">getUrlRules()
+        </span><pre>getUrlRules()</pre></a></li>
+<li class="method public inherited"><a href="#method_getUrlRules" title="getUrlRules() :: "><span class="description">getUrlRules()
+        </span><pre>getUrlRules()</pre></a></li>
+<li class="method public "><a href="#method_init" title="init() :: "><span class="description">init()
+        </span><pre>init()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i title="Properties" class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_cvEmail" title="$cvEmail() :: "><span class="description"></span><pre>$cvEmail</pre></a></li>
+<li class="property public "><a href="#property_instantiable" title="$instantiable() :: "><span class="description">whether the module can be instanced or not (used multiple times on the site). Defaults to false.</span><pre>$instantiable</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="property private "><a href="#property__assetsUrl" title="$_assetsUrl() :: "><span class="description"></span><pre>$_assetsUrl</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a xmlns:php="http://php.net/xsl" id="\JobModule"></a><ul xmlns:php="http://php.net/xsl" class="breadcrumb">
+<li>
+<a href="../index.html"><i title="Classes" class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/JobModule.html">JobModule</a>
+</li>
+</ul>
+<div xmlns:php="http://php.net/xsl" class="element class">
+<p class="short_description">Job module</p>
+<div class="details">
+<div class="long_description"><p>Manages job postings with categories and possibility to post CV, has RSS feed</p></div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Bruno LL. <https://github.com/brunoll></a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/todo">https://github.com/todo</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright © 2015 Societe G-NeTiX Inc. - All Rights Reserved</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://opensource.org/licenses/MIT">The MIT License (MIT)</a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Module.html">Module</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\CmsModule</td>
+</tr>
+</table>
+<h3>
+<i title="Methods" class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_getAdminMenu"></a><div class="element clickable method public method_getAdminMenu " data-toggle="collapse" data-target=".method_getAdminMenu .collapse" title="public">
+<h2>The admin menu items the module will add.</h2>
+<pre>getAdminMenu() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>It's the same as @see CMenu::$items except in the label you can add {sectionName} in the label to be replaced with the section name
+and in the url, section_id GET variable will be added</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\CmsModule::getAdminMenu()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getAdminMenu"></a><div class="element clickable method public method_getAdminMenu inherited" data-toggle="collapse" data-target=".method_getAdminMenu .collapse" title="public">
+<h2>The admin menu items the module will add.</h2>
+<pre>getAdminMenu() : array</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>It's the same as @see CMenu::$items except in the label you can add {sectionName} in the label to be replaced with the section name
+and in the url, section_id GET variable will be added</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CCMenu::%24items"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the admin menu items</div>
+</div></div>
+</div>
+<a id="method_getAdminTabs"></a><div class="element clickable method public method_getAdminTabs " data-toggle="collapse" data-target=".method_getAdminTabs .collapse" title="public">
+<h2>The tabs that will show up in the admin, serving as a sub-menu.</h2>
+<pre>getAdminTabs() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>You must define an array with 3 parameters :
+url: (array) the url the tab will link to @see CHtml::normalizeUrl()
+label: (string) the label the tab will show
+controller: the name of the module's controller (lower case, without "controller") that will make this tab register as "active"</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\CmsModule::getAdminTabs()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getAdminTabs"></a><div class="element clickable method public method_getAdminTabs inherited" data-toggle="collapse" data-target=".method_getAdminTabs .collapse" title="public">
+<h2>The tabs that will show up in the admin, serving as a sub-menu.</h2>
+<pre>getAdminTabs() : array</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>You must define an array with 3 parameters :
+url: (array) the url the tab will link to @see CHtml::normalizeUrl()
+label: (string) the label the tab will show
+controller: the name of the module's controller (lower case, without "controller") that will make this tab register as "active"</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the admin tabs</div>
+</div></div>
+</div>
+<a id="method_getAssetsUrl"></a><div class="element clickable method public method_getAssetsUrl " data-toggle="collapse" data-target=".method_getAssetsUrl .collapse" title="public">
+<h2>getAssetsUrl()
+        </h2>
+<pre>getAssetsUrl() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getUrlRuleClass"></a><div class="element clickable method public method_getUrlRuleClass inherited" data-toggle="collapse" data-target=".method_getUrlRuleClass .collapse" title="public">
+<h2>getUrlRuleClass()
+        </h2>
+<pre>getUrlRuleClass() : string</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CCmsUrlRule"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the module's url rewrite class</div>
+</div></div>
+</div>
+<a id="method_getUrlRules"></a><div class="element clickable method public method_getUrlRules " data-toggle="collapse" data-target=".method_getUrlRules .collapse" title="public">
+<h2>getUrlRules()
+        </h2>
+<pre>getUrlRules() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\CmsModule::getUrlRules()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getUrlRules"></a><div class="element clickable method public method_getUrlRules inherited" data-toggle="collapse" data-target=".method_getUrlRules .collapse" title="public">
+<h2>getUrlRules()
+        </h2>
+<pre>getUrlRules() : array</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CCUrlManager::%24rules"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the module's url rewrite rules</div>
+</div></div>
+</div>
+<a id="method_init"></a><div class="element clickable method public method_init " data-toggle="collapse" data-target=".method_init .collapse" title="public">
+<h2>init()
+        </h2>
+<pre>init() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i title="Properties" class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_cvEmail"> </a><div class="element clickable property public property_cvEmail" data-toggle="collapse" data-target=".property_cvEmail .collapse" title="public">
+<h2>$cvEmail</h2>
+<pre>$cvEmail </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_instantiable"> </a><div class="element clickable property public property_instantiable" data-toggle="collapse" data-target=".property_instantiable .collapse" title="public">
+<h2>whether the module can be instanced or not (used multiple times on the site). Defaults to false.</h2>
+<pre>$instantiable : boolean</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__assetsUrl"> </a><div class="element clickable property private property__assetsUrl" data-toggle="collapse" data-target=".property__assetsUrl .collapse" title="private">
+<h2>$_assetsUrl</h2>
+<pre>$_assetsUrl </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:36-04:00.<br></footer></div>
+</div>
+</body>
+</html>

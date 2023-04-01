@@ -1,0 +1,2 @@
+ALTER TABLE `crowl_merchant_name_new` ADD `parent_merchant_id` INT NOT NULL DEFAULT '0' AFTER `seller_id`;
+ALTER TABLE `crowl_merchant_name_new` ADD `user_id` INT NOT NULL DEFAULT '0' AFTER `seller_id`;

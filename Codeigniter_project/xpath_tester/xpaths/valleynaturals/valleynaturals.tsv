@@ -1,0 +1,2 @@
+offers	product.name	product.price_listed	product.price_retail	product.image_url	product.sku	"Product URL"
+//table[@id='tableOptions']//tr	//h1/text()	//td[@class='price']/text()[3]			//td[1]/text()	http://www.valleynaturals.com/ct_detail.html?pgguid=a0e74d25-7dda-434d-89cf-7a5394797ed1

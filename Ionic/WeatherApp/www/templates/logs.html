@@ -1,0 +1,27 @@
+<ion-view title="Workout Log">
+  <ion-content class="has-header width-control">
+    <div class="list">
+      <div ng-if="noLogs">
+        <h4 style='text-align:center'>No workouts logged yet.</br>Time to sweat.</h4>
+      </div>
+      <ion-list id="workout-log">
+          <ion-item class="log-item" collection-repeat="dayLog in allLogs"
+      collection-item-width="'100%'"
+      collection-item-height="74"
+      ng-style="{height: 74}">
+          <div class="row">
+            <div class="col col-50"><h2>{{dayLog.createdDate}}</h2><p>{{dayLog.activityTitle}}</p></div>
+            <div class="col"><h2>{{dayLog.useMinutes}}</h2><p>minutes</p></div>
+            <div class="col"><h2>{{dayLog.useCalories}}</h2><p>calories</p></div>
+          </div>
+            <ion-option-button class="button-calm" ng-if="userSettings.mfpStatus" ng-click="syncRow(dayLog.id)">
+                Sync
+            </ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="deleteRow(dayLog.id)">
+                Delete
+            </ion-option-button>
+          </ion-item>
+    </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

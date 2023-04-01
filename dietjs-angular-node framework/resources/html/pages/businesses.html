@@ -1,0 +1,130 @@
+<div class="col-md-6 col-lg-7 col-xs-12 col-sm-12">
+<div id="map" class="mainmap-sec"></div>
+</div>
+<div class="col-md-6 col-lg-5 col-xs-12 col-sm-12 contentpart">
+<script>
+	window.businesses = {{-JSON.stringify this.data.businesses }};
+	window.query = {{-JSON.stringify this.query}};
+</script>
+
+{{-@get '/businesses', id:'search' }}
+	{{-this.input false, 'country_short', 'hidden' }}
+	{{-this.input false, 'country_long', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_1_short', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_1_long', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_2_short', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_2_long', 'hidden' }}
+	{{-this.input false, 'locality_short', 'hidden' }}
+	{{-this.input false, 'locality_long', 'hidden' }}
+	{{-this.input false, 'postal_code_short', 'hidden' }}
+	{{-this.input false, 'postal_code_long', 'hidden' }}
+	{{-this.input false, 'neighborhood_short', 'hidden' }}
+	{{-this.input false, 'neighborhood_long', 'hidden' }}
+	{{-this.input false, 'route_short', 'hidden' }}
+	{{-this.input false, 'route_long', 'hidden' }}
+	{{-this.input false, 'street_number_short', 'hidden' }}
+	{{-this.input false, 'street_number_long', 'hidden' }}
+	{{-this.input false, 'formatted_address', 'hidden' }}
+	{{-this.input false, 'latitude', 'hidden' }}
+	{{-this.input false, 'longitude', 'hidden' }}
+	
+	<div class="wrap">
+		
+		<h1>Search</h1>
+		<div class="clear"></div>
+		<div class="form-horizontal">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="form-group">
+						<label class="control-label col-md-3 col-lg-2 col-sm-3" >Search</label>
+						<div class="col-md-9 col-lg-10 col-sm-9">{{-this.input 'What are you looking for?', 'search_value', 'text'}}</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-lg-2 col-sm-3">Location</label>
+						<div class="col-md-9 col-lg-10 col-sm-9">{{-this.input 'Where?', 'search_location', 'text'}}</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-lg-2 col-sm-3">Categories</label>
+						<div class="col-md-9 col-lg-10 col-sm-9">{{-this.select placeholder:'Category', name:'category', options:this.categories }}</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-12 col-sm-12"><button type="submit" class="btn-block">Show Result</button></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+{{-@end}}
+
+
+
+<div id="classifieds" >
+	<div class="wrap">
+		<div class="col-md-12 col-sm-12 mislery text-right">
+			<a href="#"><i class="fa fa-th-list"></i></a>
+			<a href="#"><i class="fa fa-th-large"></i></a>
+		</div>
+		<h2 class="title"><span>{{-this.total_rows}} Business{{-if this.inputs.search_location then ' around ' + this.inputs.search_location}}</span></h2>
+		
+		<div class="businesses">
+			{{for business in this.businesses:}}
+				{{this.business = business}}
+				<div class="business">
+					<div class="in">
+						<a class="avatar" href="/{{-this.business.address}}?show=wall">
+							<!--span class="profile-helper"></span><img src="{{-this.business.avatar}}"/-->
+							<img src="{{-this.business.avatar}}" alt="">
+						</a>
+						<h1 class="logo"><a href="/{{-this.business.address}}?show=wall">{{-this.business.name}}</a></h1>
+						<ul class="rate">
+							<li><img src="../../images/solidrate.png" alt=""></li>
+							<li><img src="../../images/solidrate.png" alt=""></li>
+							<li><img src="../../images/solidrate.png" alt=""></li>
+							<li><img src="../../images/solidrate.png" alt=""></li>
+							<li><img src="../../images/solidrate.png" alt=""></li>
+						</ul>
+						 <div class="infos">
+						   {{if this.business.description:}}
+							<p class="info fa fa-info"><span>{{-this.business.description}}</span></p>
+						   {{end}}
+						   {{if this.business.contact_number:}}
+							<p class="info fa fa-phone"><span>+ {{-this.business.contact_number}}</span></p>
+						   {{end}}
+						   
+						   {{if this.business.category:}}
+							<p class="info fa fa-globe"><span>{{-this.business.category}}</span></p>
+						   {{end}}
+						   {{if this.business.contact_email:}}
+							<p class="info fa fa-envelope"><span> {{-this.business.contact_email}}</span></p>
+						   {{end}}
+						   {{if this.business.formatted_address:}}
+							<p class="info fa fa-map-marker"><span>{{-this.business.formatted_address}}</span></p>
+						   {{end}}
+						  </div>
+					</div>
+				</div>
+			{{end}}
+		</div>
+		
+		{{if this.total_rows > this.businesses.length:}}
+			
+			<div class="pagination">
+				{{if this.current_page > 1:}}	
+					{{this.query.page -= 1 }}
+					<a href="?{{-querystring.stringify this.query}}" class="icon-left"><i class="fa fa-angle-left"></i></a>
+				{{end}}
+				{{for index in [this.from_pages..this.to_pages]:}}
+					{{this.query.page = parseInt(index) }}
+					<a href="?{{-querystring.stringify this.query}}" {{-if index is this.current_page then 'class="selected"'}}>{{-index}}</a>
+				{{end}}
+				{{if this.current_page != this.total_pages:}}
+					{{this.query.page = this.query.page++}}
+					<a href="?{{-querystring.stringify this.query}}" class="icon-right"><i class="fa fa-angle-right"></i></a>
+				{{end}}
+			</div>
+		{{end}}
+	</div>
+	{{this.part = 'content'}}
+	
+</div>
+</div>

@@ -1,0 +1,775 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » \MultilingualBehavior</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div xmlns:php="http://php.net/xsl" class="btn-toolbar">
+<div class="btn-group visibility" data-toggle="buttons-checkbox">
+<button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button>
+</div>
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+</div>
+<ul xmlns:php="http://php.net/xsl" class="side-nav nav nav-list">
+<li class="nav-header">
+<i title="Methods" class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___get" title="__get() :: "><span class="description">__get()
+        </span><pre>__get()</pre></a></li>
+<li class="method public "><a href="#method___isset" title="__isset() :: "><span class="description">__isset()
+        </span><pre>__isset()</pre></a></li>
+<li class="method public "><a href="#method___set" title="__set() :: "><span class="description">__set()
+        </span><pre>__set()</pre></a></li>
+<li class="method public "><a href="#method_afterConstruct" title="afterConstruct() :: "><span class="description">afterConstruct()
+        </span><pre>afterConstruct()</pre></a></li>
+<li class="method public "><a href="#method_afterDelete" title="afterDelete() :: "><span class="description">afterDelete()
+        </span><pre>afterDelete()</pre></a></li>
+<li class="method public "><a href="#method_afterFind" title="afterFind() :: "><span class="description">afterFind()
+        </span><pre>afterFind()</pre></a></li>
+<li class="method public "><a href="#method_afterSave" title="afterSave() :: "><span class="description">afterSave()
+        </span><pre>afterSave()</pre></a></li>
+<li class="method public "><a href="#method_attach" title="attach() :: Attach the behavior to the model."><span class="description">Attach the behavior to the model.</span><pre>attach()</pre></a></li>
+<li class="method public "><a href="#method_canGetProperty" title="canGetProperty() :: "><span class="description">canGetProperty()
+        </span><pre>canGetProperty()</pre></a></li>
+<li class="method public "><a href="#method_canSetProperty" title="canSetProperty() :: "><span class="description">canSetProperty()
+        </span><pre>canSetProperty()</pre></a></li>
+<li class="method public "><a href="#method_createLangClass" title="createLangClass() :: Dynamically create the translation model class with the use of the eval() function so no additionnal php file is needed."><span class="description">Dynamically create the translation model class with the use of the eval() function so no additionnal php file is needed.</span><pre>createLangClass()</pre></a></li>
+<li class="method public "><a href="#method_getLangAttribute" title="getLangAttribute() :: "><span class="description">getLangAttribute()
+        </span><pre>getLangAttribute()</pre></a></li>
+<li class="method public "><a href="#method_hasLangAttribute" title="hasLangAttribute() :: Wether the attribute exists"><span class="description">Wether the attribute exists</span><pre>hasLangAttribute()</pre></a></li>
+<li class="method public "><a href="#method_hasProperty" title="hasProperty() :: "><span class="description">hasProperty()
+        </span><pre>hasProperty()</pre></a></li>
+<li class="method public "><a href="#method_localized" title="localized() :: Named scope to use {@link localizedRelation}"><span class="description">Named scope to use {@link localizedRelation}</span><pre>localized()</pre></a></li>
+<li class="method public "><a href="#method_localizedCriteria" title="localizedCriteria() :: Array of criteria to use {@link localizedRelation}"><span class="description">Array of criteria to use {@link localizedRelation}</span><pre>localizedCriteria()</pre></a></li>
+<li class="method public "><a href="#method_modifySearchCriteria" title="modifySearchCriteria() :: Modify passed criteria by replacing conditions on base attributes with conditions on translations."><span class="description">Modify passed criteria by replacing conditions on base attributes with conditions on translations.</span><pre>modifySearchCriteria()</pre></a></li>
+<li class="method public "><a href="#method_multilang" title="multilang() :: Named scope to use {@link multilangRelation}"><span class="description">Named scope to use {@link multilangRelation}</span><pre>multilang()</pre></a></li>
+<li class="method public "><a href="#method_multilangCriteria" title="multilangCriteria() :: Array of criteria to use {@link multilangRelation}"><span class="description">Array of criteria to use {@link multilangRelation}</span><pre>multilangCriteria()</pre></a></li>
+<li class="method public "><a href="#method_setLangAttribute" title="setLangAttribute() :: "><span class="description">setLangAttribute()
+        </span><pre>setLangAttribute()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_createLocalizedRelation" title="createLocalizedRelation() :: "><span class="description">createLocalizedRelation()
+        </span><pre>createLocalizedRelation()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i title="Properties" class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_createScenario" title="$createScenario() :: "><span class="description">the scenario corresponding to the creation of the model. Default to 'insert'.</span><pre>$createScenario</pre></a></li>
+<li class="property public "><a href="#property_defaultLanguage" title="$defaultLanguage() :: "><span class="description">the default language.
+Example: 'en'.</span><pre>$defaultLanguage</pre></a></li>
+<li class="property public "><a href="#property_dynamicLangClass" title="$dynamicLangClass() :: "><span class="description">wether to dynamically create translation model class.
+If true, the translation model class will be generated on runtime with the use of the eval() function so no additionnal php file is needed.
+See {@link createLangClass()}
+Default to true.</span><pre>$dynamicLangClass</pre></a></li>
+<li class="property public "><a href="#property_forceDelete" title="$forceDelete() :: "><span class="description">wether to force deletion of the associated translations when a base model is deleted.
+Not needed if using foreign key with 'on delete cascade'.
+Default to true.</span><pre>$forceDelete</pre></a></li>
+<li class="property public "><a href="#property_forceOverwrite" title="$forceOverwrite() :: "><span class="description">wether to force overwrite of the default language value with translated value even if it is empty.
+Used only for {@link localizedRelation}.
+Default to false.</span><pre>$forceOverwrite</pre></a></li>
+<li class="property public "><a href="#property_langClassName" title="$langClassName() :: "><span class="description">the name of translation model class. Default to '[base model class name]Lang'.
+Example: for a base model class named 'Post', the translation model class name is 'PostLang'.</span><pre>$langClassName</pre></a></li>
+<li class="property public "><a href="#property_langField" title="$langField() :: "><span class="description">the name of the lang field of the translation table. Default to 'lang_id'.</span><pre>$langField</pre></a></li>
+<li class="property public "><a href="#property_langForeignKey" title="$langForeignKey() :: "><span class="description">the name of the foreign key field of the translation table related to base model table. Default to '[base model table name]_id'.
+Example: for a base model table named post', the translation model table name is 'post_id'.</span><pre>$langForeignKey</pre></a></li>
+<li class="property public "><a href="#property_langTableName" title="$langTableName() :: "><span class="description">the name of the translation table. Default to '[base model table name]Lang'.
+Example: for a base model table named 'post', the translation model table name is 'postLang'.</span><pre>$langTableName</pre></a></li>
+<li class="property public "><a href="#property_languages" title="$languages() :: "><span class="description">the languages to use.
+It can be a simple array: array('fr', 'en')
+or an associative array: array('fr' =&gt; 'Français', 'en' =&gt; 'English')
+For associatives assray, only the keys will be used.</span><pre>$languages</pre></a></li>
+<li class="property public "><a href="#property_languagesFull" title="$languagesFull() :: "><span class="description"></span><pre>$languagesFull</pre></a></li>
+<li class="property public "><a href="#property_localizedAttributes" title="$localizedAttributes() :: "><span class="description">the attributes of the base model to be translated
+Example: array('title', 'content')</span><pre>$localizedAttributes</pre></a></li>
+<li class="property public "><a href="#property_localizedPrefix" title="$localizedPrefix() :: "><span class="description">the prefix of the localized attributes in the lang table. Here to avoid collisions in queries.
+In the translation table, the columns corresponding to the localized attributes have to be name like this: 'l_[name of the attribute]'
+and the id column (primary key) like this : 'l&lt;em&gt;id'
+Default to 'l&lt;/em&gt;'.</span><pre>$localizedPrefix</pre></a></li>
+<li class="property public "><a href="#property_localizedRelation" title="$localizedRelation() :: "><span class="description">the name the relation that is used to get translated attributes values for the current language.
+Default to 'multilang[base model class name]'.
+Example: for a base model class named 'Post', the relation name is 'multilangPost'.</span><pre>$localizedRelation</pre></a></li>
+<li class="property public "><a href="#property_multilangRelation" title="$multilangRelation() :: "><span class="description">the name the relation that is used to all translations for all translated attributes.
+Used to have access to all translations at once, for example when you want to display form to update a model
+Every translation for an attribute can be accessed like this: $model-&gt;[name of the attribute]_[language code] (example: $model-&gt;title_en, $model-&gt;title_fr).
+Default to 'i18n[base model class name]'.
+Example: for a base model table named post', the relation name is 'i18nPost'.</span><pre>$multilangRelation</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property__langAttributes" title="$_langAttributes() :: "><span class="description"></span><pre>$_langAttributes</pre></a></li>
+<li class="property private "><a href="#property__notDefaultLanguage" title="$_notDefaultLanguage() :: "><span class="description"></span><pre>$_notDefaultLanguage</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a xmlns:php="http://php.net/xsl" id="\MultilingualBehavior"></a><ul xmlns:php="http://php.net/xsl" class="breadcrumb">
+<li>
+<a href="../index.html"><i title="Classes" class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/MultilingualBehavior.html">MultilingualBehavior</a>
+</li>
+</ul>
+<div xmlns:php="http://php.net/xsl" class="element class">
+<p class="short_description">MultilingualBehavior handles active record model translation.</p>
+<div class="details">
+<div class="long_description"><p>This behavior allow you to create multilingual models and to use them (almost) like normal models.
+For each model, translations have to be stored in a separate table of the database (ex: PostLang or ProductLang),
+which allow you to easily add or remove a language without modifying your database.</p>
+<p>Here an example of base 'post' table :</p>
+<pre>
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` TEXT NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</pre>
+<p>And his associated translation table (configured as default), assuming translated fields are 'title' and 'content':</p>
+<pre>
+CREATE TABLE IF NOT EXISTS `postLang` (
+  `l_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `lang_id` varchar(6) NOT NULL,
+  `l_title` varchar(255) NOT NULL,
+  `l_content` TEXT NOT NULL,
+  PRIMARY KEY (`l_id`),
+  KEY `post_id` (`post_id`),
+  KEY `lang_id` (`lang_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+ALTER TABLE `postLang`
+  ADD CONSTRAINT `postlang_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+</pre>
+<p>Attach this behavior to the model (Post in the example).
+(Everything that is commented is default values)</p>
+<pre>
+public function behaviors() {
+    return array(
+        'ml' => array(
+            'class' => 'application.models.behaviors.MultilingualBehavior',
+            //'langClassName' => 'PostLang',
+            //'langTableName' => 'postLang',
+            //'langForeignKey' => 'post_id',
+            //'langField' => 'lang_id',
+            'localizedAttributes' => array('title', 'content'), //attributes of the model to be translated
+            //'localizedPrefix' => 'l_',
+            'languages' => Yii::app()->params['translatedLanguages'], // array of your translated languages. Example : array('fr' => 'Français', 'en' => 'English')
+            'defaultLanguage' => Yii::app()->params['defaultLanguage'], //your main language. Example : 'fr'
+            //'createScenario' => 'insert',
+            //'localizedRelation' => 'i18nPost',
+            //'multilangRelation' => 'multilangPost',
+            //'forceOverwrite' => false,
+            //'forceDelete' => true,
+            //'dynamicLangClass' => true, //Set to true if you don't want to create a 'PostLang.php' in your models folder
+        ),
+    );
+}
+</pre>
+<p>In order to retrieve translated models by default, add this function in the model class:</p>
+<pre>
+public function defaultScope()
+{
+    return $this->ml->localizedCriteria();
+}
+</pre>
+<p>You also can modify the loadModel function of your controller as guillemc suggested in a previous post :</p>
+<pre>
+public function loadModel($id, $ml=false) {
+    if ($ml) {
+        $model = Post::model()->multilang()->findByPk((int) $id);
+    } else {
+        $model = Post::model()->findByPk((int) $id);
+    }
+    if ($model === null)
+        throw new CHttpException(404, 'The requested post does not exist.');
+    return $model;
+}
+</pre>
+<p>and use it like this in the update action :</p>
+<pre>
+public function actionUpdate($id) {
+    $model = $this->loadModel($id, true);
+    ...
+}
+</pre>
+<p>Here is a very simple example for the form view :</p>
+<p>&lt;?php foreach (Yii::app()->params['translatedLanguages'] as $l => $lang) :</p>
+<pre><code>if($l === Yii::app()-&gt;params['defaultLanguage']) $suffix = '';
+else $suffix = '_'.$l;
+?&gt;</code></pre>
+<fieldset>
+    <legend><?php echo $lang; ?></legend>
+    <div class="row">
+    <?php echo $form->labelEx($model,'slug'); ?>
+    <?php echo $form->textField($model,'slug'.$suffix,array('size'=>60,'maxlength'=>255)); ?>
+    <?php echo $form->error($model,'slug'.$suffix); ?>
+    </div>
+    <div class="row">
+    <?php echo $form->labelEx($model,'title'); ?>
+    <?php echo $form->textField($model,'title'.$suffix,array('size'=>60,'maxlength'=>255)); ?>
+    <?php echo $form->error($model,'title'.$suffix); ?>
+    </div>
+</fieldset>
+<p>&lt;?php endforeach; ?></p>
+<p>To enable search on translated fields, you can modify the search() function in the model like this :
+Example: $model = Post::model()->localized('fr')->findByPk((int) $id);</p>
+<p>public function search()
+{</p>
+<pre><code>$criteria=new CDbCriteria;
+
+//...
+//here your criteria definition
+//...
+
+return new CActiveDataProvider($this, array(
+    'criteria'=&gt;$this-&gt;ml-&gt;modifySearchCriteria($criteria),
+    //instead of
+    //'criteria'=&gt;$criteria,
+));</code></pre>
+<p>}</p>
+<p>Warning: the modification of the search criteria is based on a simple str_replace so it may not work properly under certain circumstances.</p>
+<p>It's also possible to retrieve languages translation of two or more related models in one query.
+Example for a Page with a "articles" HAS_MANY relation :
+$model = Page::model()->multilang()->with('articles', 'articles.multilangArticle')->findByPk((int) $id);
+echo $model->articles[0]->content_en;</p>
+<p>With this method it's possible to make multi model forms like it's explained here @link <a href="http://www.yiiframework.com/wiki/19/how-to-use-a-single-form-to-collect-data-for-two-or-more-models/">http://www.yiiframework.com/wiki/19/how-to-use-a-single-form-to-collect-data-for-two-or-more-models/</a></p>
+<p>28/03/2012:
+It's now possible to modify language when retrieving data with the localized relation.
+Example: $model = Post::model()->localized('en')->findByPk((int) $id);</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Behavior.html">Behavior</a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Behavior.html">Behavior</a></td>
+</tr>
+</table>
+<h3>
+<i title="Methods" class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___get"></a><div class="element clickable method public method___get " data-toggle="collapse" data-target=".method___get .collapse" title="public">
+<h2>__get()
+        </h2>
+<pre>__get($name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+</div></div>
+</div>
+<a id="method___isset"></a><div class="element clickable method public method___isset " data-toggle="collapse" data-target=".method___isset .collapse" title="public">
+<h2>__isset()
+        </h2>
+<pre>__isset($name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+</div></div>
+</div>
+<a id="method___set"></a><div class="element clickable method public method___set " data-toggle="collapse" data-target=".method___set .collapse" title="public">
+<h2>__set()
+        </h2>
+<pre>__set($name, $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_afterConstruct"></a><div class="element clickable method public method_afterConstruct " data-toggle="collapse" data-target=".method_afterConstruct .collapse" title="public">
+<h2>afterConstruct()
+        </h2>
+<pre>afterConstruct(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code>
+</div>
+</div></div>
+</div>
+<a id="method_afterDelete"></a><div class="element clickable method public method_afterDelete " data-toggle="collapse" data-target=".method_afterDelete .collapse" title="public">
+<h2>afterDelete()
+        </h2>
+<pre>afterDelete(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code>
+</div>
+</div></div>
+</div>
+<a id="method_afterFind"></a><div class="element clickable method public method_afterFind " data-toggle="collapse" data-target=".method_afterFind .collapse" title="public">
+<h2>afterFind()
+        </h2>
+<pre>afterFind(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code>
+</div>
+</div></div>
+</div>
+<a id="method_afterSave"></a><div class="element clickable method public method_afterSave " data-toggle="collapse" data-target=".method_afterSave .collapse" title="public">
+<h2>afterSave()
+        </h2>
+<pre>afterSave(\CModelEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CModelEvent</code>
+</div>
+</div></div>
+</div>
+<a id="method_attach"></a><div class="element clickable method public method_attach " data-toggle="collapse" data-target=".method_attach .collapse" title="public">
+<h2>Attach the behavior to the model.</h2>
+<pre>attach(\model $owner) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$owner</h4>
+<code>\model</code>
+</div>
+</div></div>
+</div>
+<a id="method_canGetProperty"></a><div class="element clickable method public method_canGetProperty " data-toggle="collapse" data-target=".method_canGetProperty .collapse" title="public">
+<h2>canGetProperty()
+        </h2>
+<pre>canGetProperty($name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+</div></div>
+</div>
+<a id="method_canSetProperty"></a><div class="element clickable method public method_canSetProperty " data-toggle="collapse" data-target=".method_canSetProperty .collapse" title="public">
+<h2>canSetProperty()
+        </h2>
+<pre>canSetProperty($name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+</div></div>
+</div>
+<a id="method_createLangClass"></a><div class="element clickable method public method_createLangClass " data-toggle="collapse" data-target=".method_createLangClass .collapse" title="public">
+<h2>Dynamically create the translation model class with the use of the eval() function so no additionnal php file is needed.</h2>
+<pre>createLangClass() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>The translation model class created is a basic active record model corresponding to the translations table.
+It include a BELONG_TO relation to the base model which allow advanced usage of the translation model like conditional find on translations to retrieve base model.</p></div></div></div>
+</div>
+<a id="method_getLangAttribute"></a><div class="element clickable method public method_getLangAttribute " data-toggle="collapse" data-target=".method_getLangAttribute .collapse" title="public">
+<h2>getLangAttribute()
+        </h2>
+<pre>getLangAttribute(string $name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the name of the attribute</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the attribute value</div>
+</div></div>
+</div>
+<a id="method_hasLangAttribute"></a><div class="element clickable method public method_hasLangAttribute " data-toggle="collapse" data-target=".method_hasLangAttribute .collapse" title="public">
+<h2>Wether the attribute exists</h2>
+<pre>hasLangAttribute(string $name) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the name of the attribute</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method_hasProperty"></a><div class="element clickable method public method_hasProperty " data-toggle="collapse" data-target=".method_hasProperty .collapse" title="public">
+<h2>hasProperty()
+        </h2>
+<pre>hasProperty($name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+</div></div>
+</div>
+<a id="method_localized"></a><div class="element clickable method public method_localized " data-toggle="collapse" data-target=".method_localized .collapse" title="public">
+<h2>Named scope to use {@link localizedRelation}</h2>
+<pre>localized(string $lang<code> = null</code>) : \model</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lang</h4>
+<code>string</code><p>the lang the retrieved models will be translated (default to current application language)</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\model</code></div>
+</div></div>
+</div>
+<a id="method_localizedCriteria"></a><div class="element clickable method public method_localizedCriteria " data-toggle="collapse" data-target=".method_localizedCriteria .collapse" title="public">
+<h2>Array of criteria to use {@link localizedRelation}</h2>
+<pre>localizedCriteria() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_modifySearchCriteria"></a><div class="element clickable method public method_modifySearchCriteria " data-toggle="collapse" data-target=".method_modifySearchCriteria .collapse" title="public">
+<h2>Modify passed criteria by replacing conditions on base attributes with conditions on translations.</h2>
+<pre>modifySearchCriteria(\CDbCriteria $criteria) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Allow to make search on model translated values.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$criteria</h4></div>
+</div></div>
+</div>
+<a id="method_multilang"></a><div class="element clickable method public method_multilang " data-toggle="collapse" data-target=".method_multilang .collapse" title="public">
+<h2>Named scope to use {@link multilangRelation}</h2>
+<pre>multilang() : \model</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\model</code></div>
+</div></div>
+</div>
+<a id="method_multilangCriteria"></a><div class="element clickable method public method_multilangCriteria " data-toggle="collapse" data-target=".method_multilangCriteria .collapse" title="public">
+<h2>Array of criteria to use {@link multilangRelation}</h2>
+<pre>multilangCriteria() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_setLangAttribute"></a><div class="element clickable method public method_setLangAttribute " data-toggle="collapse" data-target=".method_setLangAttribute .collapse" title="public">
+<h2>setLangAttribute()
+        </h2>
+<pre>setLangAttribute(string $name, string $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the name of the attribute</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>the value of the attribute</p></div>
+</div></div>
+</div>
+<a id="method_createLocalizedRelation"></a><div class="element clickable method private method_createLocalizedRelation " data-toggle="collapse" data-target=".method_createLocalizedRelation .collapse" title="private">
+<h2>createLocalizedRelation()
+        </h2>
+<pre>createLocalizedRelation($owner, $lang) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$owner</h4></div>
+<div class="subelement argument"><h4>$lang</h4></div>
+</div></div>
+</div>
+<h3>
+<i title="Properties" class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_createScenario"> </a><div class="element clickable property public property_createScenario" data-toggle="collapse" data-target=".property_createScenario .collapse" title="public">
+<h2>the scenario corresponding to the creation of the model. Default to 'insert'.</h2>
+<pre>$createScenario : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'insert'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_defaultLanguage"> </a><div class="element clickable property public property_defaultLanguage" data-toggle="collapse" data-target=".property_defaultLanguage .collapse" title="public">
+<h2>the default language.
+Example: 'en'.</h2>
+<pre>$defaultLanguage : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_dynamicLangClass"> </a><div class="element clickable property public property_dynamicLangClass" data-toggle="collapse" data-target=".property_dynamicLangClass .collapse" title="public">
+<h2>wether to dynamically create translation model class.
+If true, the translation model class will be generated on runtime with the use of the eval() function so no additionnal php file is needed.
+See {@link createLangClass()}
+Default to true.</h2>
+<pre>$dynamicLangClass : boolean</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>true</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_forceDelete"> </a><div class="element clickable property public property_forceDelete" data-toggle="collapse" data-target=".property_forceDelete .collapse" title="public">
+<h2>wether to force deletion of the associated translations when a base model is deleted.
+Not needed if using foreign key with 'on delete cascade'.
+Default to true.</h2>
+<pre>$forceDelete : boolean</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>true</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_forceOverwrite"> </a><div class="element clickable property public property_forceOverwrite" data-toggle="collapse" data-target=".property_forceOverwrite .collapse" title="public">
+<h2>wether to force overwrite of the default language value with translated value even if it is empty.
+Used only for {@link localizedRelation}.
+Default to false.</h2>
+<pre>$forceOverwrite : boolean</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_langClassName"> </a><div class="element clickable property public property_langClassName" data-toggle="collapse" data-target=".property_langClassName .collapse" title="public">
+<h2>the name of translation model class. Default to '[base model class name]Lang'.
+Example: for a base model class named 'Post', the translation model class name is 'PostLang'.</h2>
+<pre>$langClassName : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_langField"> </a><div class="element clickable property public property_langField" data-toggle="collapse" data-target=".property_langField .collapse" title="public">
+<h2>the name of the lang field of the translation table. Default to 'lang_id'.</h2>
+<pre>$langField : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'lang_id'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_langForeignKey"> </a><div class="element clickable property public property_langForeignKey" data-toggle="collapse" data-target=".property_langForeignKey .collapse" title="public">
+<h2>the name of the foreign key field of the translation table related to base model table. Default to '[base model table name]_id'.
+Example: for a base model table named post', the translation model table name is 'post_id'.</h2>
+<pre>$langForeignKey : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_langTableName"> </a><div class="element clickable property public property_langTableName" data-toggle="collapse" data-target=".property_langTableName .collapse" title="public">
+<h2>the name of the translation table. Default to '[base model table name]Lang'.
+Example: for a base model table named 'post', the translation model table name is 'postLang'.</h2>
+<pre>$langTableName : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_languages"> </a><div class="element clickable property public property_languages" data-toggle="collapse" data-target=".property_languages .collapse" title="public">
+<h2>the languages to use.
+It can be a simple array: array('fr', 'en')
+or an associative array: array('fr' =&gt; 'Français', 'en' =&gt; 'English')
+For associatives assray, only the keys will be used.</h2>
+<pre>$languages : array</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_languagesFull"> </a><div class="element clickable property public property_languagesFull" data-toggle="collapse" data-target=".property_languagesFull .collapse" title="public">
+<h2>$languagesFull</h2>
+<pre>$languagesFull </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_localizedAttributes"> </a><div class="element clickable property public property_localizedAttributes" data-toggle="collapse" data-target=".property_localizedAttributes .collapse" title="public">
+<h2>the attributes of the base model to be translated
+Example: array('title', 'content')</h2>
+<pre>$localizedAttributes : array</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_localizedPrefix"> </a><div class="element clickable property public property_localizedPrefix" data-toggle="collapse" data-target=".property_localizedPrefix .collapse" title="public">
+<h2>the prefix of the localized attributes in the lang table. Here to avoid collisions in queries.
+In the translation table, the columns corresponding to the localized attributes have to be name like this: 'l_[name of the attribute]'
+and the id column (primary key) like this : 'l&lt;em&gt;id'
+Default to 'l&lt;/em&gt;'.</h2>
+<pre>$localizedPrefix : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'l_'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_localizedRelation"> </a><div class="element clickable property public property_localizedRelation" data-toggle="collapse" data-target=".property_localizedRelation .collapse" title="public">
+<h2>the name the relation that is used to get translated attributes values for the current language.
+Default to 'multilang[base model class name]'.
+Example: for a base model class named 'Post', the relation name is 'multilangPost'.</h2>
+<pre>$localizedRelation : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_multilangRelation"> </a><div class="element clickable property public property_multilangRelation" data-toggle="collapse" data-target=".property_multilangRelation .collapse" title="public">
+<h2>the name the relation that is used to all translations for all translated attributes.
+Used to have access to all translations at once, for example when you want to display form to update a model
+Every translation for an attribute can be accessed like this: $model-&gt;[name of the attribute]_[language code] (example: $model-&gt;title_en, $model-&gt;title_fr).
+Default to 'i18n[base model class name]'.
+Example: for a base model table named post', the relation name is 'i18nPost'.</h2>
+<pre>$multilangRelation : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__langAttributes"> </a><div class="element clickable property private property__langAttributes" data-toggle="collapse" data-target=".property__langAttributes .collapse" title="private">
+<h2>$_langAttributes</h2>
+<pre>$_langAttributes </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>array()</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__notDefaultLanguage"> </a><div class="element clickable property private property__notDefaultLanguage" data-toggle="collapse" data-target=".property__notDefaultLanguage .collapse" title="private">
+<h2>$_notDefaultLanguage</h2>
+<pre>$_notDefaultLanguage </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:39-04:00.<br></footer></div>
+</div>
+</body>
+</html>

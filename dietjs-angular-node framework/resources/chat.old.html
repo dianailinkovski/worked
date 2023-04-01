@@ -1,0 +1,352 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+<script src="js/jquery-ui.js"></script>
+<script src="js/jquery.dialogOptions.js"></script>
+<script async="async" src="js/simply-toast.min.js"></script>
+<script  src="js/clndr/json2.js"></script>
+<script  src="js/clndr/moment-2.8.3.js"></script>
+<script src="js/clndr/clndr.js"></script>
+<script  src="js/clndr/site.js"></script>
+
+<script src="/socket.io/socket.io.js" type="text/javascript"></script>
+<script src="js/delivery.js"></script>
+<script type="text/javascript" src="js/easyrtc.js"></script>
+<!--<script src="js/mentor.js"></script>-->
+<script src="js/datetime.js"></script>
+<script src="js/users.js"></script>
+<script src="js/scripts.js"></script>
+
+
+<meta name="viewport" content="width=device-width" content="initial-scale = 1.0,maximum-scale = 1.0"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/clndr.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/newstyle.css">
+
+<script type="text/javascript">
+		 var oclocation = "";
+var geocoder;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+} 
+//Get the latitude and the longitude;
+function successFunction(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    codeLatLng(lat, lng)
+}
+
+function errorFunction(){
+    alert("Geocoder failed");
+}
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+
+
+
+  }
+
+  function codeLatLng(lat, lng) {
+
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+      console.log(results)
+        if (results[1]) {
+         //formatted address
+        // alert(results[0].formatted_address)
+		oclocation = results[0].formatted_address;
+        //find country name
+             for (var i=0; i<results[0].address_components.length; i++) {
+            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                    //this is the object you are looking for
+                    city= results[0].address_components[i];
+                    break;
+                }
+            }
+        }
+        //city data
+        //alert(city.short_name + " " + city.long_name)
+		//document.getElementById("locationInfo").innerHTML=city.short_name + " " + city.long_name;
+
+
+        } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+  initialize();
+
+</script> 
+</head>
+
+<body onLoad="connectToAp();">
+
+<div id="mobile_navigation">
+	<img onClick="activateMenu()" id="icon" src="img/menu-nav.gif" />
+</div>
+<div class="jcmenu">
+		 <img src="img/cross_icon.png" class="close-pop" onClick="hideJCmenu();" style="float: right;margin-right: 0px;margin-top: 0px; height:auto;" />
+		 <div class="profile">
+				  
+				  <img id="profile_image" src="img/image.png">
+				  <h4 class="textblue" id="my_name"></h4>
+		 </div>
+		  <div class="menu">
+          <div class="user_menu">
+				  <img src="img/clndr-white.png"/>
+				  <a href="javascript: void(0);" onClick="ocShowAppointments()"> Appointments</a>
+                  </div>
+                  <div class="user_menu">
+				  <img src="img/chat-white.png" />
+				  <a href="javascript: void(0);" onClick="ocShowMessages()">Messages</a>
+                  </div>
+				  <div class="clear"></div>
+		 </div>
+		  <div class="msgblock" id="msgdetails">
+			<div class="textblue gap menu-lbl">Messages</div>
+		 </div> 
+		 <div class="col-sm-hide col-xs-hide msgblock" id="apdetails">
+			<div class="textblue gap menu-lbl">Appointments</div>
+			
+		 </div> 
+</div>
+<!-- Chat -->
+<div id="msg_history" class="message-container" role="form">
+		 <img src="img/cross_icon.png" class="close-pop" onClick="PromptClear('msg_history')"/>
+		 <div id="msg_history_contents" class="block-contents"></div>
+</div>
+<div id="msg" class="message-container" role="form">
+<img src="img/cross_icon.png" class="close-pop" onClick="hideMsg();"/>
+         <div class="message-list" id="message-list">
+		  <div id="sendMessageArea" class="chatbox">
+                    <div id="iam">Offline</div>
+            <div class="chatnButton">
+            <div class="otherClients2">
+                <select id="TargetLanguage">
+                 <option value="-1">Translate</option>
+		 <option value="sq">Albanian</option>
+		 <option value="en">English</option>
+		 <option value="ar">Arabic</option> 
+		 <option value="hr">Armenian</option>
+		 <option value="az">Azerbaijan</option> 
+		 <option value="af">Afrikaans</option> 
+		 <option value="eu">Basque</option>
+		 <option value="be">Belarusian</option> 
+		 <option value="bg">Bulgarian</option>
+		 <option value="bs">Bosnian</option> 
+		 <option value="cy">Welsh</option>
+		 <option value="vi">Vietnamese</option> 
+		 <option value="hu">Hungarian</option>
+		 <option value="ht">Haitian (Creole)</option>
+		 <option value="gl">Galician</option>
+		 <option value="nl">Dutch</option>
+		 <option value="el">Greek</option> 
+		 <option value="ka">Georgian</option>
+		 <option value="da">Danish</option> 
+		 <option value="he">Yiddish</option>
+		 <option value="id">Indonesian</option>
+		 <option value="ga">Irish</option>
+		 <option value="it">Italian</option> 
+		 <option value="is">Icelandic</option>
+		 <option value="es">Spanish</option>
+		 <option value="kk">Kazakh</option>
+		 <option value="ca">Catalan</option> 
+		 <option value="ky">Kyrgyz</option>
+		 <option value="zh">Chinese</option>
+		 <option value="ko">Korean</option> 
+		 <option value="la">Latin</option> 
+		 <option value="lv">Latvian</option>
+		 <option value="lt">Lithuanian</option>
+		 <option value="mg">Malagasy</option> 
+		 <option value="ms">Malay</option> 
+		 <option value="mt">Maltese</option>
+		 <option value="mk">Macedonian</option>
+		 <option value="mn">Mongolian</option>
+		 <option value="de">German</option>
+		 <option value="no">Norwegian</option> 
+		 <option value="fa">Persian</option>
+		 <option value="pl">Polish</option> 
+		 <option value="pt">Portuguese</option> 
+		 <option value="ro">Romanian</option> 
+		 <option value="ru">Russian</option>
+		 <option value="sr">Serbian</option> 
+		 <option value="sk">Slovakian</option>
+		 <option value="sl">Slovenian</option> 
+		 <option value="sw">Swahili</option> 
+		 <option value="tg">Tajik</option>
+		 <option value="th">Thai</option> 
+		 <option value="tl">Tagalog</option>
+		 <option value="tt">Tatar</option>
+		 <option value="tr">Turkish</option> 
+		 <option value="uz">Uzbek</option> 
+		 <option value="uk">Ukrainian</option>
+		 <option value="fi">Finish</option> 
+		 <option value="fr">French</option> 
+		 <option value="hr">Croatian</option>
+		 <option value="cs">Czech</option> 
+		 <option value="sv">Swedish</option> 
+		 <option value="et">Estonian</option> 
+		 <option value="ja">Japanese</option>
+                </select>
+            </div>
+			   <textarea id="sendMessageText"></textarea>
+			   <div id="otherClients2"><button class="btn" id=""></button></div>
+		    </div>
+            </div>
+                <div id="receiveMessageArea">
+                    <div id="conversation"></div>
+                </div>
+                  <div class="message-item hide" id="message-template">
+                           <img><span class="selectable"></span>
+                  </div>
+
+         </div>
+</div>
+<!-- END Chat -->
+         
+<div class="toolbar-wrapper">
+<div class="toolbar-container" id="navigation">
+	 <div id="call_info">
+		  <input type="button" id="makeCallButton" value="Start Video Call" class="btn btn-success hidden start_call">
+		  <div id="call_waiting" class="hidden">Calling...</div>
+	 </div>
+		  
+    <div class="animated toolbar fadeIn" id="toolbar">
+        <a id="menu-btn" class="tb-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Menu">
+                
+                <img src="img/user.png" alt="User" />
+        </a>
+        <a id="hangupButton" onClick="hangup()" class="tb-btn hidden" data-toggle="tooltip" data-placement="top" title="" data-original-title="Leave">
+                 <img src="img/call-off.png" alt="Make A Call" />
+        </a>
+        
+	   <a id="callButton" class="tb-btn visible start_call" data-toggle="tooltip" data-placement="top" title="" data-original-title="Call">
+               
+                <img src="img/earphone.png" alt="Make A Call" />
+        </a>
+        <!--<a id="tb-menu" class="tb-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Show Menu">-->
+        <!--         <i class="glyphicon glyphicon-align-justify"></i>-->
+        <!--</a>-->
+         <a class="tb-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="mic">
+                <img id="mic" src="img/mic.png" alt="Mic" />
+		<!--<span id="mic" class="fa fa-fw fa-microphone"></span>-->
+        </a>
+	  <a class="tb-btn toggle toggle_camera" data-toggle="tooltip" data-placement="top" title="" data-original-title="Video">
+               
+                <img src="img/video.png" alt="Video" />
+        </a>
+		 <a class="tb-btn" id="change_camera" data-toggle="tooltip" data-placement="top" title="" data-original-title="Change Camera">
+				
+                  <img src="img/camera.png" alt="Camera" />
+		 </a>
+        <a id="attatch_img" class="tb-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Attatch image">
+	      
+           <img src="img/attatch_file.png" alt="Attatch A File" />
+        </a>
+         <a id="#" onClick="shareLocation()" class="tb-btn" data-toggle="tooltip" data-placement="top"  data-original-title="Share Location">
+                 <img src="img/location.png" alt="Share Location" />
+        </a>
+         
+         <a id="calView" id="attatch_img" class="tb-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send Appointment">
+                <img src="img/clndr.png" alt="Send Appointment" />
+		<!--<span id="image_upload" class="glyphicon glyphicon-paperclip"></span>-->
+        </a>
+          <a id="payment_options" class="tb-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Payment Options">
+                 
+                 <img src="img/credit_card.png" alt="Make Payment" />
+        </a>
+         <a id="tb-messages" id="attatch_img" class="tb-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Show Messages">
+                 <img src="img/chat.png" alt="Chat" />
+        </a>
+	   <a id="tb-toggle-video" class="tb-btn" onClick="toggleFullScreen()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Full Screen">
+               <img id="extend" src="img/extend.png" alt="Full Screen" />
+        </a>
+        
+    </div>
+
+</div>
+</div>
+<div id="showCalendar">
+<div class="popclose" onClick="PromptClear('showCalendar')"/></div>
+    <div id="cDate" class="cal1"></div>
+    <div id="cTime">
+        <div class="time-container">
+            <table class="table table-bordered">
+                <tr><td>01:00</td></tr>
+                <tr><td>02:00</td></tr>
+                <tr><td>03:00</td></tr>
+                <tr><td>04:00</td></tr>
+                <tr><td>05:00</td></tr>
+                <tr><td>06:00</td></tr>
+                <tr><td>07:00</td></tr>
+                <tr><td>08:00</td></tr>
+                <tr><td>09:00</td></tr>
+                <tr><td>10:00</td></tr>
+                <tr><td>11:00</td></tr>
+                <tr><td>12:00</td></tr>
+                <tr><td>13:00</td></tr>
+                <tr><td>14:00</td></tr>
+                <tr><td>15:00</td></tr>
+                <tr><td>16:00</td></tr>
+                <tr><td>17:00</td></tr>
+                <tr><td>18:00</td></tr>
+                <tr><td>19:00</td></tr>
+                <tr><td>20:00</td></tr>
+                <tr><td>21:00</td></tr>
+                <tr><td>22:00</td></tr>
+                <tr><td>23:00</td></tr>
+                <tr><td>00:00</td></tr>
+            </table>
+        </div>
+    </div>
+    <div id="app-btn">
+        <a>Send Appointment</a>
+    </div>
+</div>
+</div>
+
+
+
+<div id="demoContainer">
+	 <div id="videos">
+	     <div class="caller" id="oc_caller"><video autoplay="autoplay" id="selfVideo"  class="easyrtcMirror" muted="muted" volume="0"></video></div>
+	     <div id="oc_video"><video autoplay="autoplay" id="callerVideo"></video></div>
+	     <div id="acceptCallBox"> <!-- Should be initially hidden using CSS -->
+		 <div id="acceptCallLabel"></div>
+		 <button id="callAcceptButton" class='btn btn-success'>Accept</button>
+		 <button id="callRejectButton" class='btn btn-primary'>Reject</button>
+	     </div>
+	     <div class="popup" id="noConnection">No user available for call. Inivite them by link:
+		<div id="inviteLink"></div>  
+	     </div>
+	 </div>
+</div>
+
+<div class="nodisplay" id="file_upload_form">
+		 <form id="imageUploadForm">
+				  <div id="fileUpLbl" class="alert alert-success hidden">File Sent</div>
+				  <label for="oc_file">File: </label><input type="file" name="oc_file" id="oc_file"><br>
+				  <input type="button" class="btn btn-primary" value="Submit" name="oc_f_submit" id="oc_f_submit">
+		 </form>
+</div>
+<div class="nodisplay" id="camera_setings">
+		 <div id="cLbl"></div>
+		 <div id="cameraContent"></div>
+</div>
+<div class="nodisplay" id="payment_block">Comming Soon</div>
+</div>
+</body>
+</html>

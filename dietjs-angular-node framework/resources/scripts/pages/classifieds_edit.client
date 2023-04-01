@@ -1,0 +1,222 @@
+
+$(function(){
+	// ### SELECT CONTACT ###
+	$('#contact-select').selectize({
+	    dataAttr: 'data-employee',
+	    render: {
+	        option: function(item, escape) {
+	            return '<div class="select-employee-dropdown">'
+	            	+		'<img src="'+item.avatar+'"/>'
+	            	+		'<div class="employee-content">'
+	            	+			'<div class="employee-name">' + item.full_name + '</div>'
+	            	+			'<div class="employee-mail">' + (item.contact_email || '(no contact email)') + '</div>'
+	            	+			'<div class="employee-number">' + (item.contact_number || '(no contact number)')  + '</div>'
+	            	+		'</div>'
+	            	+	'</div>';
+	        }
+	    }
+	});
+
+	// ### GENERAL SELECTORS ###
+	$('select').selectize();
+
+	// ### SELECT CATEGORY FIELDS ###
+	var category = $('select[name="category"]');
+	category.change(categoryChange);
+	categoryChange();
+	function categoryChange(){
+		console.log(category.val(), 'selected');
+		var value = category.val();
+		$.get('/html/parts/sub_category/'+value+'.html', function(response){
+			console.log(response);
+			$('#category_fields').slideUp(200, function(){
+				if(response.replace(/\s+/g, ' ') != '<h3>Category Fields</h3>'){
+					$('#category_fields').html(response);
+					$('#category_fields').slideDown();
+					$('select').selectize();
+					
+					for(var i = 0; i < window.fields.length; i++){
+						var data = window.fields[i];
+						var field = $('[name="@'+data.name+'"');
+						
+						if(field.prop('tagName') == 'SELECT'){
+							field[0].selectize.setValue(data.value);
+						} else {
+							field.val(data.value);
+						}
+						
+					}
+				} 
+				
+			});
+		});
+	}
+	
+	// ### PRICE ###
+	updatePrice();
+	$('#price').keyup(updatePrice);
+	$('#currency').change(updatePrice);
+	function updatePrice(){
+		var amount = $('#price').val();
+		
+		// Construct Symbol & Format
+		var symbol = $('#currency').val().split('-')[1]; 						 // ex: $
+		var format 	= symbol.match(/([a-zA-Z]+)/i) ? "%v %s" : "%s%v" ; // $1000 or 1000 ft
+
+		// Construct Result
+		var result = accounting.formatMoney(amount, {
+			symbol: symbol,
+			format: format
+		});
+		
+		$('#final_price_tag').html(result);
+		$('#formatted_price').val(result);
+	}
+	
+	// ### DROPZONE ###
+	$("#dropform").dropzone({
+		addRemoveLinks: true,
+		// this is important as you dont want form to be submitted unless you have clicked the submit button
+		autoProcessQueue: true, 
+		autoDiscover: false,
+		// we specify on which div id we must show the files
+		previewsContainer: '#dropzonePreview', 
+		uploadMultiple: true,
+		thumbnailWidth: 122,
+		thumbnailHeight: 122,
+		acceptedFiles: "image/*",
+		parallelUploads: 50,
+		// this tells that the dropzone will not be clickable
+		clickable: "#dropzonePreview",
+		accept: function(file, done) {
+			console.log("uploaded");
+			done();
+		},
+		error: function(file, msg){
+			console.log(msg);
+		},
+		init: function() {
+		
+			var myDropzone = this;
+			var text = $(myDropzone.element).find('.dropzone-text');
+
+			console.log('$...GET JSON...', '/classifieds/'+window.classified_id+'/pictures');
+		 	$.getJSON('/classifieds/'+window.classified_id+'/pictures', function(data) { // get the json response
+	           window.pics = data.pictures;
+	            $.each(data.pictures, function(key,value){ //loop through it
+	                var mockFile = { name: value.source, size: value.size }; // here we get the file name and size as response 
+	                var uploadDir = '/uploads/pictures/original/';
+
+					// Call the default addedfile event handler
+					myDropzone.emit("addedfile", mockFile);
+
+					// And optionally show the thumbnail of the file:
+					myDropzone.emit("thumbnail", mockFile, uploadDir+mockFile.name);
+					
+					
+					// If you use the maxFiles option, make sure you adjust it to the
+					// correct amount:
+					//var existingFileCount = 1; // The number of files already uploaded
+					//myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
+	                /*
+	                myDropzone.options.addedfile.call(myDropzone, mockFile);
+	                myDropzone.options.thumbnail.call(myDropzone, mockFile, uploadDir+value.source);//uploadsfolder is the folder where you have all those uploaded files
+	                */
+	            });
+
+
+	        });
+
+			myDropzone.on("addedfile", function(){
+				text.css('margin-bottom', '15px')
+			});
+
+			myDropzone.on('removedfile', function(file){
+				console.log(file);
+				var picture = pics.filter(function(pic){ 
+					if(pic.source == file.name){ 
+						return pic; 
+					}
+				})[0];
+				
+				console.log(picture);
+				$.post('/classifieds/removePicture?id='+picture.id, function(response){
+					console.log(response);
+				});
+				if(!myDropzone.files.length){ text.css('margin-bottom', '0'); }
+			});
+	        
+			myDropzone.on('complete', function(file){
+				console.log('dropzone complete', file);
+				//myDropzone.removeFile(file);
+				//myDropzone.addFile(file);
+			});
+			
+			myDropzone.on('success', function(files, response, events){
+				console.log('dropzone success', arguments);
+				//onDropzoneSuccess(response);
+			});
+			
+			console.log($('#submit outside'));
+			
+			/*// now we will submit the form when the button is clicked
+			$('#submit').on('click',function(e) {
+				console.log('#submit inside');
+				e.preventDefault();
+				if(myDropzone.files.length){
+					myDropzone.processQueue();
+				} else {
+					$.ajax({
+						url			: $(myDropzone.element).attr('action'),
+						data		: new FormData(myDropzone.element),
+						type		:'POST',
+						processData: false,
+						contentType: false,
+						success	: onDropzoneSuccess
+					});
+				}
+				// this will submit your form to the specified action path
+				// after this, your whole form will get submitted with all the inputs + your files and the php code will remain as usual 
+			});
+			
+			function onDropzoneSuccess(response){
+				var result = JSON.parse(response);
+				$(myDropzone.element).find('.error.input-holder').removeClass('error');
+				$(myDropzone.element).find('.error-message').remove();
+				if(result.errors){
+					for(index in result.errors){
+						var parent = $('#'+index).closest('.input-holder');
+						parent.addClass('error');
+						parent.append('<div class="error error-message">'+result.errors[index]+'</div>');
+					}
+				} else {
+					window.location.pathname = '/classifieds';
+				}
+			}*/
+		
+		} // init end
+	});
+
+	// ### LOCATION ###
+	$('#formatted_address').geocomplete().bind("geocode:result", function(event, result){
+		var form = $(this).closest('form');
+		if(result.geometry && result.geometry.location){
+			var geometry = result.geometry.location.toString();
+			var pos = geometry.substr(1, geometry.length-2).split(', ');
+			form.find('input[name="latitude"]').val(pos[0]);
+			form.find('input[name="longitude"]').val(pos[1]);
+		}
+		
+		form.find('input[name="formatted_address"]').val(result.formatted_address);
+		for(var i = 0; i < result.address_components.length; i++){
+			var component = result.address_components[i];
+			var type = component.types[0];
+			form.find('input[name="'+type+'_short"]').val(component.short_name);
+			form.find('input[name="'+type+'_long"]').val(component.long_name);
+		}
+	});
+});
+
+// Disable Dropzone's AutoDiscover
+Dropzone.autoDiscover = false;
+    

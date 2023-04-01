@@ -1,0 +1,1 @@
+<?php echo $form->textField($model,'['.$formId.']['.$itemId.']user_id'); ?>

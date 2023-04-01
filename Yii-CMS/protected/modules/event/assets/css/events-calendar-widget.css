@@ -1,0 +1,92 @@
+.eventsCalendarWidget{
+	margin:0.7em 0;
+	position:relative;
+}
+
+.eventsCalendarWidget .calendar-table {
+	width:100%;
+	margin:0;
+	padding:0;
+	background:#444;
+	border-collapse:collapse;
+	border:#666 1px solid;
+	color: #ffffff;
+}
+
+.eventsCalendarWidget .calendar-table td {
+	padding: 2px;
+	font-size: 1.4em;
+	line-height:1.6em;
+}
+
+.eventsCalendarWidget .calendar-table td strong,
+.eventsCalendarWidget .calendar-table td strong a {
+	font-size:1.1em;
+	line-height:1.4em;
+}
+
+.eventsCalendarWidget .calendar-table td.calendar-month {
+	border-bottom: 1px solid #999;
+	text-align:center;
+}
+.eventsCalendarWidget .calendar-table td.calendar-month a {
+	font-size:1em !important;
+}
+
+.eventsCalendarWidget .calendar-table th {
+	text-align: center;
+	font-size: 1.3em;
+	padding:4px;
+}
+
+.eventsCalendarWidget .calendar-date .popover-trigger {
+	display:block;
+	width:22px;
+	height:22px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	font-size:1em;
+	line-height:1.6em;
+	background-color:#999; 
+	color: #FFF;
+	cursor:pointer;
+}
+
+.eventsCalendarWidget .calendar-date .popover-trigger:hover {
+	background-color:#01A4A6;
+	color: #FFF;
+}
+
+.eventsCalendarWidget .popover {
+	width:400px;
+	max-width:400px;
+}
+
+.eventsCalendarWidget .popover-content {
+    padding: 0.3em 0.7em;
+}
+
+.eventsCalendarWidget .popover-content a {
+	display:block;
+	padding:0.2em 0.3em;
+	margin:0.4em 0;
+	font-size:1em !important;
+	font-weight:400;
+	line-height:1.2em;
+	
+}
+
+
+.eventsCalendarWidget .spinner {
+	display:none;
+	background-color:rgba(255,255,255,0.8);
+	background-image:url(../img/spinner.gif);
+	background-position:center center;
+	background-repeat:no-repeat;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}

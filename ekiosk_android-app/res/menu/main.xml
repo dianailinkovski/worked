@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ngser.ekiosk.MainActivity" >
+
+    <item
+        android:id="@+id/action_kiosque"
+        android:title="Kiosque"
+        android:showAsAction="always">
+    </item>
+</menu>

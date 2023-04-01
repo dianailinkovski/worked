@@ -1,0 +1,8 @@
+1) platforms\android\assets ---> There is where I put the pre-filled database
+2) The ng-cordova plugins that I added to the project ---> http://prntscr.com/5xk25v
+3) www\js\ng-cordova.min.js ---> The file with the ng-cordova plugins added in the JS folder of the project
+4) www\js\app.js ---> Where I did the routes and added the database in the run() function
+5) www\js\controllers.js ---> Where I added some functionalities, very basics. Here you will find a simple directive to call a popup with a data from the database and in this way test if is working the integration of the prefilled database
+6) www\js\services.js ---> Here you will find a simple factory with some examples of data. I tried to use the prefilled database and create a factory to can use in the app. I can't completed this, but in the file you will find also a possible close guide to do this.
+7) www\templates ---> Some templates for the differents views and the tabs
+8) www\index.html ---> Here you will find a button with the directive to check if the database was integrated with the app.

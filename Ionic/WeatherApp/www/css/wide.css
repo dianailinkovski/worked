@@ -1,0 +1,657 @@
+@media all and (min-width: 600px) {
+	.width-control{
+		max-width: 650px;
+		margin: 20px auto;
+	}
+	.width-control-lite{
+		max-width: 650px;
+		margin: 20px auto;
+	}
+	.width-control.full-length{
+		margin-bottom:0px;
+	}		
+	.width-control .scroll{
+		-webkit-box-shadow: 0px 2px 10px 3px rgba(0,0,0,0.15);
+		box-shadow: 0px 2px 10px 3px rgba(0,0,0,0.15);
+		border-left:1px solid rgba(0,0,0,0.15);
+		border-right:1px solid rgba(0,0,0,0.15);
+		border-top: 1px solid rgba(0,0,0,0.05);
+	}
+	.platform-android .width-control .scroll{
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+	.settings-view .slider, .settings-view .scroll {
+		height: 95%;
+	}
+	#category-header.strength-back,	#category-header.stretch-back,#category-header.cardio-back,#category-header.yoga-back{
+		background-position: 100% 31%;
+	}
+	#rate-box{
+		background-position: 0% 34%;
+	}
+	.welcome-page .slide3 {
+		background-position: 50% 8%;
+	}
+	#category-header span{
+		height:200px;
+	}
+	.box div.B img {
+		max-width: 640px;
+	}
+	.platform-ios .box div.B video, .platform-ios .box div.B img#video-background, .platform-browser .box div.B video, .platform-browser .box div.B img#video-background{
+		width:705px;
+		max-width:705px;
+		height:396px;
+	}
+	.platform-ios .box div.B #video-background, .platform-browser .box div.B #video-background{
+		width:705px;
+		max-width:705px;
+		min-width: 705px;
+		height:396px;
+		position:relative;
+	}
+	.platform-ios.platform-ios7 .box div.B #video-background, .platform-ios.platform-ios7 .box div.B img#video-background, .platform-ios.platform-ios7 .box div.B video{
+		width:705px;
+		max-width:705px;
+		min-width: 705px;
+		height:397px;
+	}
+	.platform-android .box div.B video, .platform-android .box div.B img#video-background{
+		width:60%;
+		max-width:60%;
+		min-width:60%;
+	}
+	.platform-android .box div.B video{
+		left:20%;
+	}
+	.category-view .item-icon-right .icon-accessory {
+		font-size: 32px;
+	}
+	.next-text{
+		font-size: 28px;
+		line-height: 28px;
+	}
+	.platform-ios .next-exercise{
+	    margin-top: 15px;
+	}
+	.modal-colors .item.item-toggle.extra-top {
+		margin-top: 0px;
+	}
+	.end-workout-page .stats-view {
+		margin-top: 20px;
+		max-width: 430px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.end-workout-page.modal {
+		top: 5%;
+		right: 10%;
+		bottom: 5%;
+		left: 10%;
+		height: 90%;
+		overflow: visible;
+		min-height: 340px;
+		width: 80%;
+	}
+	.platform-ios.platform-cordova .modal-wrapper .modal.end-workout-page .bar-header:not(.bar-subheader){
+		height:64px;
+	}
+	.platform-ios.platform-cordova .modal-wrapper .modal.end-workout-page .bar-header:not(.bar-subheader)>*{
+		margin-top:20px;
+	}
+	.platform-ios.platform-cordova .modal-wrapper .modal.custom-modal .bar-header:not(.bar-subheader){
+		height:64px;
+	}
+	.platform-ios.platform-cordova .modal-wrapper .modal.custom-modal .bar-header:not(.bar-subheader)>*{
+		margin-top:20px;
+	}
+	.end-workout-page .stats-view .table-label p {
+		font-size: 1.8em;
+		padding-right:10px;
+		padding-top:0px;
+		margin-top:0px;
+		line-height:1.2em;
+	}
+	p.stat-number {
+		font-size: 60px;
+	}
+	.end-workout-page .stats-view p.stat-label {
+		font-size: 23px;
+	}
+	.end-workout-page .stats-view p.stat-label.small-label {
+		margin-top: 5px;
+		font-size: 15px;
+	}
+	.end-workout-page p.stat-label.small-label, .end-workout-page .stat-label span{
+	    font-size: 15px;
+	}
+	.end-workout-page .slider {
+		height: 320px;
+		margin-bottom: 20px;
+	}
+	.end-workout-buttons{
+		max-width: 600px;
+		margin: 0px auto;
+	}
+	.video-modal.fade-implode>.ng-enter, .video-modal.fade-implode.ng-enter, .video-modal.fade-implode>.ng-leave, .video-modal.fade-implode.ng-leave {
+		-webkit-transition: all ease-out 200ms;
+		-moz-transition: all ease-out 200ms;
+		transition: all ease-out 200ms;
+		position: absolute;
+		top: 10%;
+		right: 10%;
+		bottom: 10%;
+		left: 10%;
+		width: 80%;
+		height: 80%;
+		border:none;
+		border-right:1px solid #000;
+		border-left: 1px solid #000;
+	}
+	.modal.welcome-modal {
+		top: 10%;
+		bottom: 10%;
+		overflow: visible;
+		min-height: 240px;
+		width: 60%;
+		left: 20%;
+		right: 20%
+	}
+	.platform-ios .inner-category-view ul{
+	  width:340px;
+	}
+	.platform-ios .inner-category-view #nexercise-box ul{
+	  width:410px
+	}
+	.platform-ios .inner-category-view #sworkitpro-box ul{
+	  width:313px
+	}
+	.platform-ios .inner-category-view li{
+	  height:4px;
+	}
+	.platform-ios .inner-category-view li{
+	  height:4px;
+	}
+	.home-new .popup-container .popup, .preview-popup .popup-container .popup{
+		width: 320px;
+	}
+	.end-workout-page .condense{
+		margin-left:0px;
+		margin-right:0px;
+		max-width:100%
+	}
+	.end-workout-page .button-bar #continue-button.condense{
+		margin-right: 20px;
+	}
+	#time-screen .timer-box input{
+    	width:70%;
+	}
+	.category-card h3, .category-custom h3{
+		font-size:1.7em;
+	}
+	.platform-ready .modal-backdrop.active .modal-backdrop-bg{
+	    background-color: white;
+	}
+}
+/* Narrow Screens - Mainly for controlling languages */
+@media all and (max-width:325px) {
+	.end-workout-page .button-bar > button{
+	    border-width: 1px;
+	    font-size:14px;
+	}
+	.category-card h3{
+	    font-size:1.3em;
+	    line-height:1.4em;
+	}
+	.category-custom h3{
+	    font-size:1.1em;
+	    line-height:1.4em;
+	}
+	.end-workout-page #challenge-friend{
+		font-size: 15px;
+	}
+	.workout-type-list .category-title h2{
+		font-size:17px;
+	}
+	.custom-workout-page .unlock-pro h4{
+		font-size:14px;
+	}
+}
+@media all and (min-height: 540px) {
+	#singlecounter{
+		font-size: 4em;
+	}
+	#totalcounter{
+		font-size: 36px;
+    	min-height:36px;
+	}
+	#nexercise-box{
+		background-position-x: 42%;
+	}
+	.platform-ios menu .item-complex .item-content {
+		padding-top: 13px;
+		padding-bottom: 15px;
+		font-size: 20px;
+	}
+}
+@media all and (min-height: 641px) {
+	#singlecounter{
+		font-size: 5.2em;
+	}
+	#exercise h2{
+		/* Change in fit-text.js as well if modified */
+		font-size: 49px;
+	}
+	#exercise.four-count h2, #exercise.three-count h2, #exercise.two-count h2, #exercise.one-count h2{
+		font-size: 3em;
+		line-height:1.2em;
+	}
+	#totalcounter{
+		font-size: 40px;
+    	min-height:40px;
+	}
+	.box div.E .button.icon:before {
+		font-size: 2.8em;
+	}
+	#startpause p span{
+		font-size: 56px;
+	}
+}
+@media (max-height: 640px) and (orientation: landscape) {
+	.box div.B img#image-only {
+		max-width: 400px;
+	}
+	.platform-android .box div.B video{
+		/*left:25%;*/
+	}
+	.platform-android .box div.B video, .platform-android .box div.B img#video-background{
+	    background-color:#FFFFFF;
+	    width:60%;
+	    max-width:60%;
+	    min-width:60%;
+	}
+	.platform-android .box div.B video{
+	    left:20%;
+	}
+	.platform-android .box div.B img#video-background{
+	    left:0px;
+	}
+}
+@media (max-height: 400px) and (orientation: landscape) {
+	.box div.B img#image-only {
+		max-width: 300px;
+	}
+	.box div.F{
+		padding: 5px;
+	}
+	.modal.welcome-modal {
+		top: 10%;
+		bottom: 10%;
+		overflow: visible;
+		min-height: 240px;
+		width: 100%;
+	}
+	.platform-android .box div.B video, .platform-android .box div.B img#video-background{
+	    background-color:#FFFFFF;
+	    width:60%;
+	    max-width:60%;
+	    min-width:60%;
+	}
+	.platform-android .box div.B video{
+	    left:20%;
+	}
+	.platform-android .box div.B img#video-background{
+	    left:0px;
+	}
+}
+/*iPad Portrait*/
+@media all and (min-width: 600px) and (orientation: portrait) {
+	.platform-ios .box div.B video, .platform-ios .box div.B img#image-only, .platform-ios .box div.B img#video-background, .platform-browser .box div.B img#image-only, .platform-browser .box div.B video, .platform-browser .box div.B img#video-background{
+		width:705px;
+		max-width:705px;
+		min-width: 705px;
+		height:396px;
+	}
+	.platform-ios.platform-ios7 .box div.B #video-background, .platform-ios.platform-ios7 .box div.B img#video-background, .platform-ios.platform-ios7 .box div.B video{
+		width:705px;
+		max-width:705px;
+		min-width: 705px;
+		height:397px;
+	}
+	.platform-ios .next-exercise{
+		margin-top:25px;
+	}
+	.platform-ios .box div.F p{
+		font-size: 14px;
+		line-height: 14px;	
+	}
+}
+/*iPhone6 Portrait*/
+@media all and (min-width: 325px) and (max-width:412px) and (orientation: portrait) {
+	.platform-ios .box div.B video, .platform-ios .box div.B img#image-only, .platform-ios .box div.B img#video-background, .platform-browser .box div.B video, .platform-browser .box div.B img#image-only, .platform-browser .box div.B img#video-background{
+		max-width:350px;
+		min-width:350px;
+		width:350px;
+		min-height:195px;
+	}
+	.platform-ios .box div.B #video-background, .platform-browser .box div.B #video-background{
+		position:relative;
+	}
+	.platform-ios .next-exercise{
+		margin-top:20px;
+	}
+}
+/*iPhone6 Plus Portrait*/
+@media all and (min-width: 412px) and (max-width:480px) and (orientation: portrait) {
+	.platform-ios .box div.B video, .platform-ios .box div.B img#video-background, .platform-ios .box div.B img#image-only, .platform-browser .box div.B video, .platform-browser .box div.B img#video-background, .platform-browser .box div.B img#image-only{
+		max-width:400.00000001px;
+		min-width:400.00000001px;
+		width:400.00000001px;
+		min-height:225px;
+		height:225px;
+		max-height:225px;
+		vertical-align: middle;
+	}
+	.platform-ios .box div.B .restrict-video{
+	    height: 219px;
+		width:394px;
+		overflow: hidden;
+		vertical-align: middle;
+	}
+	.platform-ios .box div.B #video-background, .platform-browser .box div.B #video-background{
+		position:relative;
+	}
+	.platform-ios .next-exercise{
+	    margin-top: 25px;
+	}
+}
+@media all and (min-width: 680px){
+	.timing-page.modal {
+		top: 10%;
+		right: 10%;
+		bottom: 10%;
+		border:1px solid white;
+	}
+}
+/*iPhone4+5 Portraid*/
+@media all and (min-width: 315px) and (max-width:321px) and (orientation: portrait) {
+	.platform-ios .custom-workout-page .button-bar.choose-options button.or-button{
+		.top:188px;
+	}
+	.platform-ios .next-exercise{
+		margin-top:5px;
+	}
+}
+@media all and (orientation: landscape) {
+	#linkto{
+		width:100%;
+	}
+	.platform-ios .box div.B video, .platform-ios .box div.B img#video-background, .platform-ios .box div.B img#image-only, .platform-browser .box div.B video, .platform-browser .box div.B img#video-background, .platform-browser .box div.B img#image-only,.platform-android .box div.B video, .platform-android .box div.B img#video-background, .platform-android .box div.B img#image-only{
+		width:90%;
+		max-width:90%;
+		min-width: 90%;
+	}	
+	.platform-android .box div.B video{
+	    left:0%;
+	}
+	.platform-android .box div.B img#video-background{
+	    left:0px;
+	}
+	.box{
+		display:block;
+	}
+	.workout-view ion-nav-bar.nav-bar{
+		display:none;
+	}
+	.workout-view .has-header {
+		top: 0px;
+	}
+	.box div.A, .platform-android .box div.A {
+		position:fixed;
+		top:5px;
+		left:0px;
+	}
+	.box div.B, .platform-android .box div.B  {
+		position:fixed;
+	}
+	.box div.C, .platform-android .box div.C  {
+		
+	}
+	.box div.D, .platform-android .box div.D,.platform-ios .box div.D{
+		display:block;
+		position:fixed;
+		top:22px;
+		left:0px;
+		border:none;
+		border-bottom-width:0px;
+		background-color: transparent;
+	}
+	.box div.E, .platform-android .box div.E  {
+		position:fixed;
+		bottom:-100px;
+		left:0px;
+		z-index:20;
+		opacity:0.9;
+	}
+	.box div.E.show-controls , .platform-android .box div.E.show-controls  {
+		bottom:0px;
+	}
+	.box div.E .button.end-button{
+		font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	}
+	.box div.E .button.ion-android-mixer{
+		font-size:10px;
+	}
+	.box div.F, .platform-android .box div.F  {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		border:none;
+		background-color:transparent;
+		text-align:left;
+		max-width:170px;
+		/*Hidden in Landscape right now*/
+		display:none;
+	}
+	.box div.G{
+	    position:fixed;
+	    top:10px;
+	    right:10px;
+	    border:none;
+	}
+	.box div.F img, .platform-android .box div.F img {
+		opacity:0.8;
+		max-width:170px;
+		margin-bottom: 0px;
+	}
+	.box div.F p, .platform-android .box div.F p {
+		width:170px;
+		left:0px;
+		z-index:4;
+		font-size:8px;
+		margin-top:0px;
+	}
+	#totalcounter {
+		font-size: 38px;
+		min-height: 38px;
+	}
+}
+/*iPhone4+5 Landscape*/
+@media all and (min-height: 265px) and (max-height:320px) and (orientation: landscape) {
+	.platform-ios .box div.B video, .platform-ios .box div.B img#image-only, .platform-ios .box div.B img#video-background, .platform-browser .box div.B video, .platform-browser .box div.B img#image-only, .platform-browser .box div.B img#video-background{
+		max-width:432px;
+		width:432;
+		min-width:432px;
+		min-height:243px;
+		margin-top: 20px
+	}
+	.platform-ios.platform-ios7 .box div.B #video-background, .platform-ios.platform-ios7 .box div.B img#video-background, .platform-ios.platform-ios7 .box div.B video{
+		max-width:432px;
+		width:432;
+		min-width:432px;
+		min-height:243px;
+		margin-top: 20px
+	}
+	.platform-ios .box div.B #video-background, .platform-browser .box div.B #video-background{
+		position:relative;
+	}
+	.platform-ios #linkto{
+		margin-top: 40px;		
+	}
+	.platform-ios .next-exercise{
+		margin-top:5px;
+	}
+}
+/*iPhone6 Landscape*/
+@media all and (min-height: 325px) and (max-height:412px) and (orientation: landscape) {
+	.platform-ios .box div.B video, .platform-ios .box div.B img#image-only, .platform-ios .box div.B img#video-background, .platform-browser .box div.B video, .platform-browser .box div.B img#image-only, .platform-browser .box div.B img#video-background{
+		max-width:540px;
+		min-width:540px;
+		width:540px;
+		min-height:303px;
+		height:303px;
+		max-height:303px;
+		margin-top: 20px;
+	}
+	.platform-ios .admob-active .box div.B video, .platform-ios .admob-active .box div.B img#image-only, .platform-ios .admob-active .box div.B img#video-background, .platform-browser .admob-active .box div.B video, .platform-browser .admob-active .box div.B img#image-only, .platform-browser .admob-active .box div.B img#video-background{
+		max-width:515.5555556px;
+		min-width:515.5555556px;
+		width:515.5555556px;
+		min-height:290px;
+		height:290px;
+		max-height:290px;
+		margin-top: 2px;
+		margin-left: -1px;
+	}
+	.platform-ios .box div.B #video-background, .platform-browser .box div.B #video-background{
+		position:relative;
+	}
+	.platform-ios #linkto{
+		margin-top: 35px;
+	}
+	.platform-ios .next-exercise{
+		margin-top: 10px;
+	}
+	.platform-ios .admob-active .box div.B .restrict-video{
+		height: 290px;
+		margin-top: 30px;
+		width:512px;
+		overflow: hidden;
+		vertical-align: middle;
+	}
+	.platform-ios .admob-active .next-text{
+		font-size: 24px;
+		line-height:24px;
+	}
+	.end-workout-page.modal {
+		height:100%;
+		width:100%;
+		left:0px;
+		right:0px;
+		top:0px;
+		bottom:0px;
+	}}
+/*iPhone6 Landscape AdMob Lazy hack*/
+@media all and (min-height: 335px) and (max-height:350px) and (orientation: landscape) {
+	.platform-ios .admob-active #linkto{
+		margin-top: 20px;
+	}
+}
+/*iPhone6 Plus Landscape*/
+@media all and (min-height: 412px) and (max-height:480px) and (orientation: landscape) {
+	.platform-ios .box div.B video, .platform-ios .box div.B img#video-background, .platform-ios .box div.B img#image-only, .platform-browser .box div.B video, .platform-browser .box div.B img#video-background, .platform-browser .box div.B img#image-only{
+		max-width:640.00000001px;
+		min-width:640.00000001px;
+		width:640.00000001px;
+		min-height:360px;
+		height:360px;
+		max-height:360px;
+		vertical-align: middle;
+		margin-top: 24px;
+		margin-left: -1px;
+	}
+	.platform-ios .admob-active .box div.B video, .platform-ios .admob-active .box div.B img#image-only, .platform-ios .admob-active .box div.B img#video-background, .platform-browser .admob-active .box div.B video, .platform-browser .admob-active .box div.B img#image-only, .platform-browser .admob-active .box div.B img#video-background{
+		max-width:587.6666611px;
+		min-width:587.6666611px;
+		width:587.6666611px;
+		min-height:329px;
+		height:329px;
+		max-height:329px;
+		margin-top: 20px;
+		margin-left: -1px;
+	}
+	.platform-ios .box div.B .restrict-video{
+	    height: 355px;
+		width:633px;
+		overflow: hidden;
+		vertical-align: middle;
+	}
+	.platform-ios .box div.B #video-background, .platform-browser .box div.B #video-background{
+		position:relative;
+	}
+	.platform-ios #linkto{
+		margin-top: 25px;
+	}
+	.end-workout-page.modal {
+		height:100%;
+		width:100%;
+		left:0px;
+		right:0px;
+		top:0px;
+		bottom:0px;
+	}
+}
+/*iPad Landscape*/
+@media all and (min-width: 766px) and (orientation: landscape) {
+	.platform-ios .box div.B video, .platform-ios .box div.B img#video-background, .platform-ios .box div.B img#image-only, .platform-browser .box div.B video, .platform-browser .box div.B img#image-only, .platform-browser .box div.B img#video-background{
+		width:960px;
+		max-width:960px;
+		min-width: 90px;
+		height:540px;
+		margin-top: 100px;
+		border-bottom: none;
+	}
+	.platform-ios.platform-ios7 .box div.B #video-background, .platform-ios.platform-ios7 .box div.B img#video-background, .platform-ios.platform-ios7 .box div.B video{
+	    width:960px;
+		max-width:960px;
+		min-width: 90px;
+		height:540px;
+	}
+	.platform-ios .box div.A{
+		top:15px;
+	}
+	.box div.E.show-controls{
+		bottom:-1px;
+	}
+	.show-controls.button-bar > .button::before, .button-bar.show-controls > .button .icon::before{
+		line-height:1.5em;
+	}
+	.box div.F img, .platform-android .box div.F img {
+		width:370px;
+		max-width:370px;
+	}
+	.box div.F, .platform-android .box div.F {
+		max-width:370px;
+	}
+	.box div.G{
+	    position:fixed;
+	    top:20px;
+	    right:20px;
+	    border:none;
+	}
+	.platform-ios .next-exercise{
+		margin-top:25px;
+	}
+	.box div.F p, .platform-android .box div.F p {
+		width:370px;
+		font-size: 12px;
+		line-height: 12px;
+		margin-top:2px;
+	}
+}
+@media all and (orientation: portrait){
+	.workout-page .button.hider-buttons{
+		display:none;
+	}
+}

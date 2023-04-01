@@ -1,0 +1,107 @@
+#header{
+	position: relative;
+	z-index: 1;
+}
+#content{
+	position: fixed;
+	top: 0;
+	bottom: 91px;
+	height: 100%;
+	width: 100%;
+}
+
+#content:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+#content .center{
+	width: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+
+#content .center-in{
+	text-align: center;
+	padding: 0 40px;
+	margin-top: -40px;
+}
+
+#content .center-in h1{
+	font-size: 41px;
+	color: #00baff;
+	font-weight: bold;
+}
+
+#content .center-in p{
+	font-size: 24px;
+	color: #A5A5A5;
+	font-weight: 200;
+	clear: both;
+	line-height: 34px;
+	max-width: 700px;
+	margin: 0 auto;
+	display: inline-block;
+	margin: 0 0 10px 0;
+	clear: both;
+}
+
+#content .center-in a{
+	font-size: 24px;
+	line-height: 40px;
+	border-bottom: 2px solid #eee;
+}
+
+#content .center-in a:hover{
+	text-decoration: none;
+	border-bottom-color: #007DC5;
+}
+
+#content .center-in a:active{
+	border-bottom-color: red;
+}
+
+#footer{
+	position: fixed;
+	bottom: 0;
+}
+#content.business_invite_employee form{
+	float: left;
+	width: 100%;
+	clear: both;
+}
+#content.business_invite_employee form input{
+	max-width: 450px;
+	width: 100%;
+	clear: both;
+	margin-bottom: 10px;
+	margin: 0 auto;
+	display: block; border:none; border-left:5px solid #00baff;
+}
+
+#content.business_invite_employee form button{
+	width: 145px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 10px;
+	clear: both;
+	float: none;
+}
+
+#content.business_invite_employee .error{
+	color: #FFF;
+	border-radius: 3px;
+	margin-top: 10px;
+	padding: 6px 0;
+	text-align: center;
+	width: 500px;
+	border: 1px solid #F51D1D;
+	font-weight: bold;
+	box-shadow: 2px 2px 0 #FFD7D7;
+	background: #FF5252;
+	margin: 10px auto;
+}

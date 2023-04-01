@@ -1,0 +1,87 @@
+.bloc-people .vcard .tel, .vcard .fax, .vcard .email-desc { font-size:0.9em; line-height:1.4em; }
+.bloc-people .vcard .email, .vcard .url { word-wrap:break-word; }
+section.bloc-people .vcard dd .vcard-label { display:block; margin-top:0.5em; font-weight:bold; }
+section.bloc-people .vcard { padding:0; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; overflow:hidden; }
+section.bloc-people [class*=col-] .vcard,
+section.bloc-people [class^=col-] .vcard { margin:0; }
+section.bloc-people .vcard.image-layout { min-height:100px; }
+section.bloc-people .column1 .vcard { width:100%; }
+section.bloc-people .column2 .vcard { width:47%; margin-right:3%; }
+section.bloc-people .column3 .vcard { width:30%; margin-right:3%; }
+section.bloc-people .vcard dd { margin:0; }
+section.bloc-people .vcard.image-layout dd,
+section.bloc-people .vcard.image-layout dt { margin-left:110px; }
+section.bloc-people .vcard dt { margin:0 0 0.3em; line-height:100%; font-weight:bold; font-size:0.9em; z-index:999; }
+section.bloc-people .vcard.image-layout .photo { overflow:hidden; width:100px; margin-left:0; float: left;}
+section.bloc-people .vcard .photo img { display:block; }
+
+/* Hide thee organisation because it's not necessary for the users to see */
+section.bloc-people .vcard .org { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); }
+section.bloc-people .vcard .title, section.bloc-people .vcard .department { line-height:110%; margin-bottom:0.3em; font-size:0.8em; color:#666; }
+section.bloc-people .vcard .description { line-height:130%; margin:0.6em 0; font-size:0.85em; }
+section.bloc-people .vcard .adr { margin-top:0.6em; font-size:0.9em; }
+section.bloc-people .vcard .phone1 { margin-top:0.6em; }
+section.bloc-people .vcard .email { font-size:0.8em; word-wrap:break-word; }
+section.bloc-people .vcard dd .vcard-label { font-size:0.85em; }
+
+
+@media (min-width: 560px) {
+	section.bloc-people .vcard.image-layout { min-height:150px; }
+	section.bloc-people .vcard.image-layout dt,
+	section.bloc-people .vcard.image-layout dd { margin-left:160px; }
+	section.bloc-people .vcard.image-layout .photo { width:150px; margin-left:0; }
+}
+
+
+@media (min-width: 768px) {
+	section.bloc-people [class*=col-] .vcard,
+	section.bloc-people [class^=col-] .vcard { margin:1em 0; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout,
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout { min-height:100px; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout dt,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout dt,
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout dt,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout dt,
+	section.bloc-people [class*=col-md-4] .vcard.image-layout dd,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout dd,
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout dd,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout dd { margin-left:110px; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout .photo,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout .photo,
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout .photo,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout .photo { width:100px; margin-left:0; }
+}
+
+
+@media (min-width: 992px) {
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout { min-height:150px; }
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout dt,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout dt,
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout dd,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout dd { margin-left:160px; }
+	section.bloc-people [class*=col-sm-6] .vcard.image-layout .photo,
+	section.bloc-people [class^=col-sm-6] .vcard.image-layout .photo { width:150px; margin-left:0; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout { min-height:100px; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout dt,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout dt,
+	section.bloc-people [class*=col-md-4] .vcard.image-layout dd,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout dd { margin-left:110px; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout .photo,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout .photo { width:100px; }
+}
+
+
+@media (min-width: 1200px) {
+	section.bloc-people [class*=col-md-4] .vcard.image-layout,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout { min-height:150px; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout dt,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout dt,
+	section.bloc-people [class*=col-md-4] .vcard.image-layout dd,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout dd { margin-left:160px; }
+	section.bloc-people [class*=col-md-4] .vcard.image-layout .photo,
+	section.bloc-people [class^=col-md-4] .vcard.image-layout .photo { width:150px; }
+}

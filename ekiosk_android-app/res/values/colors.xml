@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="header">#ff33b5e5</color>
+    
+    <color name="drawer_menu_text_color">#fff</color>
+    <color name="lightgray">#ccc</color>
+    <color name="gray">#666</color>
+    <color name="greenButton">#52b615</color>
+    <color name="greenButtonTouch">#52b615</color>
+    <color name="redButton">#ff0000</color>
+    <color name="redButtonTouch">#ff0000</color>
+    
+    <color name="blueLink">#FF33B5E5</color>
+    <color name="blueLinktransparent">#3333B5E5</color>
+    
+</resources>

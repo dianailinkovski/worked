@@ -1,0 +1,33 @@
+.mod-event .article-date { margin:0.5em 0; font-size:85%; }
+.mod-event .article-image { padding-bottom:1em; text-align:center; }
+.mod-event .article-image a img { display:inline-block; }
+.mod-event .article-image-caption { font-size:85%; margin:0; }
+.mod-event .article-abstract p { margin:0 0 2em; }
+
+/* LISTING PAGE */
+.mod-event.mod-type-listing > article { padding:1em; border-bottom:none; background-color: rgba(0, 0, 0, 0.05); }
+.mod-event.mod-type-listing > article.odd { background-color:transparent; }
+
+/* DETAIL PAGE */
+.mod-event.mod-type-detail { margin-bottom:1em; padding-bottom:1em; border-bottom:1px solid #CCC; }
+.mod-event.mod-type-detail header {  margin-bottom:2em; }
+.mod-event.mod-type-detail .page-title { margin-bottom:0.5em; text-align:left; }
+.mod-event.mod-type-detail .fb-like { margin:0; }
+.mod-event.mod-type-detail .event-specs { padding:0.8em 1em 0.4em; margin-top:1em; background-color:#EEE; }
+.mod-event.mod-type-detail .article-date,
+.mod-event.mod-type-detail .event-location { margin:0 0 0.5em; font-size:85%; text-align:left; }
+.mod-event.mod-type-detail .article-label { font-weight:bold; }
+.mod-event.mod-type-detail .map-container iframe { width:100%; height:500px; }
+.mod-event.mod-type-detail .map-container .enlarge-link { text-align:right; }
+.mod-event.mod-type-detail .article-image { text-align:left; z-index:999; }
+.mod-event.mod-type-detail .article-image a img { max-width:100%; height:auto; }
+.mod-event.mod-type-detail .article-image-caption { text-align:left; }
+.mod-event.mod-type-detail .section-bloc { margin-top:1em; }
+.mod-event.mod-type-detail .section-bloc p:first-child { margin-top:0; }
+
+
+@media (min-width: 768px) {
+	.mod-event .article-image { text-align:right; }
+	.mod-event.mod-type-detail .section-bloc { margin-top:inherit; }
+	.mod-event.mod-type-detail .section-bloc:after { display:none; }
+}

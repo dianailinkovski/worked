@@ -1,0 +1,33 @@
+.bloc-contact .vcard .tel, .vcard .fax, .vcard .email-desc { font-size:0.9em; line-height:1.4em; }
+.bloc-contact .vcard .email, .vcard .url { word-wrap:break-word; }
+section.bloc-contact .vcard dd .vcard-label { display:block; margin-top:0.5em; font-weight:bold; }
+section.bloc-contact .vcard { position:relative; margin:0; }
+section.bloc-contact .vcard.last { padding-bottom:0; border-bottom:none; }
+section.bloc-contact .vcard dt { margin-top:0; margin-bottom:0.5em; font-size:1.6em; }
+section.bloc-contact .vcard .adr { margin-bottom:1em; font-size:1.1em; }
+section.bloc-contact .vcard .tel,
+section.bloc-contact .vcard .fax,
+section.bloc-contact .vcard .email { font-size:1.1em; }
+section.bloc-contact .vcard .adr .type { font-weight:bold; }
+section.bloc-contact .vcard .email-link { font-size:0.9em; }
+section.bloc-contact .vcard .note { margin-top:1em; font-size:0.9em; }
+section.bloc-contact .vcard .photo { margin-top:1em; }
+section.bloc-contact .vcard dd .vcard-label { font-size:0.75em; }
+section.bloc-contact .col-sm-7 .map-container { margin-top:3em; }
+section.bloc-contact .map-container iframe { width:100%; height:320px; }
+section.bloc-contact .map-container .enlarge-link { text-align:right; }
+section.bloc-contact .map-container .overlay { background:transparent; position:absolute; width:100%; height:320px; top:320px; margin-top:-320px; z-index:999; }
+section.bloc-contact .contact-form-container { background-color:#F7F7F7; border:1px solid #E9E9E9; padding:1px 1em 1em; }
+.has-sidebar section.bloc-contact div [class^=col-sm] { width:100%; margin-left:0; }
+.has-sidebar section.bloc-contact div [class^=col-sm] .contact-form-container { margin-top:2em; }
+section.bloc-contact .contact-form-container h2 { font-size:1.1em; }
+
+
+@media (min-width: 768px) {
+	section.bloc-contact .map-container { margin-top:2em; }
+	section.bloc-contact .vcard .picture.floated { position:absolute; top:3em; right:0; z-index:2; }
+}
+
+@media (min-width: 992px) {
+	section.bloc-contact .map-container { margin-top:0; }
+}

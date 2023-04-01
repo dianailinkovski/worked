@@ -1,0 +1,26 @@
+{{comment = this.comment}}
+<div class="comment">
+	<a href="/accounts/{{-comment.author.id}}" class="avatar">
+		<!--img src="{{-comment.author.avatar()}}" alt="Avatar"/-->
+		<img src="../../images/default-user.png" alt="">
+	</a>
+	<div class="comment-contents">
+		<div class="top">
+			<div class="left">
+				<a href="/accounts/{{-comment.author.id}}" class="author">{{-comment.author.full_name}}</a>
+				<div class="time">
+					{{- dates.months[new Date(parseInt(comment.time)).getMonth()]}}
+					{{- new Date(parseInt(comment.time)).getDate() }},
+					{{- new Date(parseInt(comment.time)).getFullYear() }}
+				</div>
+			</div>
+			<div class="right">
+				{{if this.account.id is comment.author.id:}}
+					<a href="/classifieds/comment/delete?id={{-comment.id}}" class="delete" onclick="return confirm('Are you sure?');">delete</a>
+				{{end}}
+				
+			</div>
+		</div>
+		<div class="message">{{-nl2br comment.message}}</div>
+	</div>
+</div>

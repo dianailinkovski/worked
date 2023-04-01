@@ -1,0 +1,17 @@
+{
+    "name": "uploadcare/uploadcare-php",
+    "description": "Uploadcare API binding for PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Uploadcare, LLC",
+            "email": "support@uploadcare.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Uploadcare": "src"
+        }
+    }
+}

@@ -1,0 +1,541 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » \RAuthorizer</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div xmlns:php="http://php.net/xsl" class="btn-toolbar">
+<div class="btn-group visibility" data-toggle="buttons-checkbox">
+<button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button>
+</div>
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+</div>
+<ul xmlns:php="http://php.net/xsl" class="side-nav nav nav-list">
+<li class="nav-header">
+<i title="Methods" class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_attachAuthItemBehavior" title="attachAuthItemBehavior() :: Attaches the rights authorization item behavior to the given item."><span class="description">Attaches the rights authorization item behavior to the given item.</span><pre>attachAuthItemBehavior()</pre></a></li>
+<li class="method public "><a href="#method_attachUserBehavior" title="attachUserBehavior() :: Attaches the rights user behavior to the given users."><span class="description">Attaches the rights user behavior to the given users.</span><pre>attachUserBehavior()</pre></a></li>
+<li class="method public "><a href="#method_createAuthItem" title="createAuthItem() :: Creates an authorization item."><span class="description">Creates an authorization item.</span><pre>createAuthItem()</pre></a></li>
+<li class="method public "><a href="#method_getAuthItemChildren" title="getAuthItemChildren() :: Returns the children for the specified authorization item recursively."><span class="description">Returns the children for the specified authorization item recursively.</span><pre>getAuthItemChildren()</pre></a></li>
+<li class="method public "><a href="#method_getAuthItemParents" title="getAuthItemParents() :: Returns the parents of the specified authorization item."><span class="description">Returns the parents of the specified authorization item.</span><pre>getAuthItemParents()</pre></a></li>
+<li class="method public "><a href="#method_getAuthItems" title="getAuthItems() :: Returns the authorization items of the specific type and user."><span class="description">Returns the authorization items of the specific type and user.</span><pre>getAuthItems()</pre></a></li>
+<li class="method public "><a href="#method_getAuthManager" title="getAuthManager() :: "><span class="description">getAuthManager()
+        </span><pre>getAuthManager()</pre></a></li>
+<li class="method public "><a href="#method_getPermissions" title="getPermissions() :: Returns the permissions for a specific authorization item."><span class="description">Returns the permissions for a specific authorization item.</span><pre>getPermissions()</pre></a></li>
+<li class="method public "><a href="#method_getRoles" title="getRoles() :: Returns the a list of all roles."><span class="description">Returns the a list of all roles.</span><pre>getRoles()</pre></a></li>
+<li class="method public "><a href="#method_getSuperusers" title="getSuperusers() :: Returns the users with superuser privileges."><span class="description">Returns the users with superuser privileges.</span><pre>getSuperusers()</pre></a></li>
+<li class="method public "><a href="#method_hasPermission" title="hasPermission() :: Returns the permission type for an authorization item."><span class="description">Returns the permission type for an authorization item.</span><pre>hasPermission()</pre></a></li>
+<li class="method public "><a href="#method_init" title="init() :: Initializes the authorizer."><span class="description">Initializes the authorizer.</span><pre>init()</pre></a></li>
+<li class="method public "><a href="#method_isSuperuser" title="isSuperuser() :: Returns whether the user is a superuser."><span class="description">Returns whether the user is a superuser.</span><pre>isSuperuser()</pre></a></li>
+<li class="method public "><a href="#method_updateAuthItem" title="updateAuthItem() :: Updates an authorization item."><span class="description">Updates an authorization item.</span><pre>updateAuthItem()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_excludeInvalidAuthItems" title="excludeInvalidAuthItems() :: Excludes invalid authorization items."><span class="description">Excludes invalid authorization items.</span><pre>excludeInvalidAuthItems()</pre></a></li>
+<li class="method protected "><a href="#method_mergeAuthItems" title="mergeAuthItems() :: Merges two arrays with authorization items preserving the keys."><span class="description">Merges two arrays with authorization items preserving the keys.</span><pre>mergeAuthItems()</pre></a></li>
+<li class="method protected "><a href="#method_sanitizeExpression" title="sanitizeExpression() :: Tries to sanitize code to make it safe for execution."><span class="description">Tries to sanitize code to make it safe for execution.</span><pre>sanitizeExpression()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="method private "><a href="#method_getAuthItemParentsRecursive" title="getAuthItemParentsRecursive() :: Returns the parents of the specified authorization item recursively."><span class="description">Returns the parents of the specified authorization item recursively.</span><pre>getAuthItemParentsRecursive()</pre></a></li>
+<li class="method private "><a href="#method_getPermissionsRecursive" title="getPermissionsRecursive() :: Returns the permissions for a specific authorization item recursively."><span class="description">Returns the permissions for a specific authorization item recursively.</span><pre>getPermissionsRecursive()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i title="Properties" class="icon-custom icon-property"></i> Properties
+                    <ul><li class="property public "><a href="#property_superuserName" title="$superuserName() :: "><span class="description"></span><pre>$superuserName</pre></a></li></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="property private "><a href="#property__authManager" title="$_authManager() :: "><span class="description"></span><pre>$_authManager</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a xmlns:php="http://php.net/xsl" id="\RAuthorizer"></a><ul xmlns:php="http://php.net/xsl" class="breadcrumb">
+<li>
+<a href="../index.html"><i title="Classes" class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/RAuthorizer.html">RAuthorizer</a>
+</li>
+</ul>
+<div xmlns:php="http://php.net/xsl" class="element class">
+<p class="short_description">Rights authorizer component class file.</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="mailto:cniska@live.com">Christoffer Niska</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright &amp;copy; 2010 Christoffer Niska</td>
+</tr>
+<tr>
+<th>since</th>
+<td>0.5</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Default.html">Default</a></td>
+</tr>
+</table>
+<h3>
+<i title="Methods" class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_attachAuthItemBehavior"></a><div class="element clickable method public method_attachAuthItemBehavior " data-toggle="collapse" data-target=".method_attachAuthItemBehavior .collapse" title="public">
+<h2>Attaches the rights authorization item behavior to the given item.</h2>
+<pre>attachAuthItemBehavior(mixed $items, integer $userId<code> = null</code>, \CAuthItem $parent<code> = null</code>) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$items</h4>
+<code>mixed</code><p>the item or items to which attach the behavior.</p></div>
+<div class="subelement argument">
+<h4>$userId</h4>
+<code>integer</code><p>the ID of the user to which the item is assigned.</p></div>
+<div class="subelement argument">
+<h4>$parent</h4>
+<code>\CAuthItem</code><p>the parent of the given item.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>the item or items with the behavior attached.</div>
+</div></div>
+</div>
+<a id="method_attachUserBehavior"></a><div class="element clickable method public method_attachUserBehavior " data-toggle="collapse" data-target=".method_attachUserBehavior .collapse" title="public">
+<h2>Attaches the rights user behavior to the given users.</h2>
+<pre>attachUserBehavior(mixed $users) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$users</h4>
+<code>mixed</code><p>the user or users to which attach the behavior.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>the user or users with the behavior attached.</div>
+</div></div>
+</div>
+<a id="method_createAuthItem"></a><div class="element clickable method public method_createAuthItem " data-toggle="collapse" data-target=".method_createAuthItem .collapse" title="public">
+<h2>Creates an authorization item.</h2>
+<pre>createAuthItem(string $name, integer $type, string $description<code> = ''</code>, string $bizRule<code> = null</code>, mixed $data<code> = null</code>) : \CAuthItem</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the item name. This must be a unique identifier.</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>integer</code><p>the item type (0: operation, 1: task, 2: role).</p></div>
+<div class="subelement argument">
+<h4>$description</h4>
+<code>string</code><p>the description for the item.</p></div>
+<div class="subelement argument">
+<h4>$bizRule</h4>
+<code>string</code><p>business rule associated with the item. This is a piece of
+PHP code that will be executed when {@link checkAccess} is called for the item.</p></div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>mixed</code><p>additional data associated with the item.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\CAuthItem</code>the authorization item</div>
+</div></div>
+</div>
+<a id="method_getAuthItemChildren"></a><div class="element clickable method public method_getAuthItemChildren " data-toggle="collapse" data-target=".method_getAuthItemChildren .collapse" title="public">
+<h2>Returns the children for the specified authorization item recursively.</h2>
+<pre>getAuthItemChildren(mixed $item, integer $type<code> = null</code>) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$item</h4>
+<code>mixed</code><p>the item for which to get its children.</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>integer</code><p>the item type (0: operation, 1: task, 2: role). Defaults to null,
+meaning returning all items regardless of their type.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the names of the item's children.</div>
+</div></div>
+</div>
+<a id="method_getAuthItemParents"></a><div class="element clickable method public method_getAuthItemParents " data-toggle="collapse" data-target=".method_getAuthItemParents .collapse" title="public">
+<h2>Returns the parents of the specified authorization item.</h2>
+<pre>getAuthItemParents(mixed $item, integer $type<code> = null</code>, string $parentName<code> = null</code>, boolean $direct<code> = false</code>) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$item</h4>
+<code>mixed</code><p>the item name for which to get its parents.</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>integer</code><p>the item type (0: operation, 1: task, 2: role). Defaults to null,
+meaning returning all items regardless of their type.</p></div>
+<div class="subelement argument">
+<h4>$parentName</h4>
+<code>string</code><p>the name of the item in which permissions to search.</p></div>
+<div class="subelement argument">
+<h4>$direct</h4>
+<code>boolean</code><p>whether we want the specified items parent or all parents.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the names of the parent items.</div>
+</div></div>
+</div>
+<a id="method_getAuthItems"></a><div class="element clickable method public method_getAuthItems " data-toggle="collapse" data-target=".method_getAuthItems .collapse" title="public">
+<h2>Returns the authorization items of the specific type and user.</h2>
+<pre>getAuthItems(mixed $types<code> = null</code>, mixed $userId<code> = null</code>, \CAuthItem $parent<code> = null</code>, boolean $sort<code> = true</code>, array $exclude<code> = array()</code>) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$types</h4>
+<code>mixed</code><p>the item type (0: operation, 1: task, 2: role). Defaults to null,
+meaning returning all items regardless of their type.</p></div>
+<div class="subelement argument">
+<h4>$userId</h4>
+<code>mixed</code><p>the user ID. Defaults to null, meaning returning all items even if
+they are not assigned to a user.</p></div>
+<div class="subelement argument">
+<h4>$parent</h4>
+<code>\CAuthItem</code><p>the item for which to get the select options.</p></div>
+<div class="subelement argument">
+<h4>$sort</h4>
+<code>boolean</code><p>sort items by to weights.</p></div>
+<div class="subelement argument">
+<h4>$exclude</h4>
+<code>array</code><p>the items to be excluded.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the authorization items of the specific type.</div>
+</div></div>
+</div>
+<a id="method_getAuthManager"></a><div class="element clickable method public method_getAuthManager " data-toggle="collapse" data-target=".method_getAuthManager .collapse" title="public">
+<h2>getAuthManager()
+        </h2>
+<pre>getAuthManager() : \RAuthManager</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\RAuthManager</code>the authorization manager.</div>
+</div></div>
+</div>
+<a id="method_getPermissions"></a><div class="element clickable method public method_getPermissions " data-toggle="collapse" data-target=".method_getPermissions .collapse" title="public">
+<h2>Returns the permissions for a specific authorization item.</h2>
+<pre>getPermissions(string $itemName<code> = null</code>) : \the</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$itemName</h4>
+<code>string</code><p>the name of the item for which to get permissions. Defaults to null,
+meaning that the full permission tree is returned.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\the</code>permission tree.</div>
+</div></div>
+</div>
+<a id="method_getRoles"></a><div class="element clickable method public method_getRoles " data-toggle="collapse" data-target=".method_getRoles .collapse" title="public">
+<h2>Returns the a list of all roles.</h2>
+<pre>getRoles(boolean $includeSuperuser<code> = true</code>, boolean $sort<code> = true</code>) : \the</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$includeSuperuser</h4>
+<code>boolean</code><p>whether to include the superuser.</p></div>
+<div class="subelement argument">
+<h4>$sort</h4>
+<code>boolean</code><p>whether to sort the items by their weights.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\the</code>roles.</div>
+</div></div>
+</div>
+<a id="method_getSuperusers"></a><div class="element clickable method public method_getSuperusers " data-toggle="collapse" data-target=".method_getSuperusers .collapse" title="public">
+<h2>Returns the users with superuser privileges.</h2>
+<pre>getSuperusers() : \the</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\the</code>superusers.</div>
+</div></div>
+</div>
+<a id="method_hasPermission"></a><div class="element clickable method public method_hasPermission " data-toggle="collapse" data-target=".method_hasPermission .collapse" title="public">
+<h2>Returns the permission type for an authorization item.</h2>
+<pre>hasPermission(string $itemName, string $parentName<code> = null</code>, array $permissions<code> = array()</code>) : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$itemName</h4>
+<code>string</code><p>the name of the item to check permission for.</p></div>
+<div class="subelement argument">
+<h4>$parentName</h4>
+<code>string</code><p>the name of the item in which permissions to look.</p></div>
+<div class="subelement argument">
+<h4>$permissions</h4>
+<code>array</code><p>the permissions.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>the permission type (0: None, 1: Direct, 2: Inherited).</div>
+</div></div>
+</div>
+<a id="method_init"></a><div class="element clickable method public method_init " data-toggle="collapse" data-target=".method_init .collapse" title="public">
+<h2>Initializes the authorizer.</h2>
+<pre>init() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_isSuperuser"></a><div class="element clickable method public method_isSuperuser " data-toggle="collapse" data-target=".method_isSuperuser .collapse" title="public">
+<h2>Returns whether the user is a superuser.</h2>
+<pre>isSuperuser(integer $userId) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$userId</h4>
+<code>integer</code><p>the id of the user to do the check for.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>whether the user is a superuser.</div>
+</div></div>
+</div>
+<a id="method_updateAuthItem"></a><div class="element clickable method public method_updateAuthItem " data-toggle="collapse" data-target=".method_updateAuthItem .collapse" title="public">
+<h2>Updates an authorization item.</h2>
+<pre>updateAuthItem(string $oldName, integer $name, string $description<code> = ''</code>, string $bizRule<code> = null</code>, mixed $data<code> = null</code>) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$oldName</h4>
+<code>string</code><p>the item name. This must be a unique identifier.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>integer</code><p>the item type (0: operation, 1: task, 2: role).</p></div>
+<div class="subelement argument">
+<h4>$description</h4>
+<code>string</code><p>the description for the item.</p></div>
+<div class="subelement argument">
+<h4>$bizRule</h4>
+<code>string</code><p>business rule associated with the item. This is a piece of
+PHP code that will be executed when {@link checkAccess} is called for the item.</p></div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>mixed</code><p>additional data associated with the item.</p></div>
+</div></div>
+</div>
+<a id="method_excludeInvalidAuthItems"></a><div class="element clickable method protected method_excludeInvalidAuthItems " data-toggle="collapse" data-target=".method_excludeInvalidAuthItems .collapse" title="protected">
+<h2>Excludes invalid authorization items.</h2>
+<pre>excludeInvalidAuthItems(array $items, \CAuthItem $parent<code> = null</code>, array $exclude<code> = array()</code>) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>When an item is provided its parents and children are excluded aswell.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$items</h4>
+<code>array</code><p>the authorization items to process.</p></div>
+<div class="subelement argument">
+<h4>$parent</h4>
+<code>\CAuthItem</code><p>the item to check valid authorization items for.</p></div>
+<div class="subelement argument">
+<h4>$exclude</h4>
+<code>array</code><p>additional items to be excluded.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>valid authorization items.</div>
+</div></div>
+</div>
+<a id="method_mergeAuthItems"></a><div class="element clickable method protected method_mergeAuthItems " data-toggle="collapse" data-target=".method_mergeAuthItems .collapse" title="protected">
+<h2>Merges two arrays with authorization items preserving the keys.</h2>
+<pre>mergeAuthItems(array $array1, array $array2) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array1</h4>
+<code>array</code><p>the items to merge to.</p></div>
+<div class="subelement argument">
+<h4>$array2</h4>
+<code>array</code><p>the items to merge from.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the merged items.</div>
+</div></div>
+</div>
+<a id="method_sanitizeExpression"></a><div class="element clickable method protected method_sanitizeExpression " data-toggle="collapse" data-target=".method_sanitizeExpression .collapse" title="protected">
+<h2>Tries to sanitize code to make it safe for execution.</h2>
+<pre>sanitizeExpression(string $code) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$code</h4>
+<code>string</code><p>the code to be execute.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>the return value of eval() or null if the code was unsafe to execute.</div>
+</div></div>
+</div>
+<a id="method_getAuthItemParentsRecursive"></a><div class="element clickable method private method_getAuthItemParentsRecursive " data-toggle="collapse" data-target=".method_getAuthItemParentsRecursive .collapse" title="private">
+<h2>Returns the parents of the specified authorization item recursively.</h2>
+<pre>getAuthItemParentsRecursive(string $itemName, array $items, boolean $direct) : \the</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$itemName</h4>
+<code>string</code><p>the item name for which to get its parents.</p></div>
+<div class="subelement argument">
+<h4>$items</h4>
+<code>array</code><p>the items to process.</p></div>
+<div class="subelement argument">
+<h4>$direct</h4>
+<code>boolean</code><p>whether we want the specified items parent or all parents.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\the</code>names of the parents items recursively.</div>
+</div></div>
+</div>
+<a id="method_getPermissionsRecursive"></a><div class="element clickable method private method_getPermissionsRecursive " data-toggle="collapse" data-target=".method_getPermissionsRecursive .collapse" title="private">
+<h2>Returns the permissions for a specific authorization item recursively.</h2>
+<pre>getPermissionsRecursive(\CAuthItem $item) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$item</h4>
+<code>\CAuthItem</code><p>the item for which to get permissions.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the section of the permissions tree.</div>
+</div></div>
+</div>
+<h3>
+<i title="Properties" class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_superuserName"> </a><div class="element clickable property public property_superuserName" data-toggle="collapse" data-target=".property_superuserName .collapse" title="public">
+<h2>$superuserName</h2>
+<pre>$superuserName </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the name of the superuser role.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property__authManager"> </a><div class="element clickable property private property__authManager" data-toggle="collapse" data-target=".property__authManager .collapse" title="private">
+<h2>$_authManager</h2>
+<pre>$_authManager </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the authorization manager.</td>
+</tr></table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:38-04:00.<br></footer></div>
+</div>
+</body>
+</html>

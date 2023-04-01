@@ -1,0 +1,175 @@
+.validetta-bubble-left .validetta-bubble{
+	right: 100%;
+	left: auto !important;
+	margin-right: 10px;
+	min-width: 120px;
+}
+.validetta-bubble-left .validetta-bubble:before{
+	right: -5px !important;
+	left: auto !important;
+	border-right: none;
+	border-left: 5px solid #E43838;
+}
+
+#content.welcome{
+	 background:none;
+}
+#welcome h1{
+	font-size: 51px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #ffffff;
+	letter-spacing: -2px;
+	clear: both;
+	margin-top: 50px;
+}
+
+#welcome h2{
+	font-size: 24px;
+	color: #ffffff;	
+	font-weight: 200;
+	clear: both;
+	line-height: 36px;
+}
+
+#welcome .break{
+	margin: 20px 0;
+}
+
+#welcome {
+    margin-top: 100px;
+    max-width: 544px;
+    width: 100%;
+}
+#signup {
+    background: rgba(0, 0, 0, 0.3) 0 0;
+    max-width: 370px;
+    padding: 0 20px 20px;
+    width: 100%; position:absolute; z-index:99; right:7.3%; top:85px;
+}
+
+#signup .input-holder{ position: relative; display: inline-block; width: 100%;}
+#signup .input-holder .validetta-bubble{ position: absolute; left: 0 !important; width: 100%; top: 34px !important; padding: 2px 20px; z-index: 99;}
+
+#signup h3{
+	font-size: 34px;
+	letter-spacing: -1px;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 10px;
+	border-top: black;
+}
+
+#signup input[type="text"], #signup input[type="password"]{
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 18px;
+}
+
+#name{
+	width: 100%;
+	float: left;
+	clear: both;
+}
+#name .out{
+	width: 50%;
+	float: left; position: relative;
+}
+#name .out .validetta-bubble{ position: absolute; left: 0 !important; top: 34px !important; z-index: 99; padding: 2px 10px; width: 98%;}
+#name .out #last_name_in .validetta-bubble{ left: 5% !important; width: 95% !important;}
+
+#first_name_in{
+	margin-right: 5px;
+	position: relative;
+}
+
+#last_name_in{
+	margin-left: 5px;
+}
+
+#gender-select{
+	padding-top: 5px;
+	padding-bottom: 15px;
+	float: left;
+}
+
+#gender-select-text{
+	float: left;
+	color: #a5a5a5;
+	font-weight: bold;
+	margin-right: 15px;
+}
+
+#gender-select .validetta-bubble{
+	top: -4px !important;
+}
+
+#gender-select .female.radio .validetta-bubble{
+	left: 100% !important;
+	margin-left: 10px;
+	min-width: 120px !important;
+}
+
+#gender-select .radio{
+	float: left;
+	margin-right: 10px;
+	margin-top: 1px;
+	position: relative;
+}
+
+#signup-actions{
+	float:left; width:100%; margin-bottom:18px;
+}
+
+#signup-actions a{
+	float: left;
+	margin: 10px 15px;
+	color: #848484;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#content.welcome .button, #content.welcome button{
+	font-size: 13px !important;
+	padding: 11px 20px 11px 17px;
+}
+
+#signup-actions button {
+    background: #28b6f6; 
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+}
+
+
+#content.welcome .button:before, #content.welcome button:before{
+	font-size: 18px;
+}
+.tp-banner li .title{  color: #ffffff; left:7.3% !important;  font-size: 38px; font-weight: 600;  text-transform: uppercase; max-width:58% !important; width:58%; text-align:center;} 
+.tp-banner li .content{  color: #ffffff; left:7.3% !important; text-align:center; font-size: 24px;  font-weight: 200; line-height: 36px; width:58%; max-width:58% !important; white-space:pre-wrap; font-weight:bold;}
+.tp-banner li .readsec{ width:60%; max-width:60% !important; text-align:center;}
+.tp-banner li .readsec a{ border:2px solid #00baff;  display:inline-block; text-transform:uppercase; font-size:18px; color:#00baff; line-height:28px; padding:5px 10px; min-width:140px;}
+.tp-banner ul li:after{ position:absolute; left:0; content:""; background:rgba(0,0,0,.15); top:0; width:100%; height:100%;}
+.tp-banner li .tp-bgimg{ background-position:top center !important;}
+
+
+.signsocial a{ display:inline-block; max-width:48%;}
+.signsocial a img{ width:100%;}
+.signsocial a.ggle{ float:right;}
+
+
+@media all and (max-width:500px) {
+	#content.welcome{ padding: 20px 0;}
+	#welcome{ max-width: 100% }
+	#welcome h1{ margin: 0; font-size: 56px; line-height: 59px; }
+	#welcome h2{ font-size: 21px; line-height: 29px; }
+	#welcome .break{ margin: 15px 0; }
+	#welcome .signup.button{ padding: 11px 20px; font-size: 12px; margin-left: 10px; }
+}
+
+@media all and (min-width:500px) and (max-width:768px){
+	#welcome{ max-width: 100% }
+	#welcome h1{ margin: 0; font-size: 71px; }
+	#welcome h2{ font-size: 34px; line-height: 56px; }
+	#welcome .signup.button{ padding: 11px 20px; font-size: 12px; margin-left: 10px; }
+}

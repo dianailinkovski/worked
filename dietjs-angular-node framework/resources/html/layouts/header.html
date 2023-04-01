@@ -1,0 +1,274 @@
+
+  <!--<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="http://192.241.239.235/scripts/modules/bootstrap.js"></script>-->
+
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>-->
+  {{if this.page is 'welcome' || this.page is 'classified' || this.page is 'profile' || this.page is 'business':}}
+  <div id="header" class="home-header">
+  {{else:}}
+  <div id="header" class="inner-header">
+	{{end}}
+
+    {{if this.page is 'chat':}}
+    <a id="menu-toggle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Show Menu">
+                <i class="fa fa-bars fa-2x"></i>
+            </a>
+    {{end}}
+	<div class="wrap">
+		<div class="website">
+			<nav class="navbar mobile-menu">
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+				  <a id="logo" href="/"></a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">	  
+				  
+					
+		
+			<div class="pull-right">
+				<ul class="nav navbar-nav"  id="menu">
+					<li class="active">
+						<a href="/" class="link home {{-if this.page is 'home' or this.page is 'welcome' then 'selected'}}">
+							<span class="text">Home</span>
+						</a>
+					</li>
+					<li>
+						<a href="/classifieds" class="classi link {{-if this.page == 'classifieds' then 'selected'}}" >								<span class="text">Classifieds</span>
+						</a>
+					</li>
+					<li>
+						<a href="/businesses" class="link business {{-if this.page == 'businesses' then 'selected'}}">
+							<span class="text">Business</span>
+						</a>
+					</li>               
+				  </ul>
+			<div class="right media-menu-top">
+				
+				<!--<a id="place-ad" href="/classifieds/place" class="link {{-if this.page is 'classifieds_place' then 'selected'}}"><i class="fa fa-pencil-square-o"></i>place an ad</a>-->
+				{{if this.account:}}
+				
+					<div class="dropdown-holder dropdown link dropdown-opener">
+						
+					<!-- 	<div class="link dropdown-opener"> -->
+							{{if this.account.business:}}
+								<div class="dropdown-toggle"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<div class="avatar-head ">
+													<span class="profile-helper"></span><img src="{{-this.account.business.avatar}}" alt="" />
+														
+												</div>
+										<span>{{-this.account.business.name}}</span>
+										</div>
+						{{else:}}
+														
+								<div class="dropdown-toggle"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<div class="avatar-head">
+										<span class="profile-helper"></span><img src="{{-this.account.avatar(30)}}" alt="" />
+										
+									</div>									
+									<span>{{-this.account.first_name + ' ' + this.account.last_name.substr(0, 1) + '.' }}</span>
+								</div>
+							{{end}}
+						<!-- </div> -->
+
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							{{if this.account.business:}}					
+
+								<li  class="title">Business Menu</li>
+								<li><a href="/{{-this.account.business.address}}?show=wall" class="item">Profile</a></li>
+								<li><a style="text-transform:none;" href="/classifieds/mine" class="item">ADs</a></li>
+								<li><a href="/company/deposit" class="item">Add Funds</a></li>
+								<li><a href="/businesses/stores" class="item">Stores</a></li>
+								<li><a href="/businesses/employees" class="item">Staff</a></li>
+								<li><a href="/businesses/settings/details" class="item">Settings</a></li>
+							
+							{{else:}}
+									<li  class="title">Account Menu</li>
+									<li><a href="/accounts/{{-this.account.id}}?show=wall" class="item">Profile</a></li>
+									<li><a href="/chat/?r={{-this.account.id}}" class="item">Messages</a></li>
+									<li><a href="/company/deposit" class="item">Add Funds</a></li>
+									<li><a style="text-transform:none;" href="/classifieds/mine" class="item">MY ADs</a></li>
+									<li><a href="/accounts/settings/details" class="item">Settings</a></li>							  
+							{{end}}
+							
+							{{if this.account.businesses and this.account.businesses.length:}}
+								<div class="businesses">
+									<div class="label">Use vbox as:</div>
+									{{if this.account.business:}}
+										<a href="/businesses/use/none" class="item">
+											<div class="avatar-head">
+												<span class="profile-helper"></span><img src="{{-this.account.avatar(30)}}" alt="" />
+											</div>
+											<span>{{-this.account.first_name + ' ' + this.account.last_name}}</span>
+										</a>
+									{{end}}
+									{{for business in this.account.businesses:}}
+										<a href="/businesses/use/{{-business.id}}" class="item">
+											<div class="avatar-head">
+												<span class="profile-helper"></span><img src="{{-business.avatar}}" alt="" />
+											</div>
+											<span>{{-business.name}}</span>
+										</a>
+									{{end}}
+								</div>
+							{{end}}
+							<li><a href="/businesses/create" class="item">Create Business</a></li>
+							<li><a href="/accounts/logout" class="item">Logout</a></li>
+							</ul>
+					</div>
+				{{else:}}
+					<ul class="login-section nav navbar-nav">
+						<li><a href="javascript:void();" class="link" data-toggle="modal" data-target="#loginModal">login</a></li>
+						<li><a href="/accounts/signup" class="link signup">Sign Up</a></li>
+					</ul>
+					
+					
+				{{end}}
+			</div>
+			</div>
+			</div>	
+		  </nav>
+		</div>
+	</div>
+	<!-- 
+	<div class="mobile">
+		<div class="left">
+			<a id="mobile-logo" href="/"></a>
+		</div>
+		<div class="right">
+			{{if this.account:}}
+				<div class="dropdown-holder">
+					
+					<div class="link dropdown-opener">
+						{{if this.account.business:}}
+							<span>{{-this.account.business.name}}</span>
+							<div class="avatar-head">
+								<span class="profile-helper"></span><img src="{{-this.account.business.avatar}}" alt=" />
+							</div>
+						{{else:}}
+							<span>{{-this.account.first_name + ' ' + this.account.last_name.substr(0, 1) + '.' }}</span>
+							<div class="avatar-head">
+								<span class="profile-helper"></span><img src="{{-this.account.avatar(30)}}" alt="Avatar" />
+							</div>
+						{{end}}
+					</div>
+					
+					<div class="dropdown" style="display: none;">
+						<div class="website arrow_top"></div>
+						
+						{{if this.account.business:}}
+							<div class="title">Business Menu</div>
+							<a href="/{{-this.account.business.address}}" class="item">Profile</a>
+							<a href="/classifieds/mine" class="item">Ads</a>
+							<a href="/businesses/stores" class="item">Stores</a>
+							<a href="/businesses/employees" class="item">Staff</a>
+							<a href="/businesses/settings/details" class="item">Settings</a>
+						{{else:}}
+							<div class="title">Account Menu</div>
+							<a href="/accounts/{{-this.account.id}}" class="item">Profile</a>
+							<a href="/accounts/settings/details" class="item">Settings</a>
+							<a href="/accounts/logout" class="item">Logout</a>
+						{{end}}
+						
+						{{if this.account.businesses and this.account.businesses.length:}}
+						<div class="title">Use vbox as:</div>
+						<div class="businesses">
+							{{if this.account.business:}}
+								<a href="/businesses/use/none" class="item">
+									<div class="avatar-head">
+										<span class="profile-helper"></span><img src="{{-this.account.avatar(30)}}" alt="Avatar" />
+									</div>
+									<span>{{-this.account.first_name + ' ' + this.account.last_name}}</span>
+								</a>
+							{{end}}
+							{{for business in this.account.businesses:}}
+								<a href="/businesses/use/{{-business.id}}" class="item">
+									<div class="avatar-head">
+										<span class="profile-helper"></span><img src="{{-business.avatar}}" alt="Business Avatar" />
+									</div>
+									<span>{{-business.name}}</span>
+								</a>
+							{{end}}
+						</div>
+						{{end}}
+						<div class="title">Account</div>
+						<a href="/businesses/create" class="item">Create Business</a>
+						<a href="/accounts/logout" class="item">Logout</a>
+						
+						<div class="title">VBOX</div>
+						<a href="/company/about" class="item">About</a>
+						<a href="/company/faq" class="item">FAQ</a>
+						<a href="/company/contact" class="item">Contact</a>
+						
+					</div>
+					
+				</div>
+			{{else:}}
+				<a href="javascript:void();" data-toggle="modal" data-target="#loginModal" class="link {{-if this.page == 'login' then 'selected'}}">login</a>
+				
+			{{end}}
+		</div>
+	</div> -->
+	
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title text-center" id="myModalLabel">Login</h4>
+			</div>
+			
+			<div class="modal-body">
+				<div class="center">
+					<div class="center-in  form-horizontal">
+						<!--<h1>Login</h1>-->
+						{{-@post '/accounts/login'}}
+						
+							
+							{{if this.redirect_url:}}
+								<input type="hidden" name="redirect_url" value="{{-this.redirect_url}}" />
+							{{end}}
+							<div class="form-group"><div class="col-md-12"><input id="login_email" type="text" name="email" placeholder="Email Address" class="form-control" /></div></div>
+							<div class="form-group"><div class="col-md-12"><input type="password" name="password" placeholder="Password" class="form-control" /></div></div>
+							<div class="form-group">
+							<div class="col-md-12"><button type="submit" class="btn-block">login</button>
+							<script>document.getElementById('login_email').focus()</script>
+							{{if this.query.error or (objectLength this.errors):}}
+								<div class="error" style="display: none;">Email or pasword is incorrect.</div>
+							{{end}}
+							</div></div>
+							<div class="form-group or-divide">
+								<div class="col-md-12">
+									<p><span>or</span></p>
+								</div>
+							</div>
+							
+							<div class="form-group" style="margin-bottom:0;">
+								<div class="col-md-6 col-sm-6"><a href="#"><img class="img-responsive" alt="" src="../../images/signface.png"></a></div>
+								<div class="col-md-6 col-sm-6"><a href="#"><img class="img-responsive" alt="" src="../../images/signgoogle.png"></a></div>
+							</div>
+						{{-@end}}
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<a class="pull-right control-label" href="/accounts/forgotPassword">Forgot Password?</a>
+				
+			</div>
+			
+			
+        </div>
+    </div>
+</div>

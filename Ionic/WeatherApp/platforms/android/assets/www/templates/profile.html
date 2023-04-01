@@ -1,0 +1,123 @@
+<ion-view view-title="Profile">
+
+    <ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+		</button>
+	 </ion-nav-buttons>
+
+ <ion-content has-header="true" has-footer="true" padding="true">
+	<!--zheng start-->
+	<div class="button-bar">
+		<button class="button button-outline button-positive" ng-click="playVideo()">Play a video</button>
+	</div>
+	<!--zheng end-->
+ 	<div>
+ 		<input mobiscroll-datetime ng-model="birthday" type="text"/>
+ 	</div>
+ 	<div>
+	    <ul ng-model="selectedCar" mobiscroll-list="{enhance: true}" mobiscroll-image="{width: 130}">
+	       <li>
+	            <img style="float:left;width: 37px;height: 37px;" src="http://demo.mobiscroll.com/Content/img/BMW_logo.png" />
+	            <p style="float:right">BMW</p>
+	       </li>
+	        <li>
+	            <img style="float:left;width: 40px;height: 40px;" src="http://demo.mobiscroll.com/Content/img/Dacia_logo.png" />
+	            <p style="float:right">Dacia</p>
+	       </li>
+	        <li>
+	            <img style="float:left;width: 40px;height: 40px;" src="http://demo.mobiscroll.com/Content/img/Ferrari_logo.png" />
+	            <p style="float:right">Ferrari</p>
+	       </li>
+	        <li>
+	            <img style="float:left;width: 40px;height: 40px;" src="http://demo.mobiscroll.com/Content/img/Mercedes_logo.png" />
+	            <p style="float:right">Mercedes</p>
+	       </li>
+	    </ul>
+	</div>
+	<div style="text-align:center;">
+		<div style="text-align:center;">
+			<img id="myImage" src="" style="width: 250px;height:200px;" />
+		</div>
+		<input type="button" value="Open Camera" ng-click="openCamera();" >
+		<input type="button" value="Open Album" ng-click="openAlbum();" >
+		<input type="button" value="Upload Photo" ng-click="uploadPhoto();" >
+	</div>
+ 	<form name="myForm">
+	  <dl>
+		<dd>
+			<div style="text-align:center;margin:0 auto;">
+				<img src="img/avatar/c13.png" style="width:70px; height:65px;" />
+			</div>
+		</dd>
+	  </dl>
+	  <dl>
+		<dt>Name:</dt>
+		<dd><input type="text" ng-model="profileInfo.name" value="{{profileInfo.name}}" placeholder="Please Input Name" style="padding-left: 10px;" /></dd>
+	  </dl>
+	  <dl>
+		<dt>Email:</dt>
+		<!--<dd><input type="text" ng-model="profileInfo.email" value="{{profileInfo.email}}" placeholder="Please Input Email" style="padding-left: 10px;" /></dd>-->
+		<dd>
+			 <input type="email" name="input" ng-model="email.text" required>
+			 <div style="color:red" class="error" ng-show="myForm.input.$error.required || myForm.input.$error.email">Please input valid email!</div>
+		</dd>
+	  </dl>
+	  <dl>
+		<dt>Telephone:</dt>
+		<!--<dd><input type="tel" ng-model="profileInfo.phone" value="{{profileInfo.phone}}" placeholder="Please Input Telephone" style="padding-left: 10px;" /></dd>-->
+		<dd>
+			 <input type="number" class="form-control" ng-minlength="5" ng-maxlength="11"  id="inputPhone" name="phone" placeholder="Phone" ng-model="profileInfo.phone" ng-required="true" ng-blur="callPhoneService();">
+            <span style="color:red;" class="help-block" ng-show="myForm.phone.$error.required || myForm.phone.$error.number">Valid phone number is required</span>
+            <span style="color:red;"  class="help-block" ng-show="((myForm.phone.$error.minlength || myForm.phone.$error.maxlength) && myForm.phone.$dirty) ">phone number should be digits</span>
+		</dd>
+	  </dl>
+	  <dl>
+	  	<dt>Char Only</dt>
+	  	<dd><input type="text" placeholder="txt here plz" name="alpha" ng-model="alpha" required ng-pattern="/^(\D)+$/" /></dd>
+        <dd><p style="color:red" class="alert" ng-show="myForm.alpha.$error.pattern">Text only, please.</p></dd>
+	  </dl>
+	  <dl>
+	  	<dt>Number Only</dt>
+	  	<dd>  <input type="text" placeholder="digits here plz" name="nums" ng-model="nums" required ng-pattern="/^(\d)+$/" /></dd>
+        <dd> <p style="color:red;" class="alert" ng-show="myForm.nums.$error.pattern">Numbers only, please.</p> </dd>
+	  </dl>
+	  <dl>
+	  	<dt>Money Only</dt>
+	  	<dd>  <input type="number" placeholder="money here plz" name="money" ng-model="money" required min="0" max="9999.99"/></dd>
+        <dd> <p style="color:red;" class="alert" ng-show="!myForm.money.$valid"> 0~9999.99 Money please.</p> </dd>
+	  </dl>
+  	  <dl>
+		<dt>Mandatory Field</dt>
+		<dt>
+			<dd>  <input type="text" placeholder="Please input" name="mandatory" ng-model="mandatory" required/></dd>
+			<dd> <p style="color:red;" class="alert" ng-show="!myForm.mandatory.$valid">field is required.</p> </dd>
+		</dt>
+	  </dl>
+	  <dl>
+		<dt>Emergency Contact Information:</dt>
+		<dt>
+			<textarea ng-model="profileInfo.emergencyinfo" value="{{profileInfo.emergencyinfo}}" rows="4" cols="30" style="border:solid 1px grey;"></textarea>
+		</dt>
+	  </dl>
+
+	   <dl>
+		<dt>
+			<input type="button" value="Update Info" ng-click="friend.comment = ''"/>
+		</dt>
+	  </dl>
+
+	 </form>
+	</ion-content>
+	<div class="bar bar-footer row tab-buttons-bar">
+		<div class="tabs tabs-icon-top " >
+		  <a class="tab-item" href="#/app/map" style="color:#FF9600;font-size:15px;">
+			<i class="icon ion-home"></i>
+			Map
+		  </a>
+		  <a class="tab-item" href="#/app/friendlist" style="color:#FF9600;font-size:15px;">
+			<i class="icon ion-star"></i>
+			Friend List
+		  </a>
+		</div>
+    </div>
+</ion-view>

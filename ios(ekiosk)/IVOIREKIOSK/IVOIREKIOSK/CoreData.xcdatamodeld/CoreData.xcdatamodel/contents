@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Editions" representedClassName="Editions" syncable="YES">
+        <attribute name="categorie" attributeType="String" syncable="YES"/>
+        <attribute name="coverImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="coverpath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="downloaddate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="downloadpath" attributeType="String" syncable="YES"/>
+        <attribute name="favoris" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idjournal" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="isSubscription" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="localpath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lu" attributeType="Boolean" syncable="YES"/>
+        <attribute name="nom" attributeType="String" syncable="YES"/>
+        <attribute name="openDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="publicationdate" attributeType="Date" syncable="YES"/>
+        <attribute name="type" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Editions" positionX="-1800" positionY="-1044" width="128" height="270"/>
+    </elements>
+</model>

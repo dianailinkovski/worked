@@ -1,0 +1,1 @@
+ALTER TABLE `merchant_do_not_sell_history_log` ADD `action_text` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `action_id`;

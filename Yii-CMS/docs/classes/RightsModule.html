@@ -1,0 +1,507 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » \RightsModule</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div xmlns:php="http://php.net/xsl" class="btn-toolbar">
+<div class="btn-group visibility" data-toggle="buttons-checkbox">
+<button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button>
+</div>
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+</div>
+<ul xmlns:php="http://php.net/xsl" class="side-nav nav nav-list">
+<li class="nav-header">
+<i title="Methods" class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_getAssetsUrl" title="getAssetsUrl() :: Publishes the module assets path."><span class="description">Publishes the module assets path.</span><pre>getAssetsUrl()</pre></a></li>
+<li class="method public "><a href="#method_getAuthorizer" title="getAuthorizer() :: "><span class="description">getAuthorizer()
+        </span><pre>getAuthorizer()</pre></a></li>
+<li class="method public "><a href="#method_getGenerator" title="getGenerator() :: "><span class="description">getGenerator()
+        </span><pre>getGenerator()</pre></a></li>
+<li class="method public "><a href="#method_getInstaller" title="getInstaller() :: "><span class="description">getInstaller()
+        </span><pre>getInstaller()</pre></a></li>
+<li class="method public "><a href="#method_getVersion" title="getVersion() :: "><span class="description">getVersion()
+        </span><pre>getVersion()</pre></a></li>
+<li class="method public "><a href="#method_init" title='init() :: Initializes the "rights" module.'><span class="description">Initializes the "rights" module.</span><pre>init()</pre></a></li>
+<li class="method public "><a href="#method_registerScripts" title="registerScripts() :: Registers the necessary scripts."><span class="description">Registers the necessary scripts.</span><pre>registerScripts()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i title="Properties" class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_appLayout" title="$appLayout() :: "><span class="description"></span><pre>$appLayout</pre></a></li>
+<li class="property public "><a href="#property_authenticatedName" title="$authenticatedName() :: "><span class="description"></span><pre>$authenticatedName</pre></a></li>
+<li class="property public "><a href="#property_baseUrl" title="$baseUrl() :: "><span class="description"></span><pre>$baseUrl</pre></a></li>
+<li class="property public "><a href="#property_cssFile" title="$cssFile() :: "><span class="description"></span><pre>$cssFile</pre></a></li>
+<li class="property public "><a href="#property_debug" title="$debug() :: "><span class="description"></span><pre>$debug</pre></a></li>
+<li class="property public "><a href="#property_displayDescription" title="$displayDescription() :: "><span class="description"></span><pre>$displayDescription</pre></a></li>
+<li class="property public "><a href="#property_enableBizRule" title="$enableBizRule() :: "><span class="description"></span><pre>$enableBizRule</pre></a></li>
+<li class="property public "><a href="#property_enableBizRuleData" title="$enableBizRuleData() :: "><span class="description"></span><pre>$enableBizRuleData</pre></a></li>
+<li class="property public "><a href="#property_flashErrorKey" title="$flashErrorKey() :: "><span class="description"></span><pre>$flashErrorKey</pre></a></li>
+<li class="property public "><a href="#property_flashSuccessKey" title="$flashSuccessKey() :: "><span class="description"></span><pre>$flashSuccessKey</pre></a></li>
+<li class="property public "><a href="#property_install" title="$install() :: "><span class="description"></span><pre>$install</pre></a></li>
+<li class="property public "><a href="#property_layout" title="$layout() :: "><span class="description"></span><pre>$layout</pre></a></li>
+<li class="property public "><a href="#property_superuserName" title="$superuserName() :: "><span class="description"></span><pre>$superuserName</pre></a></li>
+<li class="property public "><a href="#property_userClass" title="$userClass() :: "><span class="description"></span><pre>$userClass</pre></a></li>
+<li class="property public "><a href="#property_userIdColumn" title="$userIdColumn() :: "><span class="description"></span><pre>$userIdColumn</pre></a></li>
+<li class="property public "><a href="#property_userNameColumn" title="$userNameColumn() :: "><span class="description"></span><pre>$userNameColumn</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="property private "><a href="#property__assetsUrl" title="$_assetsUrl() :: "><span class="description"></span><pre>$_assetsUrl</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a xmlns:php="http://php.net/xsl" id="\RightsModule"></a><ul xmlns:php="http://php.net/xsl" class="breadcrumb">
+<li>
+<a href="../index.html"><i title="Classes" class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/RightsModule.html">RightsModule</a>
+</li>
+</ul>
+<div xmlns:php="http://php.net/xsl" class="element class">
+<p class="short_description">Rights module class file.</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="mailto:cniska@live.com">Christoffer Niska</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright &amp;copy; 2010 Christoffer Niska</td>
+</tr>
+<tr>
+<th>version</th>
+<td>1.3.0 DO NOT CHANGE THE DEFAULT CONFIGURATION VALUES!
+
+You may overload the module configuration values in your rights-module
+configuration like so:
+
+'modules'=>array(
+    'rights'=>array(
+        'userNameColumn'=>'name',
+        'flashSuccessKey'=>'success',
+        'flashErrorKey'=>'error',
+    ),
+),</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Default.html">Default</a></td>
+</tr>
+</table>
+<h3>
+<i title="Methods" class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_getAssetsUrl"></a><div class="element clickable method public method_getAssetsUrl " data-toggle="collapse" data-target=".method_getAssetsUrl .collapse" title="public">
+<h2>Publishes the module assets path.</h2>
+<pre>getAssetsUrl() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the base URL that contains all published asset files of Rights.</div>
+</div></div>
+</div>
+<a id="method_getAuthorizer"></a><div class="element clickable method public method_getAuthorizer " data-toggle="collapse" data-target=".method_getAuthorizer .collapse" title="public">
+<h2>getAuthorizer()
+        </h2>
+<pre>getAuthorizer() : \RightsAuthorizer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\RightsAuthorizer</code>the authorizer component.</div>
+</div></div>
+</div>
+<a id="method_getGenerator"></a><div class="element clickable method public method_getGenerator " data-toggle="collapse" data-target=".method_getGenerator .collapse" title="public">
+<h2>getGenerator()
+        </h2>
+<pre>getGenerator() : \RightsGenerator</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\RightsGenerator</code>the generator component.</div>
+</div></div>
+</div>
+<a id="method_getInstaller"></a><div class="element clickable method public method_getInstaller " data-toggle="collapse" data-target=".method_getInstaller .collapse" title="public">
+<h2>getInstaller()
+        </h2>
+<pre>getInstaller() : \RightsInstaller</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\RightsInstaller</code>the installer component.</div>
+</div></div>
+</div>
+<a id="method_getVersion"></a><div class="element clickable method public method_getVersion " data-toggle="collapse" data-target=".method_getVersion .collapse" title="public">
+<h2>getVersion()
+        </h2>
+<pre>getVersion() : \the</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\the</code>current version.</div>
+</div></div>
+</div>
+<a id="method_init"></a><div class="element clickable method public method_init " data-toggle="collapse" data-target=".method_init .collapse" title="public">
+<h2>Initializes the "rights" module.</h2>
+<pre>init() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_registerScripts"></a><div class="element clickable method public method_registerScripts " data-toggle="collapse" data-target=".method_registerScripts .collapse" title="public">
+<h2>Registers the necessary scripts.</h2>
+<pre>registerScripts() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i title="Properties" class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_appLayout"> </a><div class="element clickable property public property_appLayout" data-toggle="collapse" data-target=".property_appLayout .collapse" title="public">
+<h2>$appLayout</h2>
+<pre>$appLayout </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'application.views.layouts.main'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the path to the application layout file.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_authenticatedName"> </a><div class="element clickable property public property_authenticatedName" data-toggle="collapse" data-target=".property_authenticatedName .collapse" title="public">
+<h2>$authenticatedName</h2>
+<pre>$authenticatedName </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'Authenticated'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the name of the guest role.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_baseUrl"> </a><div class="element clickable property public property_baseUrl" data-toggle="collapse" data-target=".property_baseUrl .collapse" title="public">
+<h2>$baseUrl</h2>
+<pre>$baseUrl </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'/rights'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the base url to Rights. Override when module is nested.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_cssFile"> </a><div class="element clickable property public property_cssFile" data-toggle="collapse" data-target=".property_cssFile .collapse" title="public">
+<h2>$cssFile</h2>
+<pre>$cssFile </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the style sheet file to use for Rights.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_debug"> </a><div class="element clickable property public property_debug" data-toggle="collapse" data-target=".property_debug .collapse" title="public">
+<h2>$debug</h2>
+<pre>$debug </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>whether to enable debug mode.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_displayDescription"> </a><div class="element clickable property public property_displayDescription" data-toggle="collapse" data-target=".property_displayDescription .collapse" title="public">
+<h2>$displayDescription</h2>
+<pre>$displayDescription </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>true</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>whether to display authorization items description 
+instead of name it is set.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_enableBizRule"> </a><div class="element clickable property public property_enableBizRule" data-toggle="collapse" data-target=".property_enableBizRule .collapse" title="public">
+<h2>$enableBizRule</h2>
+<pre>$enableBizRule </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>true</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>whether to enable business rules.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_enableBizRuleData"> </a><div class="element clickable property public property_enableBizRuleData" data-toggle="collapse" data-target=".property_enableBizRuleData .collapse" title="public">
+<h2>$enableBizRuleData</h2>
+<pre>$enableBizRuleData </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>whether to enable data for business rules.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_flashErrorKey"> </a><div class="element clickable property public property_flashErrorKey" data-toggle="collapse" data-target=".property_flashErrorKey .collapse" title="public">
+<h2>$flashErrorKey</h2>
+<pre>$flashErrorKey </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'RightsError'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the flash message key to use for error messages.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_flashSuccessKey"> </a><div class="element clickable property public property_flashSuccessKey" data-toggle="collapse" data-target=".property_flashSuccessKey .collapse" title="public">
+<h2>$flashSuccessKey</h2>
+<pre>$flashSuccessKey </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'RightsSuccess'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the flash message key to use for success messages.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_install"> </a><div class="element clickable property public property_install" data-toggle="collapse" data-target=".property_install .collapse" title="public">
+<h2>$install</h2>
+<pre>$install </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>whether to install rights when accessed.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_layout"> </a><div class="element clickable property public property_layout" data-toggle="collapse" data-target=".property_layout .collapse" title="public">
+<h2>$layout</h2>
+<pre>$layout </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'rights.views.layouts.main'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the path to the layout file to use for displaying Rights.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_superuserName"> </a><div class="element clickable property public property_superuserName" data-toggle="collapse" data-target=".property_superuserName .collapse" title="public">
+<h2>$superuserName</h2>
+<pre>$superuserName </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'Admin'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the name of the role with superuser privileges.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_userClass"> </a><div class="element clickable property public property_userClass" data-toggle="collapse" data-target=".property_userClass .collapse" title="public">
+<h2>$userClass</h2>
+<pre>$userClass </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'User'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the name of the user model class.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_userIdColumn"> </a><div class="element clickable property public property_userIdColumn" data-toggle="collapse" data-target=".property_userIdColumn .collapse" title="public">
+<h2>$userIdColumn</h2>
+<pre>$userIdColumn </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'id'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the name of the id column in the user table.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_userNameColumn"> </a><div class="element clickable property public property_userNameColumn" data-toggle="collapse" data-target=".property_userNameColumn .collapse" title="public">
+<h2>$userNameColumn</h2>
+<pre>$userNameColumn </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'username'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>property</th>
+<td>the name of the username column in the user table.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property__assetsUrl"> </a><div class="element clickable property private property__assetsUrl" data-toggle="collapse" data-target=".property__assetsUrl .collapse" title="private">
+<h2>$_assetsUrl</h2>
+<pre>$_assetsUrl </pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:38-04:00.<br></footer></div>
+</div>
+</body>
+</html>

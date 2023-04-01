@@ -1,0 +1,57 @@
+
+<script id="advanced-timing.html" type="text/ng-template">
+	<div class="modal timing-page modal-colors">
+		<ion-header-bar>
+		  <button class="button button-clear button-primary" ng-click="closeModal()">Close</button>
+	      <h1 class="title">Advanced Timing</h1>
+	    </ion-header-bar>
+	    <ion-content has-bouncing="false">
+	        <div class="list">
+	          <div class="item">
+	          	<p>Length of Transition Pause (sec)</p>
+			  	<div class="range range-energized">
+			  		<input class="timing-input" value="{{advancedTiming.transitionTime}}" ng-model="advancedTiming.transitionTime">
+			    	<input type="range" name="volume" min="0" max="100" value="{{advancedTiming.transitionTime}}" ng-model="advancedTiming.transitionTime">
+			  	</div>
+			  </div>
+	          <div class="item">
+	          	<p>Length of Exercise Interval (sec):</p>
+			  	<div class="range range-energized">
+			  		<input class="timing-input" value="{{advancedTiming.exerciseTime}}" ng-model="advancedTiming.exerciseTime">
+			    	<input type="range" name="volume" min="1" max="180" value="{{advancedTiming.exerciseTime}}" ng-model="advancedTiming.exerciseTime">
+			  	</div>
+			  </div>
+	          <div class="item">
+	          	<p>Rest Break After [blank] Exercises:</p>
+			  	<div class="range range-energized">
+			  		<input class="timing-input" value="{{advancedTiming.breakFreq}}" ng-model="advancedTiming.breakFreq">
+			    	<input type="range" name="volume" min="0" max="25" value="{{advancedTiming.breakFreq}}" ng-model="advancedTiming.breakFreq">
+			  	</div>
+			  </div>
+	          <div class="item">
+	          	<p>Length of Rest Break (sec):</p>
+			  	<div class="range range-energized">
+			  		<input class="timing-input" value="{{advancedTiming.breakTime}}" ng-model="advancedTiming.breakTime">
+			    	<input type="range" name="volume" min="0" max="120" value="{{advancedTiming.breakTime}}" ng-model="advancedTiming.breakTime">
+			  	</div>
+			  </div>
+	          <div class="item">
+	          	<p>Chose total time above, or custom (mins):</p>
+			  	<div class="range range-energized">
+			  		<input class="timing-input" value="{{advancedTiming.workoutLength}}" ng-model="advancedTiming.workoutLength">
+			    	<input type="range" name="volume" min="1" max="120" value="{{advancedTiming.workoutLength}}" ng-model="advancedTiming.workoutLength">
+			  	</div>
+			  </div>
+			  <div class="item item-toggle">
+			     <p>Randomization:</p>
+			     <label class="toggle toggle-energized">
+			       <input type="checkbox" ng-model="advancedTiming.randomizationOption">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+		  		</div> 
+			</div>
+	    </ion-content>
+	</div>
+</script>

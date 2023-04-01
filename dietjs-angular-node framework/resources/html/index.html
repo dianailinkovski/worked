@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+{{if this.page is 'chat':}}
+		<div id="content" class="{{-this.page}}">{{include 'chat.html'}}</div>
+  {{else :}}
+<html>
+	<head>
+		<!-- meta -->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<title>{{-this.title}}</title>
+		
+		<!-- stylesheets: global & current page -->
+		<link rel="stylesheet" href="/styles/bootstrap.css" type="text/css" />
+		<link rel="stylesheet" href="/styles/global.css" type="text/css" />
+		<link rel="stylesheet" href="/styles/pages/{{-this.page}}.css" type="text/css" />
+		<link rel="stylesheet" href="/styles/extralayers.css" />
+		<link rel="stylesheet" href="/styles/settings.css" />
+		<link href="/styles/snackbar.min.css" rel="stylesheet">
+		<link href="/styles/material.css" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" src="/styles/bootstrap-slider.css">
+		<style>
+				#acceptCallBox{
+			display: none;
+			background: #fff;
+			width: 400px;
+			height: 140px;
+			padding: 40px;
+			margin: 0 auto;
+			position: fixed;
+			top: 50%;
+			z-index: 8;
+			left: 50%;
+			margin-top: -70px;
+			margin-left: -200px;
+			text-align: center;
+		}
+		</style>
+		
+		<!-- its css for range-->
+		<link type="text/css" rel="stylesheet" src="/styles/range/jslider.css">
+		<link type="text/css" rel="stylesheet" src="/styles/range/jslider.blue.css">
+		<link type="text/css" rel="stylesheet" src="/styles/range/jslider.plastic.css">
+		<link type="text/css" rel="stylesheet" src="/styles/range/jslider.round.css">
+		<link type="text/css" rel="stylesheet" src="/styles/range/jslider.round.plastic.css">
+		<!-- end range-->
+		
+		
+	    
+		<!-- stylesheets: modules-->
+		<link rel="stylesheet" href="/styles/modules/validetta.css" type="text/css" />
+		<link rel="stylesheet" href="/selectize/css/selectize.css" type="text/css" />
+		<link rel="stylesheet" href="/icons/css/font-awesome.min.css">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+
+		<!-- its js for range-->
+		<script src="/scripts/range/tmpl.js" type="text/javascript"></script>
+		<script src="/scripts/range/jquery.dependClass-0.1.js" type="text/javascript"></script>
+		<script src="/scripts/range/draggable-0.1.js" type="text/javascript"></script>
+		<script src="/scripts/range/jquery.slider.js" type="text/javascript"></script>
+		
+		<!-- end -->
+		
+		
+		<script src="/scripts/themepunch.tools.js"></script>
+		<script src="/scripts/themepunch.revolution.js" ></script>
+		<script type="text/javascript" src="/scripts/modules/bootstrap.js"></script>
+		<script src="/scripts/bootstrap-slider.js" type="text/javascript"></script>
+		
+		<script src="/scripts/bootstrap-slider.js" type="text/javascript"></script>
+
+		
+{{if this.data.account:}}
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="/scripts/modules/main.css">
+<script src="/scripts/modules/quickblox.js"></script>
+<script src="/scripts/modules/main.js"></script>
+
+
+  <section id="incomingCall" class="incoming modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="info-notice"><span class="incoming-callType"></span> Call from <span class="caller"></span></span>
+        </div>
+        <div class="modal-body">
+          <div class="incoming-call-controls l-flexbox l-flexbox_flexcenter">
+            <button id="reject" class="btn btn-default btn_decline">Decline</button>
+            <button id="accept" class="btn btn-default btn_accept">Accept</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <audio id="callingSignal" loop>
+    <source src="audio/calling.ogg"></source>
+    <source src="audio/calling.mp3"></source>
+  </audio>
+
+  <audio id="ringtoneSignal" loop>
+    <source src="audio/ringtone.ogg"></source>
+    <source src="audio/ringtone.mp3"></source>
+  </audio>
+
+  <audio id="endCallSignal">
+    <source src="audio/end_of_call.ogg"></source>
+    <source src="audio/end_of_call.mp3"></source>
+  </audio>
+
+  
+<script>
+var user = ({{-JSON.stringify(this)}})
+caller = {
+      id: '{{-this.data.account.id}}',
+      full_name: '{{-this.data.account.full_name}}',
+      login: '{{-this.data.account.first_name}}',
+      password: '{{-this.cid}}' };
+    chooseRecipient(caller.id);
+</script> 
+{{end}}
+
+ {{if this.page is 'contactus':}}
+
+	 <link rel="stylesheet" href="/styles/modules/bootstrap.min.css">
+   <link rel="stylesheet" href="/styles/modules/contactus.css">
+<style>
+    .wrap {
+  max-width: 944px;
+  margin: 0 auto;
+  clear: both;
+  /* padding: 0 40px; */
+}
+</style>
+
+
+{{end}}
+
+ {{if this.page is 'aboutus':}}
+
+         <link rel="stylesheet" href="/styles/modules/bootstrap.min.css">
+   <link rel="stylesheet" href="/styles/modules/contactus.css">
+
+
+
+{{end}}
+
+	
+		{{if inArray this.page, ['classifieds_edit', 'classifieds_place'] :}}
+			<!-- dropzone -->
+			<link rel="stylesheet" href="/styles/modules/dropzone.css" type="text/css" />
+		{{end}}
+		
+		{{if this.page is 'classified':}}
+			<!-- royalslider -->
+			<link rel="stylesheet" href="/royalslider/royalslider.css">
+			<link rel="stylesheet" href="/royalslider/skins/default/rs-default.css"> 
+			<link rel="stylesheet" href="/styles/modules/rrssb.css"> 
+        
+		{{end}}
+		
+		{{if this.page is 'classifieds':}}
+   
+ 		{{end}}
+		
+		
+		<!-- mobile -->
+		<link rel='stylesheet' media='screen and (max-width:768px)' href='/styles/mobile.css' type="text/css" />
+		<link rel='stylesheet'  href='/styles/responsive.css' type="text/css" />
+	</head>
+	<body>
+  <div id="main-container">
+		<!-- plugins -->
+		{{include 'html/parts/plugins.html'}}
+		{{include 'html/parts/inputs.html' }}
+
+		<!-- html -->
+
+		{{include 'html/layouts/header.html'}}
+		<div id="content" class="{{-this.page}}">{{include 'html/pages/'+this.page+'.html'}}</div>
+    </div>
+    {{if this.page is 'chat':}}
+       {{else :}}
+   
+            {{this.part = 'footer'}}
+        {{include 'html/layouts/footer.html'}}
+		<!-- scripts -->
+	
+        <!-- <script src="/scripts/modules/jelq.js" type="text/javascript"></script> -->
+
+
+		<script src="/selectize/js/selectize.min.js" type="text/javascript"></script>
+		
+        {{if this.scripts:}}
+			{{for script in this.scripts:}}
+				<script src="{{-script}}" type="text/javascript"></script>
+			{{end}}
+		{{end}}
+        {{if inArray this.page, ['classifieds_edit', 'classifieds_place'] :}}
+
+        <script>
+            var markers = [];
+            function initialize() {
+                var mapOptions = {
+                    center: { lat: 40.7127837, lng: -74.00594130000002 },
+                    zoom: 3
+                };
+                var map = new google.maps.Map(document.getElementById('map-canvas'),
+                        mapOptions);
+                google.maps.event.addListener(map, 'click', function (event) {
+                    setAllMap(null);
+                    $("#latitude").val(event.latLng.lat())
+                    $("#longitude").val(event.latLng.lng())
+                    addMarker(event.latLng);
+
+                });
+                function setAllMap(map) {
+                    for (var i = 0; i < markers.length; i++) {
+                        markers[i].setMap(map);
+                    }
+                }
+                function addMarker(location) {
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                    markers.push(marker);
+                }
+
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+
+        </script>
+        {{end}}
+
+		{{if this.page is 'contactus':}}
+        <script>
+            $(document).ready(function(){
+			alert("hai");
+    $(".wrap").css("padding","0")
+    })
+    </script>
+        {{end}}
+		
+        {{end}}
+
+				<!-- socket connection -->
+		{{if this.account:}}
+			<input type="hidden" value="{{-this.account.id}}" id="myID">
+		{{end}}
+			<script> var site_url="http://192.241.239.235/"; var users;</script>
+			<script src="/socket.io/socket.io.js" type="text/javascript"></script>
+			<script src="/scripts/global.js" type="text/javascript"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.js"></script>
+
+
+	</body>
+</html>

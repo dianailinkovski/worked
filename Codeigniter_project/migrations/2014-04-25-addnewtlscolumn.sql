@@ -1,0 +1,1 @@
+ALTER TABLE `violator_notification_email_settings` ADD `smtp_tls` ENUM('YES', 'NO')  NOT NULL  DEFAULT 'NO'  AFTER `smtp_ssl`;

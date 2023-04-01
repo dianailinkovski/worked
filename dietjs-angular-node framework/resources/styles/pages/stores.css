@@ -1,0 +1,161 @@
+body{ background:#fff !Important;}
+form{
+	padding: 20px 0;
+	clear: both;
+	float: left;
+}
+
+#store-list{
+	clear: both;
+}
+
+.stores{
+	margin-left: -5px;
+	margin-right: -5px; background:#fff;
+}
+
+.stores .store{
+	width: 48%;
+	float: left;
+	padding: 0; margin-right: 2%;
+	clear: none;
+	
+}
+h1{
+	font-size: 30px;
+	margin-top: 30px; font-weight:bold;
+	margin-bottom: 10px; color:#00baff;
+}
+
+.break{
+	margin: 15px 0;
+}
+
+#store-list h1{
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.stores .store .in{
+	margin: 0 10px 40px;
+	position: relative;
+	border-radius: 0;
+	clear: both;
+	background: #f7f8f3 ; border:1px solid #dadad8;
+}
+.stores .store .in:hover{ background: #00BBFF; border-color: #088abb;}
+.stores .store .in:hover .detail.name input, .stores .store .in:hover .detail.location input{ color: #fff;}
+.stores .store .in:hover button{ background: #fff; color: #00baff !Important; text-shadow:none;}
+.stores .store .in:hover .map{ color: #fff;}
+
+.stores .store .in:before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+	
+}
+
+.stores .store input[type="text"]{
+	background: none;
+	border-radius: 0px;
+	border: none;
+	
+	width: 100%;
+	box-shadow: none;
+	padding: 0 0 0 55px;
+
+	box-sizing: border-box;
+}
+
+.stores .store .detail{
+	clear: both;
+	position: relative;
+}
+.stores .store .detail.name{ margin:8px 0 0;}
+
+.stores .store .actions{
+	position: relative; text-align:right;
+}
+.stores .store .actions a{ color:#00baff !Important; background: #fff; border:1px solid #00BBFF; box-shadow: none;}
+
+
+.stores .store .detail.name input{
+	font-size: 19px;
+	width:70%;
+	color: #00baff;
+	border-radius: 0;
+	border: none;
+}
+
+.stores .store .detail.name input::-moz-input-placeholder{ color: #00baff;}
+.stores .store .detail.name input::-webkit-input-placeholder{ color:#00baff;}
+.stores .store .in:hover .detail.name input::-webkit-input-placeholder{ color:#fff;}
+.stores .store .in:hover .detail.name input::-moz-input-placeholder{ color:#fff;}
+
+/*
+.stores .store .detail.name input::-moz-placeholder{
+	color:#00baff !important;
+}*/
+.stores .store .detail.name input:-ms-input-placeholder{
+   color:#00baff !important;
+}
+.stores .store .detail.location input{
+	color: #777;
+}
+
+.stores .store .detail i{
+	position: absolute;
+	top: 11px;
+	left: 15px;
+	z-index: 5;
+	color: #999;
+}
+
+.stores .store .detail .fa-info-circle{
+	top: 15px;
+	color: #FFF;
+}
+
+.stores .store .detail i.fa-phone{
+	top: 13px;
+}
+
+.stores .store .detail.location .input-holder{
+	margin: 0 2px;
+}
+
+.stores .store button, .stores .store .button{
+	padding: 7px 14px 8px; font-size:14px;
+	margin: 10px 10px 10px 0;
+	float: none; line-height: 16px;
+	display: inline-block;
+	
+}
+.stores .store button:before, .stores .store .button:before{
+	margin-right: 5px;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.stores .store .in .map {
+    color: #c6c6c6;
+    font-size: 50px;
+    left: 15px;
+    position: absolute;
+    top: 10px; z-index:99;
+
+}
+
+.stores .store .in .rate{ margin:0; list-style:none; position:absolute; top:15px; right:2%;}
+.stores .store .in .rate li{ float:left;}
+.stores .store .in .rate li img{ margin:0 0 0 5px; float:left; width:22px;}
+
+@media all and (max-width:767px){
+	.stores .store{
+		width: 100%;
+	}
+}

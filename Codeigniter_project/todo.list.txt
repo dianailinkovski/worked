@@ -1,0 +1,110 @@
+js/jqwidgets/globalization/jquery.global.js:        // TODO: more detailed description and example
+js/jqwidgets/globalization/jquery.global.js:            // TODO: more detailed description and example
+js/jqwidgets/globalization/jquery.global.js:            // TODO: more detailed description and example
+js/tinymce/plugins/advlink/js/advlink.js:	// TODO: Add stuff here
+js/tinymce/plugins/spellchecker/editor_plugin_src.js:					// @TODO: I'm not sure that both are still issues on IE9.
+js/tinymce/plugins/searchreplace/js/searchreplace.js:			// TODO: Verify if this is actually needed any more, maybe it was for very old FF versions? 
+js/tinymce/plugins/autolink/editor_plugin_src.js:				// TODO: Determine if this is still needed.
+js/tinymce/themes/advanced/editor_template_src.js:			// TODO: ACC Should have an aria-describedby attribute which is user-configurable to describe what this field is actually for.
+js/tinymce/themes/advanced/js/color_picker.js:	// TODO: VoiceOver doesn't seem to support legend as a label referenced by labelledby.
+js/tinymce/tiny_mce_src.js:			// TODO: Add feature detection here in the future
+js/tinymce/tiny_mce_src.js:			// TODO: Move to normal caching system
+js/tinymce/tiny_mce_src.js:		// Fix list elements, TODO: Replace this later
+js/tinymce/tiny_mce_src.js:		//TODO: ACC test this out - adding a role = application for getting the landmarks working well.
+js/tinymce/tiny_mce_src.js:			// TODO: ACC add the appropriate description on this.
+js/tinymce/tiny_mce_src.js:				// TODO: Remove this when the list creation logic is removed
+system/application/libraries/spider_stickybusiness/spider_vitanherbs.com_controller.php:	//TODO include timestamps in openHref ? or similar construct ?
+system/application/libraries/spider_stickybusiness/spider_google.com_parser.php:        'product.price_listed' => "div[@id='item-attributes']/div[@id='item-price']/div[@id='retail-price']/b[@class='price']", //TODO
+system/application/libraries/spider_stickybusiness/spider_lib_ag/XPathHelper.php:    // TODO: get this working with database and admin back end
+system/application/libraries/spider_stickybusiness/spider_lib_ag/XPathHelper.php:                        ->order_by('RAND()')      // TODO: complex where statement to analyze stats and select from best group of ips 
+system/application/libraries/spider_stickybusiness/spider_lib_ag/XPathHelper.php:        // TODO: smart or not dumb?
+system/application/libraries/spider_stickybusiness/spider_iherb.com_controller.php:	//TODO include timestamps in openHref ? or similar construct ?
+system/application/libraries/spider_stickybusiness/spider_luckyvitamin.com_controller.php:	//TODO include timestamps in openHref ? or similar construct ?
+system/application/libraries/spider_stickybusiness/spider_livamed.com_parser.php:		/** TODO: parse additional data fields for weight, quantity, brand,rating..
+system/application/libraries/spider_stickybusiness/spider_google.com_controller.php:  //TODO include timestamps in openHref ? or similar construct ?
+system/application/libraries/spider_stickybusiness/api_productfinder.php:				continue;//TODO: report error status ? exception ?
+system/application/libraries/spider_stickybusiness/spider_iherb.com_parser.php:					unset($matches); //TODO: review existing code for such flaw.
+system/application/libraries/spider_stickybusiness/spider_swansonvitamins.com_controller.php:  //TODO include timestamps in openHref ? or similar construct ?
+system/application/libraries/spider_stickybusiness/spider_amazon.com_parser.php:        //TODO: shoud I move this test to getPageType ?		
+system/application/libraries/spider_stickybusiness/spider_amazon.com_parser.php:	// TODO: put this into the helpers file
+system/application/libraries/spider_stickybusiness/spider_amazon.com_parser.php:		// TODO: fix this
+system/application/libraries/spider_stickybusiness/spider_newegg.com_controller.php:    //TODO include timestamps in openHref ? or similar construct ?
+system/application/libraries/spider_stickybusiness/spider_vitaminshoppe.com_controller.php:	//TODO include timestamps in openHref ? or similar construct ?
+system/application/libraries/phpmailer/class.phpmailer.php:        file_put_contents($file, $body); //TODO check this worked
+system/application/libraries/semantics3/oauth-php/library/OAuthDiscovery.php:					// TODO: Keep this uri somewhere for the user?
+system/application/libraries/semantics3/oauth-php/library/store/OAuthStoreSession.php:		// TODO 
+system/application/libraries/semantics3/oauth-php/library/store/OAuthStorePDO.php:		// TODO: this depends on mysql extension
+system/application/libraries/semantics3/oauth-php/library/store/OAuthStoreMySQLi.php:				/* TODO: security. mysqli_ doesn't seem to have an escape identifier function.
+system/application/libraries/semantics3/oauth-php/library/store/OAuthStorePostgreSQL.php:        // TODO: pagination
+system/application/libraries/semantics3/oauth-php/library/store/OAuthStoreOracle.php:		// TODO
+system/application/libraries/semantics3/oauth-php/library/store/OAuthStoreSQL.php:		// TODO: pagination
+system/application/libraries/semantics3/oauth-php/library/discovery/xrds_parse.php: * TODO: more robust checking, support for more service documents
+system/application/libraries/semantics3/oauth-php/library/discovery/xrds_parse.php: * TODO: support for URIs to definition instead of local xml:id
+system/application/libraries/semantics3/oauth-php/library/discovery/xrds_parse.php:		// TODO: support uris referring to service documents outside this one
+system/application/libraries/semantics3/oauth-php/library/OAuthException2.php:// TODO: something with the HTTP return code matching to the problem
+system/application/libraries/semantics3/oauth-php/library/OAuthServer.php:	 * TODO: add correct result code to exception
+system/application/libraries/semantics3/oauth-php/library/OAuthRequest.php:			// TODO: what to do with 'multipart/form-data'?
+system/application/libraries/nosql.php:// TODO:  find all stray DynamoDb instances in the app and move them into amzdb.php.
+system/application/libraries/nosql.php:// TODO:  eliminate ->S and ->N from the app code
+system/application/libraries/nosql.php:// TODO:  convert all "->amzdb->" strings in app to "->nosql->"
+system/application/libraries/nosql.php:// TODO:  get dynamo running in svn-new
+system/application/libraries/nosql.php:// TODO:  autoload all, some?
+system/application/libraries/nosql.php:// TODO:  write nosqlMysql
+system/application/libraries/nosql.php:// TODO:  sanity-test incoming and outgoing data are formatted properly, or at least document it in this interface
+system/application/libraries/nosql.php:// TODO:  
+system/application/libraries/nosql.php:// TODO:  
+system/application/libraries/nosql.php:// TODO:  
+system/application/libraries/S3.php:		// TODO: Add TargetGrants
+system/application/libraries/.config.inc.php:// TODO:  move this to CI config directory
+system/application/controllers/whois.php:		//TODO
+system/application/controllers/whois.php:			//TODO: store these two data inside the product_trends table instead
+system/application/controllers/whois.php:			 //TODO: test "IN '$marketplace'
+system/application/controllers/crowl.php:    // TODO: remove these redundant functions
+system/application/controllers/crowl.php:        // TODO: move this proxy logic into amazon controller
+system/application/controllers/reports.php:		// @TODO add comparison support
+system/application/controllers/reports.php:		// @TODO Universal colors
+system/application/controllers/reports.php:		// @TODO Universal colors
+system/application/controllers/savedreports.php:		//TODO - the report_where needs some help
+system/application/controllers/schedule_cron.php:				// TODO: why did they set the streak_start to NULL here, for every merchant not currently in violation?
+system/application/controllers/schedule_cron.php:		// TODO: sanity checking.  If seller doesn't respond then how would this ever end?
+system/application/controllers/schedule_cron.php:		// TODO: This feature is implemented all wrong.  needs to be rewritten per merchant.
+system/application/controllers/schedule_cron.php:		// TODO: who cares?
+system/application/controllers/schedule_cron.php:		//TODO: fetch image data here
+system/application/controllers/schedule_cron.php:		//TODO: unset $this->data, too?
+system/application/controllers/schedule_cron.php:			// TODO: read amazon error messages from html for temporary/permanent failures.
+system/application/controllers/schedule.php:		//TODO - the report_where needs some help
+system/application/controllers/schedule.php:				//TODO - group_id
+system/application/controllers/schedule.php:		//TODO - this doesn't perform a partial search...
+system/application/models/violator_m.php:		// TODO:  This is totally wrong.  It should be per marketplace, otherwise it will return whatever the last data is, using the default "all" param
+system/application/models/violator_m.php:	// @TODO - need to consolidate similar functions?? ^^countViolatedProducts^^ ??
+system/application/models/violator_m.php:			//TODO: store these two data inside the product_trends table instead
+system/application/models/violator_m.php:		// TODO: make this marketplace modification for all Violator_m class functions
+system/application/models/violator_m.php:			//TODO: store these two data inside the product_trends table instead
+system/application/models/violator_m.php:			//TODO: store these two data inside the product_trends table instead
+system/application/models/crawl_data_m.php:	// TODO: fix this function so that it always returns one data type!
+system/application/models/crawl_data_m.php:		// TODO: fix $this->last_crawl()
+system/application/models/violations_m.php:		// TODO: competitor_map
+system/application/models/violations_m.php:		//TODO: change hashkey to sellerId instead of merchant_name
+system/application/models/violations_m.php:			//TODO: store these two data inside the product_trends table instead
+system/application/models/report_m.php:				//TODO: store these two data inside the product_trends table instead
+system/application/models/report_m.php:			// TODO: delete this line eventually
+system/application/models/store_m.php:	// TODO: use the violation_streak table.  Currently it's unused.
+system/application/models/store_m.php:	// TODO:  or, delete these functions and table entirely
+system/application/models/store_m.php:	// TODO:  add streak_end field to _table_violation_streaks?
+system/application/models/crowl_m.php: * TODO: break this up into several model files, one for each merchant
+system/application/models/crowl_m.php:			// TODO: do a fallback strategy for keyword search:  if no UPC, then use other data
+system/application/models/crowl_m.php:	// TODO: refactor these redundant $api . '_lookup' functions
+system/application/models/crowl_m.php:    // TODO: add URL lookup per UPC x api
+system/application/models/crowl_m.php:	// TODO: refactor _retailer_lookup so it can handle amazon too
+system/application/models/crowl_m.php:						// TODO: make the seller_id or merchant_id into mandatory data.  Merchant name changes all the time.
+system/application/models/crowl_m.php:						// TODO: de-duplicate merchant table
+system/application/models/crowl_m.php:						// TODO: analyze this.  what's it used for?  why is it updated for every item?
+system/application/models/crowl_m.php:						// TODO: change the hashkey to use merchant_id#upc#storeId
+system/application/models/crowl_m.php:			'original_name' => $merchant_name, // TODO: what is the purpose of this data?
+system/application/models/crowl_m.php:	// TODO: move into screen_shots_model
+system/application/models/products_trends_m.php:		// TODO: put proper error handling here
+system/application/models/products_trends_m.php:			'mid' => !empty($p->mid) ? (int)$p->mid : '',			//merchant_id // TODO: put this here to remove lookups from ?
+system/application/models/products_trends_m.php:			'ss'  => !empty($p->ss)  ? (string)$p->ss : '',			//screenshot  // TODO: put this here or not (ie : '', put in violations table)?
+system/application/helpers/kalacomm_helper.php:// TODO: create a cache, or find a less busy lookup strategy.
+system/application/helpers/kalacomm_helper.php:		// TODO: fix orderby
+system/application/views/violationoverview/report_marketplace.php:								// TODO: is there a saner way to do this?

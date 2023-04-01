@@ -1,0 +1,50 @@
+<ion-view>
+ <ion-nav-buttons side="left">
+	<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+ </ion-nav-buttons>
+  <ion-nav-title>
+      <h3 style="color:#FF9600;margin-top:10px;">Safe Cab</h3>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+     <button class="button active" ng-click="data.showDelete = false; data.showReorder = !data.showReorder"  ng-class="showReorder ? 'active' : ''">Sort</button>
+  </ion-nav-buttons>
+	
+  <ion-content style="height: 85%;">
+	<ion-refresher on-refresh="doRefresh()">
+                     
+    </ion-refresher>
+	<ion-list  option-buttons="itemButtons" can-swipe="true" show-delete="data.showDelete" show-reorder="data.showReorder">
+	  <ion-item ng-repeat="friend in friends" href="#/app/friendlist/{{friend.id}}" on-swipe-right="onSwipeRight();" on-swipe-left="onSwipeLeft();">
+		<div class="item-options-left" ng-show="showEdit">
+			<i class="icon ion-minus-circled">Edit</i>
+	    </div>
+		<img style="width:35px;height:35px;" ng-src="img/avatar/{{friend.img}}" />
+		<span>{{ friend.name }}</span>
+          <ion-option-button class="button-positive"
+							   ng-click="onItemDelete(friend)">
+			   <i class="icon ion-trash-b">Delete</i>
+		  </ion-option-button>
+		 <ion-option-button class="button-assertive" ng-click="onItemEdit(friend)">
+			<i class="icon ion-wrench">Edit</i>
+		</ion-option-button>
+		  
+		  <!--<ion-option-button class="button-assertive">Edit</ion-option-button>-->
+          <ion-reorder-button class="ion-navicon" on-reorder="reorderItem(friend, $fromIndex, $toIndex)"></ion-reorder-button>
+	  </ion-item>
+	</ion-list>
+	<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+  </ion-content>
+   <div class="bar bar-footer row tab-buttons-bar">
+	<div class="tabs tabs-icon-top " >
+	  <a class="tab-item" href="#/app/map" style="color:#FF9600;font-size:15px;">
+		<i class="icon ion-home"></i>
+		Map
+	  </a>
+	  <a class="tab-item" href="#/app/friendlist" style="color:#FF9600;font-size:15px;">
+		<i class="icon ion-star"></i>
+		Friend List
+	  </a>
+	</div>
+  </div>
+</ion-view>

@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+.tabularRowCollapse { float: left; }
+.tabularRowDelete { float: right; }
+.tabularInputWidget { margin:0 10px; }
+.tabularColumn { width: 100%; margin-top: 10px; }
+.tabularItem { margin: 0; padding-bottom:10px; }
+.tabularItem-wrapper { border:none; background-color:transparent; }
+.tabularItem-header { margin: 0; padding: 8px; font-size: 1.2em; color: white; font-weight: normal; border-radius: 0; border: none; background: none; background-color: #6DADCF; }
+.tabularCollapseAll { margin:1em 0; }
+.tabularItem-content .tabularItem-header { background-color: #78AC59; }
+.tabularItem-header .ui-icon { float: right; }
+.tabularItem-content { padding: 10px; background-color: #E0EDF4; }
+.tabularItem-content .tabularItem-content { background-color: #DBE8D2; }
+.tabularAdd { margin: 1em 0 0 0; }
+.tabularRowLayoutSelect { color: black; padding: 6px; }
+.tabularAdd .ui-state-default .ui-button-text { font-size: 1.8em; line-height: 1.3em; padding: 0 0.4em; }
+.tabularInputWidget .tabularInputWidget .tabularAdd .ui-state-default { background: none; background-color: #78AC59; color: #FFF; border-radius: 0; border: none; } 
+.tabularExpand { margin: 0 0 1em 0; }
+.tabularInputWidget .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
+.tabularInputWidget .ui-sortable-placeholder * { visibility: hidden; }
+.tabularInputWidget .tabularAdd .ui-state-default  { background: none; background-color: #6DADCF; color: #FFF; border-radius: 0; border: none; }

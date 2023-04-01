@@ -1,0 +1,1253 @@
+var site_url = "http://192.241.239.235/";
+var avatars_path = site_url+"uploads/profiles/original/";
+var shared_dir = "shared/";
+var id_account = false;
+var id_user = false;
+var is_owner = false;
+var id_visitor = false;
+var username = false;
+userObj = new Users();
+var socket = io.connect(site_url);
+
+var userinfo = {};
+var otherUserEasyRTCId = false;
+var z = 0;
+var second_person_online = false;
+var isVisitorPlaneSet = false;
+var sourceID=false;
+var destinationID=false;
+
+function startConnectEvents(){
+   
+    //$('.jcmenu').hide();
+    //$('#msg').hide();
+    if (!localStorage.getItem("vbox_hd") || localStorage.getItem("vbox_hd")=="off"){
+      console.log(localStorage.getItem("vbox_hd_off"));
+      $("#hd-image").attr("src","img/hd-off.png");
+   }
+    $(".vbox-hd").click(function(){
+      if (localStorage.getItem("vbox_hd")=="on") {
+	 localStorage.setItem("vbox_hd", "off");
+      }
+      else{
+	 localStorage.setItem("vbox_hd", "on");
+      }
+      showSuccess("Settings Saved. New settings will be effected after your reload the page.");
+   });
+    
+    $('#tb-menu').on('click',function(){
+        $('#jcmenu').toggle();
+    });
+    $('#menu-btn').on('click',function(){
+        $('.jcmenu').toggle();
+    });
+
+    $('#calView').on('click',function(){
+        $('#showCalendar').toggle();
+	//toggleEnableImg("clndr", "#calView img");
+    });
+    $("#close-message-container").on("click", function(){
+        $('#msg').hide();
+    });
+                       
+    $('#tb-messages').on('click',function(){
+        $('#msg').toggle();
+	$("#msg_history").hide();
+	updateScroll("#message-list");
+    });
+    
+    
+    $("#sendMessageText").on("keyup", function(event){
+        if (event.keyCode == 13) {
+            $("#chatSend").trigger("click");
+        }
+    });
+    
+    $("#inviteLink").text(location);
+    
+        $("#image_upload").click(function(){
+	//$("#file_upload_form").fadeIn();
+	//promptPopup("file_upload_form", true, true);
+	$( "#file_upload_form" ).dialog({title: "Share a file", width: 500, fluid: true,});
+    });
+	
+    $("#payment_options").click(function(){
+	$( "#payment_block" ).dialog({title: "Payment Options", width: 300, fluid: true,});
+    });
+   
+    $(".time-container table td").click(function(){
+	$(".time-container table td").each(function(){ $(this).removeClass("selected"); });
+	$(this).addClass("selected");
+	selectedTime = $(this).text();
+	//alert(selectedTime);
+    });
+    $("#app-btn a").click(function(){
+	z++;
+	selectedTime = $(".time-container table td.selected").text();
+	selectedDate = $("#showCalendar .selected").data("item");
+	if (selectedDate == null || typeof selectedDate === undefined || selectedDate == "") {
+	    showError("Please select date for appointment");
+	    return false;
+	}
+	if (selectedTime == null || typeof selectedTime === undefined || selectedTime == "") {
+	    showError("Please select time for appointment");
+	    return false;
+	}
+	appointmentTime = selectedDate + " " + selectedTime;
+	on_time = convertDate(selectedDate) + " " + selectedTime;
+	app_date = formatDate(selectedDate, "d NNN, yyyy");
+	appointmentDiv = "<div id='time_block_"+z+"' class='time-block activated'><div class='p-head padding'>Appointment</div><div class='apptime'>"
+	 +"<div class='appdate'>"
+	    +"<div class='app-img-row padding'><div class='appdate_img floatleft'></div><div class='app-time_img floatright'></div><div class='clear'></div></div>"
+	    +"<div class='app-date-row padding'><div class='appdate_date floatleft'>"+app_date+"</div><div class='app-time_time floatright'>"+selectedTime+"</div><div class='clear'></div></div>"
+	+"</div>";
+	appActions = "<div class='p-action padding bordergrey'><button id='rejApp' onclick='rejApp("+z+")' class='btn btn-default floatleft'>Reject</button><button id='acceptApp' onclick='acceptApp("+z+", \""+selectedDate+"\", \""+selectedTime+"\")' class='btn btn-primary floatright'>Accept</button><div class='clear'></div></div>";
+	appDivEnd = "</div>";
+	socket.emit("isAppointAvailable", {id_visitor: id_visitor, appointmentTime: on_time});
+	socket.on("isAppointAvailableCallback", function(data){
+	    if (data.error) {
+		showError("Sorry we could not send your appointment at the moment. Please try again later.");
+	    }
+	    else{
+		data.rows.forEach(function(row){
+		    if (row.count > 0) {
+			showError("Please select some other time. Its been already reserved.");
+			return false;
+		    }
+		    else{
+			easyrtc.sendDataWS(otherUserEasyRTCId, "message",  appointmentDiv + appActions + appDivEnd);
+			addToConversation("Me", "message", appointmentDiv + appDivEnd, true);
+			PromptClear("showCalendar");
+		    }
+		});
+	    }
+	});
+    });
+    $("#mic").click(function(){
+	if ($(this).hasClass("off")) {
+	    easyrtc.enableMicrophone(true);
+	    enableImg("mic", $(this));
+	}
+	else{
+	    easyrtc.enableMicrophone(false);
+	    disableImg("mic", $(this));
+	}
+    });
+    $(".toggle_camera").click(function(){
+	if ($(this).hasClass("off")) {
+	    easyrtc.enableCamera(true);
+	   $(this).addClass("on");
+	   $(this).removeClass("off");
+	   enableImg("video", $(this));
+	}
+	else{
+	    easyrtc.enableCamera(false);
+	    $(this).addClass("off");
+	    $(this).removeClass("on");
+	    disableImg("video", $(this));
+	}
+    });
+    $("#change_camera").click(function(){
+	var selected = false;
+	selected_camera_id = localStorage.getItem("oc_vbox_camera");
+	//alert("selecte camera" +  selected_camera_id);
+	options = "<option value='0'>Select Camera</option>";
+	easyrtc.getVideoSourceList( function(list) {
+	    var i;
+	    for( i = 0; i < list.length; i++ ) {
+		camera_lbl = list[i].label;
+		if (list[i].id == selected_camera_id) {
+		    selected = "selected='selected'";
+		}
+		if (!list[i].label || list[i].label == "" || list[i].label === undefined) {
+		    number = Number(i) + 1;
+		    camera_lbl = "Camera " + number;
+		}
+		options += "<option value='"+list[i].id+"'>"+camera_lbl+"</option>";
+	    }
+	    $( "#camera_setings" ).dialog({title: "Camera Settings", width: 400, fluid: true,});
+	    html = "<label for='source_camera'>Select Source Camera: </label>";
+	    html += "<select id='source_camera' onchange=\"changeCamera(this.value);\">" + options + "</select>";
+	    $("#cameraContent").html(html);
+	});
+    });
+    
+    $("#TargetLanguage").change(function(){ // get value of your textbox on change, log to console
+	   var a = $("#TargetLanguage").val();
+	   var txt= $("#sendMessageText").val();
+	   txt=txt.trim();
+		if(txt)
+		{
+		   var url="https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20151023T170722Z.5022dc52aa838c0f.5b7e32b7add1fa82262ff1a9e2442c8d40ae0f44&text="+encodeURIComponent(txt)+"&lang="+a+"&[format=plain]&[options=1]";
+			$.getJSON(url,function(data) { 
+				console.log(data);
+				$("#sendMessageText").val("");
+				$("#sendMessageText").val(data.text);
+			});
+		}
+    });
+//    var leaveTimeout;
+//    leaveTimeout = setTimeout(function() {
+//	  $('#toolbar').fadeOut(800);
+//       }, 10000);
+//    $('#navigation').on('mouseleave', function() {
+//       leaveTimeout = setTimeout(function() {
+//	  $('#toolbar').fadeOut(300);
+//       }, 2000);   
+//    })
+//    .on('mouseenter', function() {
+//       clearTimeout(leaveTimeout);
+//       $('#toolbar').fadeIn(800);
+//    });
+//
+
+//ion.sound({
+//    sounds: [
+//        {
+//            name: "call",
+//	    volume: 0.4
+//        },
+//        {
+//            name: "msg",
+//            volume: 0.2
+//        },
+//        {
+//            name: "join",
+//            volume: 0.3,
+//            preload: false
+//        }
+//    ],
+//    volume: 0.5,
+//    path: "img/",
+//    preload: true
+//});
+
+}
+function changeCamera(camera_id){
+    if (camera_id != 0) {
+	localStorage.setItem("oc_vbox_camera",camera_id);
+	//easyrtc.setVideoSrc(camera_id);
+	$("#cLbl").html("<div class='alert alert-success'>Settings Saved. New camera will work after you refresh the page  </div>");
+    }
+}
+function toggleEnableImg(img, ele){
+   if ($(ele).hasClass("on")) {
+      $(ele).removeClass("on");
+      $(ele).attr("src", "img/"+img+".png");
+   }
+   else{
+      $(ele).addClass("on");
+      $(ele).attr("src", "img/"+img+"-off.png");
+   }
+}
+function enableImg(img, $this){
+    $this.addClass("on"); $this.removeClass("off");
+    $this.attr("src", "img/"+img+".png");
+}
+function disableImg(img, $this){
+    $this.addClass("off"); $this.removeClass("on");
+    $this.attr("src", "img/"+img+"-off.png");
+}
+
+ function getQueryStrings() {
+      var assoc  = {};
+      var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+      var queryString = location.search.substring(1);
+      var keyValues = queryString.split('&');
+
+      for(var i in keyValues) {
+        var key = keyValues[i].split('=');
+        if (key.length > 1) {
+          assoc[decode(key[0])] = decode(key[1]);
+        }
+      }
+      return assoc;
+    }
+    
+	
+    var qs = getQueryStrings();
+	console.log("qsr is "+qs['r']+"my id is"+$("#myID").val()+"qs id is"+qs['id']);
+    if (qs['r'] == null || (qs['id'] && qs['id'] != $("#myID").val()) || (!qs['id'] && qs['r'] != $("#myID").val())) {
+	 // window.location.href = site_url;
+    }
+    var userid = Math.random().toString().slice(2, 12);
+    var room = id_account = qs['r'];
+    if (qs['id']) {
+        id_user = qs['id'];
+	id_visitor = id_account;
+    }
+    else{
+	id_user = id_account;
+	id_visitor = false;
+	is_owner = true;
+    }
+	if(qs["id"])
+	{
+		sourceID=qs["id"];
+		destinationID=qs["r"];
+	}
+	
+socket.emit("newUserConnect", {id_user:id_user, id_room:id_account});
+//socket.emit("getUserDetails",{ destinationID: sourceID, sourceID: destinationID});
+
+socket.on("newUserConnectCallback", function(data){
+   console.log("connected users callback ");
+   console.log(data.users);
+    for(var c in data.users){
+	if (data.users[c] != id_user) {
+	    //playSound("join", false);
+	    second_person_online = true;
+	    //makeInitiateContactButton(data.users[c]);
+	    socket.emit("getUsersInfo", {ids: [id_user,data.users[c]],callback: 'initiateContactButtonCallBack', to_connect_id: data.users[c]});
+	    $("#callButton").addClass("start_call");
+	    id_visitor = data.users[c];
+	    if (!qs['id']) {
+		socket.emit('getUsersInfo', {ids: [id_visitor, id_user], callback: 'getUsersInfoCallback3'});
+	    }
+	}
+    }
+});
+socket.on("ocRingingCallBack", function(){
+   $("#call_waiting").html("Ringing...");
+});
+socket.on("ocRingingChatCallBack", function(){
+   $("#call_waiting").html("Inviting "+userinfo['Visitor'].first_name+", Please wait...");
+});
+socket.on("ocChatInvitResponseCallBack", function(accepted){ 
+   if(accepted) $("#call_waiting").html("Invitation accepted. We are connecting you to "+userinfo['Visitor'].first_name);
+   else{ $("#call_waiting").html("Invitation rejected by "+userinfo['Visitor'].first_name); enable('initiateContact'); }
+});
+socket.on("initiateContactButtonCallBack", function(data){
+   data.rows.forEach(function(row){
+       if (row.id != id_user) {
+	   userinfo['Visitor'] = row;
+       }
+       else{
+	   userinfo['Me'] = row;
+       }
+   });
+   name = userinfo['Visitor'].first_name + " " +  userinfo['Visitor'].last_name;
+   name2 = userinfo['Me'].first_name + " " +  userinfo['Me'].last_name;
+   $("#initiateContact").val("Initiate contact with " + name);
+   enable('initiateContact');
+   $("#initiateContact").click(function(){ disable('initiateContact');
+       socket.emit("sendInvitation", {sourceID:userinfo['Me'].id, destinationID:userinfo['Visitor'].id, name: name2, id_account: id_account});
+       $("#call_waiting").html("Initiating Contact");
+       enable("call_waiting");
+    });
+});
+
+socket.on('getUsersInfoCallback3', function(data){
+    if (data.error) {
+	showError("We could not retrieve the user information who is trying to connect. Please refresh your page or report this error to support");
+    }
+    else{
+	data.rows.forEach(function(row){
+	    if (row.id != id_user) {
+		userinfo['Visitor'] = row;
+	    }
+	    else{
+		userinfo['Me'] = row;
+	    }
+	});
+	$("#iam").text("Connected With: "+userinfo['Visitor'].first_name);
+	console.log("new user callback");
+	setVisitorPlane(userinfo);
+    }
+});
+
+socket.on('userLeftCall', function(data){
+    second_person_online = false;
+    id_user_left = data.id_user_left;
+   // $("#iam").text("Offline");
+    disable('makeCallButton');
+    $("#callButton").removeClass("start_call");
+});
+var userinfoMsg = [];
+socket.on("getMsgUsersInfoCallback", function(data){
+    console.log("loadMsgHistory");
+    if (data.error) {
+        alert("something went wrong. Please try again later");
+        console.log(data.err);
+        endWait();
+    }
+    else{
+        data.rows.forEach(function(row){
+            if (row.id==data.ids[0]) { // data.ids[0] == data.ids.from;
+                userinfoMsg['Me'] = row;
+            }
+            else{
+                userinfoMsg['Visitor'] = row;
+            }
+        });
+	//console.log(userinfoMsg);
+        //$("#msg_history_contents").html("");
+        UsersObj = new Users();
+        UsersObj.getChatHistory(data.ids[0], data.ids[1], "#msg_history_contents");
+        endWait();
+    }
+});
+
+socket.on("getChatHistoryCallback", function(data){
+    //$(data.appendto).html("");
+    var html = "";
+    rows = data.rows;
+    var info = data.data;
+    info.appendto = info.appendto ? info.appendto : "#receiveMessageArea";
+    if (info.appendto == "#receiveMessageArea") {
+	userinfoMsg = userinfo;
+    }
+    rows = rows.reverse();
+    console.log("displaying messages");
+    console.log(userinfoMsg);
+    if (rows && typeof rows !== undefined && rows != null) {
+     rows.forEach(function(row){
+	 time = formatDate(row.time, "hh:mm:ss a");
+	 date = formatDate(row.time, "MMM dd, yyyy");
+	 if (row.from == userinfoMsg['Me'].id) { $class = "person1"; infoarray = userinfoMsg['Me']; }else{ $class = "person2";  infoarray = userinfoMsg['Visitor'];}
+	     html += '<div class="'+$class+'chat chat-box">'+
+		 '<div class="image">'+
+		     '<img src="'+avatars_path+infoarray.avatar+'">'+
+		 '</div>'+
+		 '<div class="chat-box-content">'
+		     +'<div class="pointer"></div>'
+		     +'<div class="'+$class+'SMS">'+row.message+'</div>'
+		     +'<div class="datearea"><div class="time chat-date">'+time+'</div>'
+		     +'<div class="date chat-date">'+date+'</div></div>'
+		     +'<div class="clear"></div>'
+		 +'</div>'
+	     +'</div>';
+     });
+     $(info.appendto).html(html);
+     updateScroll(info.appendto);
+    }
+});
+
+socket.on("getAppointmentsBlockCallback", function(data){
+    rows = data.rows;
+    console.log(rows);
+    if (rows && typeof rows !== undefined && rows != null) {
+	var html = "";
+	rows.forEach(function(row){
+	    if (row.id_account != id_user) {
+	    
+	    date = row.on_time;
+	    date = new Date(date);
+	    apdate = date.getMonth() + 1 + "-" +date.getDate() + "-" + date.getFullYear();
+	    aptime = date.getHours() + ":00";
+	    html += '<div id="app_'+row.id+'"><div class="app-div" ><a href="javascript:void(0)">'
+			+'<input type="hidden" class="appIdUser" value="'+row.id_account+'">'
+			+'<div class="profile-img">'
+				   +'<img src="'+avatars_path+row.avatar+'">'
+			+'</div>'
+			+'<div class="profile-name floatleft">'
+				+'<div class="p-person">'+row.first_name+' '+row.last_name+'</div>'
+                +'<div class="profile-ap textsmall floatleft">'
+                    +'<div class="appimgholder">'
+                        +'<img class="floatright1 img-left" src="./css/images/clock_icon.png"/>'
+                        +'<img class="floatleft img-right" src="./css/images/calender_icon.png"/>'
+                    +'</div>'
+                    +'<div class="aptiminginfo floatright1"><div class="ap-time floatright1">'+aptime+'</div>'
+                    +'<div class="ap-date floatleft">'+apdate+'</div></div>'
+                    +'<div class="clear"></div>'
+                +'</div>'
+			+'</div>'
+			+'<div class="clear"></div>'
+		    +'</a>'
+		    +'<div class="actions" style="display:none"><input type="button" onclick="completeAppointment('+row.id+','+row.id_user+','+row.with_user+', 2);" class="btn btn-success" value="Mark Completed"><input type="button" class="btn btn-danger" onclick="completeAppointment('+row.id+','+row.id_user+','+row.with_user+', 1);" value="Cancel Appointment"></div>'
+		+'</div>'
+		+'<div class="bordergrey"></div></div>';
+	}
+	});
+	$("#apdetails").html(html);
+    }
+    $(".app-div").click(function(){ $(".actions", this).stop().slideToggle(300); })
+});
+socket.on("getMessageBlockCallback", function(data){
+    rows = data.rows;
+    rows.reverse();
+    console.log("printing messages");
+    console.log(rows);
+    if (rows && typeof rows !== undefined && rows != null) {
+	rows = rows.reverse();
+	var html = "";
+	rows.forEach(function(row){
+	    var location = (row.locality_long) ? row.locality_long + ", " : "";
+	    location += (row.locality_long) ? row.country_long : "";
+	    html += '<div class="app-div"><a href="javascript: void(0)" onclick="loadMsgHistory('+row.id_account+')">'
+			+'<div class="profile-img">'
+				  +'<img src="'+avatars_path+row.avatar+'">'
+			+'</div>'
+			+'<div class="profile-name floatleft">'
+				+'<div class="p-person">'+row.first_name+' '+row.last_name+'</div>'
+				+'<div class="p-person-text">'+location+'</div>'
+			+'</div>'
+			+'<div class="clear"></div>'
+		+'</a></div>'
+		+'<div class="bordergrey"></div>';
+	});
+	$("#msgdetails").html(html);
+    }
+});
+
+socket.on('connect', function(){
+    var delivery = new Delivery(socket);
+ 
+    delivery.on('delivery.connect',function(delivery){
+      $("#oc_f_submit").click(function(evt){
+	 $("#fileUpLbl").addClass("hidden");
+        var file = $("input[type=file]")[0].files[0];
+	$("#imageUploadForm .loading-bar").removeClass("nodisplay");
+        delivery.send(file);
+        evt.preventDefault();
+      });
+    });
+ 
+    delivery.on('send.success',function(fileUID){
+      $("#imageUploadForm .loading-bar").addClass("nodisplay");
+	$("#fileUpLbl").removeClass("hidden");
+	$("#imageUploadForm").trigger("reset");
+	text = "<div class='file-shared'><a target='_blank' href='"+shared_dir + fileUID.name+"'>Download File</a></div>";
+	ocSendMessage(text, true);
+	socket.emit("saveUserChat",{from:id_user, to:id_visitor, text:text});
+    });
+    
+  });
+
+
+
+// socket.on('onGetUserInfo', function(data){
+//	alert("data coming");
+//   });
+function ocSetUserProfile(){
+    
+}
+
+function sendConnectionInvite(to_connect_id){
+   console.log("To connect with " + to_connect_id);
+}
+
+
+function toggleFullScreen() {
+        if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+         (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+               if (document.documentElement.requestFullScreen) {  
+               document.documentElement.requestFullScreen();  
+             } else if (document.documentElement.mozRequestFullScreen) {  
+               document.documentElement.mozRequestFullScreen();  
+             } else if (document.documentElement.webkitRequestFullScreen) {  
+               document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+            }
+            $("#oc_video").addClass("full-screen");
+	    //$(".jcmenu").hide();
+	   // $("#msg").hide();
+        } else {  
+          if (document.cancelFullScreen) {
+            document.cancelFullScreen();  
+          } else if (document.mozCancelFullScreen) {  
+            document.mozCancelFullScreen();  
+          } else if (document.webkitCancelFullScreen) {  
+            document.webkitCancelFullScreen();  
+          }
+          $("#oc_video").removeClass("full-screen");
+	  // $(".jcmenu").show();
+	  //  $("#msg").show();
+        }  
+}
+
+
+
+
+
+
+
+//audio_video
+
+var selfEasyrtcid = "";
+var haveSelfVideo = false;
+
+function disable(domId) {
+    document.getElementById(domId).disabled = "disabled";
+    if ($("#"+domId).hasClass("visible")) {
+        $("#"+domId).removeClass("visible");
+        $("#"+domId).addClass("hidden");
+    }
+}
+
+
+function enable(domId) {
+    document.getElementById(domId).disabled = "";
+    if ($("#"+domId).hasClass("hidden")) {
+        $("#"+domId).removeClass("hidden");
+        $("#"+domId).addClass("visible");
+    }
+}
+
+
+//messaging
+
+function addToConversation(who, msgType, content, noEescapeHTML) {
+    // Escape html special characters, then add linefeeds.
+    if (!noEescapeHTML) {
+	content = content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+	content = content.replace(/\n/g, '<br />');
+    }
+    
+    if (who == "Me") { $class = "person1"; infoarray = userinfo['Me']; }
+    else{ $class = "person2";  infoarray = userinfo['Visitor'];}
+	time = formatDate(false, "hh:mm:ss a");
+        date = formatDate(false, "MMM dd, yyyy");
+	html = '<div class="'+$class+'chat chat-box">'+
+		    '<div class="image">'+
+			'<img src="'+avatars_path + infoarray.avatar+'">'+
+		    '</div>'+
+		    '<div class="chat-box-content">'
+			+'<div class="pointer"></div>'
+			+'<div class="'+$class+'SMS">'+content+'</div>'
+			+'<div class="datearea"><div class="time chat-date">'+time+'</div>'
+                        +'<div class="date chat-date">'+date+'</div></div>'
+			+'<div class="clear"></div>'
+		    +'</div>'
+		+'</div>';
+    if ($class ==  "person2") {
+	playSound("msg", false);
+    }
+    $("#receiveMessageArea").append(html);
+    updateScroll("#message-list");
+}
+
+function sendStuffWS(otherEasyrtcid) {
+    var text = document.getElementById('sendMessageText').value;
+    if(text.replace(/\s/g, "").length === 0) { // Don't send just whitespace
+        return;
+    }
+    if (otherEasyrtcid) {
+	easyrtc.sendDataWS(otherEasyrtcid, "message",  text);
+    }
+    else{ console.log("Sending offline message"); }
+    
+    addToConversation("Me", "message", text);
+    document.getElementById('sendMessageText').value = "";
+    socket.emit("saveUserChat",{from:id_user,to:id_visitor, text: text});
+}
+
+
+//messaging
+
+
+
+function connectToAp() {
+    startConnectEvents();
+    console.log("connecting");
+    if (localStorage.getItem("vbox_hd") && localStorage.getItem("vbox_hd")=="on"){ easyrtc.setVideoDims(1280,720); }
+    console.log("vbox_hd" + localStorage.getItem("vbox_hd"));
+  easyrtc.enableAudio(true);
+  easyrtc.enableVideo(true);
+  easyrtc.enableDataChannels(true);
+  easyrtc.setPeerListener(addToConversation);
+  //easyrtc.setRoomOccupantListener( convertListToButtons);
+  if (!easyrtc.supportsDataChannels()) {
+    showError("Your browser does not support data channels.", 0);
+  }
+  if (!easyrtc.supportsGetUserMedia()) {
+    showError("Your browser does not allow support for user media.", 0);
+  }
+  if (!easyrtc.supportsPeerConnections()) {
+    showError("Your browser does not support this application", 0);
+  }
+    var qs = getQueryStrings();
+  var room = qs['r'];
+  if (qs['attr']) {
+   socket.emit('doAttr',false);
+  }
+  socket.emit('getUsersInfo', {ids: [id_user, id_visitor]});
+    socket.on('getUsersInfoCallback', function(data){
+    console.log("catched");
+	if (data.error) {
+	    showError("something went wrong. Please try again later");
+	    console.log(data.err);
+	}
+	else{
+	    data.rows.forEach(function(row){
+		if (row.id==id_user) {
+		    userinfo['Me'] = row;
+		    console.log("ME");
+		    console.log(userinfo['Me']);
+		}
+		else{
+		    userinfo['Visitor'] = row;
+		    console.log("Visitor");
+		    console.log(userinfo['Visitor']);
+		}
+	    });
+	    
+		$("#profile_image").attr("src", avatars_path+userinfo['Me'].avatar);
+		$("#my_name").text(userinfo['Me'].first_name + " " + userinfo['Me'].last_name);
+		easyrtc.setUsername(userinfo['Me'].first_name);
+		easyrtc.joinRoom(room, null, null, null);
+		easyrtc.connect(room, loginSuccess, loginFailure);
+		easyrtc.setRoomOccupantListener( makeTheCallButton );
+		saved_camera_id = localStorage.getItem("oc_vbox_camera");
+		if (saved_camera_id && saved_camera_id !== undefined && saved_camera_id != null && typeof saved_camera_id !== undefined) {
+		   //alert(saved_camera_id);
+		    easyrtc.setVideoSrc(saved_camera_id);
+		}
+		easyrtc.initMediaSource(
+		function(mediastream){
+		    easyrtc.setVideoObjectSrc( document.getElementById("callerVideo"), mediastream);
+		    document.getElementById("callerVideo").muted = true;
+		    
+		}, function(errorCode, errorText){
+		    showError(errorCode +" "+ errorText)
+		   // easyrtc.showError(errorCode, errorText);
+	       });
+		setVisitorPlane(userinfo);
+		console.log("called mesaate");
+		userObj.getMessageBlock(id_user, 50);
+		//userObj.getAppointmentsBlock(id_user, 50);
+		//setUpMirror();
+	}
+    });
+  
+  
+
+}
+
+function setVisitorPlane(userinfo){
+//    if (isVisitorPlaneSet) {
+//	console.log("visitor plane is set");
+//	return false;
+//    }
+    console.log("setting visitor plane");
+    
+    if (userinfo['Visitor'] && typeof userinfo['Visitor'] !==undefined && typeof userinfo['Visitor'].first_name !== undefined && userinfo['Visitor'].first_name) {
+	console.log(userinfo['Visitor']);
+	console.log("getting chat history for visitor plane");
+	userObj = new Users();
+	userObj.getChatHistory(id_user, id_visitor);
+	$("#iam").text("Connected With: "+userinfo['Visitor'].first_name);
+    }
+    isVisitorPlaneSet = true;
+}
+
+function makeTheCallButton (roomName, occupants, isPrimary) {
+   called = false;
+    for(var easyrtcid in occupants) {
+        called = true;
+	otherUserEasyRTCId = easyrtcid;
+        enable("makeCallButton"); disable("call_waiting");
+	disable('initiateContact');
+	$(".start_call i").addClass("text-success");
+	$(".start_call").each(function(){
+	    $(this).on("click", function(){
+		if (!second_person_online) {
+		    showError("No user is online to make a call");
+		    return false;
+		}
+		performCall(easyrtcid);
+		$(".start_call").addClass("hidden");
+		$(".start_call").removeClass("visible");
+	    });
+	});
+        makeChatSendButton(easyrtcid);
+    }
+    if (!called && qs['id']) {
+        makeChatSendButton(false);       
+    }
+    
+    //else{makeChatSendButton(easyrtcid);}
+}
+
+function makeTheCall (roomName, occupants, isPrimary) {
+   called = false;
+    for(var easyrtcid in occupants) {
+        called = true;
+        performCall(easyrtcid);
+        makeChatSendButton(easyrtcid);
+    }
+    //if (!called) {
+    //    $("#noConnection").fadeIn();
+    //}
+    //else{ $("#noConnection").fadeOut(); }
+}
+
+function makeChatSendButton(easyrtcid){
+    clearConnectList2();
+    var otherClientDiv = document.getElementById('otherClients2');
+        var button = document.createElement('button');
+        button.setAttribute("id", "chatSend");
+	button.setAttribute("class", "btn");
+	button.onclick = function(easyrtcid) {
+	    return function() {
+		sendStuffWS(easyrtcid);
+	    };
+	}(easyrtcid);
+
+        var label = document.createTextNode("Send");
+        button.appendChild(label);
+        otherClientDiv.appendChild(button);
+}
+
+
+function hangup(hangupMsg) { if (!hangupMsg) {
+   hangupMsg = "Call Disconnected";
+}
+    easyrtc.hangupAll();
+    disable('hangupButton');
+    enable('callButton');
+    enable('makeCallButton');
+    $("#call_waiting").html(hangupMsg);
+    //disable("call_waiting");
+}
+
+
+function clearConnectList() {
+    var otherClientDiv = document.getElementById('otherClients');
+    while (otherClientDiv.hasChildNodes()) {
+        otherClientDiv.removeChild(otherClientDiv.lastChild);
+    }
+}
+function clearConnectList2() {
+    var otherClientDiv = document.getElementById('otherClients2');
+    while (otherClientDiv.hasChildNodes()) {
+        otherClientDiv.removeChild(otherClientDiv.lastChild);
+    }
+}
+
+function convertListToButtons (roomName, occupants, isPrimary) {
+    clearConnectList();
+    for(var easyrtcid in occupants) {
+        html = '<a id="link_'+easyrtcid+'"><i class="glyphicon glyphicon-user"></i> '+easyrtc.idToName(easyrtcid)+' <i class="glyphicon glyphicon-earphone"></i></a>';
+        
+        $("#otherClients").append(html);
+        $("#link_"+easyrtcid).on("click", function(easyrtcid) {
+            return function() {
+                performCall(easyrtcid);
+            };
+        }(easyrtcid));
+    }
+    
+    clearConnectList2();
+    var otherClientDiv = document.getElementById('otherClients2');
+    for(var easyrtcid in occupants) {
+        var button = document.createElement('button');
+        button.onclick = function(easyrtcid) {
+            return function() {
+                sendStuffWS(easyrtcid);
+            };
+        }(easyrtcid);
+
+        var label = document.createTextNode("Msg to " + easyrtc.idToName(easyrtcid));
+        button.appendChild(label);
+        otherClientDiv.appendChild(button);
+    }
+}
+
+
+function setUpMirror() {
+ //   alert("1");
+    if( !haveSelfVideo) {
+	//alert("2");
+        var selfVideo = document.getElementById("selfVideo");
+	$("#oc_caller").show();
+        easyrtc.setVideoObjectSrc(selfVideo, easyrtc.getLocalStream());
+        selfVideo.muted = true;
+        haveSelfVideo = true;
+    }
+}
+
+function performCall(otherEasyrtcid) {
+    enable("call_waiting");
+    $("#call_waiting").html("Calling " + easyrtc.idToName(otherEasyrtcid));
+    easyrtc.hangupAll();
+    var acceptedCB = function(accepted, easyrtcid) {
+	
+        if( !accepted ) {
+	    var cMsg = "Call to " + easyrtc.idToName(easyrtcid) + ", busy ";
+            //$("#call_waiting").html(cMsg);
+	    //ocSendMessage(cMsg);
+	    hangup(cMsg);
+            enable('otherClients');
+        }
+	else{ disable("call_waiting"); }
+    };
+
+    var successCB = function() {
+        if( easyrtc.getLocalStream()) {
+            setUpMirror();
+        }
+        enable('hangupButton');
+        disable('callButton');
+	disable('makeCallButton');
+	//$("#call_waiting").html("Ringing...");
+	//disable("call_waiting");
+    };
+    var failureCB = function() {
+        enable('otherClients');
+	//disable("call_waiting");
+	var cMsg = "Call to " + easyrtc.idToName(easyrtcid) + ", failed ";
+	$("#call_waiting").html(cMsg);
+	ocSendMessage(cMsg);
+    };
+    easyrtc.call(otherEasyrtcid, successCB, failureCB, acceptedCB);
+    enable('hangupButton');
+    disable('callButton');
+    disable('makeCallButton');
+   
+}
+
+
+function loginSuccess(easyrtcid) {
+    //disable("connectButton");
+    //enable("disconnectButton");
+    //console.log(easyrtc);
+    selfEasyrtcid = easyrtcid;
+   // document.getElementById("iam").innerHTML = "Messaging as: " + easyrtcid;
+    easyrtc.showError("noerror", "logged in");
+}
+
+
+function loginFailure(errorCode, message) {
+    easyrtc.showError(errorCode, message);
+}
+
+function disconnect() {
+  easyrtc.disconnect();			  
+  document.getElementById("iam").innerHTML = "logged out";
+  //enable("connectButton");
+  //disable("disconnectButton"); 
+  easyrtc.clearMediaStream( document.getElementById('selfVideo'));
+  $("#oc_caller").hide();
+  //easyrtc.setVideoObjectSrc(document.getElementById("selfVideo"),"");
+  easyrtc.closeLocalMediaStream();
+  easyrtc.setRoomOccupantListener( function(){});  
+  clearConnectList();
+} 
+
+
+easyrtc.setStreamAcceptor( function(easyrtcid, stream) {
+    setUpMirror();
+    var video = document.getElementById('callerVideo');
+    video.muted = false;
+    easyrtc.setVideoObjectSrc(video,stream);
+    enable("hangupButton");
+    disable('callButton');
+    disable('makeCallButton');
+});
+
+
+
+easyrtc.setOnStreamClosed( function (easyrtcid) {
+    easyrtc.setVideoObjectSrc(document.getElementById('callerVideo'), "");
+   // easyrtc.setVideoObjectSrc(document.getElementById('selfVideo'), "");
+    disable("hangupButton");
+    enable("callButton");
+    enable('makeCallButton');
+});
+
+
+var callerPending = null;
+
+easyrtc.setCallCancelled( function(easyrtcid){
+    if( easyrtcid === callerPending) {
+        stopInComingCallNotification();
+        callerPending = false;
+    }
+});
+
+
+easyrtc.setAcceptChecker(function(easyrtcid, callback) {
+    showInComingCallNotification();
+    callerPending = easyrtcid;
+    if( easyrtc.getConnectionCount() > 0 ) {
+        document.getElementById('acceptCallLabel').innerHTML = "Drop current call and accept new from " + easyrtc.idToName(easyrtcid) + " ?";
+    }
+    else {
+        document.getElementById('acceptCallLabel').innerHTML = "Accept incoming call from " + easyrtc.idToName(easyrtcid) + " ?";
+    }
+    var acceptTheCall = function(wasAccepted) {
+        stopInComingCallNotification();
+        if( wasAccepted && easyrtc.getConnectionCount() > 0 ) {
+            easyrtc.hangupAll();
+        }
+        callback(wasAccepted);
+        callerPending = null;
+    };
+    document.getElementById("callAcceptButton").onclick = function() {
+        acceptTheCall(true);
+    };
+    document.getElementById("callRejectButton").onclick =function() {
+        acceptTheCall(false);
+    };
+} );
+
+function showInComingCallNotification() {
+   document.getElementById('acceptCallBox').style.display = "block";
+   playSound("call", true);
+   socket.emit("ocRinging", false);
+}
+
+function stopInComingCallNotification() {
+    document.getElementById('acceptCallBox').style.display = "none";
+    stopSound();
+}
+
+function playSound2(sound, repeat) {
+    snd = new Audio("img/"+sound+".mp3");
+    if (repeat) {
+	snd.addEventListener('ended', function() {
+	    this.currentTime = 0;
+	    this.play();
+	}, false);
+    }
+    snd.play();
+}
+
+function playSound(sound, repeat){
+   snd = new Audio("img/"+sound+".mp3");
+    if (repeat) {
+	snd.addEventListener('ended', function() {
+	    this.currentTime = 0;
+	    this.play();
+	}, false);
+    }
+    snd.play();
+  // $('#'+sound+'Sound').load();
+   //$('#'+sound+'Sound').play();
+   //ion.sound.play(sound);
+}
+
+//playSound("call.",true);
+
+function stopSound() {
+    snd.removeEventListener('ended');
+    snd.pause();
+    snd.currentTime = 0;
+}
+
+var appointmentDiv = "";
+
+function showError(e, delay){
+    if (delay != 0) {
+	delay = 6000;
+    }
+    var options = {delay: delay};
+    $.simplyToast(e, 'danger', options);
+}
+function showSuccess(e){
+    $.simplyToast(e, 'success');
+}
+function completeAppointment(id, person1, person2, status){
+    second_person = person1 == id_user ? person2 : person1;
+    confirmMsgMark = (status==2) ? "completed" : "canceled";
+    if (confirm("Are you sure you want to mark this appointment as "+confirmMsgMark+"?")) {
+	socket.emit("completeAppointment", {id: id, id_user: id_user});
+	socket.on("removeAppointmentCallback", function(data){
+	    if (data.error) {
+		showError("We couldn't complete your request at the moment. Please try agian later.");
+		console.log(data.err);
+	    }
+	    else{
+		var div = "#app_"+id;
+		var cappdate = $(div + " .ap-date").html();
+		var capptime = $(div + " .ap-time").html();
+		console.log(cappdate);
+		var appointmentDiv2 = "<div class='time-block activated'>"
+				       +"<div class='p-head'>Appointment</div>"
+				       +"<div class='apptime'>"
+					  +"<div class='appdate'>"
+					     +"<div class='app-img-row padding'><div class='appdate_img floatleft'></div><div class='app-time_img floatright'></div><div class='clear'></div></div>"
+					     +"<div class='app-date-row padding'><div class='appdate_date floatleft'>"+cappdate+"</div><div class='app-time_time floatright'>"+capptime+"</div><div class='clear'></div></div>"
+					  +"</div>"
+				       +"</div>";
+		    if(status ==2){ appointmentDiv2 += "<div class='p-action'>Completed</div>"; }
+		    else{ appointmentDiv2 += "<div class='p-action textred'>Canceled</div>"; }
+		    appointmentDiv2 += "</div>";
+		$(div).fadeOut(300);
+		socket.emit("saveUserChat",{from:id_user, to:second_person, text:appointmentDiv2});
+		ocSendMessage(appointmentDiv2, true);
+	    }
+	});
+    }
+}
+
+
+
+function rejApp(id){
+    id = "time_block_" + id;
+    var thisDiv = "#"+id;
+    $(thisDiv + " .p-action").html("<div class='textred'>Appointment Rejected</div>");
+    $(thisDiv).removeClass("activated");
+    easyrtc.sendDataWS(otherUserEasyRTCId, "message",  "<div class='textred padding'>Appointment Rejected</div>");
+}
+function acceptApp(id, selectedDate1, selectedTime1){
+    id = "time_block_" + id;
+    var thisDiv = "#"+id;
+    $(thisDiv + " .p-action").html("<div class='textblue'>Accepted</div>");
+    var appointmentData = $(thisDiv).html();
+    appointmentData = "<div class='time-block'>"+appointmentData+"</div>";
+    $(thisDiv).removeClass("activated");
+    socket.emit("saveUserChat",{from:id_visitor, to:id_user, text:appointmentData});
+    easyrtc.sendDataWS(otherUserEasyRTCId, "message",  "<div class='textgreen padding'>Appointment Accepted</div>");
+    selectedDate1 = convertDate(selectedDate1);
+    var appTime1 = selectedDate1 + " " + selectedTime1;
+    userObj.saveAppointment(id_user, id_visitor, appTime1);
+}
+
+
+function promptPopup(id, fixed, popfadeLinkable){
+	if (!fixed) {
+		$("#"+id).css("position","absolute");
+		pop_position = $("#"+id).position();
+		$("#"+id).css("top", ( Number(50) + $(document).scrollTop() ) +"px");
+	}
+	else{
+		$("#"+id).css("position","fixed");
+	}
+	
+	$("#"+id).fadeIn('slow');
+	if ($("#fade").length == 0) {
+		if (popfadeLinkable) {
+			$('body').append("<div id='fade' onclick=clearPopup('"+id+"')></div>");
+		}else{
+			$('body').append("<div id='fade'></div>");
+		}
+		
+	}
+	imgAppended = false;
+	closeImg(id);
+}
+
+function PromptClear(id){ if(id){ document.getElementById(id).style.display='none'; } }
+
+function hideJCmenu(){ $(".jcmenu").hide(); }
+function hideMsg() { $("#msg").hide(); }
+
+function closeImg(id){
+	if (imgAppended) {
+		return true;
+	}
+	var img=document.createElement("div");
+	img.setAttribute("class","popClose");
+	img.setAttribute("onclick","clearPopup('"+id+"')");
+	$("#"+id).append(img);
+	imgAppended = true;
+	
+}
+
+function endWait(){
+	$("#upFade").fadeOut('slow');
+	$("#wait_msg").fadeOut('slow');
+}
+
+function changeWaitText(msg){
+	$("#wait_msg").html("<h1 style='text-align:center; font-size:30px;color:#222; line-height:50px;'>"+msg
+			 +"</h1>");
+}
+
+function waitImg(msg, div) {
+	append1 = "<div style='display:none;background:none;z-index:80000; border:none;' class='up_logos' id='wait_msg'></div>";
+	append2 = "<div id='upFade' style='display:none;z-index:70000; opacity:0.8'></div>";
+	if (div) {
+		$(div).css("position","relative");
+		$(div).append(append1);
+		$(div).append(append2);
+		$("#upFade").css("position","absolute");
+		$(".up_logos").css("position","absolute");
+	}
+	else{
+		$("body").append(append1);
+		$("body").append(append2);
+	}
+	$("#upFade").fadeIn('slow');
+	$("#wait_msg").html("<h1 style='text-align:center; font-size:30px;color:#222; line-height:50px;'><img src=img/ajax-loader.gif><br>"+msg
+			 +"</h1>");
+	$("#wait_msg").fadeIn('slow');
+}
+
+function clearPopup(id){ $('#fade').remove(); $("#"+id).fadeOut('slow'); $("#overlay").fadeOut('slow'); }
+
+function ocShowMenu(){
+    $('#msg').toggle();
+}
+
+function ocshowCalendar(){
+    $('#showCalendar').toggle();
+}
+
+function updateScroll(div){
+   console.log("updateScroll");
+    var heightDiv =  $(div).prop('scrollHeight')
+    //element.scrollTop = element.scrollHeight;
+    console.log(div);
+    $("body").scrollTo(heightDiv + "px", 200);
+    $(div).scrollTo(heightDiv + "px", 200);
+    console.log(div);
+}
+
+function shareLocation(){
+    easyrtc.sendDataWS(otherUserEasyRTCId, "message",  oclocation);
+    addToConversation("Me", "message", oclocation, true);
+    socket.emit("saveUserChat",{from:id_user, to:id_visitor, text:"<div class='location-info'>"+oclocation+"</div>"});
+}
+function ocSendMessage(msg, escHtml, save){
+    easyrtc.sendDataWS(otherUserEasyRTCId, "message",  msg);
+    addToConversation("Me", "message", msg, escHtml);
+    if (save) {
+      socket.emit("saveUserChat",{from:id_user, to:id_visitor, text:msg});
+    }
+}
+function activateMenu(){
+    $("#toolbar").toggle();
+}
+function ocShowAppointments(){
+    $("#msgdetails").fadeOut(300,function(){ $("#apdetails").slideDown(300); });
+    userObj.getAppointmentsBlock(id_user, 50);    
+}
+function ocShowMessages(){
+    $("#apdetails").fadeOut(300,function(){ $("#msgdetails").slideDown(300); });
+    userObj.getMessageBlock(id_user, 50);
+}
+
+function convertDate(date){
+    date = new Date(date);
+    month = date.getMonth() + 1;
+    return date.getFullYear() + "-" + month + "-" +date.getDate();
+}
+
+function loadAppointmentDetail(id_account){
+    
+}
+function loadMsgHistory(id_account){
+   hideMsg();
+    $('#msg_history').show();
+    waitImg("Loading message history","#msg_history_contents");
+    userObj.loadMsgHistory(id_user, id_account);
+}
+function setCookie(cname,cvalue,exdays)
+{
+	var d = new Date();
+	d.setTime(d.getTime()+(exdays*24*60*60*1000));
+	var expires = "expires="+d.toGMTString();
+	document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+	if (document.cookie.length > 0) { c_start = document.cookie.indexOf(c_name + "="); if (c_start != -1) {c_start = c_start + c_name.length + 1; c_end = document.cookie.indexOf(";", c_start); if (c_end == -1) { c_end = document.cookie.length; } return unescape(document.cookie.substring(c_start, c_end));}
+	}return false;
+}
+function expireCookie(cname,cvalue)
+{
+	var exdays = 600;
+	var d = new Date();
+	d.setTime(d.getTime()-(exdays*24*60*60*1000));
+	var expires = "expires="+d.toGMTString();
+	document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+
+
+
+
+
+

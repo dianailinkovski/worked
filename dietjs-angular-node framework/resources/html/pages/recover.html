@@ -1,0 +1,22 @@
+<div class="center">
+	<div class="center-in">
+		{{if !this.success:}}
+			<h1>New Password</h1>
+			<form action="/accounts/recover/{{-this.reset_code}}" method="post" autocomplete="off">
+				<div class="top break short"></div>
+				<input id="new_password" type="password" name="new_password" placeholder="New Password" autocomplete="off"/>
+				<input type="password" name="new_password_again" placeholder="New Password Again"/>
+				<button type="submit">reset password</button>
+				<script>document.getElementById('new_password').focus()</script>
+				{{if this.errors:}}
+					<div class="error" style="display: none;">Password is invalid or not matching.</div>
+				{{end}}
+				<div class="break short"></div>
+			</form>
+		{{else:}}
+			<h1>Success!.</h1>
+			<p>Your password was successfully changed.</p>
+			<a href="/">Back to homepage</a>
+		{{end}}
+	</div>
+</div>

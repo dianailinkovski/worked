@@ -1,0 +1,120 @@
+var socket = io.connect(site_url);
+function playSound(sound, repeat) {
+    snd = new Audio("chat/img/"+sound+".mp3");
+    if (repeat) {
+	snd.addEventListener('ended', function() {
+	    this.currentTime = 0;
+	    this.play();
+	}, false);
+    }
+    snd.play();
+}
+
+function stopSound() {
+    snd.removeEventListener('ended');
+    snd.pause();
+    snd.currentTime = 0;
+}	
+$( document ).ready(function() {
+	socket.emit("newUserConnect", {id_user:$("#myID").val(), id_room:$("#myID").val()});	
+	socket.emit("getPeople", {id_user:$("#myID").val(), id_room:$("#myID").val()});	
+	socket.on("sendPeople", function(data){
+		console.log(data);
+		users=data;
+		setTimeout(function(){
+		$( ".chatIdentity" ).each(function( index ) {
+			var user=$(this).data("user");
+			console.log( index + ": " + $( this ).text() );
+			console.log(user);
+			if(data.indexOf(user.toString())>-1)
+			$(this).css("background-color","#00baff");
+		});
+		}, 3000);
+
+		
+	});	
+	socket.on("sendInvitationCallback", function(data){
+		if ($("#acceptCallBox").length > 0) {
+			$("#acceptCallBox").remove();
+		}
+		var html = '<div id="acceptCallBox">'
+				+'<div id="acceptCallLabel">Accept chat invitation from '+data.data.name+'<br></div>'
+				+'<div class="acceptCallButtons"><button onclick="ocAcceptInvitation()" class="btn btn-success">Accept</button>&nbsp; &nbsp'
+				+'<button onclick="ocRejectInvitation()" class="btn btn-primary">Reject</button></div>'
+			    +'</div>';
+			$("body").append(html);
+			playSound("call", true);
+			socket.emit("ocRingingChat", false);
+			//	var options =  {
+			//	id: $("#myID").val(), // text of the snackbar
+			//	content: "You have been invited by "+data.data.name+" to join a chat room", // text of the snackbar
+			//	style: "toast", // add a custom class to your snackbar
+			//	timeout: 15000, // time in milliseconds after the snackbar autohides, 0 is disabled,
+			//	htmlAllowed: true // allows HTML as content value
+			//}
+			//$.snackbar(options);
+
+	});
+	socket.on("addFundsCB", function(data){
+	    if (!error) {
+		 $("#d-creditcard").hide();
+		$("#credit_card_success").fadeIn();
+		$("#amount_deposited").html("$"+data.amount);
+	    }
+	    else{
+		$("#payment-errors").html("error");
+	    }
+	});
+	socket.on("doPaypalActionCB", function(data){
+	    window.location = data.redirectUrl;
+	});
+	
+	
+	$('.dropdown-holder').dropdown();
+	
+	
+});
+function ocAcceptInvitation(){ var id = $("#myID").val();
+	stopInComingChatNotification(true);window.location = site_url + "chat/?r="+id;
+}
+function ocRejectInvitation(){
+	stopInComingChatNotification(false);
+}
+function stopInComingChatNotification(accepted) {  
+	var id = $("#myID").val();
+	socket.emit("ocChatInvitResponse", {id_room: id, accepted: accepted});
+	$("#acceptCallBox").remove();
+	stopSound();
+}
+function showMethod(){
+        var type = $("#pay_type").val();if (type == 1) {$("#d-creditcard").fadeOut(300, function(){$("#d-paypal").slideDown(300);
+	});}else if(type==2){$("#d-paypal").slideUp(300, function(){$("#d-creditcard").fadeIn(300);});}return false;}
+
+function validate_numeric(id){var num = getDoc(id);var pattern = /^([0-9.]+)$/;return pattern.test(num.value);}function validate_alpha(id){var num = getDoc(id);var pattern = /^([a-zA-Z ]+)$/;return pattern.test(num.value);}function validate_password(id){if(getDocValue(id).length>5){return true;}else{return false;}}
+function validate_email(id){var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;var address = getDocValue(id);return reg.test(address);}
+function validate_entity(entities){switch(entities[1]){	case 'alpha':return validate_alpha(entities[0]);break;case 'password':return validate_password(entities[0]);break;case 'email':return validate_email(entities[0]);break;case 'numeric':return validate_numeric(entities[0]);break;default:return validate_empty(entities[0]);}}
+//onclick = "retrun validate_form([['first_name','alpha'], ['last_name', ''], ['email', 'email']]);"
+function validate_form(entities){var error = false;for(var i=0; i<entities.length; i++) {if(validate_entity(entities[i])) {PromptClear('error_'+entities[i][0]);}else {showPrompt('error_'+entities[i][0]);error = true;}}if(error) return false;else return true;}
+function getDoc(id){ return document.getElementById(id); }function getDocValue(id){ return document.getElementById(id).value; }function getDocInner(id,txt){ return document.getElementById(id).innerHTML=txt; }function errShow(id){getDoc('error_'+id).style.display='block'; err=true;}function errClear(id){getDoc('error_'+id).style.display='none';}function fadeWhite(div){  $("#"+div).append("<div id='fadeWhite'><img src='images/ajax-loader.gif'></div>");$('#fadeWhite').fadeIn('slow');}function fadeWhiteClear(){ $('#fadeWhite').fadeOut('slow');}function validateCompleteForm(arr){ var err = false; for(var i=0;i<arr.length; i++){ var ele = document.getElementById(arr[i]); if(ele.value==""){ getDoc('error_'+arr[i]).style.display='block'; err=true; } else{getDoc('error_'+arr[i]).style.display='none';} } if(err){ return false; } else return true; }function isEmpty(id){ if(document.getElementById(id).value == '') return false; else return true; }function valiPh(id, msg){ var field = document.getElementById(id); if((field.value.length==0)||(field.value.length!=10)){ document.getElementById('errorDiv').innerHTML = msg; } else{ document.getElementById('errorDiv').innerHTML = ""; return true; } }function validate_empty(id){ if(getDocValue(id)!=""){ return true; } else{ return false; } }
+function showPrompt(div){ document.getElementById(div).style.display = 'block'; }
+function showPopup(div){ $('body').append('<div id="fade"></div>'); $('#fade').fadeIn(700); $("#"+div).fadeIn(200); }
+function popupClear(div){ $('#fade').fadeOut(700); $('#'+div).fadeOut(600); $('#fade').remove(); }
+function showDiv(div){ 	document.getElementById(div).style.display = ''; }
+function PromptClear(div){ document.getElementById(div).style.display = 'none';  }
+
+function check(){console.log("test");}
+function doStripeAction(){
+    var token = $("#stripeToken").val();
+    var amount = $("#camount").val();
+    socket.emit("doStripeAction", {amount:amount, token: token, id_user: 35});
+}
+function doPaypalAction(){
+    return validate_form([['pamount','']]);
+   /*var amount = $("#pamount").val();
+    socket.emit("doPaypalAction", {amount:amount, id_user: 35});*/
+}
+function callPaypal(){
+    if(validate_form([['pamount','']])){
+	
+    }
+}

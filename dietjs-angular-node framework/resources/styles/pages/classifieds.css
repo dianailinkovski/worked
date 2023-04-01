@@ -1,0 +1,354 @@
+
+
+.value {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  margin: 0 0 0 -20px;
+  width: 40px;
+  text-align: center;
+  display: block;
+  
+  /* optional */
+  
+  font-weight: normal;
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 14px;
+  color: red;
+}
+.form-horizontal .filter.form-group{ margin-bottom: 25px;}
+.form-horizontal button{ margin-top: 15px;}
+
+.price-range-both.value {
+  width: 100px;
+  margin: 0 0 0 -50px;
+  top: 26px;
+}
+
+.price-range-both {
+  display: none; 
+}
+
+.value i {
+  font-style: normal;
+}
+
+#header{
+	position: relative;
+	z-index: 100;
+}
+#content{ }
+
+#search{ float:left; width:100%;}
+
+#search .wrap{
+	border-radius: 10px;
+	padding: 1px;
+}
+
+#search .wrap h1{
+	color: #00baff;
+	
+	float: left;
+	font-size: 26px;
+	letter-spacing: 0;
+	
+	border-radius: 3px 3px 0 0;
+	
+	margin-top: 10px; margin-bottom:10px;
+}
+
+.clear{
+	clear: both;
+}
+
+
+#search .inputs{
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2), 0 0 30px rgba(0, 0, 0, 0.1);
+	float: left;
+	background: #FFF;
+	padding: 2px 6px 2px 2px;
+	width: 100%;
+	border-radius: 0 3px 3px 3px;
+}
+
+#search .inputs .input-holder{
+	float: left;
+	border: 4px solid #FFF;
+	width: 30%;
+	box-sizing: border-box;
+}
+
+#search .inputs .input-holder:first-child{
+	border-radius: 0 0 0 3px;
+}
+
+#search .inputs .input-holder:nth-child(3) { width: 10%; }
+#search .inputs .input-holder:nth-child(4) { width: 20%; }
+
+#search .inputs button{
+	width: 10%;
+	height: 36px;
+	margin-top: 4px;
+	
+}
+
+
+#search_value, #search_location{
+	
+	width: 100%;
+	padding: 8px 15px;
+	border-radius: 4px;
+	border: 2px solid #ccc;
+	box-shadow: none;
+}
+#search_location{ background:url(../../images/input-search.png) no-repeat 10px 10px #fff; background-size:14px; padding:8px 15px 8px 30px;}
+
+#search_value:focus, #search_location:focus{
+	box-shadow: inset 0 1px 0 #E2E2E2, 0 0 4px 1px #00A2FF;
+	border: 2px solid #2877A4;
+}
+
+#search .input-holder:first-child input{
+
+}
+
+#search .selectize-input{
+	width: 100% !important;
+	vertical-align: top;
+	margin: 0;
+	background: #FFF;
+	border: 2px solid #D1D1D1;
+	border-radius: 4px;
+	box-shadow: none;
+}
+#search .selectize-control.single .selectize-input:after{
+	margin-top: -2px;
+}
+body{
+	background: #E9EAED !Important;
+}
+#classifieds{
+	
+	float: left;
+	width: 100%;
+	margin-top: 3px;
+	
+	-webkit-transform: translateZ(0); 
+}
+
+#classifieds .title{
+	font-size: 27px; line-height:30px;
+	margin-bottom: 10px;
+	color: #999;
+	
+	position: relative;
+	margin-top: 10px; display:inline-block;
+}
+
+
+
+#classifieds .title span{
+	color: #00baff;
+	position: relative;
+	z-index: 1;
+	padding-right: 10px; text-shadow:1px 1px 0 rgba(0, 0, 0, 0.2);
+	
+}
+
+#map{
+	
+	overflow: auto;
+	-webkit-transform: translateZ(0px);
+	background-color: #E5E3DF;
+	height: 76%;
+	width: 57%; top:66px;
+	float: left; position:fixed !important;
+}
+
+#map-border{
+	position: absolute;
+	top: 75%;
+	margin-top: 46px;
+	left: 0;
+	right: 0;
+	border-top: 1px solid rgba(0,0,0,0.15);
+}
+
+.gm-style-iw{
+	left: 0 !important;
+	top: 0 !important;
+}
+
+.ad-window {
+	padding: 15px 15px 0 15px;
+	font-weight: normal;
+}
+
+.ad-window .picture{
+	
+	float: left;
+	position: relative;
+	border-radius: 3px;
+}
+.ad-window .picture::before{
+	
+	border-radius: 3px !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	z-index: 100;
+	position: absolute;
+}
+
+.ad-window .picture:hover::before{
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.ad-window .picture img{
+	width: 100%;
+	border-radius: 3px;
+	float: left;
+}
+
+
+.ad-window .seller{
+	margin-top: 10px;
+	
+}
+
+.ad-window .seller img{
+	width: 25px;
+	display: inline;
+	border-radius: 100%;
+}
+.ad-window .seller-picture{ display: none;}
+.ad-window .seller-name{
+	margin-top: 2px;
+	font-size: 14px;
+	float: left;
+	display: inline-block;
+	vertical-align: top;  max-width: 148px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    white-space: nowrap;
+}
+.ad-window .seller-name a{}
+.ad-window .info{
+	margin-left: 120px;
+	position: relative;
+	
+}
+
+.ad-window .info .description{
+	color: #777;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+.ad-window .info .price{
+	color: #37A85C;
+	font-weight: bold;
+	text-align: right;
+	font-size: 15px;
+	vertical-align: top;
+	display: inline-block;
+	float: right;
+}
+.filterButton {
+	background-color: transparent;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    border-radius: 5px;
+    border: 1px solid #00BAFF;
+    display: inline-block;
+    cursor: pointer;
+    color: #00BAFF;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 11px 38px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #283966;
+}
+.filterButton:hover {
+	background-color:transparent;
+}
+.filterButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+.wrap .form-horizontal label{ font-size:16px;}
+.wrap .form-horizontal button{ font-size:15px;}
+#classifieds .ad{ width:50%; min-height:315px;}
+
+#classifieds .ad .seller{ padding:0; background:none; border:none;}
+#classifieds .filter{ float:left; width:100%; }
+.filter h1{  cursor:pointer; border-radius: 6px; display: inline-block; font-size: 27px; margin:0; text-shadow:1px 1px 0 rgba(0, 0, 0, 0.2)}
+.ads ad {
+	display:none;
+}
+#classifieds .setFilter ul{ list-style:none;}
+#classifieds .setFilter ul li input[type="checkbox"]{ float:right;}
+#classifieds .setFilter ul li span{ font-size:16px; color:#8c9faa;}
+#classifieds .ad .live-state{ background:#9C9C9C  url("../../images/chat.png") no-repeat 13px 9px / 12px auto; border-radius: 0; box-shadow: none; bottom:9px; padding:5px 15px 5px 31px;}
+#classifieds .ad .price{ right:auto; left:0; top:0;}
+#classifieds .ad .content .info { background:#e7e7e7; padding:10px 15px;}
+#classifieds .ad .content .info  h2{ font-size:23px; color:#444; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; max-width:70%; line-height:26px; display:inline-block; margin:0 0 5px;}
+#classifieds .ad .content .info  h2 a{ color:#444; font-size:20px; line-height:24px;}
+#classifieds .ad .seller-name{ margin:0; font-size:14px; }
+#classifieds .ad .picture img{ height:180px;}
+#classifieds .ad .seller-name a{ color:#00baff; max-width: 116px; display: inline-block; vertical-align: top; text-overflow:ellipsis; overflow: hidden;white-space: nowrap;}
+#classifieds .ad .seller-picture{ display:none;}
+#classifieds .ad .description{ margin:0 0 5px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; }
+#classifieds .info .profile-pic{ background: #ccc; border: 2px solid #fff; border-radius: 80px; height: 75px; position: absolute;
+    right: 10px;  top: -38px; width: 76px;}
+#classifieds .info .profile-pic img{ height:72px; width:72px; border-radius: 80px;}
+
+.classifieds .form-horizontal label{ color:#9d9d9d; text-align:left;}
+.classifieds .contentpart{ max-height:76%; background:#fff; right:0; position:absolute; top:66px; overflow:auto;}
+.select.outer{ border:none; padding:0; margin: 0;}
+.select.outer h3{ margin:0;}
+.classifieds #category_fields{ padding:0 0 0 15px; overflow: visible !important;}
+.classifieds #category_fields h3{ font-weight:400; color:#00baff; font-size:26px;}
+.classifieds #category_fields label{ color:#9d9d9d; font-size:16px; width:29%; padding:7px 0 8px; margin:0 0 13px; float:left; display:inline-block;}
+.classifieds #category_fields .selectize-control{ width:68.3333% !important; float:right; margin:0 0 15px; padding:0 15px; display:inline-block;}
+.classifieds #category_fields .selectize-control.single{  float:right;}
+.classifieds #category_fields input{ border: 2px solid #d1d1d1; border-radius: 4px; box-shadow: none; float: right; margin: 0 15px 15px; width: 63%;}
+
+.mislery {  border-bottom: 1px solid #cccccc;   padding: 0 0 10px;}
+.mislery a{ font-size:21px; margin:0 0 0 15px; color:#B8B8B8;}
+.mislery a:hover{ color:#0CC1FA;}
+
+.pagination{ margin:10px 0 15px;}
+.form-horizontal .filter  label{ padding:7px 0 0;}
+.form-horizontal .filter .range{ padding-top:13px; position: relative;}
+.form-horizontal .filter .range .start_dis{ position: absolute; bottom: -29px; left: 7px; font-size: 14px}
+.form-horizontal .filter .range .end_dis{ position: absolute; bottom: -29px; right: 7px; font-size: 14px}
+.form-horizontal .filter #Price{ width:30%; float:right; border:2px solid #d1d1d1; box-shadow:none; border-radius:4px;}
+
+.ui-slider .ui-widget-header{ background:#00baff !Important;}
+.ui-slider{ border-color:#119ce1 !important;}
+.ui-slider .ui-slider-handle{ border:none !important; background:rgba(0, 0, 0, 0) url("../../images/circle-range.png") no-repeat 0 0 !important; background-size:25px !important; width:25px !Important; height:25px !important;}
+
+.gm-style > div > div + div + div > div + div + div + div > div:first-child{ height: auto!important; min-height:310px; width: 250px; max-width: 250px;}
+.gm-style .ad-window{ padding: 0;float: left; max-width: 250px;}
+.gm-style .ad-window .picture img, .gm-style .ad-window .picture{ width: 100%; float: left; height: 145px;}
+.gm-style .ad-window .picture .price{ color: #FFF;  position: absolute; left: 0; text-shadow:none; font-size: 16px; border-radius: 0 5px 0 5px; top: 0; padding: 6px 10px;
+      background: #00BAFF; }
+.gm-style .ad-window .info{ margin: 0; float: left; padding: 10px; }
+.gm-style .ad-window .info h2{ margin-top: 0; width: 65%; font-size: 20px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap; font-weight: 400; color: #444;}
+.gm-style .ad-window .info h2 a{ color: #444;}
+.gm-style .ad-window .info .description{ color: #8C9FAA; font-size: 16px; line-height: 17px;  overflow: hidden; text-overflow:ellipsis; white-space: nowrap; max-width: 225px;}
+.gm-style .gm-style-iw{ max-height: 310px;}
+.gm-style .gm-style-iw > div{  float: left; min-width: 250px;}
+.gm-style .gm-style-iw{ max-width: 250px;}
+.gm-style > div > div + div + div > div + div + div + div > div:first-child > div > div{ max-width: 250px; }
+.gm-style .ad-window .info .profile-pic { position: absolute; right: 15px; top: -37px;}
+.gm-style .ad-window .info .profile-pic img{ width:72px; height: 72px; border:2px solid #E7E7E7; border-radius: 70px;}
+.gm-style .ad-window .info .button{background:#9C9C9C  url("../../images/chat.png") no-repeat 13px 9px / 12px auto; float: right; border-radius: 0; box-shadow: none; bottom:9px; padding:6px 15px 6px 31px;}

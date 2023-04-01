@@ -1,0 +1,61 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import "AppConstants.h"
+#endif
+
+
+
+// iOS version detector
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
+
+// iPad/iPhone detector
+#define isPad() \
+([[UIDevice currentDevice] respondsToSelector:@selector(userInterfaceIdiom)] && \
+[[UIDevice currentDevice] userInterfaceIdiom]==UIUserInterfaceIdiomPad)
+
+#define isRetina() \
+([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2)
+
+
+
+
+
+#define CacheDirectory [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+
+
+#define FT_SAVE_MOC(_ft_moc) \
+do { \
+    NSError* _ft_save_error; \
+    if(![_ft_moc save:&_ft_save_error]) { \
+        NSLog(@"Failed to save to data store: %@", [_ft_save_error localizedDescription]); \
+        NSArray* _ft_detailedErrors = [[_ft_save_error userInfo] objectForKey:NSDetailedErrorsKey]; \
+        if(_ft_detailedErrors != nil && [_ft_detailedErrors count] > 0) { \
+            for(NSError* _ft_detailedError in _ft_detailedErrors) { \
+                NSLog(@"DetailedError: %@", [_ft_detailedError userInfo]); \
+            } \
+        } \
+        else { \
+            NSLog(@"%@", [_ft_save_error userInfo]); \
+        } \
+    } \
+} while(0);

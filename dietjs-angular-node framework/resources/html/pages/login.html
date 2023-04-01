@@ -1,0 +1,26 @@
+<div class="center">
+	<div class="center-in">
+		<h1>Login</h1>
+		{{-@post '/accounts/login'}}
+			
+			{{if this.redirect_url:}}
+				<input type="hidden" name="redirect_url" value="{{-this.redirect_url}}" />
+			{{end}}
+			<input id="login_email" type="text" name="email" placeholder="Email Address"/>
+			<input type="password" name="password" placeholder="Password"/>
+			<button type="submit">login</button>
+			<p><span>or</span></p>
+			<div style="margin:10px -15px 0;" class="form-group">
+				<div class="col-md-6 col-sm-6"><a href="#"><img src="../../images/signface.png" alt="" class="img-responsive"></a></div>
+				<div class="col-md-6 col-sm-6"><a href="#"><img src="../../images/signgoogle.png" alt="" class="img-responsive"></a></div>
+			</div>
+			<script>document.getElementById('login_email').focus()</script>
+			{{if this.query.error or (objectLength this.errors):}}
+				<div class="error" style="display: none;">Email or pasword is incorrect.</div>
+			{{end}}
+			
+			<a href="/accounts/forgotPassword">Forgot Password</a>
+		{{-@end}}
+		
+	</div>
+</div>

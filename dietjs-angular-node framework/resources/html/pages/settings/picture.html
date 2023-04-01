@@ -1,0 +1,43 @@
+{{console.log('INSPECT:::')}}
+{{console.log(this.errors) }}
+{{console.log('>>>END INSPECT:::')}}
+<!-- password -->
+{{-@post '/accounts/savePicture', enctype:'multipart/form-data'}}
+	
+	<fieldset>
+		
+		<h1>Change Profile Picture</h1>
+		{{if @query.success:}}
+			<div class="success-message">Profile picture changed successfully.</div>
+		{{end}}
+
+		{{if @errors and objectLength @errors[1]:}}
+			<div class="error-message">Something went wrong. The profile picture should be smaller than 10mb and bigger than 30x30px.</div>
+		{{end}}
+		<div class="break"></div>
+		<fieldset class="input-holder">
+			<br>
+			<input type="file" name="picture"  />
+			<br><br>
+			<br>
+		</fieldset>
+		<div class="break"></div>
+		<button type="submit" class="fa fa-upload">Upload Picture</button>
+		<a href="/accounts/removePicture" class="button silver fa fa-minus-circle" style="margin-left: 10px;">Remove Picture</a>
+		<br><br><br>
+		<div class="break"></div>
+		<div class="avatar">
+			<img src="{{-this.account.avatar(300)}}" alt="picture"/>
+		</div>
+		
+		{{if @errors:}}	
+			{{-console.log @errors.upload}}
+			<div class="errors">
+			{{for index in @errors:}}
+				<div>Error: {{-@errors[index]}}</div>
+			{{end}}
+			</div>
+		{{end}}
+		
+	</fieldset>
+{{-@end}}

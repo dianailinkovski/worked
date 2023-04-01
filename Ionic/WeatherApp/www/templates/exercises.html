@@ -1,0 +1,40 @@
+<ion-view title="{{ 'EXERCISE_LIST' | translate }}" cache-view="false" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <button menu-and-drawer-toggle class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <autocomplete ng-model="result" attr-placeholder="{{'SEARCH_FOR' | translate}}" data="allExercises" on-type="" on-select="searchSelect" attr-class="fixed-search width-control" attr-input-id="exercise-search"></autocomplete>
+  <ion-content class="width-control under-search exercise-list" delegate-handle="exerciseScroll">
+    <div class="list padding">
+      <div ng-repeat="exerciseCat in exerciseCategories">
+        <div class="item item-divider h3 nexercise-orange">
+        {{exerciseCat.longName | translate}}
+        </div>
+        <div ng-repeat="exerciseEl in exerciseCat.exercises">
+          <div class="item item-text-wrap item-thumbnail-left" ng-click="openVideoModal({{exerciseEl}})" id="{{allExercises.indexOf((exerciseEl.name | translate))}}">
+            <div class="item-image">
+              <img ng-src="img/exercises/{{exerciseEl.image}}"/>
+            </div>
+            <h3>{{exerciseEl.name | translate}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+<script id="show-video.html" type="text/ng-template">
+  <div class="modal video-modal modal-colors">
+    <ion-header-bar class="bar bar-header bar-positive">
+      <button class="button button-clear button-primary left-button icon ion-android-close" ng-click="cancelVideoModal()"></button>
+    </ion-header-bar>
+    <ion-content has-bouncing="false">
+      <h3 style="text-align:center;color:white">{{(currentExercise.name | translate)}}</h3>
+      <div id='videoplayer' style="background-color:black">
+      <video ng-src="{{videoAddress}}" controls="" autoplay="" loop="" muted="" preload="" ng-if="showVideo && !androidPlatform">
+      </video>
+      <video id="videoplayerscreen" style="opacity:0.00001" loop muted ng-if="showVideo && androidPlatform">
+      </video>
+      </div>
+    </ion-content>
+  </div>
+</script>

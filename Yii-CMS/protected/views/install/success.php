@@ -1,0 +1,1 @@
+<p><?php echo Yii::t('common', 'Installation complétée'); ?></p>

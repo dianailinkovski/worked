@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » \AdminHelper</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div xmlns:php="http://php.net/xsl" class="btn-toolbar">
+<div class="btn-group visibility" data-toggle="buttons-checkbox">
+<button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button>
+</div>
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+</div>
+<ul xmlns:php="http://php.net/xsl" class="side-nav nav nav-list"><li class="nav-header">
+<i title="Methods" class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_blocsErrors" title="blocsErrors() :: Returns an array of blocs to be used in forms errorSummary function."><span class="description">Returns an array of blocs to be used in forms errorSummary function.</span><pre>blocsErrors()</pre></a></li>
+<li class="method public "><a href="#method_generateUrlStr" title="generateUrlStr() :: Generate a string to be used in url, checked for uniqueness in a model's table"><span class="description">Generate a string to be used in url, checked for uniqueness in a model's table</span><pre>generateUrlStr()</pre></a></li>
+<li class="method public "><a href="#method_multilangLabels" title="multilangLabels() :: Translates model labels and adds language after labels of fields generated by Multilingual behaviors."><span class="description">Translates model labels and adds language after labels of fields generated by Multilingual behaviors.</span><pre>multilangLabels()</pre></a></li>
+<li class="method public "><a href="#method_pathFromId" title="pathFromId() :: Returns a path type string from an alias id"><span class="description">Returns a path type string from an alias id</span><pre>pathFromId()</pre></a></li>
+<li class="method public "><a href="#method_sortableGridViewJS" title="sortableGridViewJS() :: Returns javascript bloc that modifies grid view to make rows jquery sortable"><span class="description">Returns javascript bloc that modifies grid view to make rows jquery sortable</span><pre>sortableGridViewJS()</pre></a></li>
+<li class="method public "><a href="#method_tabularInputAfterAddItemDatetimePicker" title="tabularInputAfterAddItemDatetimePicker() :: Returns a javascript block to make date time picker function with tabular widget, put it in after add."><span class="description">Returns a javascript block to make date time picker function with tabular widget, put it in after add.</span><pre>tabularInputAfterAddItemDatetimePicker()</pre></a></li>
+<li class="method public "><a href="#method_tabularInputCkEditorBeforeDeleteItem" title="tabularInputCkEditorBeforeDeleteItem() :: Returns a javascript block to make ckeditor function with tabular widget, put it in before delete item."><span class="description">Returns a javascript block to make ckeditor function with tabular widget, put it in before delete item.</span><pre>tabularInputCkEditorBeforeDeleteItem()</pre></a></li>
+<li class="method public "><a href="#method_tabularInputCkEditorSortableStart" title="tabularInputCkEditorSortableStart() :: Returns a javascript block to make ckeditor function with tabular widget, put it in sortable start."><span class="description">Returns a javascript block to make ckeditor function with tabular widget, put it in sortable start.</span><pre>tabularInputCkEditorSortableStart()</pre></a></li>
+<li class="method public "><a href="#method_tabularInputCkEditorSortableStop" title="tabularInputCkEditorSortableStop() :: Returns a javascript block to make ckeditor function with tabular widget, put it in sortable stop."><span class="description">Returns a javascript block to make ckeditor function with tabular widget, put it in sortable stop.</span><pre>tabularInputCkEditorSortableStop()</pre></a></li>
+</ul>
+</li></ul>
+</div>
+<div class="span8">
+<a xmlns:php="http://php.net/xsl" id="\AdminHelper"></a><ul xmlns:php="http://php.net/xsl" class="breadcrumb">
+<li>
+<a href="../index.html"><i title="Classes" class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/AdminHelper.html">AdminHelper</a>
+</li>
+</ul>
+<div xmlns:php="http://php.net/xsl" class="element class">
+<p class="short_description">Helper class for admin section</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Bruno LL. <https://github.com/brunoll></a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/todo">https://github.com/todo</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright © 2015 Societe G-NeTiX Inc. - All Rights Reserved</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://opensource.org/licenses/MIT">The MIT License (MIT)</a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Helper.html">Helper</a></td>
+</tr>
+</table>
+<h3>
+<i title="Methods" class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_blocsErrors"></a><div class="element clickable method public method_blocsErrors " data-toggle="collapse" data-target=".method_blocsErrors .collapse" title="public">
+<h2>Returns an array of blocs to be used in forms errorSummary function.</h2>
+<pre>blocsErrors(array $blocs) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>You can use array_merge to merge errors from different sources.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$blocs</h4>
+<code>array</code><p>the blocs models</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the blocs models</div>
+</div></div>
+</div>
+<a id="method_generateUrlStr"></a><div class="element clickable method public method_generateUrlStr " data-toggle="collapse" data-target=".method_generateUrlStr .collapse" title="public">
+<h2>Generate a string to be used in url, checked for uniqueness in a model's table</h2>
+<pre>generateUrlStr(string $str, \CActiveRecord $model, string $attribute, integer $id<code> = null</code>, string $lang<code> = null</code>, array $reserved<code> = array()</code>) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$str</h4>
+<code>string</code><p>the string to process.</p></div>
+<div class="subelement argument">
+<h4>$model</h4>
+<code>\CActiveRecord</code><p>the model in which it will be stored</p></div>
+<div class="subelement argument">
+<h4>$attribute</h4>
+<code>string</code><p>the attribute in which it will be stored</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>integer</code><p>the id of the model being edited (if not new model). Defaults to null</p></div>
+<div class="subelement argument">
+<h4>$lang</h4>
+<code>string</code><p>if multilang, the language of the url. Defaults to null</p></div>
+<div class="subelement argument">
+<h4>$reserved</h4>
+<code>array</code><p>array of reserved words which the url must not be. Defaults to empty array()</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the url</div>
+</div></div>
+</div>
+<a id="method_multilangLabels"></a><div class="element clickable method public method_multilangLabels " data-toggle="collapse" data-target=".method_multilangLabels .collapse" title="public">
+<h2>Translates model labels and adds language after labels of fields generated by Multilingual behaviors.</h2>
+<pre>multilangLabels(\CActiveRecord $model, array $labels, string $messageFile<code> = 'admin'</code>) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$model</h4>
+<code>\CActiveRecord</code><p>the model to which the labels belong to.</p></div>
+<div class="subelement argument">
+<h4>$labels</h4>
+<code>array</code><p>the untranslated labels</p></div>
+<div class="subelement argument">
+<h4>$messageFile</h4>
+<code>string</code><p>the message file to use to do the translation</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the translated labels</div>
+</div></div>
+</div>
+<a id="method_pathFromId"></a><div class="element clickable method public method_pathFromId " data-toggle="collapse" data-target=".method_pathFromId .collapse" title="public">
+<h2>Returns a path type string from an alias id</h2>
+<pre>pathFromId(integer $id) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>integer</code><p>the alias id</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the path</div>
+</div></div>
+</div>
+<a id="method_sortableGridViewJS"></a><div class="element clickable method public method_sortableGridViewJS " data-toggle="collapse" data-target=".method_sortableGridViewJS .collapse" title="public">
+<h2>Returns javascript bloc that modifies grid view to make rows jquery sortable</h2>
+<pre>sortableGridViewJS(string $id, string $modelName, string $attributeName) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Ajax calls admin/gridviewsort to do its sorting on the server side</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>the id of the grid view</p></div>
+<div class="subelement argument">
+<h4>$modelName</h4>
+<code>string</code><p>the name of the model being sorted</p></div>
+<div class="subelement argument">
+<h4>$attributeName</h4>
+<code>string</code><p>the name of the model's attribute being sorted</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the translated labels</div>
+</div></div>
+</div>
+<a id="method_tabularInputAfterAddItemDatetimePicker"></a><div class="element clickable method public method_tabularInputAfterAddItemDatetimePicker " data-toggle="collapse" data-target=".method_tabularInputAfterAddItemDatetimePicker .collapse" title="public">
+<h2>Returns a javascript block to make date time picker function with tabular widget, put it in after add.</h2>
+<pre>tabularInputAfterAddItemDatetimePicker() : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>It creates the datetime picker when adding a new item to fields tagged with class datetimePicker.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the javascript</div>
+</div></div>
+</div>
+<a id="method_tabularInputCkEditorBeforeDeleteItem"></a><div class="element clickable method public method_tabularInputCkEditorBeforeDeleteItem " data-toggle="collapse" data-target=".method_tabularInputCkEditorBeforeDeleteItem .collapse" title="public">
+<h2>Returns a javascript block to make ckeditor function with tabular widget, put it in before delete item.</h2>
+<pre>tabularInputCkEditorBeforeDeleteItem() : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Must destroy ckeditor upon delete otherwise it will create problems, removing textarea is not enough.</p>
+<p>Operates on textareas with class ckEditor</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the javascript</div>
+</div></div>
+</div>
+<a id="method_tabularInputCkEditorSortableStart"></a><div class="element clickable method public method_tabularInputCkEditorSortableStart " data-toggle="collapse" data-target=".method_tabularInputCkEditorSortableStart .collapse" title="public">
+<h2>Returns a javascript block to make ckeditor function with tabular widget, put it in sortable start.</h2>
+<pre>tabularInputCkEditorSortableStart() : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Must destroy and restore ckeditor upon moving.</p>
+<p>Operates on textareas with class ckEditor</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the javascript</div>
+</div></div>
+</div>
+<a id="method_tabularInputCkEditorSortableStop"></a><div class="element clickable method public method_tabularInputCkEditorSortableStop " data-toggle="collapse" data-target=".method_tabularInputCkEditorSortableStop .collapse" title="public">
+<h2>Returns a javascript block to make ckeditor function with tabular widget, put it in sortable stop.</h2>
+<pre>tabularInputCkEditorSortableStop() : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Must destroy and restore ckeditor upon moving.</p>
+<p>Operates on textareas with class ckEditor</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the javascript</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:39-04:00.<br></footer></div>
+</div>
+</body>
+</html>

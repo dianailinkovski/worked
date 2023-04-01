@@ -1,0 +1,9 @@
+/* ZONE DE NOTIFICATION (component) */
+#message-modal-link.has-new-messages { color:#DE8300; }
+
+/* MODAL */
+#frm-messages .alert-dismissable { padding-right:15px; }
+#frm-messages .alert-header { background-color:#A3C1E0; margin-bottom:1em; padding:0.3em; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
+#frm-messages .alert button { opacity: 1; filter: alpha(opacity=100); position:absolute; top:20px; right:24px; }
+#frm-messages .message-date { float:left; margin-bottom:0; font-size:0.85em; font-style:italic; font-weight:600; }
+#frm-messages .alert .message-new-tag { float:left; display:inline-block; margin-left:0.5em; color:#EA8C00; font-size: 1em;  }

@@ -1,0 +1,39 @@
+<ion-view title="{{'REWARDS' | translate}}" class="rewards-view green-bar" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <button menu-and-drawer-toggle class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header width-control">
+    <div class="list card" ng-if="sessionmStatus">
+      <div class="item item-text-wrap">
+          <div class="item-content">
+              <h2 class="centered">mPOINTS*</h2>
+          </div>
+          <p class="under-toggle">{{'EARN' | translate}}</p>
+          <p class="under-toggle no-margin-top">{{'SEE_FAQ' | translate}}<p>
+          <div class="padding-top padding-left padding-right" style="position:relative">
+            <span class="badge badge-assertive rewards-badge" ng-if="sessionMCount.count">{{sessionMCount.count}}</span>
+            <button class="button button-block button-balanced nexercise-green" ng-click="launchSessionM()">
+                {{'CLAIM' | translate}}
+            </button>     
+          </div>
+      </div>
+    </div>  
+    <div class="list card">
+  	  <div class="item item-text-wrap ">
+  	  	  <div class="item-content">
+              <h2 class="centered">{{'INSTANT' | translate}}</h2>
+          </div>
+          <p class="under-toggle">{{'INSTANT_REWARD' | translate}}</p>
+  	  </div>
+    </div>
+
+    <div class="padding">
+      <button class="button button-block button-balanced nexercise-green" ng-click="rewardsFAQ()">
+          {{'FREQUENT' | translate}}
+      </button>     
+    </div>
+    <p class="diff-instructions padding" ng-if="!sessionmStatus">*{{'NOT_AVAILABLE' | translate}}</p>
+    <div class="centered item-content padding-bottom"><a href="#/app/sworkitpro" class="unlock-pro"><i class="icon ion-locked"></i><h4>*{{'FEATURE_6' | translate}}</h4></a></div>
+
+  </ion-content>
+</ion-view>

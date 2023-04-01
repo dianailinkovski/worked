@@ -1,0 +1,1 @@
+ALTER TABLE `store_smtp` ADD `use_tls` TINYINT(1)  NOT NULL  DEFAULT '0'  AFTER `use_ssl`;

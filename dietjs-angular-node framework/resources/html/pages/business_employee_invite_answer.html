@@ -1,0 +1,13 @@
+<div class="center">
+	<div class="center-in">
+		{{if this.answer is 'accept':}}
+			<h1>Invitation Sucessfully Accepted</h1>
+			<p>You're now part of {{-this.business.name}}.</p>
+			<a href="/">Back to homepage</a>
+		{{else:}}
+			<h1>Invitation Rejected</h1>
+			<p>The invitation from {{-this.business.name}} was rejected.</p>
+			<a href="/">Back to homepage</a>
+		{{end}}
+	</div>
+</div>

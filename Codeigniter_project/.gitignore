@@ -1,0 +1,17 @@
+.htaccess
+.DS_Store
+system/application/config/config.php
+system/application/config/custom/global_session.php
+system/application/config/database.php
+system/cache/*
+system/logs/*
+uploaded_files/*
+uploads/*
+nbproject/
+nbproject/private/
+output.*
+amazoncookie.txt
+mysql_general.log
+test*
+xdebug/*
+tmpmigrationlist.txt

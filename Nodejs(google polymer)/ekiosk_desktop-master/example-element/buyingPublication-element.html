@@ -1,0 +1,203 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/core-localstorage/core-localstorage.html" rel="import">
+<link href="../components/core-ajax/core-xhr.html" rel="import">
+
+<link href="spinnerSmall-element.html" rel="import">
+
+<polymer-element name="buyingPublication-element" attributes="publication username password buyingPublicationConfirmer buyingPublicationAnnuler masterCreditRef" >
+  <template>
+    	<style>
+			.detail {
+				font-size: 18px;
+			}
+			.ekcoindetail {
+				background-image: url('../img/ekcoin_big_logo.png');
+				background-size: 25px;
+				background-repeat: no-repeat;
+				background-position: right center;
+				padding-left: 5px;
+				width: 25px;
+				height: 25px;
+				display: inline-block;
+			}
+		</style>
+        
+        <core-xhr id="xhr"></core-xhr>
+        <core-localstorage id="StorageEkcredit" name="StorageEkcredit" value="{{ekcreditLocalStorage}}" autoSaveDisabled="true"></core-localstorage>
+        
+        <div class="detail">
+            <div horizontal justified layout center style="height: 40px;">
+                <div>Solde actuel</div>
+                <template if="{{currentCredit == null}}">
+	                <div horizontal layout center><spinnerSmall-element></spinnerSmall-element><span class="ekcoindetail"></span></div>
+                </template>
+                <template if="{{currentCredit != null}}">
+	                <div horizontal layout center>{{currentCredit}}<span class="ekcoindetail"></span></div>
+                </template>
+            </div>
+            
+            <div horizontal justified layout center style="height: 40px;">
+                <div>Votre achat</div>
+                <div horizontal layout center>{{publication.prix}}<span class="ekcoindetail"></span></div>
+            </div>
+            
+            <div style="height:1px; background:#bbb;"></div>
+            
+            <div horizontal justified layout center style="height: 40px;">
+                <div>Nouveau solde</div>
+                <template if="{{currentCredit == null}}">
+                	<div horizontal layout center><span class="ekcoindetail"></span></div>
+                </template>
+                <template if="{{currentCredit != null}}">
+	                <div horizontal layout center style="color:{{totalTextColor}};">{{totalCredit}}<span class="ekcoindetail"></span></div>
+                </template>
+                
+            </div>
+        </div>
+        
+  </template>
+  <script>
+
+    Polymer('buyingPublication-element', {
+	  publication:null, 
+	  username: null, 
+	  password: null, 
+	  currentCredit: null,
+	  
+	  buyingPublicationConfirmer: null,
+	  buyingPublicationAnnuler: null,
+	  masterCreditRef: null,
+	  ekcreditLocalStorage: null, 
+	  
+	  buyingSuccess: null,
+	  
+	  xhrMain: null,
+	  
+	  computed: {
+		  totalCredit: "currentCredit-publication.prix",
+		  totalTextColor: "(totalCredit >= 0) ? 'green' : 'red'", 
+	  },
+	  
+	  ready: function() {
+		  
+	  },
+	  resetDialog: function() {
+		  this.publication = null;
+		  this.username = null;
+		  this.password = null;
+		  this.currentCredit = null;
+		  
+		  
+		  this.buyingPublicationConfirmer.setAttribute('disabled', '');
+		  
+	  },
+	  startValidation: function() {
+		  console.log("startvalidation buyingPublication");
+		  console.log(this.publication);
+		  console.log(this.username);
+		  console.log(this.password);
+		  
+		  this.xhrMain = this.$.xhr.request({
+			url: "http://api.ngser.gnetix.com/v1.1/getCurrentCredit.php",
+			method: 'POST',
+			headers: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'}, 
+			params: {'username':this.username, 'password':this.password}, 
+			callback: this.xhrCreditCallback.bind(this),
+		  });
+		  
+		  console.log(this.xhrMain);
+		  
+	  },
+	  
+	  test: function(e) {
+		console.log('test'); 
+		//this.currentCredit = 400; 
+		//this.masterCreditRef = 1;
+		//this.ekcreditLocalStorage = this.masterCreditRef;
+		//this.$.StorageEkcredit.save();
+		
+		//
+		this.xhrMain = this.$.xhr.request({
+			url: "http://api.ngser.gnetix.com/v1.1/AddAchatIndividuel.php",
+			method: 'POST',
+			headers: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'}, 
+			params: {'data': JSON.stringify({'username':this.username, 'password':this.password, 'editionid': this.publication.id, 'quantite': this.publication.prix})}, 
+			callback: this.xhrBuyCallback.bind(this),
+			sync: true
+		  });
+		
+		return this.buyingSuccess;
+	  },
+	  
+	  xhrCreditCallback: function(response, xhr) {
+			console.log(xhr.readyState);
+			console.log(xhr.getAllResponseHeaders());
+			if(xhr.getAllResponseHeaders()) {
+				console.log(this);
+				
+				console.log('connexionDialogCallback');
+				console.log(response);
+				console.log(xhr);
+				try{
+					jsonResponse = JSON.parse(response);
+					
+					console.log(jsonResponse);
+					
+					
+					if (jsonResponse.resultat == "true") {
+						console.log("le resultat est true");
+						this.currentCredit = jsonResponse.data.quantite;
+						console.log(this.buyingPublicationConfirmer);
+						this.buyingPublicationConfirmer.removeAttribute('disabled');
+					}
+					else {
+						alert(jsonResponse.data);
+					}
+					
+				}catch(e){
+					console.log(e); //error in the above string(in this case,yes)!
+					alert(e);
+				}
+			}
+	  },
+	  
+	  xhrBuyCallback: function(response, xhr) {
+			console.log(xhr.readyState);
+			console.log(xhr.getAllResponseHeaders());
+			if(xhr.getAllResponseHeaders()) {
+				console.log(this);
+				
+				console.log('connexionDialogCallback');
+				console.log(response);
+				console.log(xhr);
+				try{
+					jsonResponse = JSON.parse(response);
+					
+					console.log(jsonResponse);
+					
+					
+					if (jsonResponse.resultat == "true") {
+						
+						this.currentCredit = jsonResponse.data.quantite;
+						
+						this.buyingPublicationConfirmer.removeAttribute('disabled');
+						this.buyingSuccess = true;
+					}
+					else {
+						alert(jsonResponse.data);
+						this.buyingSuccess = false;
+					}
+					
+				}catch(e){
+					console.log(e); //error in the above string(in this case,yes)!
+					alert(e);
+					this.buyingSuccess = false;
+				}
+			}
+	  },
+	  
+    });
+
+  </script>
+</polymer-element>

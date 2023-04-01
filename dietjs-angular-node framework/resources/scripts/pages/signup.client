@@ -1,0 +1,13 @@
+$(function(){	
+	$('#location').geocomplete({
+		types: ['(regions)']
+	}).bind("geocode:result", function(event, result){
+		$('#location_holder input[name="formatted_address"]').val(result.formatted_address);
+		for(var i = 0; i < result.address_components.length; i++){
+			var component = result.address_components[i];
+			var type = component.types[0];
+			$('#location_holder input[name="'+type+'_short"]').val(component.short_name);
+			$('#location_holder input[name="'+type+'_long"]').val(component.long_name);
+		}
+	});
+});

@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `company_name` VARCHAR( 200 ) NOT NULL AFTER `last_name`;

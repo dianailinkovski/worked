@@ -1,0 +1,1 @@
+ALTER TABLE `test_mv2`.`violator_notification_email_settings` ADD COLUMN `notifications_on_off` CHAR(3) NULL DEFAULT 'off'  AFTER `reset_after_reaching` , ADD COLUMN `notification_frequency` TINYINT(2) UNSIGNED NULL DEFAULT 2  AFTER `notifications_on_off` ;

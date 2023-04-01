@@ -1,0 +1,31 @@
+<div class="wrap">
+	<br>
+	<div class="head">
+		<div class="left website">
+			{{if !this.account.business:}}
+				<h1>My Ads</h1>
+			{{else:}}
+				<h1>Ads posted by {{-this.account.business.name}}</h1>
+			{{end}}
+		</div>
+		<div class="left mobile">
+			<h1>Ads</h1>
+		</div>
+		<div class="right">
+			<a href="/classifieds/place" class="button fa fa-plus">place an ad</a>
+		</div>
+		<div class="break"></div>
+	</div>
+	
+	{{if this.ads.length:}}
+		<div class="ads">
+			{{for ad in this.ads:}}
+				{{this.ad = ad}}
+				{{include 'html/parts/ad.html'}}
+			{{end}}
+		</div>
+	{{else:}}
+		<h3>Nothing to show.</h3>
+		<br><br>
+	{{end}}
+</div>

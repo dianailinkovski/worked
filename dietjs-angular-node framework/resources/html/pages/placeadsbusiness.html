@@ -1,0 +1,113 @@
+<link type="text/css" href="/styles/pages/classifieds_place.css" rel="stylesheet">
+
+<div class="center">
+	<div class="center-in">
+		{{-@post '/classifieds/place', id: 'dropform', enctype : 'multipart/form-data' }}
+			<h1>Place an Ad</h1>
+			
+			
+			<fieldset class="tradeTypes outer-center">
+				<div class="inner-center">
+					{{-this.input 'Sell', 'trade_type', 'radio', 1}}
+					{{-this.input 'Buy', 'trade_type', 'radio', 2}}
+				</div>
+			</fieldset>
+			
+			
+			<fieldset>
+				<h3><label for="title">Title</label></h3>
+				{{-this.input 'Write a short title', 'title', 'text'}}
+			</fieldset>
+			
+			
+			<fieldset>
+				<h3><label for="description">Description</label></h3>
+				{{-this.textarea 'Describe briefly what are you offering', 'description', 'text'}}
+			</fieldset>
+			
+			
+			<fieldset class="input-holder select">
+				<h3><label for="category">Choose Category</label></h3>
+				{{-this.select placeholder:'Choose Category', name:'category', options:this.categories }}
+			</fieldset>
+			
+			<div id="category_fields" style="display: none;"></div>
+			
+			
+			<fieldset id="location_holder" >
+				<h3><label for="location">Location</label></h3>
+				{{-this.input 'Physical Location', 'location', 'text'}}
+				{{-this.input false, 'country_short', 'hidden' }}
+				{{-this.input false, 'country_long', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_1_short', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_1_long', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_2_short', 'hidden' }}
+				{{-this.input false, 'administrative_area_level_2_long', 'hidden' }}
+				{{-this.input false, 'locality_short', 'hidden' }}
+				{{-this.input false, 'locality_long', 'hidden' }}
+				{{-this.input false, 'postal_code_short', 'hidden' }}
+				{{-this.input false, 'postal_code_long', 'hidden' }}
+				{{-this.input false, 'neighborhood_short', 'hidden' }}
+				{{-this.input false, 'neighborhood_long', 'hidden' }}
+				{{-this.input false, 'route_short', 'hidden' }}
+				{{-this.input false, 'route_long', 'hidden' }}
+				{{-this.input false, 'street_number_short', 'hidden' }}
+				{{-this.input false, 'street_number_long', 'hidden' }}
+				{{-this.input false, 'country_short', 'hidden' }}
+				{{-this.input false, 'country_short', 'hidden' }}
+				{{-this.input false, 'formatted_address', 'hidden' }}
+				{{-this.input false, 'latitude', 'hidden' }}
+				{{-this.input false, 'longitude', 'hidden' }}
+			</fieldset>
+			
+			
+			{{if this.account.business:}}
+				<fieldset>
+					<h3><label for="contact-select">Contact</label></h3>
+					
+					<select id="contact-select" name="contact_details">
+						{{for employee in this.account.business.employees:}}
+							<option data-employee="{{- JSON.htmlify({ 'full_name': employee.full_name, 'avatar': employee.avatar(40), 'contact_number': employee.contact_number, 'contact_email': employee.contact_email}) }}" value="{{-employee.id}}">{{-employee.full_name}}</option>
+						{{end}}
+					</select>
+				</fieldset>
+				
+			{{end}}
+			
+			<fieldset class="contact_options">
+				<h3><label>Contact Options</label></h3>
+				<div class="contact-box">
+					<h5>Vipul Gupta</h5>
+					<img src="/uploads/profiles/original/45df234a8826ac983dd4cf0ba47791e1.jpg" />
+					<h4>Vipul Gupta</h4>
+					<p>vipul.gupta@udaantechnologies.com<small>111-2222-3333</small></p>
+				</div>
+				
+				{{-this.input 'Enable Vbox Live View', 'show_vbox', 'checkbox'}}
+				{{-this.input 'Show Email', 'show_email', 'checkbox'}}
+				{{-this.input 'Show Phone Number', 'show_phone', 'checkbox'}}
+				{{-this.input 'Show Contact Form', 'show_contact_form', 'checkbox'}}
+			</fieldset>
+			
+			<fieldset>
+				<h3><label for="currency">Price</label></h3>
+				<select id="currency" name="currency">
+					{{for index, currency of this.currencies:}}
+						<option value="{{-currency.code}}-{{-currency.symbol_native}}" data-symbol="{{-currency.symbol_native}}">{{-currency.name}} ({{-currency.symbol_native}})</option>
+					{{end}}
+				</select>
+				{{-this.input 'Amount', 'price', 'text'}}
+				
+				{{-this.input false, 'formatted_price', 'hidden' }}
+			</fieldset>
+			
+			<fieldset>
+				<h3 style="margin-bottom:8px;">Upload Pictures</h3>
+				 <div class="inputfile_box" id="dropzonePreview">{{-this.input 'Avatar', 'avatar', 'file'}} <strong>Click here <br>OR <br>Drag or drop files</strong></div>
+			</fieldset>
+			
+			<div id="submit" class="button">Place Ad</div>
+		{{@end}}
+	</div>
+</div>
+<script src="/scripts/pages/classifieds_place.js" type="text/javascript"></script>

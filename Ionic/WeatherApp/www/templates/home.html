@@ -1,0 +1,56 @@
+<ion-view title="{{title}}" class="home-title" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <button menu-and-drawer-toggle class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button ng-click="launchMPoints()" class="button button-icon ng-hide" id="home-points" ng-if="sessionMAvailable && rewardSettings.mPoints" >
+		<img src="img/extras/gift.png" class="home-gift" />
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="has-header home-view" has-bouncing="true">
+  	<div class="category-view">
+  		<div class="inner-category-view">
+		  	<div class="category-card category-strength card-a" id="strength-box">
+		  		<a href="#/app/home/0" ng-click="activateSelection('strength-tag')" id="strength-tag">
+		  			<div class="category-flex">
+			  			<h3>{{'STRENGTH' | translate}}</h3>
+		  			</div>
+		  		</a>
+		  	</div>
+		  	<div class="category-card category-cardio card-b" id="cardio-box">
+		  		<a href="#/app/home/1" ng-click="activateSelection('cardio-tag')" id="cardio-tag">
+		  			<div class="category-flex">
+		  				<h3>{{'CARDIO' | translate}}</h3>
+		  			</div>
+		  		</a>
+		  	</div>
+		  	<div class="category-card category-yoga card-c" id="yoga-box">
+		  		<a href="#/app/home/2" ng-click="activateSelection('yoga-tag')" id="yoga-tag">
+		  			<div class="category-flex">
+		  				<h3>{{'YOGA' | translate}}</h3>
+		  			</div>
+		  		</a>
+		  	</div>
+		  	<div class="category-card category-stretch card-d" id="stretch-box">
+		  		<a href="#/app/home/3" ng-click="activateSelection('stretch-tag')" id="stretch-tag">
+		  			<div class="category-flex">
+		  				<h3>{{'STRETCHING' | translate}}</h3>
+		  			</div>
+		  		</a>
+		  	</div>
+	  	</div>
+	  	<div class="category-custom" id="custom-box" >
+	  		<a href="#/app/custom" ng-click="activateSelection('custom-tag')" id="custom-tag">
+	  			<div class="category-flex">
+	  				<h3><i class="icon ion-plus plus-feature"></i> {{'CUSTOM_SM' | translate}}</h3>
+	  			</div>
+	  		</a>
+		 </div>
+		 <div class="circle circle-border circle-solid quick-five">
+		     <a href="#/app/home/0/quickFive/5/workout" class="quick-inner">
+		         <img ng-src="img/{{quickImage.img}}.png"/>
+		     </a>
+		</div>
+  	</div>
+  </ion-content>
+</ion-view>

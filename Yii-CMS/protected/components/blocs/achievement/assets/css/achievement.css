@@ -1,0 +1,17 @@
+.bloc-achievement dl.photoset:before,
+.bloc-achievement dl.photoset:after { display: table; content: " "; }
+.bloc-achievement dl.photoset:after { clear: both; }
+.bloc-achievement dl.photoset { margin:2em 0 1em; padding:0 0 2em; border-bottom:1px solid #CCC; }
+.bloc-achievement dl.photoset:last-child { border:none; padding:0; }
+.bloc-achievement dl.photoset dt { font-size: 1.5em; line-height: 1em; margin: 0 0 1em; }
+.bloc-achievement dl.photoset dd.photoset-cover { margin-bottom:1em; }
+.bloc-achievement dl.photoset dd.photoset-description { font-size:1em; margin: 0 0 2em; }
+.bloc-achievement dl.photoset dd.photoset-description ul,
+.bloc-achievement dl.photoset dd.photoset-description ol,
+.bloc-achievement dl.photoset dd.photoset-description p { margin-top:0; }
+.bloc-achievement dl.photoset dd.photoset-photos ul { display:none; }
+
+@media (min-width: 560px) {
+	.bloc-achievement dl.photoset dd { float:right; width:65%; }
+	.bloc-achievement dl.photoset dd.photoset-cover { float:left; width:30%; }
+}

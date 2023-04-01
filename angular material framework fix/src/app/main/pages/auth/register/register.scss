@@ -1,0 +1,103 @@
+#register {
+    width: 100%;
+    height: 100%;
+    background: url('/assets/images/backgrounds/march.jpg') no-repeat;
+    background-size: cover;
+
+    #register-form-wrapper {
+        height: 100%;
+        min-height: 800px;
+
+        #register-form {
+            max-width: 384px;
+            padding: 32px;
+            margin: 32px;
+            background: #FFFFFF;
+            text-align: center;
+
+            .logo {
+                width: 128px;
+                height: 128px;
+                line-height: 128px;
+                font-size: 86px;
+                font-weight: 500;
+                margin: 32px auto;
+                color: rgba(255, 255, 255, 1);
+                border-radius: 2px;
+            }
+
+            .title {
+                margin: 16px 0 32px 0;
+                font-size: 17px;
+            }
+
+            form {
+                width: 100%;
+
+                md-input-container {
+                    width: 320px;
+                }
+
+                md-checkbox {
+                    margin: 0;
+                }
+
+                .terms {
+                    font-size: 13px;
+                    margin: 16px 0 32px 0;
+
+                    a {
+                        margin-left: 4px;
+                    }
+                }
+
+                .md-button {
+                    width: 220px;
+                    margin: 16px auto;
+                    display: block;
+                }
+            }
+
+            .login {
+                margin: 32px auto 24px auto;
+                width: 250px;
+                font-weight: 500;
+
+                .text {
+                    margin-right: 8px;
+                }
+
+                .link {
+
+                }
+            }
+        }
+    }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-sm) {
+
+    #register {
+
+        #register-form-wrapper {
+
+            #register-form {
+                padding: 24px;
+                width: 90%;
+
+                form {
+
+                    md-input-container {
+                        width: 100%;
+                    }
+
+                    .md-button {
+                        width: 90%;
+                    }
+                }
+            }
+        }
+    }
+
+}

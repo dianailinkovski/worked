@@ -1,0 +1,47 @@
+<ion-view view-title="{{homeTitle}}" hide-back-button="true">
+  <ion-content>
+	<div style="text-align:center;padding:10px;">
+		<h3>
+		Whether you're a sun chase or <br/>cool as ice, Weather Watchman<br/>
+		can	put you in the zone.
+		</h3>
+	</div>
+	<div style="background: #330065;height: 65px;">
+		<div style="width: 30%;float:left;padding: 20px;">
+			<h3 style="color:white; text-align:center">Month</h3>
+		</div>
+		<div style="width: 50%;float:right;padding: 20px;">
+			<h3 style="color:white; text-align:center;">Temperature</h3>
+		</div>
+	</div>
+	<div id="home" class="clear center">
+		<div class="center" style="width:20%;float:left">
+			<p class="mon">Jan</p>
+			<p class="mon">Feb</p>
+			<p class="mon">Mar</p>
+			<p class="mon">Apr</p>
+			<p class="mon">May</p>
+		</div>
+		<div style="width:50%;float:left">
+			<p style="margin-top:7px;"></p>
+			<p class="lbl">FIND MY</p>
+			<img ng-src="img/eye.png" style="width:80px;height:50px;" alt="eye" ng-click="goWeatherPage()"/>
+			<p class="lbl">WEATHER</p>
+		</div>
+		<div style="width:30%;float:right">
+			<p class="degree">5&deg</p>
+			<p class="degree">6&deg</p>
+			<p class="degree">7&deg</p>
+			<p class="degree">8&deg</p>
+			<p class="degree">9&deg</p>
+		</div>
+	</div>
+	<div class="clear" style="text-align:left;clear:both;padding: 10px;">
+		<span>
+			Choose your month of travel and your desired temperature.			
+			Weather Watchman will find your matching travel destinations with
+			weather data and a map view of their location.
+		</span>
+	</div>
+  </ion-content>  
+</ion-view>

@@ -1,0 +1,119 @@
+<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script>
+    (function() {
+	Stripe.setPublishableKey('pk_test_ycTWO6DcB7xxy6YMhpHWjiZV');
+    })();
+</script>
+<div class="deposit container">
+		<div class="profile">
+			<div class="cl-title">
+				<h2>Deposit Funds</h2>
+			</div>
+			<div class="incap-menu">
+				<div class="settings">
+						{{if this.funds:}}<div class="alert alert-info">You have ${{-this.funds}} in your account.</div>{{end}}
+						<div class="alert-danger payment-errors"></div>
+						{{-this.msg}}
+						<div id="credit_card_success" class="alert alert-success nodisplay">
+								You have successfully deposited an amount of <span id="amount_deposited"></span>
+						</div>
+						<div class="row"><br>
+							<div class="col-md-3"><b>Deposit By:</b></div>
+							<div class="col-md-7">
+								<select name="byid" id="pay_type" class="form-control" onchange="showMethod()">
+									<option value="">Select Deposit Method</option>
+									<option value="1">By Paypal</option>
+									<option value="2">By Credit Card</option>
+								</select>
+							</div>
+						</div><br>
+						
+						<div id="d-creditcard" class="nodisplay">
+							<form action="" method="post" id="payment-form">
+								<div class="row">
+									<div class="col-md-3"><b>Amount:</b></div>
+									<div class="col-md-7">
+										<input class="form-control rest" type="text" name="amount" id="camount" onkeypress="return numbersonly(this, event)">
+										<div class="error" id="error_camount">Required, Please enter amount to deposit.</div><br>
+									</div>
+								</div>
+								<div class="row">
+								    <div class="col-md-3"><b>Credit Card#:</b></div>
+								    <div class="col-md-7">
+									    <input class="form-control rest" type="text" name="credit_crd" data-stripe="number" id="credit_crd" onkeypress="return numbersonly(this, event)">
+									    <div class="error" id="error_credit_crd">Required, Please enter your credit card number.</div><br>
+								    </div>
+								</div>
+								<div class="row">
+								    <div class="col-md-3"><b>Expiry Date (MM/YYYY):</b></div>
+								    <div class="col-md-3">
+									    <input type="text" name="exmonth" id="exmonth" class="form-control rest" data-stripe="exp-month" style="width:100%">
+								    </div>
+								    <div class="col-md-4">
+									    <input type="text" name="exyear" id="exyear" class="form-control rest" data-stripe="exp-year style="width:100%">
+								    </div>
+								</div>
+								<div class="row"><br>
+									<div class="col-md-3"><b>CVC:</b></div>
+									<div class="col-md-7">
+										<input class="form-control rest" type="text" name="cvc" data-stripe="cvc" id="cvc" onkeypress="return numbersonly(this, event)">
+										<div class="error" id="error_cvc">Required, Please enter your cvc number.</div><br>
+									</div>
+								</div>
+								<div class="col-md-10"><input type="submit" id="depositStripe" name="stripe_action" value="Deposit Now"  class="btn btn-default save-btn"></div>
+							</form>
+						</div>
+						<div id="d-paypal" class="nodisplay">
+							<form action="" method="post">
+								<div class="row">
+									<div class="col-md-3"><b>Amount:</b></div>
+									<div class="col-md-7">
+										<input class="form-control rest" type="text" name="amount" id="pamount" onkeypress="return numbersonly(this, event)">
+										<div class="error" id="error_pamount">Please enter amount.</div><br>
+									</div>
+									<div class="col-md-10"><input type="submit" name="paypal_action" onclick="doPaypalAction()" value="Deposit Now" class="btn btn-default save-btn"></div>
+								</div>
+							</form>
+						</div>
+				</div>
+             </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    
+   // $('#payment-form').submit(function(){alert('hi')});
+ 
+
+
+$('#payment-form').submit(function(e) {
+		if (validate_form([['camount','numeric'], ['credit_crd','numeric'], ['cvc','numeric']])){
+				Stripe.card.createToken({
+				    number: $('#credit_crd').val(),
+				    cvc: $('#cvc').val(),
+				    exp_month: $('#exmonth').val(),
+				    exp_year: $('#exyear').val()
+				}, stripeResponseHandler);
+				e.preventDefault();
+		}
+});
+
+function stripeResponseHandler(status, response) {
+  var $form = $('#payment-form');
+
+  if (response.error) {
+    // Show the errors on the form
+    $form.find('.payment-errors').text(response.error.message);
+    $form.find('button').prop('disabled', false);
+  } else {
+    // response contains id and card, which contains additional card details
+    var token = response.id;
+    // Insert the token into the form so it gets submitted to the server
+    $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+    // and submit
+     $form.get(0).submit();
+  }
+}
+
+</script>

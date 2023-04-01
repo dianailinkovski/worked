@@ -1,0 +1,184 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../components/core-menu/core-menu.html">
+<link rel="import" href="../components/core-item/core-item.html">
+<link rel="import" href="../components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../components/core-menu/core-submenu.html">
+<link rel="import" href="../components/paper-button/paper-button.html">
+
+<link href="../components/core-icons/core-icons.html" rel="import">
+<link href="../components/core-icon-button/core-icon-button.html" rel="import">
+<link href="../components/core-toolbar/core-toolbar.html" rel="import"> 
+<link href="../components/paper-tabs/paper-tabs.html" rel="import">
+
+<link rel="import" href="bibliothequeTabView-element.html">
+<link rel="import" href="menuLayout-element.html">
+
+<polymer-element name="bibliothequeLayout-element">
+	
+    
+    
+  <template>
+    <core-localstorage id="StorageResponsiveWidth" name="StorageResponsiveWidth" value="{{responsiveWidth}}"></core-localstorage>
+    <style>
+	
+		core-drawer-panel::shadow #drawer {
+			z-index: 3;
+		}
+		core-drawer-panel::shadow #scrim {
+			z-index: 2;
+		}
+	
+      [drawer] {
+        background-color: #eee;
+        border-right: 1px solid #bbb;
+		z-index: 3;
+      }
+      
+	  [drawer]::shadow #dropShadow {
+		  display:none;
+	  }
+	  
+      [main] {
+        height: 100%;
+        /*background-color: #4F7DC9;*/
+      }
+	  
+	  [main]::shadow #dropShadow {
+		  z-index:2;
+	  }
+      
+      #buttonMenu {
+        display: none;
+      }
+      
+      core-drawer-panel[narrow] #buttonMenu {
+        display: inline-block
+      }
+	  
+	  paper-tabs{
+		background-color: #fff;
+		  
+	  }
+	  core-toolbar {
+		z-index: 2;
+		background-color: #eee;
+		border-bottom: 1px #999 solid;
+		/*box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);*/
+	  }
+	  
+	  paper-tabs {
+		  z-index: 1;
+	  }
+	  
+	  paper-tab[active] {
+		background-color: #f2642a;
+		/*box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);*/
+	  }
+	  
+	  paper-tabs.transparent-teal {
+		box-shadow: none;
+	  }
+		
+	  paper-tabs.transparent-teal::shadow #selectionBar {
+		background-color: #f2642a;
+	  }
+		
+	  paper-tabs.transparent-teal paper-tab::shadow {
+		color: #333;
+		font-size:18px;
+	  }
+	  
+	  paper-tab[active]::shadow .tab-content {
+		color: #fff;
+		/*font-weight: bold;*/
+	  }
+	  
+	  paper-tabs.transparent-teal paper-tab::shadow #ink {
+		color: #dddddd;
+	  }
+	  
+	  paper-button#kiosque {
+		  background-color: #55b948;
+		  color: #fff;
+		  font-size: 18px;
+		  text-transform: none;
+	  }
+      
+    </style>
+    
+    <core-drawer-panel id="drawerPanel" drawerWidth="350px" responsiveWidth="{{responsiveWidth}}px">
+    	<core-header-panel drawer>
+    	<!--<core-header-panel mode="seamed" id="core_header_panel" navigation flex>-->
+		    <menuLayout-element></menuLayout-element>
+    	</core-header-panel>
+        <!--<div id="div" tool>Bibliothèque</div>-->
+        <!--<div tool>Bibliothèque</div>-->
+        <core-header-panel main fit>
+            <core-toolbar class="transparent-teal">
+                <core-icon-button id="buttonMenu" icon="menu" on-tap="{{togglePanel}}"></core-icon-button>
+                <span flex>Bibliothèque</span>
+                <paper-button id="kiosque" on-tap="{{openKiosque}}">Kiosque</paper-button>
+              </core-toolbar>
+            
+            <div class="content">
+                
+                <paper-tabs class="transparent-teal" selected="{{selectedPage}}">
+                    <paper-tab id="paper_tab1" active>Récents</paper-tab>
+                    <paper-tab id="paper_tab2">Tous</paper-tab>
+                    <paper-tab id="paper_tab3">Favoris</paper-tab>
+                    <paper-tab id="paper_tab4">Abonnement</paper-tab>
+                </paper-tabs>
+                
+                <bibliothequeTabView-element selectedPage="{{selectedPage}}"></bibliothequeTabView-element>
+                
+            </div>
+        </core-header-panel>
+    </core-drawer-panel>
+    </template>
+
+  <script>
+	
+	Polymer('bibliothequeLayout-element', {
+		
+		selectedPage: 0,
+		
+		responsiveWidth: 900,
+		
+		ready: function() {
+			var ref = this;
+			console.log('bibliothequeLayout-element ready');
+			this.addEventListener("SelectedRecentChanged", function(e) {
+				console.log('SelectedRecentChanged');
+				console.log(this.shadowRoot.querySelector('bibliothequeTabView-element'));
+			    this.shadowRoot.querySelector('bibliothequeTabView-element').asyncFire("reloadBibliotheque");
+			  
+		  });
+		  
+		  this.addEventListener('menuLayout-ConnexionChanged', function(e) {
+				e.stopPropagation();
+				console.log('menuLayout-ConnexionChanged kiosqueLayoutCalled');
+				if(e.detail.username != "" && e.detail.username != undefined)
+					this.responsiveWidth = 2000;
+				else
+					this.responsiveWidth = 900;
+			});
+		},
+		
+		togglePanel: function() {
+		  var menu = this.shadowRoot.querySelector('menuLayout-element');
+		  menu.page = 0;
+		  this.$.drawerPanel.togglePanel();
+		},
+		openKiosque: function() {
+			window.location = "kiosque.html";
+		},
+		
+    });
+	
+  </script>
+
+</polymer-element>

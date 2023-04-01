@@ -1,0 +1,6 @@
+.bloc-citation blockquote { position:relative; margin-bottom:3em; padding-left:2em; background-color: rgba(255, 255, 255, 0.4); border-left-color: #CCC; }
+.bloc-citation blockquote p { position:relative; margin-top:0;  font-style:italic; font-size:1.4em; }
+.bloc-citation blockquote p:before { content:"«"; display:block; position:absolute; top:0; left:-0.8em; line-height:1em; color:#999; }
+.bloc-citation blockquote p:after { content:"»"; display:inline-block; position:relative; line-height:1em; margin-left:0.3em; color:#999;  }
+.bloc-citation blockquote cite { font-size:85%; color:#999; }
+.bloc-citation blockquote cite:before { content:'\2014 \00A0'; }

@@ -1,0 +1,27 @@
+<div class="infowindow businesses">
+	<div class="business">
+		<div class="in">
+			<a class="avatar" href="/{{-this.business.address}}">
+				<span class="profile-helper"></span><img src="{{-this.business.avatar}}"/>
+			</a>
+			<h1><a href="/{{-this.business.address}}">{{-this.business.name}}</a></h1>
+			<div class="infos">
+				{{if this.business.description:}}
+					<p class="info fa fa-info">{{-this.business.description}}</p>
+				{{end}}
+				{{if this.business.contact_number:}}
+					<p class="info fa fa-phone">{{-this.business.contact_number}}</p>
+				{{end}}
+				{{if this.business.contact_email:}}
+					<p class="info fa fa-envelope">{{-this.business.contact_email}}</p>
+				{{end}}
+				{{if this.business.category:}}
+					<p class="info fa fa-tags">{{-this.business.category}}</p>
+				{{end}}
+				{{if this.business.formatted_address:}}
+					<p class="info fa fa-globe">{{-this.business.formatted_address}}</p>
+				{{end}}
+			</div>
+		</div>
+	</div>
+</div>

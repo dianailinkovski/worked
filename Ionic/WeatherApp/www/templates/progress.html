@@ -1,0 +1,31 @@
+<ion-view title="{{'PROGRESS' | translate}}" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <button menu-and-drawer-toggle class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header settings-view width-control">
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+	  <ion-slide>
+	    <div class"progress-box">
+	    	<div class="row">
+			  <div class="col table-label"><p>{{'TOTAL' | translate}}</p><p>{{'TODAY' | translate}}</p></div>
+			  <div class="col"><p class="stat-number">{{totals.todayMinutes}}</p><p class="stat-label">{{'MINUTES_SM' | translate}}</p></div>
+			  <div class="col"><p class="stat-number">{{totals.todayCalories}}</p><p class="stat-label">{{'CALORIES_SM' | translate}}</p></div>
+			</div>
+			<h4 class="padding centered">{{'YOU_SWORK' | translate}} {{totals.totalMonthMin}} {{'OUT_OF' | translate}}</h4>
+	    </div>
+	    <a href="#/app/sworkitpro"><div class="upgrade-box">
+	    	<div class="upgrade-header">
+	    		<h4>{{'WANT_STATS' | translate}}</h4>
+	    	</div>
+	    	<div class="upgrade-body">
+	    		<p>{{'FEATURE_1' | translate}}</p>
+	    		<p><i class="icon ion-stats-bars"></i>{{'FEATURE_2' | translate}}</p>
+	    		<p><i class="icon ion-arrow-graph-up-right"></i>{{'FEATURE_3' | translate}}.</p>
+	    		<p><i class="icon ion-ribbon-a"></i>{{'FEATURE_4' | translate}}</p>
+	    		<a class="get-pro" href="#/app/sworkitpro"><h4>{{'FEATURE_5' | translate}}</h4></a>
+	    	</div>
+	    </div></a>
+	  </ion-slide>
+	</ion-slide-box>
+  </ion-content>
+</ion-view>

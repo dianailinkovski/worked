@@ -1,0 +1,2 @@
+test	Price	"Retail Price"	"Product Name"	UPC	SKU	Image	"Product URL"
+	"//table[@id=""super-product-table""]"	"//table[@id=""super-product-table""]/tbody/tr/td[2]"	//title		//form/font/text()[1]		http://www.myvillagegreen.com/jarrow-formulas-jarro-dophilius-eps.html#120

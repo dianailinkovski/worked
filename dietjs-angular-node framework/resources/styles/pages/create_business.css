@@ -1,0 +1,136 @@
+#header{
+	position: relative;
+	z-index: 1;
+}
+#content{
+	padding: 30px 0;
+}
+
+#content:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+#content .center{
+	width: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 auto;
+	padding: 0 !important;
+}
+
+#content .center-in{
+	text-align: left;
+	padding: 0 30px;
+	margin-top: 0;
+}
+
+#content .center-in h1{
+	font-size: 37px;
+	color: #00BAFF;
+	font-weight: 400;
+	text-align: center;
+}
+
+#content .center-in p{
+	font-size: 24px;
+	color: #A5A5A5;
+	font-weight: 200;
+	clear: both;
+	line-height: 34px;
+}
+
+#content .center-in a{
+	font-size: 17px;
+	line-height: 40px;
+	border-bottom: 2px solid #eee;
+}
+
+#content .center-in a:hover{
+	text-decoration: none;
+	border-bottom-color: #007DC5;
+}
+
+#content .center-in a:active{
+	border-bottom-color: red;
+}
+
+#footer{
+	
+}
+#content.create_business form{
+	max-width: 490px; background:rgba(0,0,0,.1); padding:1px 20px 25px;
+	margin: 0 auto;
+}
+#content.create_business form input, #content.create_business form textarea{
+	width: 100%;
+	clear: both;
+	float: left;
+	margin-bottom: 10px; border:none; border-left:6px solid #29b6f6;
+}
+#content.create_business form input[type="file"]{ border-left:0;}
+
+#content.create_business fieldset{
+	border: none; width:100%;
+}
+
+#content.create_business fieldset h3{
+	text-align: left;
+	margin-bottom: 10px;
+	margin-top: 0;
+	font-weight: normal;
+	color: #454545; font-size:20px; line-height:25px;
+}
+#content.create_business fieldset h3 label{ font-weight:normal;}
+
+#content.create_business form button{
+	 float:none; color:#fff;  width:100%;
+}
+
+#content.create_business .break{
+	margin: 10px 0 10px -25px;
+	clear: both;
+}
+
+#content.create_business .top.break{
+	margin: 10px 0 20px -25px;
+}
+
+#content.create_business h3 small{
+	color: #999;
+}
+
+.address-example{
+	float: left;
+	margin-bottom: 10px;
+	color: #999;
+	font-size: 14px;
+	margin-left: 15px;
+}
+
+.error input{
+	border: 1px solid #FD5B5B;
+	background: #FFF;
+	border-radius: 3px 3px 0 0;
+	margin: 0 !important;
+}
+
+.error input:focus{
+	box-shadow: inset 0 1px 0 #E2E2E2, 0 0 4px 1px #FD5B5B;
+	position: relative;
+	z-index: 10;
+}
+
+.error .error{
+	background: #FD5B5B;
+	color: #FFF;
+	border-radius: 0 0 3px 3px;
+	padding: 6px 10px;
+	margin-bottom: 10px;
+	font-size: 13px;
+	line-height: 13px;
+	clear: both;
+}

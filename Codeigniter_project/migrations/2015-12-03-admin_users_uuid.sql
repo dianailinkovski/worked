@@ -1,0 +1,1 @@
+ALTER TABLE `admin_users` ADD `uuid` VARCHAR( 200 ) NOT NULL AFTER `id`; 

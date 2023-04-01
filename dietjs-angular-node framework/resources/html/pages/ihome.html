@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+
+<!--
+#######################################
+	- THE HEAD PART -
+######################################
+-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>SLIDER REVOLUTION -  The Responsive Slider Plugin</title>
+
+    <!-- get jQuery from the google apis -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+
+    <!-- CSS STYLE-->
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+
+    <!-- THE PREVIEW STYLE SHEETS, NO NEED TO LOAD IN YOUR DOM -->
+    <link rel="stylesheet" type="text/css" href="css/noneed.css" media="screen" />
+
+
+    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    
+     <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>   
+    <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+
+	<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+    <link rel="stylesheet" type="text/css" href="css/extralayers.css" media="screen" />	
+	<link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
+
+	<!-- GOOGLE FONTS -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300,700,800,900' rel='stylesheet' type='text/css'>
+<div class="home_header">
+  <div class="logo_container">
+	<img src="images/logo.png"/>
+  </div>
+  <div class="menu_container">
+	 <a href=""><i class="fa fa-home"></i><span class="text">Home</span></a>
+  </div>
+</div>
+<div class="tp-banner-container">
+		<div class="tp-banner" >
+			<ul>	
+			    <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-thumb="images/1.jpg"  data-saveperformance="on"  data-title="Intro Slide">
+					<video autoplay loop> 
+						<source src="images/1.mp4" type="video/mp4" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+					</video>				
+                    <div class="slider_item_container">
+					   <div class="slider_title_container">
+							<h1 class="slider_title">THE NEW</h1>
+						    <h1 class="slider_title">BIG THING</h1>
+							<h5 class="slider_desc">from comfort of your home</h5>
+					   </div>						
+					</div>					
+				</li>
+				<li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-thumb="images/2.jpg"  data-saveperformance="on"  data-title="Intro Slide">
+					<video autoplay loop > 
+						<source src="images/2.mp4" type="video/mp4" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+					</video>
+					<div class="slider_item_container">
+						<div class="slider_title_container">
+							<h1 class="slider_title">GET YOU FAVORITE ITEMS AT STORE</h1>						    
+							<h5 class="slider_desc">Don't miss anything</h5>
+					   </div>
+					</div>
+				</li>
+				<li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-thumb="images/1.jpg"  data-saveperformance="on"  data-title="Intro Slide">					
+					<img alt="slidebg1" data-lazyload="images/1.jpg" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">					
+					<div class="slider_item_container">
+						<div class="slider_title_container">
+							<h1 class="slider_title">ONE HAPPY FAMILY</h1>						    
+							<h5 class="slider_desc">On special occasions</h5>
+					   </div>
+					</div>
+				</li>				
+				<li data-transition="slideleft" data-slotamount="7" data-masterspeed="1000" data-thumb="images/2.jpg" data-delay="10000"  data-saveperformance="on"  data-title="Ken Burns Slide">					
+					<img alt="laptopmockup_sliderdy" data-lazyload="images/2.jpg" data-bgposition="right top" data-kenburns="on" data-duration="12000" data-ease="Power0.easeInOut" data-bgfit="115" data-bgfitend="100" data-bgpositionend="center bottom">					
+					<div class="slider_item_container">
+						<div class="slider_title_container">
+							<h1 class="slider_title">SAVE MONEY, DON'T MISS A THING</h1>						    
+							<h5 class="slider_desc">With VBOX</h5>
+					   </div>
+					</div>
+				</li>	 
+			</ul>
+<div class="tp-bannertimer"></div>	</div>
+</div>	
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {						
+		jQuery('.tp-banner').show().revolution(
+		{
+			dottedOverlay:"none",
+			delay:16000,
+			startwidth:1170,
+			startheight:700,
+			hideThumbs:200,
+			
+			thumbWidth:100,
+			thumbHeight:50,
+			thumbAmount:5,
+			
+			navigationType:"bullet",
+			navigationArrows:"solo",
+			navigationStyle:"preview4",
+			
+			touchenabled:"on",
+			onHoverStop:"on",
+			
+			swipe_velocity: 0.7,
+			swipe_min_touches: 1,
+			swipe_max_touches: 1,
+			drag_block_vertical: false,
+									
+									parallax:"mouse",
+			parallaxBgFreeze:"on",
+			parallaxLevels:[7,4,3,2,5,4,3,2,1,0],
+									
+			keyboardNavigation:"off",
+			
+			navigationHAlign:"center",
+			navigationVAlign:"bottom",
+			navigationHOffset:0,
+			navigationVOffset:20,
+
+			soloArrowLeftHalign:"left",
+			soloArrowLeftValign:"center",
+			soloArrowLeftHOffset:20,
+			soloArrowLeftVOffset:0,
+
+			soloArrowRightHalign:"right",
+			soloArrowRightValign:"center",
+			soloArrowRightHOffset:20,
+			soloArrowRightVOffset:0,
+					
+			shadow:0,
+			fullWidth:"off",
+			fullScreen:"on",
+
+			spinner:"spinner4",
+			
+			stopLoop:"off",
+			stopAfterLoops:-1,
+			stopAtSlide:-1,
+
+			shuffle:"off",
+			
+			autoHeight:"off",						
+			forceFullWidth:"off",						
+									
+									
+									
+			hideThumbsOnMobile:"off",
+			hideNavDelayOnMobile:1500,						
+			hideBulletsOnMobile:"off",
+			hideArrowsOnMobile:"off",
+			hideThumbsUnderResolution:0,
+			
+			hideSliderAtLimit:0,
+			hideCaptionAtLimit:0,
+			hideAllCaptionAtLilmit:0,
+			startWithSlide:0,
+			fullScreenOffsetContainer: ".header"	
+		});						
+	});				
+	</script>		
+	
+	</div>
+</div>
+
+
+
+
+
+</body>

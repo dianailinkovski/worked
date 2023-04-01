@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="16dp"
+      android:paddingBottom="27px" >
+
+    <RelativeLayout 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:gravity="bottom|center_horizontal"
+      >
+
+    
+        
+		<com.ngser.ekiosk.kiosque.NetworkedCacheableImageView
+	        android:id="@+id/nciv_pug"
+	        android:layout_width="120dp"
+	        android:layout_height="164dp"
+	        android:layout_centerInParent="true"
+	        android:scaleType="centerCrop" />
+		
+		<com.thbs.progressbutton.MasterLayout
+		    android:id="@+id/MasterLayout01"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_centerHorizontal="true"
+		    android:layout_centerVertical="true"
+		    android:clickable="false"
+		    android:visibility="gone" >
+		</com.thbs.progressbutton.MasterLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:minHeight="40dip"
+            android:minWidth="40dip" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/nciv_pug"
+            android:layout_alignTop="@+id/nciv_pug"
+            
+            android:src="@drawable/bandeau_2_all_caps"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/nciv_pug"
+            android:layout_alignTop="@+id/nciv_pug"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/favico_over"
+            android:visibility="gone" />
+	</RelativeLayout>
+</RelativeLayout>

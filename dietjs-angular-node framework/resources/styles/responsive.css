@@ -1,0 +1,349 @@
+.foot-menu {
+  float: left;
+}
+.foot-menu > li {
+  display: inline-block;
+  list-style: outside none none;
+}
+nav {
+  float: left;
+  margin: 0 0 20px 0;
+}
+.inner-content {
+  padding: 20px 25px;
+}
+.mobile-menu {
+  width: 100%;
+}
+
+@media only screen and (min-width:1500px) {
+  .timebox .circle{ left: -79px;}
+  .timebox.left .circle{ right: -80px;}
+}
+
+@media only screen and (min-width:992px) and ( max-width:1100px){
+  .wrap{ margin: 0 2%;}
+  .businesses .business .infos{ min-height: 270px;}
+  #map{ width: 47%;}
+  .royalSlider .rsOverflow{ min-height: 589px;}
+  .map-container .map-info{ width: 57%;}
+  .business .timebox.right{ width: 40%;}
+  .business .timeline_container.wlogin .timebox.right{ margin: 0 8% 0 0;}
+  .store-sec .stored_box .stores a.store{ padding: 10px 2% 10px 8%; margin: 0 5% 25px 0; width: 45%;}
+  .faq .wrapper{ max-width: 100%;}
+  .timebox.left{ width: 35%; margin: 0 55% 0 10%;}
+  .timebox.right{ width: 35%; margin: 0 10% 0 55%;}
+  .timebox.left .circle{ right: -67px;}
+  .timebox .circle{ left: -67px;}
+  #content .employee{ width: 38%;}
+  .welcome .tp-banner-container video{ height: 100%; min-height: 614px}
+  .tp-caption.fullscreenvideo, .tp-banner-container .fullcoveredvideo{ min-height: 614px;}
+	
+}
+
+@media only screen and (min-width:768px) and ( max-width:991px){
+
+	.wrap{ margin: 0 2%;}
+	.timebox.left{ margin:0 55% 0 2%;  width:43%;}
+	.timebox.right{ float:none; margin:0 2% 0 55%; width:43%;}
+  .tabdetail-container .border{ margin: 0 0 0 -3px;}
+  .timebox.left .circle{ right: -54px;}
+  .timebox .circle{ left: -54px;}
+	.profile .tabs .tab{ margin:0 15px 0 0;}
+
+  #classifieds .ad, .businesses .business{ width: 33%;}
+  #search .wrap{ padding: 0 !important;}
+  #classifieds .ad .seller-name a{ max-width: 106px;}
+  .businesses .business .in{ min-height: 400px;}
+  .account_settings #signup{ margin: 50px auto;}
+  .inner-header #logo{ border:none;}
+  .classifieds #category_fields label{ width: 23%;}
+  .classifieds #category_fields .selectize-control{ width: 76.333% !important;}
+  .classifieds #category_fields input{ width: 72.33%;}
+  .royalSlider .rsOverflow{ height: 442px !important; min-height: 442px;}
+  .royalSlider { height: 442px !important;}
+  .top_section .head{ bottom: 12%;}
+  .top_section .head h1{ font-size: 38px;}
+  .map-container .map-info ul li p{ width: 100%;}
+  .map-container .map-info ul li p a{ margin: 5px 10px 5px 0;}
+  .timeline_container.wlogin .timebox.right{ margin: 0 5% 0 0;}
+
+  .store-sec .stored_box{ width: 60%;}
+  .store-sec .staff-sec{ width: 38%;}
+  .store-sec .stored_box .stores a.store{ width: 100%; margin: 0 0 20px; padding: 10px 2% 10px 12%;}
+  .business .description_container{ width: 56%;}
+  .main-contactsec h3{ font-size: 27px; margin: 0 0 5px;}
+  .faq .wrapper{ max-width: 100%;}
+  .faq .inner-content{ padding: 0 3% 10px;}
+  .classifieds_mine .ad{ width: 49%;}
+  .subheader .wrap{ max-width: 80%;}
+  #content.account_settings{ min-height: 865px;}
+  .business_settings .subheader{ position: static; float: left; width: 100%; margin: 0 0 20px;}
+  .welcome #signup{ max-width: 300px; padding: 0 15px 15px; right: 5%; top: 70px;}
+  .welcome #signup h3{ margin: 10px 0 5px; font-size: 25px; line-height: 25px;}
+   .welcome #signup .out{ width: 100%; margin: 0;}
+   .welcome #signup #first_name_in, .welcome #signup #last_name_in{ margin: 0;}
+   #signup input[type="text"], #signup input[type="password"]{ margin-bottom: 10px; font-size: 14px; padding: 4px 13px; height: 30px;}
+   .welcome #signup-actions button{ padding: 7px 20px 7px 17px !important;}
+   .welcome #signup-actions{ margin-bottom: 10px;}
+   .tp-banner li .tp-bgimg{ background-size: auto 460px !important;}
+   .tp-banner-container .tparrows{ top: 240px !important;}
+   #signup .input-holder .validetta-bubble{ top: 25px !important;}
+   #name .out .validetta-bubble{ top: 25px !important; width: 100% !important;}
+   #name .out #last_name_in .validetta-bubble{ left: 0 !important; width: 100% !important;}
+   .classifieds #map, .businesses #map{ position: static !important; width:100%; margin: 20px 0;}
+   .classifieds .contentpart, .businesses .contentpart{ float: left; position: static;}
+
+ 
+}
+
+
+@media only screen and (max-width:767px) {
+	
+	.mobile-menu {
+  background: #000000 none repeat scroll 0 0;
+  padding: 0 10px;
+  /* position: fixed; */
+  z-index: 999999;
+  float: left;
+  width: 100%;
+}
+#header {
+  z-index: 99999;
+  height:auto;
+    position: fixed !important;
+}
+
+.navbar-toggle .icon-bar {
+  background: #fff;
+}
+#logo {
+  margin: 11px 0  0 0;
+}
+#signup{position:static;max-width:100%;}
+#footer,#footer.home-footer {
+  position: static;
+}
+#main-container {
+  padding: 0;
+}
+.tp-banner-container {
+  float: left;
+  width: 100%;
+}
+.tp-banner-container li {
+  float: left; max-height: 191px;
+  position: relative; !important;
+  width: 100% !important;
+}
+.tp-banner ul li::after {
+  position: static;
+}
+.tparrows {
+  top: 150px!important;
+}
+.foot-menu > li {
+  display: inline-block;
+  list-style: outside none none;
+ 
+}
+.foot-social {
+  width: 100%;
+  text-align:center; margin:0 !important;
+}
+.foot-social li {
+  display: inline-block;
+  float: none !important;
+}
+.about-list li {
+  margin: 20px 0;
+  width: 100%;
+}
+#map-canvas {
+  float: left;
+  height: 200px;
+  margin: 30px 0 0;
+  padding: 0;
+}
+.social-sec {
+  float: left!important;
+}
+.faq .wrapper{width:100%;}
+#navbar .pull-right{float:left!important;width:100%;}
+.nav.navbar-nav {
+  width: 100%;
+  text-align: left; margin:0;
+  float: left;  box-shadow:0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+.nav.navbar-nav li{
+  width: 100%;
+  text-align: left;
+  float: left;
+}
+.right.media-menu-top {
+  float: left;
+  width: 100%;
+}
+.login-section li a{margin:10px 0!important;}
+
+
+
+/*====my css=====*/
+.foot-menu{ text-align:center;}
+#footer-menu a{ margin:4px 12px 0;} 
+.foot-menu{ margin:0 0 5px;}
+#navbar{ padding:0; margin:0 0 7px; overflow-x: hidden;}
+#header .link{ padding:7px 10px 7px 35px !important; text-align: left !important; border-left: 0 !important; background-position: 0 9px !important; float: none; display: block;}
+#header .link.classi img{ width:20px;}
+#header .right .dropdown-opener{ padding:0 0 7px 0 !important; width:100%; text-align:left;}
+.login-section.nav.navbar-nav > li{ margin:0 0 0 -6px; width:auto;}
+.login-section.nav.navbar-nav > li:last-child{ float:right;}
+#header .right .signup{ margin:0;}
+
+.wrap{ margin: 0 3%;}
+#content{ margin:50px 0 0; min-height: 281px; padding: 0 !important;}
+#header .wrap{ margin:0; padding: 0;}
+.user-sec .user-account .profile-pic > img{ width:100px; height:100px; padding:3px;}
+.user-sec .user-account{ margin:-70px 0 15px; position: static;}
+
+.user-account .profile-pic .upload img{ width:27px;}
+.user-sec .user-account h3{ font-size:18px; line-height:24px;}
+.user-sec .user-account small, .user-sec .user-account p{ font-size:15px;}
+.user-sec{ min-height:140px; float:left; padding:15px 3% 0; width:100%;}
+.tabdetail-container{ float:left; width:100%;}
+.user-sec .tabs{ margin:20px 0 0; position:static;}
+.user-sec > .follow{ position:absolute; left:0; top:10px; }
+
+#content.profile .user-sec > .follow{  bottom:110px; }
+#content.profile .user-sec .links{ position: absolute; right: 0; bottom: 110px; width: 100%; text-align: center;}
+#content.profile .user-sec .links .follow{ float: none; display: inline-block;}
+
+#content.business .user-sec .links{ position: absolute; right: 0; bottom: 152px; margin: 0; width: 100%;}
+#content.business .user-sec .links .follow{ padding:4px 10px; float: none; display: inline-block;}
+
+.user-sec .follow li{ margin:0 10px; float:none; display:inline-block;}
+.topprofile-sec .upload img{ width:27px;}
+.tabdetail-container h2{ font-size:21px; line-height:25px;}
+.tabdetail-container .border{ display:none;}
+.timebox.left{ width:90%; margin:0 5% 20px;}
+.timebox.right{ width:90%; margin:0 5% 20px;}
+.timebox .arrow{ display:none;}
+.tabs .tab{ margin:0 10px 0 0; font-size: 15px;}
+.timeline_container.wlogin .timebox.right{ margin:0 5%;}
+.post-row .list .post-contents .message{ font-size: 14px; line-height: 18px;}
+
+.classifieds #category_fields label{ width: 100%; margin: 0;}
+.classifieds #category_fields input{ width: 100%; margin: 0 0 10px;}
+.classifieds #category_fields .selectize-control{ width: 100% !important; padding: 0;}
+.inner-header #logo{ height: 50px; border:none;}
+.classifieds #category_fields{ padding: 0 15px;}
+#classifieds .ad{ width: 100%;}
+
+.classifieds .contentpart, .businesses .contentpart{ position: static;}
+#search .wrap{ padding: 0 !important;}
+.royalSlider .rsOverflow{ min-height: 100px; height: 184px !important;}
+.royalSlider{ height: 184px !important;}
+.section.price{ top:10px; font-size: 15px; padding: 5px 10px 8px; margin: 0;}
+.section.price span{ font-size: 11px;}
+.top_section .head{ bottom: 50px;}
+.top_section .head h1{ font-size: 18px;}
+.top_section .head p{ font-size: 11px; line-height: 17px; margin: 0;}
+.top_section .head ul{ margin: 0;}
+.top_section .head ul li img{ width: 15px;}
+.top_section button.choose-recipient{ background: #00baff url("../../images/chat.png") no-repeat scroll 14px 9px; background-size: 15px auto;
+       min-width: 85px;  padding: 4px 3px 7px 22px;}
+.top_section .live-chat-button{ right: 15px; bottom: 140px;}
+.top_section .paypal-btn{ background: #eeeeee url("../../images/paypl-icon.png") no-repeat scroll 7px 5px; background-size: 19px auto;
+    font-size: 13px;  margin: 0 10px 0 0;  padding: 4px 11px 6px 33px;}
+    .map-container{ margin: 0;}
+.map-container #map{ width: 100% !important;}
+.map-container .map-info{ width: 100%; margin: 20px 0 0;}
+.description-sec h4{ padding: 0;}
+.description-sec{ font-size: 14px;}
+#comments{ border-radius: 0; margin: 10px 0 0;}
+#comments h2{ margin: 0;}
+#comments .comment{ padding: 10px 0; border-radius: 0;}
+.sidebar .in{ margin-left: 0;}
+.map-container .map-info ul li{ padding: 5px 0 0;}
+.stores_container .store-sec{ padding: 15px 5% 0;}
+.store-sec .stored_box{ width: 99%; padding: 15px 5%;}
+.store-sec .stored_box .stores a.store{ padding: 10px 2% 10px 18%; margin: 0 0 20px; width: 100%;}
+.store-sec .staff-sec{ width: 100%; margin: 20px 0;}
+.description_container{ width: 90%;}
+.description_container li span{ width: 100%; padding: 0;}
+.description_container li strong{ width: 100%; margin: 5px 0 0;}
+#content .center{ margin: 0 5%; width: 90%;}
+#content.login .center-in a img{ margin: 5px auto;}
+
+
+
+#content.forgotPassword{ position: static;}
+#content .center .center-in{ margin: 0; padding: 1px 0 0;}
+#content.classifieds_place form{ padding: 20px 15px;}
+#content.classifieds_place fieldset h3, #content.classifieds_place fieldset h3 label{ margin: 0;}
+#content .center-in{ margin: 20px auto; padding: 2px 10px 20px;}
+#content .center-in #signup{ margin-top: 0;}
+#content .center-in h1{ font-size: 28px;}
+#content .center-in p{ font-size: 16px; line-height: 20px;}
+#content.forgotPassword form input{ width: 100%;}
+#signup .FLname .input-holder{ width: 100%;}
+#loginModal .modal-dialog{ width: 300px;}
+#loginModal .form-group a img{margin: 10px auto;}
+.page-title{ font-size: 30px; line-height: 35px; padding: 0 0 10px;}
+.cms-page p{ font-size: 14px; line-height: 20px; padding: 0 0 10px;}
+.about-list li{ margin: 7px 0;}
+.about-list{ margin: 0;}
+.contactus .section_offset{ padding: 25px 0;}
+.main-contactsec .social-sec{ margin: 20px 0 0 15px;}
+.main-contactsec h3{ width: 100%; margin: 0 0 10px; font-size: 30px;}
+.main-contactsec form li{ margin-bottom: 15px;}
+.main-contactsec .row{ padding: 10px 0;}
+.main-contactsec form{ display: inline-block; width: 100%; margin-bottom: 20px;}
+.faq .inner-content{ padding: 0 15px;}
+.faq .inner-content > p{ font-size: 15px; line-height: 20px;}
+.accordion .singleque{ padding: 9px 10px;}
+.faq .accordion h3{ font-size: 16px; line-height: 21px;}
+.faq .accordion .expandable p{ font-size: 14px; line-height: 18px;}
+.howitworks .work-box{ padding: 10px 15px; margin: 10px 0;}
+.howitworks .work-box img{ margin: 0 10px 10px 0; width: 100px; float: left;}
+.howitworks .work-box p{ font-size: 14px; line-height: 18px;}
+.stores h1{ font-size: 22px;}
+.stores .store .in .rate li img{ width: 13px; margin:0 0 0 2px; }
+
+#content .employee{ width: 100%;}
+.pending.employee h3{ font-size: 16px;}
+
+#content.business_invite_employee, #content.notFound{ position: static;}
+#content.notFound{ margin: 65px 0 20px;}
+.tp-banner li .tp-bgimg{ background-size: 100% 191px !important;}
+.tp-banner li .title, .tp-banner li .content, .tp-banner li .readsec{ display: none;}
+.welcome #signup .out{ width: 100%; margin: 0;}
+.welcome #signup #first_name_in, .welcome #signup #last_name_in{ margin: 0;}
+.welcome #signup h3{ font-size: 27px; margin-top: 10px;}
+#signup input[type="text"], #signup input[type="password"], #signup-actions{margin-bottom: 12px;}
+.classifieds #map{ position: static !important; width:100%; margin: 20px 0;}
+.businesses #map{ position: static !important; width:100%; margin: 20px 0;}
+#loginModal .modal-dialog{ margin: 225px auto 20px;}
+.about_container{ width: 90%;}
+.classifieds_mine .head{ margin-top: -10px;}
+.profile .pagination{ width: 100%; margin: 10px 0;}
+.timebox .circle{ display: none;}
+h3.empty{ margin: 0; font-size: 18px; line-height: 22px;}
+.classifieds_mine .head h1{ font-size: 18px; margin: 12px 0 20px; letter-spacing: 0;}
+#content.login form{ padding: 20px 5% 0;}
+#content.login{ margin: 70px auto 20px;} 
+#content.login .center-in h1{ margin-top: 10px;}
+.subheader{ position: static;}
+.account_settings .picture fieldset input[type="file"]{ width: 100%;}
+.account_settings .picture fieldset .fa{ font-size: 13px; padding: 10px 8px;}
+ .stores .store .in{ margin: 0 10px 20px;}
+
+}
+
+
+
+@media only screen and (min-width:480px) and ( max-width:767px){
+  .tp-banner li .tp-bgimg{ background-size: 100% 287px !important;}
+  .tp-banner-container li{ max-height: 287px;} 
+  .tparrows{ top: 185px !important;}
+}

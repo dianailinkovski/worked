@@ -1,0 +1,6 @@
+#job-caract { margin-top:0; }
+.section-bloc > header > h1.job-caract-title { margin-bottom:0; }
+
+#job-caract tbody > tr > th { background-color:#eee; width:50%; }
+#job-caract.table>tbody>tr>th, #job-caract.table>tfoot>tr>th, #job-caract.table>tbody>tr>td, #job-caract.table>tfoot>tr>td { border-color:#ddd; }
+#job-caract.table-striped>tbody>tr:nth-child(odd)>td, #job-caract.table-striped>tbody>tr:nth-child(odd)>th { background-color:#efefef; }

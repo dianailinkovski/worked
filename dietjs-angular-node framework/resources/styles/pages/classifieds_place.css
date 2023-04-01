@@ -1,0 +1,311 @@
+body{ background:#f2f1ef !Important;}
+#header{
+	position: relative;
+	z-index: 10;
+}
+#content{
+	padding: 30px 0;
+}
+
+#content:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+#content .center{
+	width: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 auto;
+	padding: 0 !important;
+}
+
+#content .center-in{
+	text-align: left;
+	padding: 0 30px;
+	margin-top: 0;
+}
+
+#content .center-in h1{
+	font-size: 40px;
+	color: #00baff;
+	text-align: center;
+	letter-spacing: -2px; margin:0 0 10px;
+}
+
+#content .center-in p{
+	font-size: 24px;
+	color: #A5A5A5;
+	font-weight: 400;
+	clear: both;
+	line-height: 34px;
+}
+
+
+#footer{
+	
+}
+
+.chosen-container{
+	width: 100% !important;
+}
+
+#content.classifieds_place form{
+	max-width: 500px; background:rgba(0, 0, 0, 0.1);
+	margin: 0 auto; border:1px solid #bababa; padding:20px 35px;
+}
+
+#content.classifieds_place form input[type="text"], 
+#content.classifieds_place form textarea{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#content.classifieds_place fieldset{
+	border: none; width:100%;
+	position: relative; margin-bottom:8px;
+}
+
+#content.classifieds_place fieldset h3{
+	
+	margin: 0;
+	font-size: 18px;
+	font-weight: normal;
+	color: #444;
+	top: 0;
+	right: 100%;
+}
+#content.classifieds_place fieldset h3 label{ font-weight:normal;}
+
+#content.classifieds_place form button{
+	width: 100%;
+}
+
+#content.classifieds_place .break{
+	margin: 10px 0 20px -25px;
+	clear: both;
+}
+
+#content.classifieds_place .top.break{
+	margin: 10px 0 20px -25px;
+}
+
+#content.classifieds_place h3 small{
+	color: #999;
+}
+
+.address-example{
+	float: left;
+	margin-bottom: 10px;
+	color: #999;
+	font-size: 14px;
+	margin-left: 15px;
+}
+
+.error input{
+	border: 1px solid #FD5B5B;
+	background: #FFF;
+	border-radius: 3px 3px 0 0;
+	margin: 0 !important;
+}
+
+.error input:focus{
+	box-shadow: inset 0 1px 0 #E2E2E2, 0 0 4px 1px #FD5B5B;
+	position: relative;
+	z-index: 10;
+}
+form .chosen-container{
+	margin-bottom: 10px;
+}
+
+#final_price_tag{
+	background: #00baff ;
+	color: #FFF;
+	font-size: 21px;
+	line-height: 21px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	padding:8px 10px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+#last_break{
+	margin: 20px 0 !important;
+}
+
+#submit{
+
+	width: 100%; float:none;
+	box-sizing: border-box; background:#00baff;
+	 text-align: center; text-transform:none;
+}
+
+.dz-filename{
+	display: none;
+}
+
+.error .error{
+	background: #FD5B5B;
+	color: #FFF;
+	border-radius: 0 0 3px 3px;
+	padding: 6px 10px;
+	margin-bottom: 10px;
+	font-size: 13px;
+	line-height: 13px;
+	clear: both;
+}
+
+.input-holder.select.error .error-message{
+	margin: 0;
+}
+.input-holder.select.error .chosen-container{
+	border-color: red;
+	margin-bottom: 0;
+}
+
+.input-holder.select.error .chosen-single{
+	border-color: red;
+	border-radius: 3px 3px 0 0;
+}
+
+#category_fields{
+	padding: 20px 30px;
+	background: #FFF;
+	border: 1px solid #FFF;
+	border-radius: 3px;
+	margin: 15px 0;
+	border: 2px solid #DBDBDB;
+	box-shadow: 0 1px 3px 3px #EEE, 0 0px 50px #F2F2F2;
+}
+
+#category_fields label{
+	margin-bottom: 5px;
+	margin-top: 15px;
+	float: left;
+	color: #8D8F92;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+#category_fields input{
+	background: #eee;
+	border: 1px solid #eee;
+}
+
+#category_fields input:focus{
+	box-shadow: inset 0 1px 0 #e2e2e2, 0 0 4px 1px #00a2ff;
+	border: 1px solid #2877A4;
+	background: #FFF;
+	position: relative;
+	z-index: 1;
+}
+
+#category_fields h3{
+	margin-bottom: 0px;
+	font-weight: normal;
+	color: #5E5E5E;
+	font-size: 21px;
+}
+
+.select-employee-dropdown{
+	position: relative;
+	padding: 10px 0;
+	min-height: 60px;
+}
+.select-employee-dropdown img{
+	position: absolute;
+	top: 14px;
+	left: 14px;
+	background-color: #fff;
+	padding: 2px;
+	box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+	width: 40px;
+	height: 40px;
+}
+.select-employee-dropdown .employee-content{
+	float: left;
+	margin: 7px 0 7px 62px;
+	line-height: 15px;
+}
+.select-employee-dropdown .employee-name{
+	font-weight: bold;
+	font-size: 15px;
+	margin-top: 9px;
+}
+.select-employee-dropdown .employee-mail{
+	font-size: 12px;
+}
+
+.select-employee-dropdown .employee-number{
+	font-size: 12px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.contact_options .input-holder{
+	padding: 2px 0;
+	font-size: 15px;
+}
+
+.contact_options .input-holder label{
+	margin-left: 7px; padding-left:15px;
+}
+
+.contact_options .input-holder input{
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd; margin-left:0 !Important;
+}
+
+.selectize-control{
+	margin-bottom: 10px;
+}
+
+.tradeTypes .radio{
+	margin: 0 10px;
+	text-align: center; display:inline-block; float:none; font-size:18px;
+}
+.tradeTypes{
+	padding-bottom: 10px;
+	
+}
+
+.tradeTypes .centralize{
+	margin: 0 auto;
+}
+
+.outer-center {
+    float: right;
+    
+    position: relative; width:100%;
+}
+.inner-center {
+    float: right;
+    width:100%; text-align:center;
+    position: relative;
+}
+
+.radio label::before{ margin-top:7px; margin-right:5px;}
+.classifieds_place .dropzone{ padding:8px 15px; background:#fff;  box-shadow:none; border-color:#ccc;}
+.classifieds_place .selectize-input{ background:#fff;}
+
+@media all and (max-width:960px){
+	.tradeTypes{
+		padding-top: 10px;
+	}
+	#content.classifieds_place fieldset h3{
+		position: static;
+		margin-right: 0;
+		text-align: left;
+		margin: 5px 0 10px 0;
+	}
+	#content.classifieds_place .break{
+		margin: 10px 0 10px -25px;
+	}
+}

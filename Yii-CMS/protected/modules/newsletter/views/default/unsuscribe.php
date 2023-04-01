@@ -1,0 +1,1 @@
+<p><?php echo Yii::t('newsletterModule.common', 'Votre adresse courriel a été supprimée de la liste d’envoi.'); ?></p>

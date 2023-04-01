@@ -1,0 +1,82 @@
+md-dialog {
+
+    &.event-form-dialog {
+        max-width: 720px;
+        width: 720px;
+
+        md-dialog-content {
+            position: relative;
+            display: block;
+        }
+
+        form {
+            overflow: hidden;
+
+            md-toolbar {
+
+                .title {
+                    font-size: 17px;
+                }
+            }
+
+            md-input-container {
+
+                textarea {
+                    min-height: 120px;
+                }
+            }
+
+            .date-row {
+
+                > md-input-container {
+                    margin: 0 16px;
+
+                    &:first-child {
+                        margin-left: 0;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            .notifications {
+                margin: 16px 0;
+
+                > .md-button {
+                    margin: 0;
+                }
+            }
+        }
+
+        .md-actions {
+            position: relative;
+            overflow-y: hidden;
+            overflow-x: auto;
+            justify-content: space-between;
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+        }
+    }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-md) {
+
+    md-dialog {
+
+        &.event-form-dialog {
+            width: 80%;
+        }
+    }
+}
+
+@media screen and (max-width: $layout-breakpoint-sm) {
+
+    md-dialog {
+
+        &.event-form-dialog {
+            width: 90%;
+        }
+    }
+}

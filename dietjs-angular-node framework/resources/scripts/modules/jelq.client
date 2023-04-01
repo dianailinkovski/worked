@@ -1,0 +1,1112 @@
+/* 
+	Jelq v1.0.5
+	Copyright (c) 2014, Adam Halasz
+	All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+	
+	1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+	
+	2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+	
+	3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+	
+	// Toogle Object
+	
+	// Options:
+	// target 		: Object to Show
+	// holder 		: Parent of Object
+	// effect		: OnShow and OnHide Effect Speed (number)
+	// noClickOut 	: True or False : Hide the Object on Clickout or not
+	// onShow 		: Function to run on Show
+	// onHide 		: Function to run on Hide
+	// margin 		: Array of Margins you use for you app from the document corners
+	//			   this is important for the toggle'ed element to not exceed the document dimensions
+	//			  defaults are 40
+	/*			  ex: margin : { top: 20, right: 10, bottom: 5, left: 1 }
+	*/
+	
+	
+	var last = {};
+	
+	// Toggle Functions
+	
+	function toggleShow(target, options){
+		if(!isset(options.effect)){
+			show(target);
+		} else {
+			show(target, options.effect);
+		}
+	}
+	
+	function toggleHide(target, options){
+		if(!isset(options.effect)){
+			hide(target);
+		} else {
+			hide(target, options.effect);
+		}
+	}
+	
+	function toggle(options){
+		
+		// Save Safe Object Reference for Document Dimensions
+		var docWidth  = window.innerWidth;
+		var docHeight = window.innerHeight;
+		
+		var docWidthOffset = documentWidth() - docWidth;
+		var docHeighOffset = documentHeight() - docHeight;
+		
+		// Create Safe Target Object Reference
+		var target = toObject(options.target);
+		
+		
+		// If Target is Hidden
+		
+		if(target.style.display == "none"){
+
+			options.holder = ( isset(options.holder) ) ? options.holder : target.parentNode ;
+			
+			// Hide Last Toggle
+			if(isset(last.toggle)){
+				hide(last.toggle.target);
+				/*if(isset(window.toggle.onHide)){
+					window.toggle.onHide();
+				}*/
+				if(isset(last.toggle.onHide)){
+					last.toggle.onHide();
+				}
+			}
+			// Show Target
+			toggleShow(target, options);
+				
+			function setTargetPos(){
+				var targetPosition 	= positions(target);
+				target.left		= targetPosition.left;
+				target.right	= target.left+target.offsetWidth;
+				target.top 		= targetPosition.top;
+				target.bottom 	= targetPosition.top+target.offsetHeight;
+			}
+			 /* setTargetPos();
+			
+	        var offset = $(options.target).offset();
+	        var width = $(options.target).width();
+	        var height = $(options.target).height();
+	        var docHeight = $(document.body).height();
+	        var docWidth = $(document.body).width();
+	        
+	        var isEntirelyVisibleHeight = (offset.top + height <= docHeight);
+	        var isEntirelyVisibleWidth = (offset.left + width <= docWidth);
+	                 
+	        if (!isEntirelyVisibleHeight) {
+	            $(options.target).addClass('edgeHeight');
+	        } else {
+	            $(options.target).removeClass('edgeHeight');
+	        }
+	        
+	        if (!isEntirelyVisibleWidth) {
+	            $(options.target).addClass('edgeWidth');
+	        } else {
+	            $(options.target).removeClass('edgeWidth');
+	        }
+	        
+			      
+			setTargetPos();
+			var margin = getMargins();
+			console.log(options.target);
+			
+			var margin = getMargins();			
+			
+			margin.right -= window.pageXOffset;
+			
+			// FIX Right 
+			if(docWidth < target.right){ 
+				target.style.removeProperty("left");
+				target.style.right = margin.right + 'px'; 
+				setTargetPos(); 
+			}
+			
+			// FIX Bottom 
+			if(docHeight <= target.bottom && target.top >= 0){
+				target.style.removeProperty("top");
+				target.style.bottom = margin.bottom + 'px';
+				setTargetPos();
+				//echo([margin.top,target.top]);
+				if(margin.top == target.top){ 
+					target.style.bottom = 'inherit';
+				}
+			}
+
+			// Fix Top
+			if(target.top <= 0){ 
+				target.style.removeProperty("bottom");
+				target.style.top = margin.top + 'px'; 
+				setTargetPos();
+				target.style.bottom = 'inherit';
+
+			}
+			
+			// Fix Left
+			if(target.left < 0){ 
+				target.style.removeProperty("right");
+				target.style.left = margin.left + 'px'; 
+				setTargetPos(); 
+			}*/
+			
+			// Run onShow Event
+			if(isset(options.onShow)){ options.onShow(); }
+			
+			// Stop Target Holder OnClick Event Bubbling
+			stopEvent("onclick", options.holder); 
+			
+			if(options.noClickOut != true){
+				
+				function onClickOut(){
+					if(!isset(target.noClickOut)){
+						resetAbsolutePositions();
+						toggleHide(target, options);  					  // Hide Target
+						if(isset(options.onHide)){ options.onHide(); } // Run onHide Event
+					}
+				}
+				
+				// Add On Click Event to Document
+				addEvent(document.documentElement, "onclick", onClickOut, true);
+
+			}
+			
+			target.hide = function(){
+				resetAbsolutePositions();
+				toggleHide(target, options);
+				if(isset(options.onHide)){ options.onHide(); } // Run onHide Event
+			}
+			
+		// If Target is Visible
+		} else {
+			resetAbsolutePositions();
+			toggleHide(target, options);
+			if(isset(options.onHide)){ options.onHide(); } // Run onHide Event
+		}
+
+		last.toggle = options; // Save Last Toggled Element
+		
+		function resetAbsolutePositions(){
+			target.style.top = '';
+			target.style.right = '';
+			target.style.left = '';
+			target.style.bottom = '';
+		}
+		
+		function getMargins(){
+			// Default Margins
+			if(isset(options.margin)){
+				if(!isset(options.margin.top)){ options.margin.top = 0; }
+				if(!isset(options.margin.right)){ options.margin.right = 0; }
+				if(!isset(options.margin.bottom)){ options.margin.bottom = 0; }
+				if(!isset(options.margin.left)){ options.margin.left = 0; }
+			} else {
+				options.margin = {};
+				options.margin.top = 0;
+				options.margin.right = 0;
+				options.margin.bottom = 0;
+				options.margin.left = 0;
+			}
+			
+			return options.margin;
+		}
+	}
+	
+	// Show Element
+	function show(id, opacityRate, display, opacityGrade){ 
+		if(!isset(display)) { var display = 'block'; } 
+		var target = toObject(id);
+
+		if(isset(opacityRate)){	
+			var opacity = getOpacity(target);
+			target.style.display = display;
+			if(!isset(opacityGrade)) { var opacityGrade = 1; } 
+			var pipeOpacity = setInterval(function(){
+				if(opacity < 10){
+					opacity = opacity + opacityGrade;
+					setOpacity(target, opacity);
+				} else {	 
+					clearInterval(pipeOpacity);
+				}
+			}, opacityRate);
+		} else {
+			target.style.display = display; 
+		}
+	}
+	
+	function slug(string){
+		return string.replace(/\s/gi, '_').toLowerCase().replace(/\./gi, '_');
+	}
+	
+	// Hide Element
+ 	function hide(id, opacityRate, opacityGrade, then){ 
+		var target = toObject(id);
+		
+		if(isset(opacityRate)){	
+			if(isset(opacityGrade)){
+				if(typeof opacityGrade == 'function') {
+					var grade = 2;
+				} else {
+					var grade = 1;
+				}
+			} else {
+				var grade = 0;
+			}
+			var opacity = getOpacity(target);
+			
+			if(grade == 0 ) 		{ var og = 1; } 
+			else if (grade == 1)	{ og = opacityGrade; } 
+			else 					{ og = 1; }
+			
+			var pipeOpacity = setInterval(function(){
+				if(opacity > 0){
+					opacity = opacity - og;
+					setOpacity(target, opacity);
+				} else {
+					target.style.display = "none";
+					clearInterval(pipeOpacity);
+					if(grade == 2) {  opacityGrade(target); } 
+					else if(isset(then)) { then(target); }
+				}
+			}, opacityRate);
+		} else {
+			target.style.display = "none"; 
+		}
+	}
+	
+	function setOpacity(object, value) {
+		object = toObject(object);
+		object.style.opacity = value/10;
+		object.style.filter = 'alpha(opacity=' + value*10 + ')';
+	}
+	
+	// Safe Object Creation
+	// Checks if the target is string then creates an object from it
+	// or if its already an object then just return
+	function toObject(t){
+		return (typeof(t) == "string") ? $('#'+t)[0] : t ;
+	}
+	
+	function isset(value, def){
+		if(value != null && value != "undefined" && value != "" && value != "NaN" && value != NaN && value != def){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	// Returns The Document Height
+	function documentHeight(doc){
+		if(isset(doc) == false){ var doc = document; }
+
+		return Math.max(
+			Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight),
+			Math.max(doc.body.offsetHeight, doc.documentElement.offsetHeight),
+			Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
+		);
+	}
+	
+	// Returns the Document Width
+	function documentWidth(doc){
+		if(isset(doc) == false){ var doc = document; }
+		return Math.max(
+			Math.max(doc.body.scrollWidth, doc.documentElement.scrollWidth),
+			Math.max(doc.body.offsetWidth, doc.documentElement.offsetWidth),
+			Math.max(doc.body.clientWidth, doc.documentElement.clientWidth)
+		);
+	}
+	
+	/* Get Object Positions
+		Description: Get an Objects Position from Window Left and Window Top
+		Parameters: 
+			- object
+	*/
+	
+	function positions(object) {
+		var left = 0;
+		var top = 0;
+		var width = object.offsetWidth;
+		var height = object.offsetHeight;
+		if (object.offsetParent) {
+			do { 
+				 left += object.offsetLeft;
+				 top += object.offsetTop;
+			} while (object = object.offsetParent);
+		}
+		
+		return {
+			left	: left, 
+			top		: top, 
+			right	: width + left, 
+			bottom	: height + top
+		};
+	}
+	
+	// Advanced Event Handler TO DOM OBJECT
+	
+	// Parameters:
+		/*	object	: the object to track
+	 		event	: the event to track on the object
+	 		func	: the function to run the when event is fired
+	 		option	: Parameters: 
+	    		null  - keep both functions
+	     		true  - remove the added function and keep the old function
+	    		false - replace old function with the new function
+	    		just  - (string) fire just the added function then return to the old function
+		*/
+	
+	function addEvent(object, event, func, option){
+		// Remember the Old Event
+		var oldevent = object[event];
+		object[event] = function(e){
+			// Run Old Function
+			if(oldevent){ 
+				if(option != false && option != "just"){
+					oldevent(e); 
+				}
+			}
+			// Run Added Function
+			func();
+			// If Option is Not Null
+			if(isset(option)){
+				// Remove the added Function 
+				if(option == true || option == "just"){
+					object[event] = oldevent;
+				// Replace with the added Function	
+				} else if( option == false){
+					object[event] = func;
+				}
+			}
+		}
+	}
+	
+	// Stop Event Bubbling
+	
+	// Description : Stop Event Bubbling on an Object
+	// Parameters  : - Event	: Event to Stop
+	//   			 - Object	: Stop Event on this Object
+	
+	function stopEvent(event, object){
+		if(event.preventDefault){
+			event.preventDefault();
+		}
+		
+		// If Object is Set
+		if(isset(object)){
+			// Create Safe Object Reference
+			object = toObject(object);
+			
+			object[event] = function(childEvent){
+				if(childEvent && childEvent.stopPropagation) {
+					childEvent.stopPropagation();
+				} else {
+					childEvent = window.event;
+					childEvent.cancelBubble = true;
+				}
+			}
+		} else {
+			if(event && event.stopPropagation) {
+				event.stopPropagation();
+			} else {
+				event = window.event;
+				event.cancelBubble = true;
+			}
+		}
+	}
+	
+	// Capitalize First Letter of a String
+	function capitalize(string){
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+	
+	// Check if Someting is in Array
+	function inArray(match, array){
+		for(var i = 0; i < array.length; i++){
+			if(match == array[i]){
+				return [i];
+			}
+		}
+		return false;
+	}
+	
+	/* 
+		jQuery.dropdown()
+		
+		options:
+		- run: show the dropdown on initialization
+		- input: an input that controls the contents of the dropdown
+		- onEnter: callback(selected, event) 
+			fire function when user hits enter
+		- onUp: callback(input, event) 
+			- fire function when user hits up button
+		- onDown: callback(input, event) 
+			- fire function when user hits down button
+		- onKeyUp callback(input, event) 
+			- fire function when any key is pressed
+	*/
+	
+	$.fn.dropdown = function(options){
+		var options 	= (options) ? options : {} ;
+		var selected 	= false;
+		var parent 		= $(this);
+		$(this).data('dropdownOptions', options);
+		$(this).each(function(index, holder){
+			var dropdown = $(holder).find('.dropdown');
+			var opener 	 = $(holder).find('.dropdown-opener');
+			if(!isset(opener.attr('tabindex'))) opener.attr('tabindex', 0);
+			
+			var action = (options.hover) ? 'mouseover' : 'focus' ;
+			opener.off('focus').on('focus', toggleDropdown);
+			
+			function toggleDropdown(event){
+				opener.blur();
+				if(event){
+					event.stopPropagation();
+					//event.preventDefault();
+				}
+				
+				toggle({ 
+					target: dropdown[0], 
+					onShow: function(){
+						if(options.scroll){ 
+							function scrollFunction(){
+								var offset = options.scrollOffset ? parseInt(options.scrollOffset) : 0 ;
+								$(document.body).scrollTo(dropdown.offset().top + offset); 
+							}
+							if(options.scrollTiming){
+								setTimeout(scrollFunction, options.scrollTiming);
+							} else {
+								scrollFunction();
+							}
+						}
+						opener.addClass('opened');
+						dropdown.data('opened', dropdown);
+						
+						if(isset(options.hover)){
+							parent.each(function(index, targetHolder){
+								var targetOpener = $(targetHolder).find('.dropdown-opener');
+								var targetDropdown = $(targetHolder).find('.dropdown');
+								targetOpener.on('mouseover', function(index, item){
+									if(!targetOpener[0].isEqualNode(opener[0])){
+										//$(targetOpener.data().dropdown).data().toggle();
+										targetOpener.focus();
+										targetOpener.data('hoverClickTracker', true);
+									}
+								});
+								targetOpener.off('click').on('click', function(index, item){
+									if(targetOpener.data('hoverClickTracker')){ 
+										targetOpener.focus();
+									}
+									targetOpener.data('hoverClickTracker', true);
+								});
+							});
+						}
+					},
+					onHide: function(){
+						opener.removeClass('opened');
+						dropdown.data('opened', false);
+						dropdown.data('selected', false);
+						if(options.hover) {
+							parent.each(function(index, targetHolder){
+								var targetOpener = $(targetHolder).find('.dropdown-opener');
+								targetOpener.off('mouseover');
+								targetOpener.data('hoverClickTracker', false);
+							});
+						}
+					}
+				});
+				return false;
+			}
+			
+			var keyListener = isset(options.input) ? $(options.input) : opener ;
+			keyListener.data('dropdown', dropdown);
+			
+			keyListener.focus(function(event){
+				dropdown = $(keyListener.data('dropdown')[0]);
+				keyListener.off('keydown').on('keydown', keyDownHandler);
+				keyListener.off('keyup').on('keyup', keyUpHandler);
+			});
+			
+			keyListener.click(function(event){
+				event.stopPropagation();
+			});
+			
+			$(document.body).click(function(event){
+				//keyListener.off('keydown');
+				//keyListener.off('keyup');
+			});
+			
+			dropdown.data('toggle', function(event){
+				keyListener.off('keydown');
+				keyListener.off('keyup');
+				toggleDropdown(event);
+			});
+			dropdown.data('keyListener', keyListener);
+			
+			function keyDownHandler(event){
+				
+				if (event.keyCode == 38 || event.keyCode == 37) { // up, left
+					event.stopPropagation();
+					selected = dropdown.find('.selected');
+					
+					var links = dropdown.find('.link');
+					var selectedIndex = 0;
+					links.filter(function(index, element){ 
+						if($(element).hasClass('selected')){ selectedIndex = index }  
+					});
+					selected.removeClass('selected');
+					if(selectedIndex == 0){
+						$(links[links.length-1]).addClass('selected');
+						dropdown.data('selected', $(links[links.length-1]));
+					} else {
+						$(links[selectedIndex-1]).addClass('selected');
+						dropdown.data('selected', $(links[selectedIndex-1]));
+					}
+					if(options.onUp) options.onUp(keyListener, event);
+					return false;
+				} else if (event.keyCode == 40 || event.keyCode == 39) { // down, right
+					event.stopPropagation();
+					selected = dropdown.find('.selected');
+					var links = dropdown.find('.link');
+					var selectedIndex = 0;
+					var unchanged = true;
+					links.filter(function(index, element){ 
+						if($(element).hasClass('selected')){ selectedIndex = index; unchanged = false; }  
+					});
+					selected.removeClass('selected');
+					if(selectedIndex == links.length-1 || unchanged){
+						$(links[0]).addClass('selected');
+						dropdown.data('selected', $(links[0]));
+					} else {
+						$(links[selectedIndex+1]).addClass('selected');
+						dropdown.data('selected', $(links[selectedIndex+1]));
+					}
+					
+					if(options.onDown) options.onDown(keyListener, event);
+					return false;
+				} else if (event.keyCode == 8) {
+					if(options.onDelete) options.onDelete(keyListener, event);
+				}
+			}
+			
+			function keyUpHandler(event){
+				if(	   event.keyCode != 38  // not up
+					&& event.keyCode != 40  // not down
+					&& event.keyCode != 37  // not left
+					&& event.keyCode != 39  // not right
+					&& event.keyCode != 13  // not enter
+					&& event.keyCode != 27  // not esc
+				){ 
+					event.stopPropagation();
+					if(options.onKeyUp) options.onKeyUp(keyListener, toggleDropdown, event);
+				} else if (event.keyCode == 27){
+					event.stopPropagation();
+					keyListener.blur();
+					keyListener.val('');
+					dropdown.data('selected', false);
+					toggleDropdown();
+					return false;
+				} else if (event.keyCode == 13) { // enter
+					event.stopPropagation();
+					if(options.onEnter && isset(dropdown.data('selected')) && dropdown[0].style.display != 'none') { 
+						options.onEnter(dropdown.data('selected'), $(holder), event);
+						keyListener.blur();
+						keyListener.val('');
+						if(keyListener[0].nodeName == 'INPUT') keyListener.focus();
+						dropdown.data('selected', false);
+						toggleDropdown();
+						return false;
+					} else if (dropdown.data('selected') 
+						&& dropdown.data('selected').attr('href') 
+						&& !dropdown.data('selected').attr('data-nopush')) 
+					{
+						event.stopPropagation();
+						app.go(dropdown.data('selected').attr('href'));
+						toggleDropdown();
+						return false;
+					} else {
+						return true;
+					}
+					dropdown.data('selected', false);
+					
+				} else {
+					//return true;
+				}
+			}
+			
+			if(options.run && dropdown[0].style == 'none') toggleDropdown();
+		});
+		$(this).dropdownLinks();
+	}
+	
+	$.fn.dropdownLinks = function(){
+		var parent = $(this);
+		parent.each(function(index, holder){
+			var dropdown = $(holder).find('.dropdown');
+			var links 	 = dropdown.find('.link');
+			links.mouseenter(function(){
+				dropdown.find('.selected').removeClass('selected');
+				$(this).addClass('selected');
+				dropdown.data('selected', $(this));
+			});
+			links.off('mousedown').on('mousedown', function(event){
+				event.stopPropagation();
+				event.preventDefault();
+				
+				var selected = dropdown.data('selected');
+				
+				var onEnter = parent.data('dropdownOptions').onEnter;
+				if(onEnter) onEnter(selected, parent, event);
+				
+				var keyListener = $(dropdown).data('keyListener');
+				
+				keyListener.blur();
+				keyListener.val('');
+				
+				dropdown.data('selected', false);
+				dropdown.data('toggle')(event);
+				if(keyListener[0].nodeName == 'INPUT') keyListener.focus();
+			});
+			links.mouseleave(function(){
+				if(dropdown.data('selected')) {
+					dropdown.data('selected').removeClass('selected');
+					dropdown.data('selected', false);
+				}
+			});
+		});
+	}
+	
+	// Autofocus on Fields
+	
+	// Parameters:
+		// field 		: autofocus on this field
+		// customType 	: Set a Custom type (useful for password fields)	
+	$.fn.autoFocus = function(customType){
+		$(this).each(function(index, element){
+			var element = $(element);
+			var type = (isset(customType)) ? customType : element.attr('type');
+			element.focus(function(){ iFocus(element, type); });
+			element.blur(function(){ iBlur(element, type); });
+		});
+	}
+	
+	// Input Focus & Blur
+	
+	// e = element to focus/blur
+	// t = custom type 
+	
+	// Input Focus
+	var focus = [];
+	function iFocus(element, type, valueHolder){
+		var value_holder = isset(valueHolder) ? valueHolder : 'value' ; 
+		if(focus[element.attr('id')] == null){
+			if(type == true) element.attr('type', 'password');
+			focus[element.attr('id')] = element.attr(value_holder);
+			element.attr('placeholder', element.attr(value_holder));		
+			element.attr(value_holder, '');		
+		}
+	}
+	
+	// Input Blue
+	function iBlur(element, type, valueHolder){
+		var value_holder = isset(valueHolder) ? valueHolder : 'value' ; 
+		if(element.attr(value_holder) == ''){
+			element.attr(value_holder, focus[element.attr('id')]);
+			focus[element.attr('id')] = null;
+			if(type == true) element.attr('type', 'text'); 
+		}
+	}
+	
+	function numify(value){
+	    var nStr = value + '';
+	    nStr = nStr.replace( /\,/g, "");
+	    var x = nStr.split( '.' );
+	    var x1 = x[0];
+	    var x2 = x.length > 1 ? '.' + x[1] : '';
+	    var rgx = /(\d+)(\d{3})/;
+	    while ( rgx.test(x1) ) {
+	        x1 = x1.replace( rgx, '$1' + ',' + '$2' );
+	    }
+	    return x1 + x2;
+	}
+	
+	function plural(text, object){
+		if(isset(object)){
+			var length = typeof object == 'object' ? object.length : object ;
+			return (length > 1) ? text.pluralize() : text.singularize() ;
+		} else {
+			return text;
+		}
+	}	
+	
+	function merge(obj1, obj2){
+		return $.extend({}, obj1, obj2);
+	}
+	
+	function ampm(date, echo){
+		if(date.getHours() < 12){
+			return date.getHours() +':'+ addZeros(date.getMinutes()) +  echo('am');
+		} else {
+			var hours = (date.getHours() - 12);
+			if(hours == 0){ hours = 12; }
+			return hours +':'+ addZeros(date.getMinutes())+  echo('pm');
+		}
+	}
+	
+	dates = {
+		months: {
+			0: 'January',
+			1: 'February',
+			2: 'March',
+			3: 'April',
+			4: 'May',
+			5: 'June',
+			6: 'July',
+			7: 'August',
+			8: 'September',
+			9: 'October',
+			10: 'November',
+			11: 'December'
+		},
+		days: {
+			0: 'Sunday',
+			1: 'Monday',
+			2: 'Tuesday',
+			3: 'Wednesday',
+			4: 'Thursday',
+			5: 'Friday',
+			6: 'Saturday'
+		},
+		days2: [ 'Monday','Tuesday', 'Wednesday','Thursday', 'Friday','Saturday','Sunday']
+	}
+	
+	function time(timestamp){
+		var today = new Date();
+		var date = new Date(parseInt(timestamp));
+		if(date.getDate() != today.getDate()){
+			if(today.getDate() - date.getDate() == 1){ 
+				var the_date = echo('Yesterday'); 
+			} else {
+				var the_date = echo(dates.months[date.getMonth()].substr(0,3)) + ' ' + date.getDate();
+			}
+			return ampm(date, echo) + ', ' + the_date ;
+		} else {
+			return ampm(date, echo);
+		}
+	};
+	
+	nl2br = function(string){
+		return string.replace(/\n|\r|\n\r|\r\n/gi, '<br>');
+	}
+	
+	function price(number, currency, text){
+		if(isNumber(number)){
+			var number = numify(number);
+			var currency = currency.toLowerCase();
+			var className = '';
+			if(number != '0.00' && isset(number)){
+				className = 'payed';
+				if(!text) var text = '<span class="price-before">'+echo('from')+'</span> ';
+				
+				if(currency == 'huf'){
+					var html = text + ' <span class="price-tag">' + number + 'Ft</span>';
+				
+				} else if(currency == 'eur'){
+					var html = text + ' <span class="price-tag">&euro;' + number + '</span>';
+				
+				} else if(currency == 'gbp'){
+					var html = text + ' <span class="price-tag">&pound;' + number + '</span>';
+				
+				} else if(currency == 'usd'){
+					var html = text + ' <span class="price-tag">$' + number + '</span>';
+				
+				} else {
+					var html = text + ' <span class="price-tag">&curren;' + number + '</span>';
+				}
+				
+				
+			} else {
+				className = 'free';	
+				var html = '<span class="price-before">'+echo('for')+'</span> ' + '<span class="price-tag">'+ echo('free') + '</span>';
+			}
+		} else {
+			className = 'barter';
+			var html = '<span class="price-before">'+echo('for')+'</span> ' + '<span class="price-tag">'+ number + '</span>';
+		}
+		
+		return '<span class="price '+className+'">'+html+'</span>';
+	}
+	
+	addZeros = function(int){
+		return (int < 10) ? '0'+int : int ;
+	}
+	
+	if(!JSON){ JSON = {}; }
+	JSON.htmlify = function(string){
+		return JSON.stringify(string).replace(/\"/gi, '&quot;');
+	}
+	
+	function uri(s){ return encodeURIComponent(s); }
+	function duri(s){ return decodeURIComponent(s); }
+	
+	// Check if string is a Number
+	function isNumber(string){
+		if( parseInt(string) == string ){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function Class(name){
+		window[name] = function(){};
+		for(var prop in Class.prototype) {
+		    window[name].prototype[prop] = Class.prototype[prop];
+		}
+		window[name].prototype._ClassName = name;
+	}
+	
+	// DISABLE LOG function
+	Class.prototype.disableLog = function(){
+		Object.prototype.disabledLog = true;
+	}
+	
+	// LOG function
+	Class.prototype.log = function(arg1, arg2, arg3, arg4){
+		if(!Object.prototype.disabledLog){ 
+			var args = Array.prototype.slice.call( arguments );
+			args[0]  = '#' + this._ClassName+':// ' + capitalize(args[0]);
+			console.log.apply(console, args);
+		}
+	}
+	
+	// WARN function
+	Class.prototype.warn = function(arg1, arg2, arg3, arg4){
+		if(!Object.prototype.disabledLog){ 
+			var args = Array.prototype.slice.call( arguments );
+			args[0]  = '#' + this._ClassName+':// ' + capitalize(args[0]);
+			console.warn.apply(console, args);
+		}
+	}
+	
+	// ERROR function
+	Class.prototype.error = function(text){
+		if(!Object.prototype.disabledLog){ 
+			var args = Array.prototype.slice.call( arguments );
+			args[0]  = '#' + this._ClassName+':// ' + capitalize(args[0]);
+			console.error.apply(console, args);
+		}
+	}
+	
+	var template_cache = {};
+	function template(str, data){
+		// Figure out if we're getting a template, or if we need to
+		// load the template - and be sure to cache the result.
+		var fn = !/\W/.test(str) ?
+		  template_cache[str] = template_cache[str] ||
+		    template(document.getElementById(str).innerHTML) :
+		 
+		  // Generate a reusable function that will serve as a template
+		  // generator (and which will be cached).
+		  new Function("obj",
+		    "var p=[],print=function(){p.push.apply(p,arguments);};" +
+		   
+		    // Introduce the data as local variables using with(){}
+		    "with(obj){p.push('" +
+		   
+			  // Convert the template into pure JavaScript
+			  str
+			    .replace(/[\r\t\n]/g, " ")
+			    .split("[[").join("\t")
+			    .replace(/((^|]])[^\t]*)'/g, "$1\r")
+			    .replace(/\t-(.*?)]]/g, "',$1,'")
+			    .split("\t").join("');")
+			    .split("]]").join("p.push('")
+			    .split("\r").join("\\'")
+			+ "');}return p.join('');");
+		
+		// Provide some basic currying to the user
+		return data ? fn( data ) : fn;
+	};
+	
+	// Cookie Module
+	function Cookie(global_name){ 
+		// Cookie Constants
+		window[global_name] = new Object();
+		Cookie.prototype.length = 0;
+		
+		// Please note that you cannot call or modify HttpOnly Cookies
+		Cookie.prototype.set = function(name, value, days, hours, minutes, milliseconds){
+			days 			= (isset(days)) 		? 1000*60*60*24*days	: 0 ;
+			hours 			= (isset(hours)) 		? 1000*60*60*hours 		: 0 ;
+			minutes 		= (isset(minutes)) 		? 1000*60*minutes 		: 0 ;
+			milliseconds 	= (isset(milliseconds)) ? 1000*milliseconds 	: 0 ;
+			
+			var date 			= new Date();
+			var time 			= new Date(date.getTime() + (days + hours + minutes + milliseconds)).toGMTString() ;
+			document.cookie 	= name + '=' + uri(value) +'; expires=' + time + '; path=/' ;
+			if(!isset(window[global_name][name])){
+				++Cookie.prototype.length;
+			}
+			window[global_name][name] = value;
+		};
+		
+		// To delete multiple cookies use multiple arguments
+		Cookie.prototype.clear = function(){
+			// DELETE cookies
+			for(var i = 0; i < arguments.length; i++){
+				var name = arguments[i];
+				document.cookie = name+'=null; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+				delete window[global_name][name];
+				--Cookie.prototype.length;
+			}
+			//window[global_name].init();
+		};
+		
+		Cookie.prototype.init = function(){
+			//if(!isset(document.cookie)){ document.cookie = ' ' };
+			var the_cookies = document.cookie.split('; ');
+			if(isset(the_cookies)){
+				for(var i = 0; i < the_cookies.length; i++){
+					var cookie 	= the_cookies[i];
+					var pair 	= cookie.split('=');
+					var name 	= duri(pair[0]);
+					var value 	= duri(pair[1]);
+					window[global_name][name] = value;
+				}
+				if(isset(name)){
+					window[global_name][name].length = the_cookies.length;
+				}
+			}
+		};
+		
+		/*
+			ITERATE trough each cookies
+			ex:
+			cookie.each(function(property, value){ 
+				console.log(property +': '+ value); 
+			})
+		*/
+		Cookie.prototype.each = function(callback){
+			for(property in window[global_name]){
+				if(window[global_name].hasOwnProperty(property)){
+					callback(property, window[global_name][property]);
+				}
+			}
+		}
+		
+		return this;
+	}
+	
+	
+	if ("withCredentials" in new XMLHttpRequest())
+		window.corsSupported = true;	
+	else if (window.XDomainRequest)
+		window.corsSupported = true;	
+	else
+		window.corsSupported = false;	
+
+	
+	cookies = new Cookie('cookies');
+	cookies.init();
+	
+	// jQuery Scroll To
+	$.fn.scrollTo = function( target, options, callback ){
+	  if(typeof options == 'function' && arguments.length == 2){ callback = options; options = target; }
+	  var settings = $.extend({
+	    scrollTarget  : target,
+	    offsetTop     : 50,
+	    duration      : 500,
+	    easing        : 'swing'
+	  }, options);
+	  return this.each(function(){
+	    var scrollPane = $(this);
+	    var scrollTarget = (typeof settings.scrollTarget == "number") ? settings.scrollTarget : $(settings.scrollTarget);
+	    var scrollY = (typeof scrollTarget == "number") ? scrollTarget : scrollTarget.offset().top + scrollPane.scrollTop() - parseInt(settings.offsetTop);
+	    scrollPane.animate({scrollTop : scrollY }, parseInt(settings.duration), settings.easing, function(){
+	      if (typeof callback == 'function') { callback.call(this); }
+	    });
+	  });
+	}
+	
+	// Count an Objects Length
+	function objectLength(object) {
+	    var count = 0;
+	    for(var prop in object) {
+	        if(object.hasOwnProperty(prop)){
+	        	++count;
+	        }
+	    }
+	    return count;
+	}
+	
+	function shuffle(array) {
+	  var currentIndex = array.length
+	    , temporaryValue
+	    , randomIndex
+	    ;
+	
+	  // While there remain elements to shuffle...
+	  while (0 !== currentIndex) {
+	
+	    // Pick a remaining element...
+	    randomIndex = Math.floor(Math.random() * currentIndex);
+	    currentIndex -= 1;
+	
+	    // And swap it with the current element.
+	    temporaryValue = array[currentIndex];
+	    array[currentIndex] = array[randomIndex];
+	    array[randomIndex] = temporaryValue;
+	  }
+	
+	  return array;
+	}
+	
+	function arrayRemove(arr) {
+	    var what, a = arguments, L = a.length, ax;
+	    while (L > 1 && arr.length) {
+	        what = a[--L];
+	        while ((ax= arr.indexOf(what)) !== -1) {
+	            arr.splice(ax, 1);
+	        }
+	    }
+	    return arr;
+	}
+	
+	// Unique Hexatridecimal ID Generator
+	uniqid = function(){
+		var time = new Date().getTime();
+		while (time == new Date().getTime());
+		return new Date().getTime().toString(36);
+	}
+	
+	function Next(number, callback){
+		var c = 0; if(number == 0){ callback(); }
+		return function(){ c++; if(c == number){ callback.apply(this, arguments); } }
+	}
+
+	/* Console Tolerance */
+	if(!console){ console = {}; }
+	if(!console.log) { console.log = function(){} }
+	if(!console.trace) { console.trace = function(){} }
+	if(!console.error) { console.error = function(){} }
+	if(!console.warn) { console.warn = function(){} }
+	
+	// PlaceHolder Fix with Placeholders.js v3.0.0
+	(function(t){"use strict";function e(t,e,r){return t.addEventListener?t.addEventListener(e,r,!1):t.attachEvent?t.attachEvent("on"+e,r):void 0}function r(t,e){var r,n;for(r=0,n=t.length;n>r;r++)if(t[r]===e)return!0;return!1}function n(t,e){var r;t.createTextRange?(r=t.createTextRange(),r.move("character",e),r.select()):t.selectionStart&&(t.focus(),t.setSelectionRange(e,e))}function a(t,e){try{return t.type=e,!0}catch(r){return!1}}t.Placeholders={Utils:{addEventListener:e,inArray:r,moveCaret:n,changeType:a}}})(this),function(t){"use strict";function e(){}function r(t,e){var r,n,a=!!e&&t.value!==e,u=t.value===t.getAttribute(V);return(a||u)&&"true"===t.getAttribute(P)?(t.removeAttribute(P),t.value=t.value.replace(t.getAttribute(V),""),t.className=t.className.replace(R,""),n=t.getAttribute(Q),n&&(t.setAttribute("maxLength",n),t.removeAttribute(Q)),r=t.getAttribute(D),r&&(t.type=r),!0):!1}function n(t){var e,r,n=t.getAttribute(V);return""===t.value&&n?(t.setAttribute(P,"true"),t.value=n,t.className+=" "+k,r=t.getAttribute(Q),r||(t.setAttribute(Q,t.maxLength),t.removeAttribute("maxLength")),e=t.getAttribute(D),e?t.type="text":"password"===t.type&&J.changeType(t,"text")&&t.setAttribute(D,"password"),!0):!1}function a(t,e){var r,n,a,u,i;if(t&&t.getAttribute(V))e(t);else for(r=t?t.getElementsByTagName("input"):p,n=t?t.getElementsByTagName("textarea"):h,i=0,u=r.length+n.length;u>i;i++)a=r.length>i?r[i]:n[i-r.length],e(a)}function u(t){a(t,r)}function i(t){a(t,n)}function l(t){return function(){m&&t.value===t.getAttribute(V)&&"true"===t.getAttribute(P)?J.moveCaret(t,0):r(t)}}function o(t){return function(){n(t)}}function c(t){return function(e){return b=t.value,"true"===t.getAttribute(P)&&b===t.getAttribute(V)&&J.inArray(C,e.keyCode)?(e.preventDefault&&e.preventDefault(),!1):void 0}}function s(t){return function(){r(t,b),""===t.value&&(t.blur(),J.moveCaret(t,0))}}function d(t){return function(){t===document.activeElement&&t.value===t.getAttribute(V)&&"true"===t.getAttribute(P)&&J.moveCaret(t,0)}}function g(t){return function(){u(t)}}function v(t){t.form&&(L=t.form,L.getAttribute(I)||(J.addEventListener(L,"submit",g(L)),L.setAttribute(I,"true"))),J.addEventListener(t,"focus",l(t)),J.addEventListener(t,"blur",o(t)),m&&(J.addEventListener(t,"keydown",c(t)),J.addEventListener(t,"keyup",s(t)),J.addEventListener(t,"click",d(t))),t.setAttribute(U,"true"),t.setAttribute(V,E),(m||t!==document.activeElement)&&n(t)}var p,h,m,f,b,A,y,E,x,L,T,S,N,w=["text","search","url","tel","email","password","number","textarea"],C=[27,33,34,35,36,37,38,39,40,8,46],B="#ccc",k="placeholdersjs",R=RegExp("(?:^|\\s)"+k+"(?!\\S)"),V="data-placeholder-value",P="data-placeholder-active",D="data-placeholder-type",I="data-placeholder-submit",U="data-placeholder-bound",j="data-placeholder-focus",q="data-placeholder-live",Q="data-placeholder-maxlength",z=document.createElement("input"),F=document.getElementsByTagName("head")[0],G=document.documentElement,H=t.Placeholders,J=H.Utils;if(H.nativeSupport=void 0!==z.placeholder,!H.nativeSupport){for(p=document.getElementsByTagName("input"),h=document.getElementsByTagName("textarea"),m="false"===G.getAttribute(j),f="false"!==G.getAttribute(q),A=document.createElement("style"),A.type="text/css",y=document.createTextNode("."+k+" { color:"+B+"; }"),A.styleSheet?A.styleSheet.cssText=y.nodeValue:A.appendChild(y),F.insertBefore(A,F.firstChild),N=0,S=p.length+h.length;S>N;N++)T=p.length>N?p[N]:h[N-p.length],E=T.attributes.placeholder,E&&(E=E.nodeValue,E&&J.inArray(w,T.type)&&v(T));x=setInterval(function(){for(N=0,S=p.length+h.length;S>N;N++)T=p.length>N?p[N]:h[N-p.length],E=T.attributes.placeholder,E?(E=E.nodeValue,E&&J.inArray(w,T.type)&&(T.getAttribute(U)||v(T),(E!==T.getAttribute(V)||"password"===T.type&&!T.getAttribute(D))&&("password"===T.type&&!T.getAttribute(D)&&J.changeType(T,"text")&&T.setAttribute(D,"password"),T.value===T.getAttribute(V)&&(T.value=E),T.setAttribute(V,E)))):T.getAttribute(P)&&(r(T),T.removeAttribute(V));f||clearInterval(x)},100)}H.disable=H.nativeSupport?e:u,H.enable=H.nativeSupport?e:i}(this),function(t){"use strict";var e=t.fn.val,r=t.fn.prop;Placeholders.nativeSupport||(t.fn.val=function(t){return void 0===t&&this.eq(0).data("placeholder-active")?"":e.apply(this,arguments)},t.fn.prop=function(t,e){return void 0===e&&this.eq(0).data("placeholder-active")&&"value"===t?"":r.apply(this,arguments)})}(jQuery);
+	$(function(){ 
+		var placeholder_test = document.createElement('input');
+		if('placeholder' in placeholder_test) jQuery.support.placeholder = true;
+		if(!isset(jQuery.support.placeholder)){
+			Placeholders.enable(); 
+		}
+	})
+	
+	if(!window.echo) { function echo(s){ return s; } }
+	
+	

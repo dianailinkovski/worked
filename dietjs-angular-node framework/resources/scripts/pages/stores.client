@@ -1,0 +1,19 @@
+$(function(){
+	$('.location input').geocomplete().bind("geocode:result", function(event, result){
+		var form = $(this).closest('form');
+		if(result.geometry && result.geometry.location){
+			var geometry = result.geometry.location.toString();
+			var pos = geometry.substr(1, geometry.length-2).split(', ');
+			form.find('input[name="latitude"]').val(pos[0]);
+			form.find('input[name="longitude"]').val(pos[1]);
+		}
+
+		form.find('input[name="formatted_address"]').val(result.formatted_address);
+		for(var i = 0; i < result.address_components.length; i++){
+			var component = result.address_components[i];
+			var type = component.types[0];
+			form.find('input[name="'+type+'_short"]').val(component.short_name);
+			form.find('input[name="'+type+'_long"]').val(component.long_name);
+		}
+	});
+});

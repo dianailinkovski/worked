@@ -1,0 +1,141 @@
+<script>
+	window.ads = {{-JSON.stringify this.data.ads.filter (item) -> item.avatar = if (item.seller_type is 'business') then item.seller.avatar else item.seller.avatar(50) }};
+	window.query = {{-JSON.stringify this.query}};
+    window.maxPrice = getMax(window.ads,"price")
+    window.lowPrice = getLow(window.ads,"price")
+    function getMax(arr, prop) {
+    var max;
+    for (var i=0 ; i<arr.length ; i++) {
+        if (!max || parseInt(arr[i][prop]) > parseInt(max[prop]))
+            max = arr[i];
+    }
+    return max;
+}
+    function getLow(arr, prop) {
+    var max;
+    for (var i=0 ; i<arr.length ; i++) {
+        if (!max || parseInt(arr[i][prop]) < parseInt(max[prop]))
+            max = arr[i];
+    }
+    return max;
+}
+
+</script>
+
+{{-@get '/classifieds', id:'search' }}
+	{{-this.input false, 'country_short', 'hidden' }}
+	{{-this.input false, 'country_long', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_1_short', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_1_long', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_2_short', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_2_long', 'hidden' }}
+	{{-this.input false, 'locality_short', 'hidden' }}
+	{{-this.input false, 'locality_long', 'hidden' }}
+	{{-this.input false, 'postal_code_short', 'hidden' }}
+	{{-this.input false, 'postal_code_long', 'hidden' }}
+	{{-this.input false, 'neighborhood_short', 'hidden' }}
+	{{-this.input false, 'neighborhood_long', 'hidden' }}
+	{{-this.input false, 'route_short', 'hidden' }}
+	{{-this.input false, 'route_long', 'hidden' }}
+	{{-this.input false, 'street_number_short', 'hidden' }}
+	{{-this.input false, 'street_number_long', 'hidden' }}
+	{{-this.input false, 'formatted_address', 'hidden' }}
+	{{-this.input false, 'latitude', 'hidden' }}
+	{{-this.input false, 'longitude', 'hidden' }}
+	
+	<div class="wrap">
+		<h1>Find Classifieds:</h1>
+		<div class="clear"></div>
+		<div class="inputs">
+			{{-this.input 'What are you looking for?', 'search_value', 'text'}}
+			{{-this.input 'Where?', 'search_location', 'text'}}
+			{{-this.select placeholder:'Type', name:'trade_type', options:[[1, 'Selling'], [2, 'Buying']] }}
+			{{-this.select placeholder:'Category', name:'category', options:this.categories }}
+			<button type="submit">Search</button>
+		</div>
+	</div>	
+{{-@end}}
+
+<div id="map"></div>
+<div id="map-border"></div>
+
+<div id="classifieds" >
+	<div class="wrap">
+		<div class="setFilter">
+
+      <!--  <span>
+        <label>
+        <b>Location/City</b>
+            <select multiple name="country_short">
+            {{for ad in this.ads:}}
+				<option value="{{ad.administrative_area_level_1_short}}">{{ad.administrative_area_level_1_long}}</option>
+			{{end}}
+            
+            </select>
+        </label>
+        </span>
+    -->
+
+
+
+            <link rel="stylesheet" href="/styles/normalize.css" />
+    <link rel="stylesheet" href="/styles/jquery.range.css" />
+            <script src="/scripts/jquery-1.11.1.min.js"></script>
+    
+                <span>
+        <label>
+        <b>Price Range</b>
+            <br/>
+             			<input class="range-slider" type="hidden" value=""/>
+          </label>
+        </span>
+    
+                
+        </div>
+
+        <script>
+       $(document).ready(function(){
+           $('.range-slider').val(window.lowPrice.price+","+window.maxPrice.price)
+            $('.range-slider').jRange({
+                from: window.lowPrice.price,
+                to: window.maxPrice.price,
+                step: 1,
+                scale: [window.lowPrice.price,window.maxPrice.price],
+                format: '%s',
+                width: 300,
+                showLabels: true,
+                isRange : true
+            });
+
+    });
+
+        </script>
+        <h2 class="title"><span>{{-this.total_rows}} Classifieds{{-if this.inputs.search_location then ' around ' + this.inputs.search_location}}</span></h2>
+	    	
+		<div class="ads">
+			{{for ad in this.ads:}}
+				{{this.ad = ad}}
+				{{include 'html/parts/ad.html'}}
+			{{end}}
+		</div>
+		
+		{{if this.total_rows > this.ads.length:}}
+			
+			<div class="pagination">
+				{{if this.current_page > 1:}}	
+					{{this.query.page -= 1 }}
+					<a href="?{{-querystring.stringify this.query}}" class="icon-left"><i class="fa fa-angle-left"></i></a>
+				{{end}}
+				{{for index in [this.from_pages..this.to_pages]:}}
+					{{this.query.page = parseInt(index) }}
+					<a href="?{{-querystring.stringify this.query}}" {{-if index is this.current_page then 'class="selected"'}}>{{-index}}</a>
+				{{end}}
+				{{if this.current_page != this.total_pages:}}
+					{{this.query.page = this.query.page++}}
+					<a href="?{{-querystring.stringify this.query}}" class="icon-right"><i class="fa fa-angle-right"></i></a>
+				{{end}}
+			</div>
+		{{end}}
+	</div>
+	{{include 'html/layouts/footer.html'}}
+</div>

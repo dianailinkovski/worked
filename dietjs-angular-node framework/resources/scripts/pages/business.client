@@ -1,0 +1,128 @@
+$(function(){
+	if($('.ads').length){
+		$('.ads').imagesLoaded(function(){
+			$('.ads').masonry({
+		  		itemSelector: '.ad'
+			});
+		});
+	}
+});
+
+var map;
+function initialize() {
+	console.log('initialize map');
+	var latitude = window.query && window.query.latitude ? query.latitude : 1 ;
+	var longitude = window.query && window.query.longitude ? query.longitude : 1 ;
+	console.log('map lat/long positions:', latitude, longitude);
+	var mapOptions = {
+		zoom: 8,
+		center: new google.maps.LatLng(latitude, longitude)
+	};
+	map = new google.maps.Map(document.getElementById('storeMap'), mapOptions);
+	var bounds = new google.maps.LatLngBounds();
+	
+	var infowindow = new google.maps.InfoWindow({
+		maxWidth: 500,
+	});
+	window.stores.forEach(function(item){ 
+
+		console.log("sayeed:"+item.category);
+		var pinImg='/images/pin.png';
+		if(item.category >=1 && item.category <=6)
+			pinImg='/images/items.png';
+		else if(item.category >=7 && item.category <=13)
+					pinImg='/images/home.png';
+		else if(item.category >=14 && item.category <=18)
+					pinImg='/images/items.png';
+		else if(item.category >=19 && item.category <=25)
+					pinImg='/images/home.png';
+		else if(item.category >=26 && item.category <=31)
+					pinImg='/images/food.png';
+		else if(item.category >=32 && item.category <=40)
+					pinImg='/images/animals.png';
+		else if(item.category >=41 && item.category <=46)
+					pinImg='/images/leisure.png';
+		else if(item.category >=47 && item.category <=48)
+					pinImg='/images/job.png';
+		else if(item.category >=49 && item.category <=55)
+					pinImg='/images/edu.png';
+	
+				console.log("PinImg:"+pinImg)
+				
+		var position = new google.maps.LatLng(item.latitude, item.longitude);
+		console.log('set marker to', position, item); 
+		bounds.extend(position);
+		var marker = new google.maps.Marker({
+			position: position,
+			map: map,
+			icon: pinImg
+		});
+		makeInfoWindowEvent(map, infowindow, item, marker);
+		map.panTo(position);
+	});
+	map.fitBounds(bounds);
+	/*
+	if(isset(query.locality_long)){
+		if (!window.stores.length){
+			map.setZoom(11);
+		} else if(window.stores.length == 1){ 
+			map.setZoom(11);
+		} else {
+			center = bounds.getCenter();
+			map.fitBounds(bounds);
+		}
+	} else {
+		if (window.stores.length == 1){
+			map.setZoom(11);
+		} else {
+			map.setZoom(4);
+		}
+	}*/
+	
+}
+
+function makeInfoWindowEvent(map, infowindow, input, marker) {
+	google.maps.event.addListener(marker, 'click', function(event) {
+		console.log(marker);
+		var htmlContent = render('html/parts/store_window.html', {
+			store:input, 
+			business: window.business_address
+		});
+		infowindow.setContent(htmlContent);
+		window.infowindow = infowindow;
+		window.marker = marker;
+		
+		infowindow.open(map, marker);
+		$('.gm-style-iw').parent().css('opacity', 0)
+		window.infowindow = infowindow;
+		setTimeout(function(){
+			infowindow.open(map, marker);
+			$('.gm-style-iw').parent().css('opacity', 0);
+			setTimeout(function(){
+				$('.gm-style-iw').parent().css('opacity', 1);
+			}, 50);
+		}, 50);
+		//var latLng = merge(event.latLng, {k:event.latLng})
+		console.log('#event.latLng', event.latLng)
+		//infowindow.setPosition(event.latLng);
+		//console.log(event.latLng.k+30, event.latLng.A);
+		//map.panTo(new google.maps.LatLng(event.latLng.k, event.latLng.A));
+
+	});
+}
+
+function map_recenter(latlng,offsetx,offsety) {
+    var point1 = map.getProjection().fromLatLngToPoint(
+        (latlng instanceof google.maps.LatLng) ? latlng : map.getCenter()
+    );
+    var point2 = new google.maps.Point(
+        ( (typeof(offsetx) == 'number' ? offsetx : 0) / Math.pow(2, map.getZoom()) ) || 0,
+        ( (typeof(offsety) == 'number' ? offsety : 0) / Math.pow(2, map.getZoom()) ) || 0
+    );  
+    map.panTo(map.getProjection().fromPointToLatLng(new google.maps.Point(
+        point1.x - point2.x,
+        point1.y + point2.y
+    )));
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);

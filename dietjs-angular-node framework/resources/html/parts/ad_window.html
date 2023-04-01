@@ -1,0 +1,41 @@
+
+{{ad = this.ad}}
+<div class="ad-window ad-image">
+	{{if ad.pictures and ad.pictures.length:}}
+		<a href="/classifieds/{{-ad.id}}" class="picture">
+			<img src="/uploads/pictures/original/{{-ad.pictures[0].source}}" alt="picture"/>
+			<div class="price">{{-ad.formatted_price}}</div>
+		</a>
+	{{end}}
+	<div class="info">
+		<a href="/accounts/' + ad.seller.id + '"><span class="profile-pic"><img src="/uploads/profiles/original/{{-ad.seller.avatarName}}" alt=""></span></a>
+		<h2><a href="/classifieds/{{-ad.id}}">{{-ad.title}}</a></h2>
+		
+		{{if ad.description:}}
+			<div class="description">{{-ad.description.substr(0, 90)}}{{-if ad.description.length > 90 then '...'}}</div>
+		{{end}}
+		<div class="seller">
+
+			{{if ad.seller.id:}}
+				{{if ad.seller_type is 'business':}}
+					
+					<div class="seller-name">
+						by <a href="/{{-ad.seller.address}}">{{-ad.seller.name}}</a>
+					</div>
+				{{else:}}
+					
+					<div class="seller-name">
+						by <a href="/accounts/{{-ad.seller.id}}">{{-ad.seller.full_name}}</a>
+					</div>
+				{{end}}
+			{{end}}
+			
+			{{if this.myID: }}
+                <a class="chatIdentity button live-state offline" data-user="{{-ad.seller.id}}" href="http://192.241.239.235/chat/?r={{-ad.seller.id}}&id={{-this.myID}}" >Chat</a>
+			{{else:}}
+			    <a href="javascript:void();" class="chatIdentity button live-state offline" data-user="{{-ad.seller.id}}" data-toggle="modal" data-target="#loginModal" >Chat</a>
+		</div>
+		
+	</div>
+		
+</div>

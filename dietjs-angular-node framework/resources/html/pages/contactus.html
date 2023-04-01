@@ -1,0 +1,240 @@
+	<!--web fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic' rel='stylesheet' type='text/css'>
+		<!--libs css-->
+	
+		<!--theme css-->
+       
+        
+
+
+     <style>
+	 .adv{
+vertical-align: top;
+text-align: right;
+width: 100%;
+height: 100%;		 
+		 }
+		 .advspan
+		 {
+			letter-spacing: 2px;
+/* background-color: rgba(0, 0, 0, 0.64); */
+color: #040404;
+/* top: 144px; */
+width: 155px;
+font-weight: 500;
+font-size: 15px;
+text-align: justify;
+text-shadow: 1px 1px 1px #198CCE; 
+		 }
+	 </style>   
+        
+	</head>
+    
+    
+        <style>
+		#infoinner{
+			width: 95%;
+			margin-right: auto;
+margin-left: auto;
+color:#FFF;
+		}
+		
+		
+		#info2 {
+			
+			padding-left: 7.5px;
+padding-right: 7.5px;
+width: 100%;
+position: absolute;
+bottom: 5px;
+/* left: 25%; */
+ z-index: 9999;
+ margin:auto 0;
+
+		}
+        #infoi {
+						
+padding-left: 7.5px;
+padding-right: 7.5px;
+width: 100%;
+position: absolute;
+bottom: 50px;
+/* left: 25%; */
+background-image: url(/images/background.png);
+
+}
+#infoi {
+    z-index: 9999;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+   font-size:16px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+   font-size:16px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;
+   font-size:16px; 
+}
+
+:-ms-input-placeholder {  
+   color: black;  
+   font-size:16px;
+}
+textarea, .select_title, input:not([type="submit"]) {
+border:none; background:#f1f1f1;
+border-left: 6px solid #198CCE;
+box-shadow:none; border-radius:0 !Important;
+color:#000
+}
+.select_title1 {
+border-bottom: 1px solid #000;
+}
+textarea{ height:196px; resize:none;}
+#map-canvas {
+        height: 400px;
+        margin: 0px;
+        padding: 0px
+      }
+button{ background:#00baff; box-shadow:none; color:#fff !Important; border:none;}
+</style>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+function initialize() {
+  var myLatlng = new google.maps.LatLng(37.783288,-122.408426);
+  var mapOptions = {
+    zoom: 16,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+//var image = 'images/ico/favicon.png';
+	var pinImg='/images/pin.png';
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      animation: google.maps.Animation.DROP,
+      title: 'VBOX',
+      icon: pinImg,
+	  
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+	<body class="sticky_menu contact">
+		
+		<!--layout-->
+		<div class="wide_layout bg_light">
+			<!--header markup-->
+			
+            <!-----------------------------------HEADER NAV START HERE--------------------------------------->
+           
+            <!-----------------------------------HEADER NAV END HERE--------------------------------------->	
+			
+			<!--page title-->
+			<!--section class="page_title translucent_bg_color_scheme image_fixed image_bg_14 t_align_c relative wrapper">
+				<div class="container">
+					<h1 class="color_light fw_light m_bottom_5" style="color:#198CCE;text-shadow: 1px 1px 1px #333;font-weight: 500;">Contact Us</h1>
+					
+					<ul class="hr_list d_inline_m breadcrumbs">
+						<li class="m_right_8 f_xs_none"><a href="/" class="color_grey_light_3 d_inline_m m_right_10" style="color:#198CCE;font-weight: 500;">Home</a><i class="icon-angle-right d_inline_m color_grey_light_3 fs_small" style="color:#198CCE;font-weight: 500;"></i></li>
+					
+						<li><a class="color_grey_light_3 d_inline_m" style="color:#198CCE;font-weight: 500;">Contact Us</a></li>
+					</ul>
+				</div>
+			</section-->
+			<!--content-->
+			<section class="section_offset">
+				<div class="container clearfix">
+					<div class="main-contactsec">
+					<div class="row whitebox">
+						<div class="col-md-12 col-sm-12">
+							<h3 class="m_bottom_15 heading_1 page-title">Contact Form</h3>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_30">
+							<form action="postcontact.php" method="get">
+								<ul>
+									<li class="m_bottom_30">
+										<input type="text" name="cf_name" placeholder="Name*" class="w_full r_corners fw_light">
+									</li>
+									<li class="m_bottom_30">
+										<input type="email" name="cf_email" placeholder="Email*" class="w_full r_corners fw_light">
+									</li>
+									<li class="m_bottom_30">
+										<input type="text" name="cf_subject" placeholder="Subject" class="w_full r_corners fw_light">
+									</li>
+									<li class="m_bottom_30">
+										<textarea class="w_full r_corners fw_light height_3" name="cf_message" placeholder="Message"></textarea>
+									</li>
+									<!--li class="m_bottom_20">
+										<label for="capcha" class="d_inline_m fw_light m_right_5 w_auto">Anti-spam test: 4+4=</label>
+										<input id="capcha" type="text" name="cf_anti_spam" class="r_corners fw_light d_inline_m w_auto">
+									</li-->
+									<li class="m_bottom_30">
+										<button class="button_type_5 color_blue transparent pull-right r_corners fs_medium tr_all m_right_10 m_sm_bottom_10" type="submit">Submit</button>
+									</li>
+								</ul>
+							</form>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_30">
+							<div id="map-canvas" class="w_full" height="400">
+							</div>
+						</div>
+					</div>
+					
+					<div class="row ">
+						<div class="col-md-3 col-sm-4">
+							<h4>Contact Information</h4>
+							<p>(123) 1234 4567 <br>info@vbox.com <br>vbox</p>
+						</div>
+						<div class="col-md-3 col-sm-4">
+							<h4>Office Address</h4>
+							<p>925 Market St, <br>San Francisco,  <br>CA 94103 </p>
+						</div>
+						<div class="m_xs_bottom_30 pull-right social-sec">
+							<h5 class="color_dark m_bottom_10 fw_light">Stay Connected</h5>
+							<ul class="hr_list social_icons">
+								<!--tooltip_container class is required-->
+								<li class="m_right_15 tooltip_container m_xs_right_15">
+									<!--tooltip-->
+									<span class="d_block r_corners color_default tooltip fs_small tr_all">Google Plus</span>
+									<a href="#" class="d_block googleplus icon_wrap_size_2 circle color_grey_light_2">
+										<i class="icon-gplus-1 fs_small"></i>
+									</a>
+								</li>
+								<li class="m_right_15 tooltip_container">
+									<!--tooltip-->
+									<span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
+									<a href="#" class="d_block facebook icon_wrap_size_2 circle color_grey_light_2">
+										<i class="icon-facebook fs_small"></i>
+									</a>
+								</li>
+								<li class="m_right_15 tooltip_container">
+									<!--tooltip-->
+									<span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
+									<a href="#" class="d_block twitter icon_wrap_size_2 circle color_grey_light_2">
+										<i class="icon-twitter fs_small"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</div>
+			</section>
+	
+			<!--footer-->
+
+            
+		<!--back to top button-->
+
+		<!--Libs-->
+	

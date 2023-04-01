@@ -1,0 +1,123 @@
+<div class="center">
+	<div class="center-in">
+
+		{{-@post '/classifieds/edit' }}
+			{{-@input false, 'id', 'hidden'}}
+			<h1>Edit Ad</h1>
+			
+
+			<fieldset class="tradeTypes outer-center">
+				<div class="inner-center">
+					{{-@input 'Sell', 'trade_type', 'radio', 1}}
+					{{-@input 'Buy', 'trade_type', 'radio', 2}}
+				</div>
+			</fieldset>
+			
+			
+			<fieldset>
+				<h3><label for="title">Title</label></h3>
+				{{-@input 'Write a short title', 'title', 'text'}}
+			</fieldset>
+			
+			
+			<fieldset>
+				<h3><label for="description">Description</label></h3>
+				{{-@textarea 'Describe briefly what are you offering', 'description', 'text'}}
+			</fieldset>
+			
+			
+			<fieldset class="input-holder select">
+				<h3><label for="category">Choose Category</label></h3>
+				{{-this.select placeholder:'Choose Category', name:'category', options:this.categories }}
+			</fieldset>
+			
+			<div id="category_fields" style="display: none;"></div>
+			
+			
+			<fieldset id="location_holder" >
+				<h3><label for="location">Location</label></h3>
+				{{-@input 'Physical Location', 'formatted_address', 'text'}}
+				{{-@input false, 'country_long', 'hidden' }}
+				{{-@input false, 'administrative_area_level_1_short', 'hidden' }}
+				{{-@input false, 'administrative_area_level_1_long', 'hidden' }}
+				{{-@input false, 'administrative_area_level_2_short', 'hidden' }}
+				{{-@input false, 'administrative_area_level_2_long', 'hidden' }}
+				{{-@input false, 'locality_short', 'hidden' }}
+				{{-@input false, 'locality_long', 'hidden' }}
+				{{-@input false, 'postal_code_short', 'hidden' }}
+				{{-@input false, 'postal_code_long', 'hidden' }}
+				{{-@input false, 'neighborhood_short', 'hidden' }}
+				{{-@input false, 'neighborhood_long', 'hidden' }}
+				{{-@input false, 'route_short', 'hidden' }}
+				{{-@input false, 'route_long', 'hidden' }}
+				{{-@input false, 'street_number_short', 'hidden' }}
+				{{-@input false, 'street_number_long', 'hidden' }}
+				{{-@input false, 'country_short', 'hidden' }}
+				{{-@input false, 'latitude', 'hidden' }}
+				{{-@input false, 'longitude', 'hidden' }}
+			</fieldset>
+			
+
+		
+			{{if this.account.business:}}
+				
+				
+				<fieldset>
+					<h3><label for="contact-select">Contact</label></h3>
+					<select id="contact-select" name="contact_details">
+
+						{{for employee in this.account.business.employees:}}
+							<option data-employee="{{- JSON.htmlify({ 'full_name': employee.full_name, 'avatar': employee.avatar(40), 'contact_number': employee.contact_number, 'contact_email': employee.contact_email}) }}" value="{{-employee.id}}" {{-if this.inputs.agent.id is employee.id then 'selected="selected"'}}>{{-employee.full_name}}</option>
+						{{end}}
+					</select>
+				</fieldset>
+				
+			{{end}}
+			
+			<fieldset class="contact_options">
+				<h3>Contact Options</h3>
+				{{-@input 'Enable Vbox Live View', 'show_vbox', 'checkbox'}}
+				{{-@input 'Show Email', 'show_email', 'checkbox'}}
+				{{-@input 'Show Phone Number', 'show_phone', 'checkbox'}}
+				{{-@input 'Show Contact Form', 'show_contact_form', 'checkbox'}}
+			</fieldset>
+			
+			<fieldset>
+				<h3><label for="currency">Price</label></h3>
+				<select id="currency" name="currency">
+					{{for index, currency of this.currencies:}}
+						<option {{-if currency.code is this.currency then 'selected'}} value="{{-currency.code}}-{{-currency.symbol_native}}" data-symbol="{{-currency.symbol_native}}">{{-currency.name}} ({{-currency.symbol_native}})</option>
+					{{end}}
+				</select>
+				{{-@input 'What\'s the price for your offer?', 'price', 'text'}}
+				<div id="final_price_tag">$0.00</div>
+				{{-@input false, 'formatted_price', 'hidden' }}
+			</fieldset>
+			
+			
+
+
+
+			<button type="submit" id="submit" class="button">Edit Ad</button>
+		{{-@end}}
+		
+		{{-@post '/classifieds/adPicture', enctype:'multipart/form-data', id:'dropform' }}
+			{{-@input false, 'id', 'hidden'}}
+			
+			<fieldset>
+				<h3>Upload Pictures</h3>
+				 <div class="dropzone inputfile_box" id="dropzonePreview">
+				 	<div class="dropzone-text">Click here <br> OR <br> Drag and drop files</div>
+				 </div>
+			</fieldset>
+			<small style="margin: 20px 0 0 0; color: #999; text-align: center; width: 100%;">Pictures are uploaded and removed from the server as soon as<br> you pick or remove a photo.</small>
+		{{-@end}}
+
+	</div>
+</div>
+
+<script>
+	window.fields = {{-util.inspect this.inputs.fields}} || [];
+	window.classified_id = '{{-this.inputs.id}}';
+    
+</script>

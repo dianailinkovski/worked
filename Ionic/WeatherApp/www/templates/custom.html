@@ -1,0 +1,156 @@
+<ion-view title="{{ 'MY_CUSTOM' | translate }}" cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button-icon icon ion-edit mixer-button" ng-click="editAll()" ng-if="customWorkouts.savedWorkouts.length"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header custom-workout-page width-control full-length">
+        <ion-slide-box on-slide-changed="" show-pager="true" style="height:180px">
+            <ion-slide>
+                <div id="category-header" ng-class="downloadedWorkouts[0].shortURI">
+                    <span class="header-span">
+                      <!-- <h3>{{thisCategory < 2 ? ('GET_TO_SWORK' | translate) : ('SWORK_OUT' | translate)}}</h3> -->
+                          <p class="featured-text">{{'FEATURED' | translate}}</p>
+                          <h3>{{downloadedWorkouts[0].name}}</h3>
+                          <!-- <h3 class="custom-feature-sub">{{getFirst(downloadedWorkouts[0].description)}}</h3> -->
+                          <i class="icon ion-plus plus-feature" ng-click="addCustomWorkout(downloadedWorkouts[0].shortURI, 0)"></i>
+                    </span>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div id="category-header" ng-class="downloadedWorkouts[1].shortURI">
+                    <span class="header-span">
+                      <!-- <h3>{{thisCategory < 2 ? ('GET_TO_SWORK' | translate) : ('SWORK_OUT' | translate)}}</h3> -->
+                          <p class="featured-text">{{'FEATURED' | translate}}</p>
+                          <h3>{{downloadedWorkouts[1].name}}</h3>
+                          <!-- <h3 class="custom-feature-sub">{{getFirst(downloadedWorkouts[1].description)}}</h3> -->
+                          <i class="icon ion-plus plus-feature" ng-click="addCustomWorkout(downloadedWorkouts[1].shortURI, 1)"></i>
+                    </span>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div id="category-header" ng-class="downloadedWorkouts[2].shortURI">
+                    <span class="header-span">
+                      <!-- <h3>{{thisCategory < 2 ? ('GET_TO_SWORK' | translate) : ('SWORK_OUT' | translate)}}</h3> -->
+                          <p class="featured-text">{{'FEATURED' | translate}}</p>
+                          <h3>{{downloadedWorkouts[2].name}}</h3>
+                          <!-- <h3 class="custom-feature-sub">{{getFirst(downloadedWorkouts[2].description)}}</h3> -->
+                          <i class="icon ion-plus plus-feature" ng-click="addCustomWorkout(downloadedWorkouts[2].shortURI, 2)"></i>
+                    </span>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <div>
+            <div class="button-bar choose-options" style="padding:2px">
+              <button class="button nexercise-orange uppercase white-text new-button add-options" ng-click="createCustom()" ng-class="{'glow' : isPressed}">{{'DESIGN_NEW' | translate}}</button>
+              <button class="or-button" ng-click="orPressed()">{{'OR' | translate}}</button>
+              <button ng-click="showFeatured()" class="button nexercise-blue uppercase white-text new-button add-options" ng-class="{'glow' : isPressed}">{{'COPY_POP' | translate}}</button>
+            </div>
+            <p class="page-instructions" style="font-size:16px;margin-top:20px" ng-if="customWorkouts.savedWorkouts.length == 0">{{'DESIGN_FIRST' | translate}}</p>
+            <ion-list class="workout-type-list">
+                <div class="my-customs">
+                    <div ng-repeat="myWorkout in customWorkouts.savedWorkouts track by $index">
+                        <ion-item class="item-text-wrap item-icon-right">
+                            <div ng-click="selectCustom($index, myWorkout)">
+                                <h2>{{(myWorkout.name | translate)}}</h2>
+                                <!--<span ng-repeat="myExercises in myWorkout.workout">
+                                 {{myExercises}},
+                                 </span> -->
+                                <span>{{myWorkout.total}} {{myWorkout.total == '1' ? ('EXERCISE' | translate)  : ('EXERCISES' | translate)}}</span>
+                                <i class="icon ion-chevron-right icon-accessory"></i>
+                                <ion-option-button class="button-balanced"
+                                ng-click="editCustom($index, myWorkout)">
+                                {{('EDIT' | translate)}}
+                                </ion-option-button>
+                                <ion-option-button class="button-calm"
+                                ng-click="shareCustom($index, myWorkout)">
+                                {{('SHARE' | translate)}}
+                                </ion-option-button>
+                                <ion-option-button class="button-assertive"
+                                ng-click="deleteCustom($index, myWorkout)">
+                                {{('DELETE' | translate)}}
+                                </ion-option-button>
+                            </div>
+                        </ion-item>
+                    </div>
+                </div>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>
+
+<script id="custom-workout.html" type="text/ng-template">
+    <div class="modal custom-modal">
+    <ion-header-bar class="bar bar-stable">
+    <button class="button button-clear button-primary" ng-click="cancelCreateCustom()">{{'CANCEL_SM' | translate}}</button>
+    <h1 class="title counter-title title-center">{{totalSelected + ' ' + ('OF' | translate) + ' ' + allExercises.length}}</h1>
+    <button class="button button-clear button-primary bold orange-text" ng-click="saveCustom()">{{'SAVE' | translate}}</button>
+    </ion-header-bar>
+    <autocomplete ng-model="result" attr-placeholder="{{'SEARCH_FOR' | translate}}" data="allExercises" on-type="" on-select="searchSelect" attr-class="fixed-search" attr-input-id="exercise-search"></autocomplete>
+    <ion-content class="padding under-search" delegate-handle="createScroll">
+    <div class="button-bar padding">
+    <a class="button button-stable" ng-click="resetCustom()">{{'RESET' | translate}}</a>
+    <a class="button button-stable" ng-click="previewCustom()">{{'PREVIEW' | translate}}</a>
+    </div>
+    <ion-list>
+    <div ng-repeat="exerciseCat in exerciseCategories track by $index" id="{{'cat' + $index}}">
+    <div class="item item-divider nexercise-orange">
+    <h3>{{exerciseCat.longName | translate}}</h3>
+    <p class="all-button" ng-click="toggleAll(exerciseCat.shortName, $index)">{{'ALL' | translate}}</p>
+    </div>
+    <div ng-repeat="exerciseEl in exerciseCat.exercises track by $index">
+    <ion-checkbox class="item-text-wrap item-checkbox-right item-thumbnail-left" name="selectedExercises[]" value="{{exerciseEl.name | translate}}" ng-model="exerciseEl.selected" id="{{allExercises.indexOf((exerciseEl.name | translate))}}" ng-change="mathSelected(exerciseEl.selected)">
+    <div class="item-image">
+    <img ng-src="img/exercises/{{exerciseEl.image}}"/>
+    </div>
+    <h3>{{exerciseEl.name | translate}}</h3>
+    </ion-checkbox>
+    </div>
+    </div>
+    </ion-list>
+    <div class="button-bar padding-bottom padding-top">
+    <a class="button button-stable" ng-click="resetCustom()">{{'RESET' | translate}}</a>
+    <a class="button button-stable" ng-click="previewCustom()">{{'PREVIEW' | translate}}</a>
+    </div>
+    </ion-content>
+    </div>
+    </script>
+
+<script id="custom-workout-reorder.html" type="text/ng-template">
+    <div class="modal custom-modal reorder-modal">
+    <ion-header-bar class="bar bar-stable">
+    <button class="button button-clear button-primary" ng-click="cancelReorderCustom()">{{'CANCEL_SM' | translate}}</button>
+    <h1 class="title">{{'REORDER_W' | translate}}</h1>
+    <button class="button button-icon icon ion-ios-minus-outline" ng-click="data.showDelete = !data.showDelete"></button>
+    </ion-header-bar>
+    <ion-content class="padding-20">
+    <div class="margin-bottom-20">
+    <div class="button-bar padding">
+    <a class="button button-energized nexercise-orange" ng-click="saveReorder()">{{'SAVE_O' | translate}}</a>
+    </div>
+    <p class="page-instructions">{{'DRAG' | translate}}</p>
+    <ion-list class="padding" show-reorder="data.showReorder" show-delete="data.showDelete">
+    <ion-item ng-repeat="exerciseEls in reorderWorkout track by $index">
+    <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(exerciseEls)"></ion-delete-button>
+    <h3>{{getTranslatedExercise(exerciseEls) | translate}}</h3>
+    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(exerciseEls, $fromIndex, $toIndex)">
+    </ion-reorder>
+    </ion-item>
+    </ion-list>
+    <div>
+    <p class="page-instructions">{{'ADD_EX' | translate}}</p>
+    <div class="center" style="max-width: 360px;">
+    <select class="ion-input-select" ng-model="selectedExerciseAdd.selected" ng-options="exerciseAdd | translate for exerciseAdd in allExercises">
+    </select>
+    </div>
+    <div class="center padding-20">
+    <button class="button nexercise-orange icon-left ion-ios-plus-outline nexercise-button" ng-click="addExercise()">{{'ADD_EX' | translate}}</button>
+    </div>
+    </div>
+    <div class="item item-divider item-text-wrap">
+    <h4>{{'WORKOUT_TIP' | translate}}</h4>
+    </div>
+    <div style="margin-top:20px;margin-bottom:40px">
+    </div>
+    </div>
+    </ion-content>
+    </div>
+    </script>

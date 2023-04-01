@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » \Helper</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div xmlns:php="http://php.net/xsl" class="btn-toolbar">
+<div class="btn-group visibility" data-toggle="buttons-checkbox">
+<button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button>
+</div>
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+</div>
+<ul xmlns:php="http://php.net/xsl" class="side-nav nav nav-list"><li class="nav-header">
+<i title="Methods" class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_breadcrumbsFromAlias" title="breadcrumbsFromAlias() :: Generate breadcrumbs from CMS alias."><span class="description">Generate breadcrumbs from CMS alias.</span><pre>breadcrumbsFromAlias()</pre></a></li>
+<li class="method public "><a href="#method_encodeFileName" title="encodeFileName() :: Encode file name (replace any special character with an underscore)"><span class="description">Encode file name (replace any special character with an underscore)</span><pre>encodeFileName()</pre></a></li>
+<li class="method public "><a href="#method_fileSuffix" title="fileSuffix() :: Add a suffix to a file (following an underscore, before the file extension)."><span class="description">Add a suffix to a file (following an underscore, before the file extension).</span><pre>fileSuffix()</pre></a></li>
+<li class="method public "><a href="#method_formatDate" title="formatDate() :: Format a date"><span class="description">Format a date</span><pre>formatDate()</pre></a></li>
+<li class="method public "><a href="#method_formatMimeType" title="formatMimeType() :: Format a readable string from the mime type of a file"><span class="description">Format a readable string from the mime type of a file</span><pre>formatMimeType()</pre></a></li>
+<li class="method public "><a href="#method_logToFile" title="logToFile() :: Log message to a file."><span class="description">Log message to a file.</span><pre>logToFile()</pre></a></li>
+<li class="method public "><a href="#method_messageCategoryArray" title="messageCategoryArray() :: Query all messages of a category"><span class="description">Query all messages of a category</span><pre>messageCategoryArray()</pre></a></li>
+<li class="method public "><a href="#method_randStr" title="randStr() :: Generate a random string"><span class="description">Generate a random string</span><pre>randStr()</pre></a></li>
+<li class="method public "><a href="#method_removeAccents" title="removeAccents() :: Replace accentuated characters with their non accentuated version."><span class="description">Replace accentuated characters with their non accentuated version.</span><pre>removeAccents()</pre></a></li>
+<li class="method public "><a href="#method_rrmdir" title="rrmdir() :: Recursively delete a directory"><span class="description">Recursively delete a directory</span><pre>rrmdir()</pre></a></li>
+<li class="method public "><a href="#method_sendMail" title="sendMail() :: Send an email using Yii params"><span class="description">Send an email using Yii params</span><pre>sendMail()</pre></a></li>
+<li class="method public "><a href="#method_titleFromBreadcrumbs" title="titleFromBreadcrumbs() :: Generate page title from the breadcrumbs"><span class="description">Generate page title from the breadcrumbs</span><pre>titleFromBreadcrumbs()</pre></a></li>
+</ul>
+</li></ul>
+</div>
+<div class="span8">
+<a xmlns:php="http://php.net/xsl" id="\Helper"></a><ul xmlns:php="http://php.net/xsl" class="breadcrumb">
+<li>
+<a href="../index.html"><i title="Classes" class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Helper.html">Helper</a>
+</li>
+</ul>
+<div xmlns:php="http://php.net/xsl" class="element class">
+<p class="short_description">General Helper class</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Bruno LL. <https://github.com/brunoll></a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/todo">https://github.com/todo</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright © 2015 Societe G-NeTiX Inc. - All Rights Reserved</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://opensource.org/licenses/MIT">The MIT License (MIT)</a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Helper.html">Helper</a></td>
+</tr>
+</table>
+<h3>
+<i title="Methods" class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_breadcrumbsFromAlias"></a><div class="element clickable method public method_breadcrumbsFromAlias " data-toggle="collapse" data-target=".method_breadcrumbsFromAlias .collapse" title="public">
+<h2>Generate breadcrumbs from CMS alias.</h2>
+<pre>breadcrumbsFromAlias(boolean $linkLast<code> = false</code>, integer $aliasId<code> = null</code>) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$linkLast</h4>
+<code>boolean</code><p>wether to link the last item or not.</p></div>
+<div class="subelement argument">
+<h4>$aliasId</h4>
+<code>integer</code><p>the alias id. Defaults to the current alias.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the breadcrumbs.</div>
+</div></div>
+</div>
+<a id="method_encodeFileName"></a><div class="element clickable method public method_encodeFileName " data-toggle="collapse" data-target=".method_encodeFileName .collapse" title="public">
+<h2>Encode file name (replace any special character with an underscore)</h2>
+<pre>encodeFileName(string $name) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the file name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the filtered string</div>
+</div></div>
+</div>
+<a id="method_fileSuffix"></a><div class="element clickable method public method_fileSuffix " data-toggle="collapse" data-target=".method_fileSuffix .collapse" title="public">
+<h2>Add a suffix to a file (following an underscore, before the file extension).</h2>
+<pre>fileSuffix($name, $suffix) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4><p>string the name of the file.</p></div>
+<div class="subelement argument">
+<h4>$suffix</h4><p>string the wanted suffix.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the modified file name.</div>
+</div></div>
+</div>
+<a id="method_formatDate"></a><div class="element clickable method public method_formatDate " data-toggle="collapse" data-target=".method_formatDate .collapse" title="public">
+<h2>Format a date</h2>
+<pre>formatDate(string $date, string $type, string $language<code> = null</code>) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Note that some translation messages are used.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code>string</code><p>the date, many formats are supported, @see php function strtotime.</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>type of formatting: reg, reg+time, timesince, post, short, slashes, slashes+time, rfc2822</p></div>
+<div class="subelement argument">
+<h4>$language</h4>
+<code>string</code><p>the language of formatting, "fr" and "en" are supported. Defaults to Yii language.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the filtered string</div>
+</div></div>
+</div>
+<a id="method_formatMimeType"></a><div class="element clickable method public method_formatMimeType " data-toggle="collapse" data-target=".method_formatMimeType .collapse" title="public">
+<h2>Format a readable string from the mime type of a file</h2>
+<pre>formatMimeType(string $mimetype) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Uses Yii translation fonction</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mimetype</h4>
+<code>string</code><p>the mime type</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the string</div>
+</div></div>
+</div>
+<a id="method_logToFile"></a><div class="element clickable method public method_logToFile " data-toggle="collapse" data-target=".method_logToFile .collapse" title="public">
+<h2>Log message to a file.</h2>
+<pre>logToFile(string $filename, string $msg) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code><p>the file name (and path)</p></div>
+<div class="subelement argument">
+<h4>$msg</h4>
+<code>string</code><p>the message</p></div>
+</div></div>
+</div>
+<a id="method_messageCategoryArray"></a><div class="element clickable method public method_messageCategoryArray " data-toggle="collapse" data-target=".method_messageCategoryArray .collapse" title="public">
+<h2>Query all messages of a category</h2>
+<pre>messageCategoryArray(string $category) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$category</h4>
+<code>string</code><p>the category</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the messages</div>
+</div></div>
+</div>
+<a id="method_randStr"></a><div class="element clickable method public method_randStr " data-toggle="collapse" data-target=".method_randStr .collapse" title="public">
+<h2>Generate a random string</h2>
+<pre>randStr(integer $length<code> = 32</code>) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$length</h4>
+<code>integer</code><p>the length of the hash. Default 32.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the string</div>
+</div></div>
+</div>
+<a id="method_removeAccents"></a><div class="element clickable method public method_removeAccents " data-toggle="collapse" data-target=".method_removeAccents .collapse" title="public">
+<h2>Replace accentuated characters with their non accentuated version.</h2>
+<pre>removeAccents(string $str) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Note that this might not catch everything and if you need clean the string of all special characters you still need to filter it.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$str</h4>
+<code>string</code><p>string to operate on.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the string without accents.</div>
+</div></div>
+</div>
+<a id="method_rrmdir"></a><div class="element clickable method public method_rrmdir " data-toggle="collapse" data-target=".method_rrmdir .collapse" title="public">
+<h2>Recursively delete a directory</h2>
+<pre>rrmdir(string $dir) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code>string</code><p>the path to the directory</p></div>
+</div></div>
+</div>
+<a id="method_sendMail"></a><div class="element clickable method public method_sendMail " data-toggle="collapse" data-target=".method_sendMail .collapse" title="public">
+<h2>Send an email using Yii params</h2>
+<pre>sendMail(string $to, string $subject, string $body) : boolean | string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Add a "mail" array to the Yii params with the following keys: Host, Username, Password, Port, Form, FormName.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$to</h4>
+<code>string</code><p>the email to send to</p></div>
+<div class="subelement argument">
+<h4>$subject</h4>
+<code>string</code><p>the email subject</p></div>
+<div class="subelement argument">
+<h4>$body</h4>
+<code>string</code><p>the email body</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code><code>string</code>bool true if success, string with error info if error</div>
+</div></div>
+</div>
+<a id="method_titleFromBreadcrumbs"></a><div class="element clickable method public method_titleFromBreadcrumbs " data-toggle="collapse" data-target=".method_titleFromBreadcrumbs .collapse" title="public">
+<h2>Generate page title from the breadcrumbs</h2>
+<pre>titleFromBreadcrumbs(array $bc<code> = null</code>, string $sep<code> = null</code>) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$bc</h4>
+<code>array</code><p>the breadcrumbs array. Defaults to "breadcrumbs" variable in controller, if it exists.</p></div>
+<div class="subelement argument">
+<h4>$sep</h4>
+<code>string</code><p>the separator string between items. Defaults to "titleSeparator" variable in controller, if it exists.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the title.</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:39-04:00.<br></footer></div>
+</div>
+</body>
+</html>

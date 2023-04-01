@@ -1,0 +1,60 @@
+.button {
+	background-image: none;
+	border: none;
+	padding: 0;
+}
+.button .buttonR, .button input {
+	float: left;
+	background-image: none;
+	background: transparent url(../images/sprite-sticky_ie.png) right -180px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	padding: 0 10px 0 4px;
+}
+.button .buttonCornerL {
+	float: left;
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -180px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	width: 6px;
+}
+.redButton .buttonR, .redButton input,
+input.redButton, button.redButton,
+.actionArea .resetButton button, .actionArea .resetButton input[type=button] {
+	float: left;
+	background-image: none;
+	background: transparent url(../images/sprite-sticky_ie.png) right -150px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	padding: 0 10px 0 4px;
+}
+.redButton .buttonCornerL {
+	float: left;
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -150px no-repeat;
+	line-height: 20px;
+	height: 20px;
+	width: 6px;
+}
+.bigButton .buttonR {
+	background: transparent url(../images/sprite-sticky_ie.png) right -210px no-repeat;
+	line-height: 36px;
+	height: 36px;
+}
+.bigButton .buttonCornerL {
+	background: transparent url(../images/sprite-sticky_ie.png) 0 -210px no-repeat;
+	line-height: 36px;
+	height: 36px;
+}
+.tabNav li {
+	padding: 6px 0 0 0;
+}
+.productActionArea {
+	background: #b4b4b4 url(../images/sprite-sticky_x.png) 0 -80px repeat-x;
+}
+.actionArea input[type=text] {
+	line-height: 18px;
+	height: 18px;
+}
+.actionArea select {
+	margin: 0;
+}

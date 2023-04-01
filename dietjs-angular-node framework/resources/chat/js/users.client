@@ -1,0 +1,24 @@
+function Users() {
+}
+
+Users.prototype = {
+    constructor: Users,
+    getChatHistory: function(from, to, appendto){
+        appendto = appendto ? appendto : "#receiveMessageArea";
+        console.log("calling getChatHistory");
+        socket.emit("getChatHistory", {from: from, to: to, appendto:appendto});
+    },
+    saveAppointment: function(id_user, id_visitor, appTime){
+        socket.emit("saveAppointment", {id_user: id_user, id_visitor: id_visitor, appTime: appTime});
+    },
+    getMessageBlock: function(id_user, limit){
+        console.log("getting messages");
+        socket.emit("getMessageBlock", {id_user: id_user, limit: limit});
+    },
+    getAppointmentsBlock: function(id_user, limit){
+        socket.emit("getAppointmentsBlock", {id_user: id_user, limit: limit});
+    },
+    loadMsgHistory: function(from, to){
+        socket.emit("getUsersInfo", {ids: [from, to], callback: "getMsgUsersInfoCallback"});
+    }
+}

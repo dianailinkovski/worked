@@ -1,0 +1,12 @@
+/**************** Internet Explorer 10 in Windows 8 and Windows Phone 8 Fix (for bootstrap) ****************/
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+/************ Utility classes ***********/
+.img-right { float:right; margin-left:1em; margin-bottom:1em; }
+.img-left { float:left; margin-right:1em; margin-bottom:1em; }
+.text-lessen { color:#888; }
+.text-small { font-size:0.85em !important; }

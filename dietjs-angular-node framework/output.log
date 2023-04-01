@@ -1,0 +1,90 @@
+10 Oct 17:11:51 - [33m[nodemon] 1.7.1[39m
+10 Oct 17:11:51 - [33m[nodemon] to restart at any time, enter `rs`[39m
+10 Oct 17:11:51 - [33m[nodemon] watching: *.*[39m
+10 Oct 17:11:51 - [32m[nodemon] starting `node /root/vbox/index.js`[39m
+[31m[nodemon] Internal watch failed: watch ENOSPC[39m
+10 Oct 17:14:36 - [33m[nodemon] 1.7.1[39m
+10 Oct 17:14:36 - [33m[nodemon] to restart at any time, enter `rs`[39m
+10 Oct 17:14:36 - [33m[nodemon] watching: *.*[39m
+10 Oct 17:14:36 - [32m[nodemon] starting `node /root/vbox/index.js`[39m
+info    - EasyRTC: Starting EasyRTC Server (v1.0.14) on Node (v0.10.37)
+Application started on port 80
+Error: listen EADDRINUSE
+  at errnoException (net.js:905:11)
+  at Server._listen2 (net.js:1043:14)
+  at listen (net.js:1065:10)
+  at Server.listen (net.js:1139:5)
+  at new exports.setup (/root/vbox/node_modules/diet/index.js:240:7)
+  at Object.<anonymous> (/root/vbox/index.js:24:7)
+  at Module._compile (module.js:456:26)
+  at Object.Module._extensions..js (module.js:474:10)
+  at Module.load (module.js:356:32)
+  at Function.Module._load (module.js:312:12)
+
+info    - EasyRTC: EasyRTC Server Ready For Connections (v1.0.14)
+App.notFound
+[31m[nodemon] Internal watch failed: watch ENOSPC[39m
+10 Oct 17:15:47 - [33m[nodemon] 1.7.1[39m
+10 Oct 17:15:47 - [33m[nodemon] to restart at any time, enter `rs`[39m
+10 Oct 17:15:47 - [33m[nodemon] watching: *.*[39m
+10 Oct 17:15:47 - [32m[nodemon] starting `node /root/vbox/index.js`[39m
+info    - EasyRTC: Starting EasyRTC Server (v1.0.14) on Node (v0.10.37)
+Application started on port 80
+Error: listen EADDRINUSE
+  at errnoException (net.js:905:11)
+  at Server._listen2 (net.js:1043:14)
+  at listen (net.js:1065:10)
+  at Server.listen (net.js:1139:5)
+  at new exports.setup (/root/vbox/node_modules/diet/index.js:240:7)
+  at Object.<anonymous> (/root/vbox/index.js:24:7)
+  at Module._compile (module.js:456:26)
+  at Object.Module._extensions..js (module.js:474:10)
+  at Module.load (module.js:356:32)
+  at Function.Module._load (module.js:312:12)
+
+info    - EasyRTC: EasyRTC Server Ready For Connections (v1.0.14)
+App.notFound
+[31m[nodemon] Internal watch failed: watch ENOSPC[39m
+info    - EasyRTC: Starting EasyRTC Server (v1.0.14) on Node (v0.10.37)
+Application started on port 80
+Error: listen EADDRINUSE
+  at errnoException (net.js:905:11)
+  at Server._listen2 (net.js:1043:14)
+  at listen (net.js:1065:10)
+  at Server.listen (net.js:1139:5)
+  at new exports.setup (/root/vbox/node_modules/diet/index.js:240:7)
+  at Object.<anonymous> (/root/vbox/index.js:24:7)
+  at Module._compile (module.js:456:26)
+  at Object.Module._extensions..js (module.js:474:10)
+  at Module.load (module.js:356:32)
+  at Function.Module._load (module.js:312:12)
+
+index.js: command not found
+info    - EasyRTC: Starting EasyRTC Server (v1.0.14) on Node (v0.10.37)
+Application started on port 80
+Error: listen EADDRINUSE
+  at errnoException (net.js:905:11)
+  at Server._listen2 (net.js:1043:14)
+  at listen (net.js:1065:10)
+  at Server.listen (net.js:1139:5)
+  at Object.<anonymous> (/root/vbox/index.js:19:44)
+  at Module._compile (module.js:456:26)
+  at Object.Module._extensions..js (module.js:474:10)
+  at Module.load (module.js:356:32)
+  at Function.Module._load (module.js:312:12)
+  at Function.Module.runMain (module.js:497:10)
+
+Error: listen EADDRINUSE
+  at errnoException (net.js:905:11)
+  at Server._listen2 (net.js:1043:14)
+  at listen (net.js:1065:10)
+  at Server.listen (net.js:1139:5)
+  at new exports.setup (/root/vbox/node_modules/diet/index.js:240:7)
+  at Object.<anonymous> (/root/vbox/index.js:221:7)
+  at Module._compile (module.js:456:26)
+  at Object.Module._extensions..js (module.js:474:10)
+  at Module.load (module.js:356:32)
+  at Function.Module._load (module.js:312:12)
+
+info    - EasyRTC: EasyRTC Server Ready For Connections (v1.0.14)
+App.notFound

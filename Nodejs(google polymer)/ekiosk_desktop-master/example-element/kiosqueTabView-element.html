@@ -1,0 +1,976 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/core-animated-pages/core-animated-pages.html" rel="import">
+<link href="../components/paper-icon-button/paper-icon-button.html" rel="import" />
+<link href="../components/core-ajax/core-ajax.html" rel="import">
+<link href="../components/core-animated-pages/transitions/slide-up.html" rel="import">
+<link href="../components/core-ajax/core-xhr.html" rel="import">
+<link href="../components/paper-menu-button/paper-menu-button.html" rel="import">
+<link href="../components/core-toolbar/core-toolbar.html" rel="import">
+<link href="../components/paper-item/paper-item.html" rel="import">
+<link href="../components/core-menu-button/core-menu-button.html" rel="import">
+<link href="../components/core-item/core-item.html" rel="import">
+<link href="../components/core-localstorage/core-localstorage.html" rel="import">
+<link href="../components/paper-dialog/paper-dialog.html" rel="import">
+<link href="../components/paper-dialog/paper-dialog-transition.html" rel="import">
+
+<link href="../components/core-dropdown-menu/core-dropdown-menu.html" rel="import">
+
+<link href="kiosqueOverlayDetail-element.html" rel="import">
+<link href="spinner-element.html" rel="import">
+<link href="buyingPublication-element.html" rel="import">
+
+<polymer-element name="kiosqueTabView-element">
+    
+    
+      
+  <template>
+    
+    <core-localstorage id="StorageUsername" name="StorageUsername" value="{{username}}" autoSaveDisabled="true"></core-localstorage>
+    <core-localstorage id="StoragePassword" name="StoragePassword" value="{{password}}" autoSaveDisabled="true"></core-localstorage>
+    <core-localstorage id="StorageEkcredit" name="StorageEkcredit" value="{{ekcredit}}" autoSaveDisabled="true"></core-localstorage>
+    
+    <core-xhr id="xhr"></core-xhr>
+    <core-xhr id="xhr2"></core-xhr>
+    <!--
+    <core-ajax id="getAjax" auto url="http://api.ngser.gnetix.com/v1.1/getRecentsParCategorie.php" params='{"categorie":"Tous"}' handleAs="json"></core-ajax>
+    -->
+    
+    
+    <style>
+	
+      .chip-container, .chip-container-detail {
+        /*
+		position: absolute;
+        top: 20px;
+        right: 0;
+        left: 0;
+		*/
+		text-align: center;
+      }
+	  
+	  .chip-container-detail {
+		  position:relative;
+		  top:0;
+	  }
+
+      .chip {
+        display: inline-block;
+        position: relative;
+        border-radius: 3px;
+        margin: 8px;
+        overflow: hidden;
+        text-align: start;
+        /*background-color: rgba(255,255,255,0.9);*/
+        /*box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);*/
+      }
+
+      .chip-top {
+        width: 160px;
+        height: 200px;
+		text-align:center;
+		padding:5px 0 0;
+		/*background:white;*/
+      }
+	  
+	  .chip-top img {
+		  box-sizing:border-box;
+		  border:1px solid #888;
+	  }
+
+      .chip-bottom {
+        
+      }
+	  
+	  .archive_chip {
+	  	 background-color: rgba(255,255,255,0.9);
+         box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+         width:200px;
+         height:180px;
+	  }
+	  
+	  .archive_chip .chip-top {
+	  	 background: white;
+	  	 padding: 20px 10px;
+	  	 width:180px;
+	  	 height:100px;
+	  }
+	  
+	  .archive_chip .chip-bottom {
+	  	 background: white;
+	  }
+	  
+      .chip-album-title {
+        font-weight: bold;
+		text-align:center;
+		color:#333;
+		padding: 5px;
+		/*background:white;*/
+      }
+
+      .ekcoin {
+		background-image: url('../img/ekcoin_big_logo.png');
+		background-size: 24px;
+		background-repeat: no-repeat;
+		background-position: right center;
+		padding-right: 28px;
+		margin-right: 15px;
+	  }
+	  
+	  #month_toolbar {
+	  	border-top: 1px solid #aaa;
+	  	font-family: Arial, Helvetica, sans-serif;
+	  	font-weight: bold;
+	  }
+	  
+	  #month_toolbar .center_text {
+	  	margin:0 auto;
+	  	width:200px;
+	  	text-align: center;
+	  	font-size: 24px;
+	  	font-weight: bold;
+	  	color: grey;
+	  }
+	  
+	  #month_toolbar .left{
+	  	color: grey;
+	  	font-weight: bold;
+	  	font-size: 20px;
+	  	margin-left:60px;
+	  	width:200px;
+	  	text-align: right;
+	  }
+	  
+	  #month_toolbar .right{
+	  	color: grey;
+	  	font-weight: bold;
+	  	font-size: 20px;
+	  	margin-right: 60px;
+	  	width:200px;
+	  	text-align: left;
+	  }
+	  
+	  #month_toolbar paper-button {
+	  	text-transform: capitalize
+	  }
+	  #kiosk_toolbar .center_text{
+	  	margin:0 auto;
+	  	width:200px;
+	  	text-align:center;
+	  	font-size: 24px;
+	  }
+	  
+	  .banner img{
+	  	cursor: pointer;
+	  }
+	  
+	  #abonnement_mark-1 {
+	  	position: absolute;
+	  	left: 1px;
+	  	top: 3px;
+	  	width: 120px;
+	  	height: 120px;
+	  	background-image: url('../img/ic_abonnement.png');
+	  }
+
+	  #jour_abonnement_mark-1 {
+	  	position: absolute;
+	  	left: -3px;
+	  	top: -2px;
+	  	width: 120px;
+	  	height: 120px;
+	  	background-image: url('../img/ic_abonnement.png');
+	  }
+
+	paper-button[raisedButton].colored {
+		background: #E6A73A;
+		color: #fff;
+	}
+	
+	paper-button[raisedButton].colored #ripple,
+	paper-button[raisedButton].colored::shadow #ripple {
+		color: #F6CF42;
+	}
+	
+	paper-button[raisedButton].colored #focusBg,
+	paper-button[raisedButton].colored::shadow #focusBg {
+		background: #ffffff;
+	}
+	
+	paper-button::shadow #content > span {
+		font-size:16px;
+		padding: 0 10px;
+    }
+	
+    </style>
+    
+<core-animated-pages selected="{{page}}" transitions="hero-transition slide-up slide-down" on-core-animated-pages-transition-end="{{complete}}">
+	
+    <section>
+        <div layout vertical>
+            <core-toolbar id="kiosk_toolbar">
+                <core-dropdown-menu id="categorieMenu" selected="{{categorieMenuSelected}}" style="margin:0px">
+                    <template repeat="{{categorieMenuArray}}">
+                        <core-item label="{{}}"></core-item>
+                    </template>
+                </core-dropdown-menu>
+                <!--
+                <core-menu-button icon="menu" id="categorieMenu" selected="{{categorieMenuSelected}}" label="{{categorieMenuText}}">
+                    <template repeat="{{categorieMenuArray}}">
+                        <core-item label="{{}}"></core-item>
+                    </template>
+                </core-menu-button>
+                -->
+                
+                <paper-button raisedButton class="colored" label="Archives" on-tap={{loadJournauxArchive}} style="margin-right:0px"></paper-button>
+                <div class="center_text" flex><span>{{selectedArchiveTitle}}</span></div>
+                <div horizontal layout center>
+                	<span class="ekcoin">{{ekcredit}}</span>
+                    <paper-button raisedButton class="colored" label="Acheter" on-tap={{buyCredit}}></paper-button>
+                </div>
+            </core-toolbar>
+            <template if="{{selectedArchive != null}}">
+	            <core-toolbar id="month_toolbar">
+	            	<div class="left"><paper-button on-tap="{{increaseMonth}}" label="{{year-1+(month+12-(12+month)%12)/12}} {{monthArray[(12+month)%12]}}"></paper-button></div>
+	            	<div class="center_text"><span>{{year-1+(month-1+12-(12+month-1)%12)/12}} {{monthArray[(12+month-1)%12]}}</span></div>
+	            	<div class="right"><paper-button on-tap="{{decreaseMonth}}" label="{{year-1+(month+12-2-(12+month-2)%12)/12}} {{monthArray[(12+month-2)%12]}}"></paper-button></div>
+	            </core-toolbar>
+            </template>
+            
+            <template if="{{mainTemplate.publications.length > 0}}">
+	            <div class="banner">
+	            	<img src="{{mainTemplate.topPub.image}}" width="100%" on-tap={{goAds}}>
+	            </div>
+	        </template>
+	        
+            <template if="{{mainTemplate == null}}">
+                <spinner-element></spinner-element>
+            </template>
+            
+            <template if="{{mainTemplate.publications.length == 0}}">
+                <div layout horizontal style="background:rgba(255,255,255,0.3);">
+                    <div layout horizontal center center-justify style="margin:auto; font-size:26px;">
+                        <p>Aucune publication trouvée</p>
+                    </div>
+                </div>
+            </template>
+            
+            <div class="chip-container" hero-p>  
+              <template id="templateItems" repeat="{{mainTemplate.publications as publication}}" if="{{mainTemplate.publications.length > 0}}">
+              
+                <div class="chip" hero-id="publication-div-hero" hero?="{{selectedPublication === publication}}" data-id-"{{publication.id}}" on-tap="{{transition}}">
+                  <div class="chip-top">
+                    <img style="max-width:100%; max-height:100%;" id="{{publication.nom}}-{{publication.id}}-img" class="img-publication" alt="{{publication.nom}}-{{publication.datePublication}}" src="{{publication.coverPath}}" />
+                    <div id="abonnement_mark-{{publication.isSubscription}}"/>
+                  </div>
+                  <div class="chip-bottom">
+                    <div class="chip-album-title">{{publication.nom}}</div>
+                    <!--<div class="chip-artist">{{publication.categorie}}</div>-->
+                  </div>
+                </div>
+    
+              </template>
+              <template id="templateItems" repeat="{{mainTemplate as publication}}" if="{{!mainTemplate[0].journaux}}">
+              
+                <div class="chip" hero-id="publication-div-hero" hero?="{{selectedPublication === publication}}" data-id-"{{publication.id}}" on-tap="{{transition}}">
+                  <div class="chip-top">
+                    <img style="max-width:100%; max-height:100%;" id="{{publication.nom}}-{{publication.id}}-img" class="img-publication" alt="{{publication.nom}}-{{publication.datePublication}}" src="{{publication.coverPath}}" />
+
+                  </div>
+                  <div class="chip-bottom">
+                    <div class="chip-album-title">{{getWeekday(publication.datePublication)}}</div>
+                    <!--<div class="chip-artist">{{publication.categorie}}</div>-->
+                  </div>
+                </div>
+    
+              </template>
+    		  <template id="templateItems" repeat="{{mainTemplate as data}}" if="{{mainTemplate[0].journaux}}">
+              	<template repeat="{{data.journaux as publication}}">
+        	        <div class="chip archive_chip" hero-id="publication-div-hero" journaux_id="{{publication.id}}" hero?="{{selectedPublication === publication}}" data-id-"{{publication.id}}" on-tap="{{selectArchive}}">
+        	          <div class="chip-top">
+        	            <img style="max-width:100%; max-height:100%;" journaux_id="{{publication.id}}" id="{{publication.nom}}-{{publication.id}}-img" class="img-publication" src="{{replaceFileName(publication.image)}}" alt="{{publication.nom}}" />
+        	            <div id="jour_abonnement_mark-{{publication.isSubscription}}"/>
+        	          </div>
+        	          <div class="chip-bottom">
+       	             <div class="chip-album-title">{{publication.nom}}</div>
+        	            <!--<div class="chip-artist">{{publication.categorie}}</div>-->
+        	          </div>
+        	        </div>
+    	          </template>
+   	          </template>
+            </div>
+            
+            <template if="{{mainTemplate.publications.length > 0}}">
+	            <div class="banner">
+	            	<img src="{{mainTemplate.bottomPub.image}}" width="100%" on-tap={{goAds}}>
+	            </div>
+	        </template>
+	        
+        </div>
+      </section>
+    
+    <section>
+        	<style no-shim>
+			
+				.dialog {
+					box-sizing: border-box;
+					-moz-box-sizing: border-box;
+					font-family: Arial, Helvetica, sans-serif;
+					font-size: 13px;
+					background: nonte;
+					padding:30px 42px;
+					outline: 1px solid rgba(0,0,0,0.2);
+					box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+					width: 760px;
+					height: 550px;
+				}
+
+				#dialog {
+					padding:20px;
+					
+				}
+				
+				#details {
+					
+				  }
+				
+				  .detail {
+					height: 400px;
+					text-align: start;
+					overflow: hidden;
+					background: #fff;
+					box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.0);
+					padding:20px;
+				  }
+			
+				  .detail-left {
+					max-width: 320px;
+				  }
+			
+				  .detail-right {
+					padding: 10px;
+					text-align:center;
+					min-width:200px;
+				  }
+			
+				  .detail-img {
+					  box-sizing:border-box;
+					  border:1px solid #888;
+				  }
+			
+				  .detail-nom {
+					font-size: 2em;
+					font-weight: bold;
+				  }
+				  
+				  .detail-categorie {
+					  font-size: 1.7em;
+				  }
+				  
+				  .detail-date {
+					border: solid #444 1px;
+					border-left: none;
+					border-right: none;
+					font-size: 1.3em;
+					padding: 10px 0;
+					margin: 10px 0;
+				  }
+				  
+				  .detail-prix {
+					  padding: 10px;
+				  }
+				  
+				  .detail-button-wrapper {
+					  max-width:300px;
+					  margin:0 auto;
+				  }
+				  
+				  .detail-notif-achat {
+					  font-size: 0.9em;
+				  }
+				  
+				  .detail-acheter-button {
+					background: #53b716;
+					border-radius: 5px;
+					color: white;
+					font-size: 1.5em;
+					padding: 8px;
+					cursor: pointer;
+				  }
+				  
+				  .detail-acheter-button-detail {
+					background: #ffff00;
+					border-radius: 0 0 5px 5px;
+					color: #444;
+					padding: 5px;
+					margin: 0 5px 5px;
+					font-size: 1em;
+				  }
+				  
+				  .detail-same-publications {
+					background:white;
+				  }
+				  
+				  core-toolbar {
+					background:#ffffff;
+				  }
+				  
+				  .detail-prix {
+					  font-size: 24px;
+					  font-weight: bold;
+				  }
+				  
+				  .ekcoindetail {
+					background-image: url('../img/ekcoin_big_logo.png');
+					background-size: 30px;
+					background-repeat: no-repeat;
+					background-position: right center;
+					padding-left: 5px;
+					width: 30px;
+					height: 30px;
+					display: inline-block;
+				  }
+
+				  .layout_center {
+				  	margin-left: auto;
+				  	margin-right:auto;
+				  }
+		</style>
+            
+        
+            <div id="details">
+            <div layout vertical hero-id="publication-div-hero" hero style="background:white;"  flex self-stretch>
+            	<core-toolbar class="transparent-teal">
+                    <div flex></div>
+                    <div end-justified layout on-tap="{{closeDetail}}" style="cursor: pointer; margin: 0; font-size: 0.9em;">Fermer</div>
+                    <paper-icon-button class="detail-close-icon" icon="close" end-justified layout on-tap="{{closeDetail}}" style="cursor:pointer; margin: 0;"></paper-icon-button>
+                    
+                </core-toolbar>
+                <div class="detail" layout horizontal>
+                    <div class="detail-left" hero>
+                    	<img class="detail-img" style="max-width:100%; max-height:100%; box" id="{{selectedPublication.nom}}-{{selectedPublication.id}}-img" alt="{{selectedPublication.nom}}-{{selectedPublication.datePublication}}" src="{{selectedPublication.coverPath}}" />
+                    </div>
+                    <div class="detail-right" flex>
+                        <div layout horizontal center>
+                            <div flex>
+                                <div class="detail-nom">{{selectedPublication.nom}}</div>
+                                <div class="detail-categorie">{{selectedPublication.categorie}}</div>
+                                <div class="detail-date">Édition du<br />{{selectedPublication.datePublication}}</div>
+                                
+                                <template if="{{localPublication != null}}">
+                                    
+                                    <template if="{{localPublication == 0}}">
+                                        <template if="{{username == '' || password == ''}}">
+                                            <div class="detail-prix" horizontal layout center center-justified>{{selectedPublication.prix}}<span class="ekcoindetail"></span></div>
+                                            <div class="detail-button-wrapper">
+                                                <div class="detail-notif-achat">Crédits ekiosk nécessaires</div>
+                                                <div class="detail-acheter-button" on-tap="{{buttonPress}}">Acheter</div>
+                                                <div class="detail-acheter-button-detail">Aucun achat sans compte eKiosk</div>
+                                            </div>
+                                        </template>
+                                        <template if="{{username != '' || password != ''}}">
+                                            <template if="{{selectedPublication.telechargementRestant == 0}}">
+                                                <div class="detail-prix" horizontal layout center center-justified>{{selectedPublication.prix}}<span class="ekcoindetail"></span></div>
+                                                <div class="detail-button-wrapper">
+                                                    <div class="detail-notif-achat">Crédits ekiosk nécessaires</div>
+                                                    <div class="detail-acheter-button" on-tap="{{buttonPress}}">Acheter à nouveau</div>
+                                                    <div class="detail-acheter-button-detail">Téléchargement par achat épuisé</div>
+                                                </div>
+                                            </template>
+                                            
+                                            <template if="{{selectedPublication.telechargementRestant == -1}}">
+                                                <div class="detail-prix" horizontal layout center center-justified>{{selectedPublication.prix}}<span class="ekcoindetail"></span></div>
+                                                <div class="detail-button-wrapper">
+                                                    <div class="detail-notif-achat">Crédits ekiosk nécessaires</div>
+                                                    <div class="detail-acheter-button" on-tap="{{buttonPress}}">Acheter</div>
+                                                    <div class="detail-acheter-button-detail">3 téléchargements par achat</div>
+                                                </div>
+                                            </template>
+                                            
+                                            <template if="{{selectedPublication.telechargementRestant == 1}}">
+                                                <div class="detail-button-wrapper" style="padding-top: 15px;">
+                                                    <div class="detail-acheter-button" on-tap="{{buttonPress}}">Télécharger</div>
+                                                    <div class="detail-acheter-button-detail">1 téléchargement restant</div>
+                                                </div>
+                                            </template>
+                                            
+                                            <template if="{{selectedPublication.telechargementRestant > 1}}">
+                                                <div class="detail-button-wrapper" style="padding-top: 15px;">
+                                                    <div class="detail-acheter-button" on-tap="{{buttonPress}}">Télécharger</div>
+                                                    <div class="detail-acheter-button-detail">{{selectedPublication.telechargementRestant}} téléchargements restant</div>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </template>
+                                    
+                                    <template if="{{localPublication == 1}}">
+                                    	<div class="detail-button-wrapper" style="padding-top: 15px;">
+                                                    <div class="detail-acheter-button" on-tap="{{buttonPress}}">Ouvrir</div>
+                                                    <div class="detail-acheter-button-detail">Disponible dans votre bibliothèque</div>
+                                                </div>
+                                    </template>
+                                    
+                                </template>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-same-publications">
+	                <core-toolbar>
+	                	<div flex style="border-bottom: 1px #333 solid; padding-bottom: 10px;">Éditions antérieures</div>
+                    </core-toolbar>
+                    <div style="text-align:center;">
+                    	<!--<core-ajax id="getAjaxDetail" auto url="http://api.ngser2.gnetix.com/v1.1/getMemeEditeurs.php" params='{"id":"{{selectedPublication.id_journal}}"}' handleAs="json"></core-ajax>-->
+                        
+                        <template if="{{detailTemplate == null}}">
+                            <spinner-element></spinner-element>
+                        </template>
+                            
+                        <div class="chip-container-detail" hero-p>
+                        	
+                            
+                            
+                            <template id="templateItemsDetail" repeat="{{detailTemplate.publications as publication}}">
+                            
+                                <div class="chip" on-tap="{{detailTransition}}">
+                                    <div class="chip-top">
+                                        <img style="max-width:100%; max-height:100%;" id="{{publication.nom}}-{{publication.id}}-img" class="img-publication" alt="{{publication.nom}}-{{publication.datePublication}}" src="{{publication.coverPath}}" />
+                                    </div>
+                                    <div class="chip-bottom">
+                                        <div class="chip-album-title">{{publication.datePublication}}</div>
+                                    </div>
+                                </div>
+                            
+                            </template>
+                        
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+			</div>
+			
+	</section>
+
+    
+
+    
+
+    </core-animated-pages>
+	
+    <paper-dialog id="buyDialog" heading="Achat" transition="paper-dialog-transition-bottom" backdrop="true" layered="true" autoCloseDisabled="true" closeSelector="[dismissive]">
+    	<style>
+			paper-dialog {
+				width: 300px;
+			}
+			paper-button[dismissive] {
+				font-weight: bold;
+				color: red;
+			}
+			paper-button[affirmative] {
+				font-weight: bold;
+				color: green;
+			}
+		</style>
+    	<buyingPublication-element id="buyingPublication" publication="{{dialogPublication}}" username="{{dialogUsername}}" password="{{dialogPassword}}" buyingPublicationConfirmer="{{$.buyingPublicationConfirmer}}" buyingPublicationAnnuler="{{$.buyingPublicationAnnuler}}" masterCreditRef="{{ekcredit}}"></buyingPublication-element>
+        <paper-button id="buyingPublicationAnnuler" label="Annuler" dismissive on-tap="{{this.buyingDialog = null;}}"></paper-button>
+        <paper-button id="buyingPublicationConfirmer" label="Confirmer" affirmative autofocus on-tap="{{confirmBuyDialog}}"></paper-button>
+    </paper-dialog>
+    
+  </template>
+  <script>
+
+    Polymer('kiosqueTabView-element', {
+    	temp_category: null,
+		username: null,
+		password: null,
+		ekcredit: null,
+		
+		localPublication: null,
+		
+	  categorieMenuArray: ['Tous', 'Quotidien', 'Hebdomadaire', 'Mensuel', 'Magazine', 'Livre', 'Abonnement'], 
+	  monthArray: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+	  weekdayArray: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+	  categorieMenuSelected: 0,
+	  local_database:null, 
+	  mainTemplate: null,
+	  detailTemplate: null,
+	  
+	  xhrMain: null,
+	  xhrDetail: null,
+	  
+	  dialogUsername: null,
+	  dialogPassword: null,
+	  dialogPublication: null,
+	  
+	  buyingDialog: null,
+	  
+	  month: new Date().getMonth()+1,
+	  year: new Date().getFullYear(),
+	  
+	  ready: function() {
+		console.log("ready- tabView");
+		var ref = this;
+		
+		ref.addEventListener('core-localstorage-load', function(e) {
+			console.log('core-localstorage-load');
+			if(ref.username == null || ref.passowrd == null) {
+				ref.loadOpenPage(ref);
+			}
+		});
+		
+		
+		ref.addEventListener('menuLayout-ConnexionChanged', function(e) {
+			e.stopPropagation();
+			
+			ref.mainTemplate = null;
+			ref.detailTemplate = null;
+			ref.username = e.detail.username;
+			ref.password = e.detail.password;
+			ref.ekcredit = e.detail.ekcredit;
+			ref.page = 0;
+			ref.loadOpenPage(ref);
+			
+			
+		});
+		
+		//this.loadOpenPage(this);
+	  },
+	 	  
+      page: 0,
+	  
+      selectedPublication: null,
+	  selectedArchive: null,
+	  selectedArchiveTitle: null,
+	  computed: {
+		categorieMenuText: 'categorieMenuArray[categorieMenuSelected]',
+	  },
+	  
+	  
+	  openMenuToggle: function() {
+		  //console.log(this.shadowRoot.querySelector('#categorieMenu'));
+		  this.shadowRoot.querySelector('#categorieMenu').toggle();
+		  
+	  },
+	  categorieMenuSelectedChanged: function() {
+		//console.log('categorieMenuSelectedChanged');
+		//console.log(this.categorieMenuSelected);
+		
+		if(this.categorieMenuSelected != null) {
+			
+			this.mainTemplate = null;
+			this.loadOpenPage(this);
+			
+		}
+		
+	  },
+	  increaseMonth: function() {
+	  	var d = new Date();
+	  	var m = d.getMonth() + 1;
+	  	if(this.month < m && this.selectedArchive != null ){
+	  		this.month +=1;
+	  		this.loadArchives(this);
+	  	}
+	  	
+	  },
+	  decreaseMonth: function() {
+	  	var d = new Date();
+	  	var m = d.getMonth() + 1;
+	  	if(this.month > m - 12 && this.selectedArchive != null){
+	  		this.month -=1;
+	  		this.loadArchives(this);
+	  	}
+	  },
+	  replaceFileName: function(file_name){
+	  	var point_index = file_name.lastIndexOf(".");
+		var new_name = file_name.substr(0, point_index) + "_s." + file_name.substr(point_index + 1);
+		return new_name;
+	  },
+	  getWeekday: function(date) {
+	  	var d = new Date(date);
+	  	return this.weekdayArray[d.getDay()]+" "+date.substring(date.length-2, date.length);
+	  },
+      transition: function(e) {
+		  if(e.target.templateInstance.model.publication == null) {
+			  console.log("item == null");
+			  //return;
+		  }
+		  this.selectedPublication = e.target.templateInstance.model.publication;
+		  
+		  this.page = 1;
+		  
+			var path = require('path');
+			var cwd = path.dirname( process.execPath );
+			var fs = require('fs');
+			var directory = cwd+"/issues/"+this.selectedPublication.id+"/";
+			if( fs.existsSync(directory+"issue.encrypted") ) {
+				this.localPublication = 1;
+			}
+			else {
+				this.localPublication = 0;
+			}
+
+		  this.xhrDetail = this.$.xhr2.request({
+			  url: "http://api.ngser.gnetix.com/v1.1/getMemeEditeurs.php", 
+			  params: {"id" : this.selectedPublication.id_journal, "username":this.username, "password":this.password}, 
+			  callback: this.xhrDetailCallback.bind(this),
+		  });
+		  
+      },
+	  loadOpenPage: function(ref) {
+		
+		if (this.categorieMenuText == "Abonnement") {
+			ref.xhrMain = this.$.xhr.request({
+				url: "http://api.ngser.gnetix.com/v1.1/getRecentsParCategorie.php",
+				params: {"categorie":this.temp_category, "username":this.username, "password":this.password, "abonnement":"1"}, 
+				callback: this.xhrMainCallback.bind(this),			
+			});
+		}
+		else {
+			this.temp_category = this.categorieMenuText;
+			ref.xhrMain = this.$.xhr.request({
+				url: "http://api.ngser.gnetix.com/v1.1/getRecentsParCategorie.php",
+				params: {"categorie":this.categorieMenuText, "username":this.username, "password":this.password}, 
+				callback: this.xhrMainCallback.bind(this),			
+			});
+		}	
+	  },
+	  loadArchives: function(ref){
+	  		
+	  	ref.xhrMain = this.$.xhr.request({
+			url: "http://api.ngser.gnetix.com/v1.1/getPublicationsArchive.php",
+			params: {"month":new Date().getMonth()+1-this.month, id:this.selectedArchive, "username":this.username, "password":this.password}, 
+			callback: this.xhrMainCallback.bind(this),
+			
+		});
+	  },
+	  selectArchive: function(e) {
+		//console.log('load the current page here');
+		//console.log(this.username);
+		//console.log(this.password);
+		this.selectedArchive = e.target.templateInstance.model.publication.id;
+		this.selectedArchiveTitle = e.target.templateInstance.model.publication.nom;
+		
+		this.loadArchives(this);
+	  },
+	  loadJournauxArchive: function(ref) {
+		//console.log('load the current page here');
+		//console.log(this.username);
+		//console.log(this.password);
+		this.selectedArchive = null;
+		this.selectedArchiveTitle = "Archives";
+		this.month = new Date().getMonth() + 1;
+		
+		ref.xhrMain = this.$.xhr.request({
+			url: "http://api.ngser.gnetix.com/v1.1/getJournauxArchive.php",
+			params: {"username":this.username, "password":this.password}, 
+			callback: this.xhrMainCallback.bind(this),
+			
+		});
+	  },
+	  detailTransition: function(e) {
+		  //console.log('detailTransition');
+		  this.localPublication = null;
+		  
+		  this.selectedPublication = e.target.templateInstance.model.publication;
+		  
+		  var path = require('path');
+		  var cwd = path.dirname( process.execPath );
+		  var fs = require('fs');
+		  var directory = cwd+"/issues/"+this.selectedPublication.id+"/";
+		  if( fs.existsSync(directory+"issue.encrypted") ) {
+			this.localPublication = 1;
+		  }
+		  else {
+			this.localPublication = 0;
+		  }		  
+	  },
+	  xhrMainCallback: function(response, xhr) {
+			//console.log(xhr.readyState);
+			//console.log(xhr.getAllResponseHeaders());
+			if(xhr.getAllResponseHeaders()) {
+				//console.log(this);
+				
+				//console.log('connexionDialogCallback');
+				//console.log(response);
+				//console.log(xhr);
+				try{
+					jsonResponse = JSON.parse(response);
+					
+					//console.log(jsonResponse);
+					
+					
+					if (jsonResponse.resultat == "true") {
+						
+						this.mainTemplate = jsonResponse.data;
+					}
+					else {
+						alert(jsonResponse.data);
+					}
+					
+				}catch(e){
+					console.log(e); //error in the above string(in this case,yes)!
+					alert(e);
+				}
+			}
+	  },
+	  xhrDetailCallback: function(response, xhr) {
+			console.log('xhrDetailCallback');
+			if(xhr.getAllResponseHeaders()) {
+				
+				try{
+					
+					jsonResponse = JSON.parse(response);
+					//console.log(this);
+					//console.log(jsonResponse);
+					
+					
+					if (jsonResponse.resultat == "true") {
+						this.detailTemplate = jsonResponse.data;
+					}
+					else {
+						alert(jsonResponse.data);
+					}
+					
+				}catch(e){
+					console.log(e); //error in the above string(in this case,yes)!
+					alert(e);
+				}
+			}
+	  },
+	  closeDetail: function() {
+		  this.page=0;
+		  //this.fire('kiosqueTabView-showTabBar');
+		  //var template = this.shadowRoot.querySelector('#templateItemsDetail');
+		  //template.model = null;
+		  this.localPublication = null;
+		  this.detailTemplate = null;
+		  
+	  },
+	  
+	  buyCredit: function(e) {
+			var gui = require('nw.gui');
+			gui.Shell.openExternal("http://www.ekioskmobile.net/index.php?m=offres&e=fct5")
+	  },
+	  
+	  goAds: function(e) {
+	  		var gui = require('nw.gui');
+			gui.Shell.openExternal(e.target.templateInstance.model.mainTemplate.topPub.url);
+	  },
+	  
+	  buyPublication: function() {
+		  this.buyingDialog = this.shadowRoot.querySelector('#buyDialog');
+		  this.buyingDialog.toggle();
+		  
+		  this.shadowRoot.querySelector('#buyingPublication').resetDialog();
+		  this.dialogPublication = this.selectedPublication;
+		  this.dialogUsername = this.username;
+		  this.dialogPassword = this.password;
+		  this.shadowRoot.querySelector('#buyingPublication').startValidation();
+	  },
+	  
+	  startDownload: function() {
+		  //this.closeDetail();
+		  console.log(this.selectedPublication);
+		  var local_db = getDB();
+		  var refObject = this;
+		  db.insert({
+			nom: this.selectedPublication.nom,
+			type: this.selectedPublicationtype,
+			categorie: this.selectedPublication.categorie,
+			
+			id: this.selectedPublication.id,
+			id_journal: this.selectedPublication.id_journal,
+			datePublication: this.selectedPublication.datePublication,
+			downloadPath: this.selectedPublication.downloadPath,
+			coverPath: this.selectedPublication.coverPath,
+			isSubscription : this.selectedPublication.isSubscription,
+			localpath: "",
+			downloadDate: Math.round(new Date().getTime() / 1000),
+			openDate: "",
+			favoris: 0
+			
+		  }, function(err, newDoc) {
+			if (err) {
+				console.log(err);
+			} else {
+				showUser(newDoc);
+				console.log(newDoc['_id']);
+				refObject.fire('downloadManager-addedPublication', {publication: refObject.selectedPublication, dataBaseId: newDoc['_id']});
+				refObject.fire('show-toast', {textToShow: "Téléchargement en cours"});
+				window.location = "bibliotheque.html";
+			}
+		  });
+	  },
+	  
+	  confirmBuyDialog: function(e) {
+		  //console.log('buyingPublication-element');
+		  //console.log(this);
+		  //console.log(this.$.buyingPublication);
+		  var toto = this.$.buyingPublication.test();  
+		  //console.log(toto);
+		  if(toto == true) {
+		  	this.buyingDialog.toggle();
+			this.buyingDialog = null;
+			
+			this.startDownload();
+		  }
+		  
+	  },
+	  
+	  buttonPress: function(e) {
+		  if(this.localPublication == 1) {
+			var path = require('path');
+			var cwd = path.dirname( process.execPath );
+			
+			var crypto = require('crypto');
+			var fs = require('fs');
+			
+			// get your password from safe store
+			var password = new Buffer('eKioskMobile20140822');
+			var aes = crypto.createDecipher('aes-256-cbc', password);
+			var directory = cwd+"/issues/"+this.selectedPublication.id+"/";
+			if( fs.existsSync(directory+"issue.encrypted") ) {
+				var rstream = fs.createReadStream(directory+"issue.encrypted");
+				
+				rstream   // reads from myfile.txt
+				.pipe(aes)  // decrypt with aes256
+				.pipe(fs.createWriteStream("issue-for-reader.pdf"));  // output stdout
+				if( fs.existsSync("issue-for-reader.pdf") ) {
+					window.location = "./reader/index2.html?nom="+encodeURIComponent(this.selectedPublication.nom)+"&date="+encodeURIComponent(this.selectedPublication.datePublication);
+				}
+				else {
+					alert("Erreur lors de la décryption du journal");
+				}
+			}
+			else {
+				alert("Erreur d'ouverture\nFermer l'application et essayer de nouveau ou retélécharger le journal dans le kiosque.");
+			}
+			return;
+		  }
+		  
+		  if(this.username == null || this.username == "" || this.password == null || this.password == "") {
+			  alert("Vous devez posséder un compte eKiosk pour acheter des publications.");
+			  return;
+		  }else if(( parseInt(this.ekcredit) <= 0 && parseInt(this.selectedPublication.prix) > 0 ) || (parseInt(this.ekcredit) < parseInt(this.selectedPublication.prix)) ){
+		  	  alert("Votre solde de crédits est épuisé,veuillez acheter des crédits");
+		  	  this.buyCredit();
+		  	  return;
+		  }
+		  else {
+			  if(parseInt(this.selectedPublication.telechargementRestant) > 0) {
+				  this.startDownload();
+			  }
+			  else {
+				  this.buyPublication();
+			  }
+		  }
+	  },
+	  
+    });
+
+  </script>
+</polymer-element>

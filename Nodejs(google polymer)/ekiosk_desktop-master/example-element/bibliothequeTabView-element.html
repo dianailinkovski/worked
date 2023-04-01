@@ -1,0 +1,245 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/core-animated-pages/core-animated-pages.html" rel="import">
+<link href="../components/core-animated-pages/transitions/slide-from-right.html" rel="import">
+<link href="../components/paper-icon-button/paper-icon-button.html" rel="import" />
+<link href="bibliothequeOverlayDetail-element.html" rel="import">
+<link href="bibliothequeCover-element.html" rel="import">
+<link href="spinner-element.html" rel="import">
+
+<polymer-element name="bibliothequeTabView-element" attributes="selectedPage">
+  <template>
+
+    <style>
+		core-animated-pages {
+			height: 100%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 0;
+		}
+		.chip-container-wrapper {
+			background: url('../img/testimage.png') repeat;
+			position: absolute;
+			top: 0;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			height: 100%;
+			width: 100%;
+			padding-top: 48px;
+			box-sizing: border-box;
+		}
+      .chip-container {
+        text-align: center;
+		background:url('../img/tablette_simple_2.png') repeat; 
+      }
+
+      .chip {
+        display: inline-block;
+        position: relative;
+        margin: 0 4px;
+        overflow: hidden;
+        text-align: start;
+		height:247px;
+      }
+
+      .chip-top {
+        width: 160px;
+        height: 200px;
+		text-align:center;
+		padding:31px 0 0;
+      }
+	  
+	  .chip-top img {
+		  box-sizing:border-box;
+		  border:1px solid #888;
+		  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+	  }
+
+      
+    </style>
+    <core-animated-pages selected="{{page}}" transitions="slide-from-right" on-core-animated-pages-transition-end="{{complete}}">
+	
+		  <section>
+		    <div class="chip-container-wrapper">
+		        <div class="chip-container">
+		        
+		            <template if="{{recentsIssues == null}}">
+		                <spinner-element></spinner-element>
+		            </template>
+		            
+		            <template if="{{recentsIssues.length > 0}}">
+		                <template repeat="{{recentsIssues as publication}}">
+		                    <bibliothequeCover-element publication="{{publication}}"></bibliothequeCover-element>
+		                </template>
+		            </template>
+		          	
+		            <template if="{{recentsIssues.length == 0}}">
+		                <div style="padding: 25px 0; font-size: 23px;">Visitez le <a href="../kiosque.html">Kiosque</a> pour acheter des publications</div>
+		            </template>
+		            
+		        </div>
+		    </div>
+		  </section>
+		  <section>
+		  <div class="chip-container-wrapper">
+		        <div class="chip-container">
+		        
+		            <template if="{{allIssues == null}}">
+		                <spinner-element></spinner-element>
+		            </template>
+					
+		            <template if="{{allIssues.length > 0}}">
+		                <template repeat="{{allIssues as publication}}">
+		                    <bibliothequeCover-element publication="{{publication}}"></bibliothequeCover-element>
+		                </template>
+		            </template>
+		          	
+		            <template if="{{allIssues.length == 0}}">
+		                <div style="padding: 25px 0; font-size: 23px;">Visitez le <a href="../kiosque.html">Kiosque</a> pour acheter des publications</div>
+		            </template>
+		            
+		        </div>
+		    </div>
+		  </section>
+		  <section>
+		  <div class="chip-container-wrapper">
+		        <div class="chip-container">
+		        
+		            <template if="{{favIssues == null}}">
+		                <spinner-element></spinner-element>
+		            </template>
+		            
+		            <template if="{{favIssues.length > 0}}">
+		                <template repeat="{{favIssues as publication}}">
+		                    <bibliothequeCover-element publication="{{publication}}"></bibliothequeCover-element>
+		                </template>
+		            </template>
+		            
+		            <template if="{{favIssues.length == 0}}">
+		                <div style="padding: 25px 0; font-size: 23px;">Aucune publication dans vos favoris</div>
+		            </template>
+		            
+		        </div>
+		    </div>
+		  </section>
+
+		<section>
+		  	<div class="chip-container-wrapper">
+		        <div class="chip-container">
+		        
+		            <template if="{{abonnIssues == null}}">
+		                <spinner-element></spinner-element>
+		            </template>
+		            
+		            <template if="{{abonnIssues.length > 0}}">
+		                <template repeat="{{abonnIssues as publication}}">
+		                    <bibliothequeCover-element publication="{{publication}}"></bibliothequeCover-element>
+		                </template>
+		            </template>
+		            
+		            <template if="{{abonnIssues.length == 0}}">
+		                <div style="padding: 25px 0; font-size: 23px;">Aucune publication dans vos abonnements</div>
+		            </template>
+		            
+		        </div>
+		    </div>
+		</section>
+
+    </core-animated-pages>
+
+  </template>
+  <script>
+
+    Polymer('bibliothequeTabView-element', {
+	  selectedPage: null,
+      page: 0,
+	  recentsIssues: null,
+	  allIssues: null,
+	  favIssues: null,
+	  abonnIssues:null,
+
+      selectedAlbum: null,
+	  
+	  ready: function() {
+		  var ref = this;
+		  
+		  
+		  this.addEventListener("reloadBibliotheque", function(e) {
+			  console.log("reloadBibliotheque");
+			  ref.recentsIssues = null;
+		  	  ref.allIssues = null;
+		  	  ref.favIssues = null;
+			
+			  setTimeout(function(){
+				  ref.recentsIssues = getRecentsIssues(); 
+				  ref.allIssues = getAllIssues(); 
+				  ref.favIssues = getAllFavoris();
+				  ref.abonnIssues = getAllFavoris();
+			  }.bind(ref),500);
+			  
+		  });
+		  setTimeout(function(){
+			  this.recentsIssues = getRecentsIssues(); 
+			  this.allIssues = getAllIssues(); 
+			  this.favIssues = getAllFavoris();
+			  this.abonnIssues = getAllAbonnement();
+
+			  //this.verifAllDownloadPending();
+			  
+		  }.bind(this),500);
+
+		  
+	  },
+		selectedPageChanged: function() {
+			console.log('selectedPageValueChanged');
+			this.page = this.selectedPage;
+		},
+      transition: function(e) {
+		  console.log(e);
+		  if(e.target.templateInstance.model.item == null) {
+			  return;
+		  }
+		  this.selectedAlbum = e.target.templateInstance.model.item;
+		  
+      },
+	  complete: function() {
+		  var bibli = this.shadowRoot.querySelector('section[active]').querySelectorAll('bibliothequeCover-element');
+		  Array.prototype.forEach.call(bibli, function(issue) {
+			  var tooltips = issue.shadowRoot.querySelectorAll('core-tooltip');
+			  Array.prototype.forEach.call(tooltips, function(tip) {
+				tip.setPosition();
+			  });
+		  });
+		  
+	  },
+	  tapHandler: function() {
+		  this.$.dialog.toggle();
+	  },
+	  verifAllDownloadPending: function() {
+		
+		var db = getDB();
+		var ref = this;
+		db.find({}).sort({ "downloadDate": -1 }).exec(function (err, docs) {
+			for (var i = 0; i < docs.length; i++) {
+				var test = docs[i];
+				var path = require('path');
+				var cwd = path.dirname( process.execPath );
+				var fs = require('fs');
+				var directory = cwd+"/issues/"+test['id']+"/";
+				if( !fs.existsSync(directory+"issue.encrypted") ) {
+					console.log("start download");
+					ref.fire('downloadManager-addedPublication', {publication: test, dataBaseId: test['_id']});
+				}
+			}
+		});
+		  
+	  },
+	  
+    });
+
+  </script>
+</polymer-element>

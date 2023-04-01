@@ -1,0 +1,162 @@
+<ion-view title="{{totalTimer.displayText}}" cache-view="false">
+    <ion-nav-buttons side="primary">
+	  <button class="button button-clear button-primary end-button" ng-click="endWorkout()" ng-if="!androidPlatform">{{'END_SM' | translate}}</button>
+    </ion-nav-buttons>
+	<ion-nav-buttons side="secondary">
+	  <button class="button button-clear button-primary end-button" ng-click="endWorkout()" ng-if="androidPlatform">{{'END_SM' | translate}}</button>
+	  <button class="button-icon icon ion-music-note" ng-if="urxAvailable" ng-click="launchURX()" ng-class="{'orange-text' : changeURX}"></button>
+	  <button class="button-icon icon ion-android-options mixer-button" ng-click="showTiming()" ng-if="!yogaSelection"></button>
+	  <button class="button-icon icon mixer-button" ng-class="{'ion-volume-high' : extraSettings.audioOption, 'ion-volume-mute' : !extraSettings.audioOption }" ng-click="toggleAudio()" ng-if="yogaSelection"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header workout-page" scroll="false" ng-class="{'admob-active' :isAdMobRunning || isMoPubRunning}">
+  	<div class="box">
+		<div id="exercise" class="A flex-timers" auto-font-size="resizeOptions" style="width: 100%; height: 50px;" ng-model="currentExercise.name" ng-click="toggleControls()">
+			{{currentExercise.name | translate}}
+	    </div>
+		<div ng-if="nextExercise.status || beginNotification || transitionStatus || helpText" class="next-exercise" ng-class="{'blue-text':transitionStatus,'orange-text-help':helpText && !nextExercise.status ,'orange-text':beginNotification}">
+			<p class="next-text" id="next-exercise-id">{{transitionStatus ? (changeText ? changeText : ('GET_READY' | translate).toUpperCase()) : (beginNotification ? ('BEGIN' | translate).toUpperCase() + '!' : (nextExercise.status ? ('NEXT_SM' | translate) + ' ' + (nextExercise.name | translate) : (helpText ? helpText : '')))}}</p>
+		</div>
+		<div id="linkto" class="B flex-timers" on-swipe-left="swipeLeftSkip()" on-swipe-right="swipeRightBack()" ng-class="{'pause-opacity':!totalTimer.status && hasStarted && !transitionStatus}">
+			<img ng-src="img/exercises/{{currentExercise.image}}" id="image-only" ng-if="!advancedTiming.autoPlay" ng-click="toggleControls()" />
+			<div style="position:relative" class="restrict-video" ng-click="toggleControls()" ng-if="advancedTiming.autoPlay">
+				<img ng-src="img/frames/{{nextExercise.image}}" id="video-background"/>
+				<video ng-src="{{videoAddress}}" loop="" muted="" webkit-playsinline="" preload="" autoplay="" ng-if="advancedTiming.autoPlay && !androidPlatform" id="inline-video">
+				</video>
+				<video id="inlinevideo" ng-if="advancedTiming.autoPlay && androidPlatform" muted>
+				</video>
+
+			</div>
+	    </div>
+	    <!-- <div class="item D flex-timers" id="single-timer"> -->
+	    <div class="item D flex-timers" id="single-timer">
+		    <div class="timer-number flex-timers" ng-click="toggleTimer()">
+			    <div class="inner-timer">
+			    	<h1 ng-class="{'orange-text':!transitionStatus,'blue-text':transitionStatus}" ng-model="singleTimer.displayText" id="timer-number-h1">{{transitionStatus ? transitionTimer : singleTimer.displayText}}</h1>
+			    </div>
+		    </div>
+	    	<progress-arc
+                size="{{ size}}"
+                stroke="{{transitionStatus ? '#14CEFF' : '#FF8614'}}"
+                stroke-width="{{ strokeWidth }}"
+                complete="transitionStatus&&isAutoStart ? (transitionTimer / 12) : (transitionStatus ? (transitionTimer / advancedTiming.transitionTime) : (singleTimer.seconds / advancedTiming.exerciseTime))"
+                background="{{ background }}"
+                counter-clockwise="{{direction}}" ng-style="{'width': (size + 'px'), 'height' : (size + 'px')}"
+                ng-class="{'animate-arc' : advancedTiming.exerciseTime > singleTimer.seconds && singleTimer.seconds !== 0, 'transition-arc' : advancedTiming.transitionTime > transitionTimer + 1 && transitionTimer !== 0}" class="flex-timers"
+                >
+            </progress-arc>
+        </div>
+	  	<div class="button-bar E fade-in" ng-class="{'show-controls' : showControls}">
+	  		<a class="button end-button flex-buttons hider-buttons" ng-click="endWorkout()" ng-if="!isPortrait">{{'END_SM' | translate}}</a>
+	  		<a class="button icon ion-minus flex-buttons" ng-click="decreaseTempo()" ng-if="yogaSelection"></a>
+			<a class="button icon ion-ios-videocam flex-buttons" ng-if="!advancedTiming.autoPlay" ng-click="openVideoModal()"></a>
+			<a class="button icon ion-ios-rewind flex-buttons" ng-class="{'grey-icon':!previousExercise}" ng-click="backExercise()" ng-if="advancedTiming.autoPlay && !yogaSelection"></a>
+			<a class="button icon flex-buttons" style="flex-basis: 25%;" ng-click="toggleTimer()" ng-class="{'ion-play':!hasStarted, 'ion-pause':hasStarted, 'ion-play':!totalTimer.status, 'transition-pause-active': transitionStatus, 'orange-text':!totalTimer.status, 'blue-text':transitionStatus}"></a>
+			<a class="button icon ion-ios-fastforward flex-buttons" ng-click="skipExercise(true)" ng-if="!yogaSelection"></a>
+			<a class="button icon ion-plus flex-buttons" ng-click="increaseTempo()" ng-if="yogaSelection"></a>
+			<a class="button icon ion-music-note flex-buttons hider-buttons" ng-click="launchURX()" ng-if="!isPortrait && urxAvailable"></a>
+			<a class="button icon ion-android-options flex-buttons hider-buttons" ng-click="showTiming()" ng-if="!yogaSelection && !isPortrait"></a>
+			<a class="button icon mixer-button flex-buttons hider-buttons" ng-class="{'ion-volume-high' : extraSettings.audioOption, 'ion-volume-mute' : !extraSettings.audioOption }" ng-click="toggleAudio()" ng-if="yogaSelection && !isPortrait"></a>
+		</div>
+	    <div class="item F flex-timers" ng-if="isAdCampaign">
+	    	<!-- <h2 id="totalcounter" ng-model="totalTimer.displayText" ng-class="{'grey-icon':!totalTimer.status}">{{totalTimer.displayText}}</h2> -->
+	    	<p class="uppercase">{{'WORKOUT_SPONSOR' | translate}}</p>
+	    	<img ng-src="{{workoutAdImage}}"  id="workout-ad-container"/>
+	    </div>
+	    <div class="item G flex-timers" ng-if="!isPortrait">
+	    	<h2 id="totalcounter" ng-model="totalTimer.displayText" ng-class="{'grey-icon':!totalTimer.status}">{{totalTimer.displayText}}</h2>
+	    </div>
+	</div>
+	<div id="total-progress">
+		<div id="total-progress-bar" ng-style="{ 'width' : (totalWidth + '%')}"></div>
+	</div>
+  </ion-content>
+</ion-view>
+
+
+<script id="workout-complete.html" type="text/ng-template">
+  <div class="modal end-workout-page modal-colors">
+    <ion-header-bar>
+      <h1 class="title title-center">{{'GREAT' | translate}} SWORK!</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="false" class="width-control-lite" scrollbar-y="false">
+       	<div class="stats-view">
+    	    <div class="row">
+			  <div class="col fill-height-or-more">
+			  	<div class="stat-column flex-column flex-justify-center flex-align-center">
+			  		<div class="stat-calories">
+			  			<h2 class="stat-number flex-column flex-justify-center flex-align-center">{{burnRounded}}</h2>
+			  		</div>
+			  	</div>
+			  </div>
+			  <div class="col fill-height-or-more">
+			  	<div class="stat-column flex-column flex-justify-center flex-align-center">
+			  		<div class="stat-minutes">
+			  			<h2 class="stat-number flex-column flex-justify-center flex-align-center">{{timeToAddRounded}}</h2>
+			  		</div>
+			  	</div>
+			  </div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<p class="stat-label">{{'CALORIES_SM' | translate}}<span ng-if="showWeightAdjust">*</span></p>
+					<p class="stat-label small-label" ng-if="totals.todayCalories > burn">{{'TOTAL' | translate}} {{'TODAY' | translate}}: <span class="orange-text">{{totals.todayCalories}}</span></p>
+				</div>
+				<div class="cal-in-min">
+					<p>{{'IN' | translate}}</p>
+				</div>
+				<div class="col">
+			  		<p class="stat-label">{{'MINUTES_SM' | translate}}</p>
+			  		<p class="stat-label small-label" ng-if="totals.todayMinutes > timeToAdd">{{'TOTAL' | translate}} {{'TODAY' | translate}}: <span class="orange-text">{{totals.todayMinutes}}</span></p>
+			  	</div>
+			</div>
+		</div>
+		<p ng-click="adjustWeight()" class="center adjust-weight uppercase" ng-if="showWeightAdjust">
+	    *{{'ADJUST' | translate}} {{'IN' | translate}} {{'SETTINGS_MENU' | translate}}
+	    </p>
+		<div class="end-workout-buttons">
+	        <button class="button button-block button-stable condense new-button" ng-click="cancelModal()" ng-if="!workoutComplete" id="continue-button">
+			  {{'RESUME' | translate}}
+			</button>
+			<button class="button button-block button-energized new-button nexercise-orange condense no-border" ng-click="mainMenu()">
+			  {{'MAIN_MENU' | translate}}
+			</button>
+			<button class="button button-block button-positive nexercise-blue condense no-border new-button" id="challenge-friend" ng-click="challengeFriend()">
+		  	  {{'SHARE_W' | translate}}
+			</button>
+		</div>
+		<div class="end-workout-health padding" ng-if="healthKitData.showHealthKitOption">
+			<button class="button button-block button-assertive button-clear" ng-click="enableHealthKit()">
+				{{'ENABLE_H' | translate}}
+			</button>
+		</div>
+		<div class="end-workout-health" ng-if="androidPlatform && !kindleDevice && !googleFitSettings.attempted && timeToAdd >= 1" style="padding-left:0px;padding-right:0px">
+			<button class="button button-block button-assertive condense new-button" ng-click="enableGoogleFit()">
+			<img src="img/googleFit.png" style="height: 28px;margin-top: 6px;position: absolute;left: 10px;"/>
+				{{'CONNECT_FIT' | translate}}
+			</button>
+		</div>
+		<p class="centered health-red-text extra-top" ng-model="healthKitData.healthKitStatus">{{healthKitData.healthKitStatus}}</p>
+		<div class="sponsored-end-workout center" ng-if="isEndAdCampaign" ng-click="openCallToAction()">
+			<p class="page-instructions" ng-model="callToActionText">{{callToActionText}}</p>
+			<img class="sponsor-image-end" ng-src="img/extras/promo-ad-sworkit-pro.png" />
+		</div>
+
+    </ion-content>
+  </div>
+</script>
+
+<script id="show-video.html" type="text/ng-template">
+  <div class="modal video-modal modal-colors">
+    <ion-header-bar class="bar bar-header bar-positive">
+    	<button class="button button-clear button-primary left-button icon ion-android-close" ng-click="cancelVideoModal()"></button>
+    </ion-header-bar>
+    <ion-content has-bouncing="false">
+    	<div id='videoplayer' style="background-color:black">
+            <video id="modal-video-player" ng-src="{{videoAddressModal}}" preload="" webkit-playsinline="" autoplay="" controls="" loop="" muted="" ng-if="showVideo && !androidPlatform">
+			</video>
+			<video id="modalvideoplayer" style="opacity:0.00001" loop muted ng-if="showVideo && androidPlatform">
+			</video>
+    	</div>
+    </ion-content>
+  </div>
+</script>

@@ -1,0 +1,14 @@
+.bloc-feature .feature { position:relative; width:100%; text-align:center; }
+.bloc-feature .feature h3 { padding:0.5em 0; margin:1em 0; border-top:#DDD 1px solid; border-bottom:#DDD 1px solid; text-transform:uppercase; font-size:1.1em; text-align:center; }
+.bloc-feature .feature img { max-width:100%; height:auto; }
+.bloc-feature .feature > p { text-align:center; font-size:0.85em; }
+.bloc-feature .hidden-xs { z-index:-1; }
+.bloc-feature div.clearfix { margin-bottom:2em; }
+.bloc-feature .feature-layout-row { padding-bottom:3em; }
+#content .row .bloc-feature .feature-layout-row .col-sm-4 { padding-bottom:0; }
+.bloc-feature .feature-layout-row .col-sm-8 * { font-size:0.9em; }
+
+@media (min-width: 768px) {
+	section.bloc-feature .feature-layout-row .col-sm-8 * { text-align:left; }
+	section.bloc-feature .feature-layout-row h3 { padding:0; margin-top:0; border-top:none; border-bottom:none; }
+}

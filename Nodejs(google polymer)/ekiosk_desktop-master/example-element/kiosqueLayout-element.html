@@ -1,0 +1,165 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../components/core-menu/core-menu.html">
+<link rel="import" href="../components/core-item/core-item.html">
+<link rel="import" href="../components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../components/core-menu/core-submenu.html">
+<link rel="import" href="../components/paper-button/paper-button.html">
+
+<link href="../components/core-icons/core-icons.html" rel="import">
+<link href="../components/core-icon-button/core-icon-button.html" rel="import">
+<link href="../components/core-toolbar/core-toolbar.html" rel="import"> 
+<link href="../components/paper-tabs/paper-tabs.html" rel="import">
+
+<link rel="import" href="kiosqueTabView-element.html">
+<link rel="import" href="menuLayout-element.html">
+
+
+<polymer-element name="kiosqueLayout-element">
+	
+    
+    
+  <template>
+    <core-localstorage id="StorageResponsiveWidth" name="StorageResponsiveWidth" value="{{responsiveWidth}}"></core-localstorage>
+    <style>
+	
+      [drawer] {
+        background-color: #eee;
+        border-right: 1px solid #bbb;
+		z-index: 2;
+      }
+      
+	  [drawer]::shadow #dropShadow {
+		  display:none;
+	  }
+	  
+      [main] {
+        height: 100%;
+        /*background-color: #4F7DC9;*/
+		background:url('../img/kiosque_bg.jpg') no-repeat bottom center fixed; 
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+      }
+      
+      #buttonMenu {
+        display: none;
+      }
+      
+      core-drawer-panel[narrow] #buttonMenu {
+        display: inline-block
+      }
+	  
+	  core-toolbar {
+		background-color: #eee;
+		border-bottom: 1px #999 solid;
+		/*box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);*/
+	  }
+	  
+	  paper-tab[active] {
+		background-color: #aaaaaa;
+		color: #fff;
+		/*box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);*/
+	  }
+	  
+	  paper-tabs.transparent-teal {
+		box-shadow: none;
+	  }
+		
+	  paper-tabs.transparent-teal::shadow #selectionBar {
+		background-color: #ffffff;
+	  }
+		
+	  paper-tabs.transparent-teal paper-tab::shadow {
+		color: #ffffff;
+	  }
+	  
+	  paper-tabs.transparent-teal paper-tab::shadow #ink {
+		color: #dddddd;
+	  }
+      
+	  paper-button#retourBiblio {
+		  background-color: #55b948;
+		  color: #fff;
+		  font-size: 18px;
+		  text-transform: none;
+	  }
+	  
+    </style>
+    
+    <core-drawer-panel id="drawerPanel" drawerWidth="350px" responsiveWidth="{{responsiveWidth}}px">
+    	<core-header-panel drawer>
+    	<!--<core-header-panel mode="seamed" id="core_header_panel" navigation flex>-->
+		    <menuLayout-element></menuLayout-element>
+    	</core-header-panel>
+        <!--<div id="div" tool>Bibliothèque</div>-->
+        <!--<div tool>Bibliothèque</div>-->
+        <core-header-panel main>
+            <core-toolbar class="transparent-teal">
+                <core-icon-button id="buttonMenu" icon="menu" on-tap="{{togglePanel}}"></core-icon-button>
+                <span flex>Kiosque</span>
+                <paper-button id="retourBiblio" on-tap="{{openBibliotheque}}">Retour à la bibliothèque</paper-button>
+              </core-toolbar>
+            
+            <div class="content">
+                <!--<paper-tabs class="transparent-teal" selected="0" id="paper-tabs">
+                    <paper-tab id="paper_tab1" active>Publications</paper-tab>
+                    <paper-tab id="paper_tab2">Crédits</paper-tab>
+                    <paper-tab id="paper_tab3">Archives</paper-tab>
+                </paper-tabs>-->
+                <kiosqueTabView-element></kiosqueTabView-element>
+            </div>
+        </core-header-panel>
+    </core-drawer-panel>
+    </template>
+
+  <script>
+	
+	Polymer('kiosqueLayout-element', {
+		responsiveWidth: 900,
+		ready: function() {
+			
+			var kiosqueTabView_element = this.shadowRoot.querySelector('kiosqueTabView-element');
+			
+			this.addEventListener('menuLayout-ConnexionChanged', function(e) {
+				e.stopPropagation();
+				console.log('menuLayout-ConnexionChanged kiosqueLayoutCalled');
+				if(e.detail.username != "" && e.detail.username != undefined)
+					this.responsiveWidth = 2000;
+				else
+					this.responsiveWidth = 900;
+				kiosqueTabView_element.fire('menuLayout-ConnexionChanged', e.detail);
+			});
+			
+			/*
+			var paper_tabs = this.shadowRoot.querySelector('paper-tabs');
+			kiosqueTabView_element.addEventListener('kiosqueTabView-hideTabBar', function(e) {
+				
+				console.log(paper_tabs);
+				paper_tabs.style.display = 'none';
+			});
+			kiosqueTabView_element.addEventListener('kiosqueTabView-showTabBar', function(e) {
+
+				console.log(paper_tabs);
+				paper_tabs.style.display = 'block';
+			});
+			*/
+		},
+		togglePanel: function() {
+			var menu = this.shadowRoot.querySelector('menuLayout-element');
+			menu.page = 0;
+			this.$.drawerPanel.togglePanel();
+		},
+		openBibliotheque: function() {
+			window.location = "bibliotheque.html";
+		},
+		
+    });
+	
+  </script>
+
+</polymer-element>

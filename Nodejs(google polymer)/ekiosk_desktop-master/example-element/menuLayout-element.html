@@ -1,0 +1,736 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../components/core-menu/core-menu.html">
+<link rel="import" href="../components/core-item/core-item.html">
+<link rel="import" href="../components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../components/core-menu/core-submenu.html">
+
+<link href="../components/core-icons/core-icons.html" rel="import">
+<link href="../components/core-icon-button/core-icon-button.html" rel="import">
+<link href="../components/core-toolbar/core-toolbar.html" rel="import"> 
+<link href="../components/paper-tabs/paper-tabs.html" rel="import">
+<link href="../components/paper-toggle-button/paper-toggle-button.html" rel="import">
+<link href="../components/paper-radio-group/paper-radio-group.html" rel="import">
+<link href="../components/paper-input/paper-input.html" rel="import">
+
+<link href="../components/core-animated-pages/core-animated-pages.html" rel="import">
+<link href="../components/core-animated-pages/transitions/slide-from-right.html" rel="import">
+<link href="../components/paper-ripple/paper-ripple.html" rel="import">
+<link href="../components/core-localstorage/core-localstorage.html" rel="import">
+<link href="../components/paper-dialog/paper-dialog.html" rel="import">
+<link href="../components/paper-dialog/paper-dialog-transition.html" rel="import">
+
+<link href="../components/core-ajax/core-xhr.html" rel="import">
+<link href="../components/core-ajax/core-ajax.html" rel="import">
+<link href="../components/core-icons/core-icons.html" rel="import">
+
+<link href="spinner-element.html" rel="import">
+
+<polymer-element name="menuLayout-element">
+	
+	<template>
+		<core-ajax id="ajaxSubmit" method="POST" auto handleAs="json" cacheResponse=false on-core-response="{{handleResponse}}">
+		</core-ajax>
+
+		<style>
+			
+			core-toolbar {
+				z-index:1;
+				background-color: #eee;
+				border: 1px #999 solid;
+				border-left: 0;
+				border-top: 0;
+				border-right: 0;
+				/*box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);*/
+			}
+			
+		 	 
+		 	core-menu {
+		 		margin:0 !important;
+		 	}
+		 	 
+		 	.bg-bouton{
+		 		background-color: #fff;
+		 		padding-left:20px;
+				box-shadow: 0 6px 7px 0 rgba(0, 0, 0, 0.1);
+		 	}
+		 	
+			.item, .bg-bouton p {
+				position: relative;
+				height: 48px;
+				line-height: 48px;
+			}
+			
+			.label {
+				height: 48px;
+				line-height: 48px;
+			}
+			
+		 	.bouton-menu{
+		 		/*padding:15px 15px 15px 0;*/
+		 	}
+		 	
+		 	.pointer{
+		 		cursor:pointer;
+		 	}
+		 	
+		 	p{
+		 		padding-left:10px;
+		 	}
+		 	
+		 	hr{
+		 		border:none;
+		 		height:1px;
+		 		background:#ccc;
+		 		margin:0;
+		 	}
+		 	
+		 	paper-radio-group > hr{
+		 		padding:0 !important;
+		 	}
+		 	
+		 	.texte-bleu{
+		 		color:#2693FF;
+		 	}
+		 	
+		 	.texte-bleu[flex]{
+		 		text-align:right;
+				padding-right: 10px;
+		 	}
+		 	
+		 	.texte-rouge{
+		 		color:red;
+		 	}
+		 	
+		 	.align-center{
+		 		text-align:center;
+		 	}
+		 	
+			#topLogo {
+				display: block;
+				width: 100%;
+				height: 172px;
+				background-image: url('../img/menu-logo.png');
+				background-color: #fff;
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
+				padding: 10px 0;
+			}
+			
+			#googleplay {
+				display: inline-block;
+				width: 132px;
+				height: 44px;
+				background-image: url('../img/DisponibleGooglePlay.png');
+				background-color: transparent;
+				background-repeat: no-repeat;
+				background-position: center;
+				padding: 10px 0;
+				cursor: pointer;
+			}
+			
+			#appstore {
+				display: inline-block;
+				width: 132px;
+				height: 44px;
+				background-image: url('../img/DisponibleAppStore.png');
+				background-color: transparent;
+				background-repeat: no-repeat;
+				background-position: center;
+				padding: 10px 0;
+				cursor: pointer;
+			}
+			
+		</style>
+		
+        <core-xhr id="xhr"></core-xhr>
+        
+        <core-localstorage name="StorageUsername" value="{{username}}"></core-localstorage>
+        <core-localstorage name="StoragePassword" value="{{password}}"></core-localstorage>
+        <core-localstorage name="StorageEkcredit" value="{{ekcredit}}"></core-localstorage>
+        
+        <core-localstorage name="StorageRecentPendant" value="{{selectedRecentPendant}}"></core-localstorage>
+        <core-localstorage name="StorageDeleteAfter" value="{{selectedDeleteAfter}}"></core-localstorage>
+        <core-localstorage name="StorageNbMaximum" value="{{selectedNbMaximum}}"></core-localstorage>
+        <core-localstorage name="StorageExcluFavoris" value="{{selectedExcluFavoris}}"></core-localstorage>
+		
+		<core-menu id="core_menu" valueattr="label" theme="core-light-theme">
+		
+			<core-animated-pages selected="{{page}}" transitions="slide-from-right" on-core-animated-pages-transition-end="{{complete}}">
+			
+				<section>
+					<div slide-from-right>
+						<div id="topLogo" class="bg-bouton"></div>
+						<template if="{{username == '' && password == ''}}">
+                            <p>Votre compte</p>
+                            
+                            <div class="bg-bouton">
+                                <div class="item bouton-menu pointer" on-tap="{{connexion}}">
+                                    <div class="label texte-bleu" fit>Connexion</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
+                                
+                                <hr />
+                                
+                                <div class="item bouton-menu pointer" on-tap="{{creerCompte}}">
+                                    <div class="label texte-bleu" fit>Créer un compte</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
+                            </div>
+						</template>
+                        
+                        <template if="{{username != '' && password != ''}}">
+                            <p>{{username}}</p>
+                            
+                            <div class="bg-bouton">
+                                <div class="item bouton-menu pointer" on-tap="{{sectionCode}}">
+                                    <div class="label texte-bleu" fit>Code d'activation</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
+                                
+                                <hr />
+                                
+                                <div class="item bouton-menu pointer" on-tap="{{resetPassword}}">
+                                    <div class="label texte-bleu" fit>Réinitialiser mon mot de passe</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
+                                
+                                <hr />
+                                
+                                <div class="item bouton-menu pointer" on-tap="{{deconnexion}}">
+                                    <div class="label texte-rouge" fit>Déconnexion</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
+                            </div>
+						</template>
+                        
+						<p>Nettoyage automatique</p>
+						
+						<div class="bg-bouton">
+							<div class="bouton-menu" horizontal layout>
+								<div class="label">Récent pendant :</div>
+                                <div class="item pointer" flex  on-tap="{{sectionRecent}}">
+									<div class="texte-bleu" flex>{{textRecentPendant}}</div>
+									<paper-ripple fit></paper-ripple>
+                                </div>
+							</div>
+							
+							<hr />
+							
+							<div class="bouton-menu" horizontal layout>
+								<div class="label">Supprimer après :</div>
+                                <div class="item pointer" flex  on-tap="{{sectionSupprimer}}">
+									<div class="texte-bleu" flex>{{textDeleteAfter}}</div>
+									<paper-ripple fit></paper-ripple>
+                                </div>
+							</div>
+							
+							<hr />
+							
+							<div class="bouton-menu" horizontal layout>
+								<div class="label">Maximum :</div>
+                                <div class="item pointer" flex  on-tap="{{sectionPublication}}">
+									<div class="texte-bleu" flex>{{textPubMaximum}}</div>
+									<paper-ripple fit></paper-ripple>
+                                </div>
+							</div>
+							
+							<hr />
+							
+							<div class="bouton-menu item" horizontal layout center>
+								<div flex>Exclure les favoris</div>
+								<paper-toggle-button id="btnToggleFavoris" class="blue" checked="{{textExcluFavoris}}" on-tap="{{toggleFavoris}}" style="margin-right: 10px;"></paper-toggle-button>
+							</div>
+						</div>
+						
+						<core-animated-pages id="animated-page-favoris" selected="{{pageToggleFavoris}}" transitions="cross-fade-all" on-core-animated-pages-transition-end="{{complete}}" style="height:60px;">
+							<section>
+								<div cross-fade-all>
+									<p id="favorisInclu" class="texteInfo" style="padding:0 10px 0 20px;">Vos Favoris seront supprimés automatiquement par le nettoyage automatique.</p>
+								</div>
+							</section>
+                            <section>
+								<div cross-fade-all>
+									<p id="favorisExclu" class="texteInfo" style="padding:0 10px 0 20px;">Vos Favoris ne seront pas supprimés automatiquement.</p>
+								</div>
+							</section>
+						</core-animated-pages>
+						
+						<p>À propos</p>
+						<div class="bg-bouton">
+							<p class="bouton-menu" style="margin: 0; padding:0;">Version : 1.3</p>
+                            <hr />
+                            <div flex style="color: #2693FF; position: relative; height: 48px; line-height: 48px; cursor:pointer;" on-tap="{{openSupport}}">Support technique</div>
+                            
+						</div>
+                        
+                        
+                        <div style="padding: 1em 0;">
+                            <div style="display:block; width:100%; text-align:center; font-size: 17px;">Télécharger nos apps</div>
+                            <div layout flex horizontal around-justified>
+                            	<div id="googleplay" on-tap="{{openGooglePlay}}"></div>
+                            	<div id="appstore" on-tap="{{openAppStore}}"></div>
+                            </div>
+                        	
+                        </div>
+						
+					</div>
+				</section>
+				
+				
+				<section>
+					<div slide-from-right>
+					
+						<core-toolbar id="core_toolbar">
+							<div on-tap="{{back}}" class="pointer" layout horizontal center center-justified style="position:relative;width: 35px; height: 35px;">
+	                            <core-icon icon="arrow-back" style="color: #333;"></core-icon>
+                            	<paper-ripple fit class="circle"></paper-ripple>
+                            </div>
+							<div>Code d'activation</div>
+						</core-toolbar>
+						
+						<div class="bg-bouton">
+							<paper-input floatingLabel label="Code :" id="active_code" value="{{code_value}}"></paper-input>
+						</div>
+						
+						<div class="bg-bouton" on-tap="{{activateCode}}">
+							<div class="bouton-menu pointer align-center">Envoyer</div>
+						</div>
+						
+					</div>
+				</section>
+				
+				<section>
+					<core-toolbar id="core_toolbar">
+						<div on-tap="{{back}}" class="pointer" layout horizontal center center-justified style="position:relative;width: 35px; height: 35px;">
+                            <core-icon icon="arrow-back" style="color: #333;"></core-icon>
+                            <paper-ripple fit class="circle"></paper-ripple>
+                        </div>
+						<div>Récents pendant</div>
+					</core-toolbar>
+					
+					<paper-radio-group class="bg-bouton" selected="{{selectedRecentPendant}}" vertical layout>
+                    	<template repeat="{{recentPendant as item}}">
+							<paper-radio-button label="{{item}}" id="paper_button"></paper-radio-button>
+                    	</template>    
+						
+					</paper-radio-group>
+					
+					<p>Après ce délai, les éditions ne s'afficheront plus dans la section récents, mais seront disponible dans la section tous de votre bibliothèque.</p>
+				</section>
+				
+				<section>
+					<core-toolbar id="core_toolbar">
+						<div on-tap="{{back}}" class="pointer" layout horizontal center center-justified style="position:relative;width: 35px; height: 35px;">
+                            <core-icon icon="arrow-back" style="color: #333;"></core-icon>
+                            <paper-ripple fit class="circle"></paper-ripple>
+                        </div>
+						<div>Supprimer après</div>
+					</core-toolbar>
+					
+					<paper-radio-group selected="{{selectedDeleteAfter}}" class="bg-bouton" vertical layout>
+	                    <template repeat="{{deleteAfter as item}}">
+							<paper-radio-button label="{{item}}" id="paper_button"></paper-radio-button>
+                        </template>
+					</paper-radio-group>
+					
+					<p>Après ce délai, les éditions ne seront supprimé de votre appareil.</p>
+					<p>Vous pourrez toujours les télécharger à nouveaux via le Kiosque.</p>
+				</section>
+				
+				<section>
+					<core-toolbar id="core_toolbar">
+						<div on-tap="{{back}}" class="pointer" layout horizontal center center-justified style="position:relative;width: 35px; height: 35px;">
+                            <core-icon icon="arrow-back" style="color: #333;"></core-icon>
+                            <paper-ripple fit class="circle"></paper-ripple>
+                        </div>
+						<span>Publication maximum</span>
+					</core-toolbar>
+					
+					<paper-radio-group selected="{{selectedNbMaximum}}" class="bg-bouton" vertical layout>
+                    	<template repeat="{{pubMaximum as item}}">
+							<paper-radio-button label="{{item}}" id="paper_button"></paper-radio-button>
+						</template>
+					</paper-radio-group>
+					
+					<p>Une fois ce nombre de publication atteint, les anciennes publications seront supprimées de votre appareil.</p>
+					<p>Vous pourrez toujours les télécharger à nouveaux via le Kiosque.</p>
+				</section>
+				
+		</core-animated-pages>		
+	
+	</core-menu>
+	
+    <paper-dialog id="connexionDialog" heading="Connecter votre compte ekiosk" transition="paper-dialog-transition-bottom" backdrop="true" layered="true" autoCloseDisabled="true" closeSelector="[dismissive]">
+    	<style>
+			paper-dialog {
+				min-width: 600px;
+			}
+
+			
+			paper-toggle-button.blue::shadow paper-radio-button::shadow #ink[checked], paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+		      color: #2693FF;
+		    }
+		    
+		    paper-toggle-button.blue::shadow paper-radio-button::shadow #onRadio, paper-toggle-button.blue::shadow #toggleBar[checked], paper-radio-group.blue paper-radio-button::shadow #onRadio {
+		      background-color: #2693FF;
+		    }
+		 				
+			paper-dialog paper-button {
+				font-weight: bold;
+			}
+			
+			paper-button[autofocus] {
+				color: #4285f4;
+				font-weight: bold;
+			}
+		</style>
+        <!--
+        <div flex layout>
+        	<img src="../img/logo_ekiosk.png" width="250" self-center-justified />
+        </div>
+        -->
+        <div flex style="position:relative;">
+            <div id="connexion-div">
+                <div class="item bouton-menu">
+                    <div class="bouton-menu" horizontal layout style="padding-top:10px;">
+                        <paper-input id="input-username" floatingLabel label="Usager" required error="Champ obligatoire"></paper-input>
+                    </div>
+                    
+                    <div class="bouton-menu" horizontal layout>
+                        <paper-input id="input-password" floatingLabel label="Mot de passe" type="password" required error="Champ obligatoire"></paper-input>
+                    </div>
+                </div>
+                
+                <div id="error-div" style="display:none;">
+                	<p>
+	                	<core-icon icon="error" style="color: red;"></core-icon><span id="error-text" style="padding-left:5px; color:red;"></span>
+                    </p>
+                </div>
+                
+                <div class="item bouton-menu pointer" style="position: relative; height: 48px; line-height: 48px;" on-tap="{{creerCompte}}">
+                    <div class="label texte-bleu" fit style="color:#2693FF;">Créer un compte</div>
+                    <paper-ripple fit style="color: #4285f4;"></paper-ripple>
+                </div>
+            </div>
+            
+            <div id="connexion-spinner" horizontal layout center center-justified style="position: absolute; top: 0; width: 100%;">
+                <spinner-element></spinner-element>
+            </div>
+        </div>
+        <paper-button label="Annuler" dismissive on-tap="{{cancelConnexionDialog}}"></paper-button>
+        <paper-button id="connexion-button" label="Connexion" affirmative autofocus on-tap="{{connexionDialog}}"></paper-button>
+        
+    </paper-dialog>
+    
+    <paper-dialog id="deconnexionDialog" heading="Avertissement" transition="paper-dialog-transition-bottom" backdrop="true" layered="true">
+    	<style>
+			
+			paper-button[autofocus] {
+				font-weight: bold;
+				color: red;
+			}
+		</style>
+        <p>Voulez-vous vraiment déconnecter votre compte de cet ordinateur ?</p>
+        
+        <paper-button label="Annuler" dismissive></paper-button>
+        <paper-button label="Confirmer" affirmative autofocus on-tap="{{deconnexionDialog}}"></paper-button>
+        
+    </paper-dialog>
+
+    <paper-dialog id="activatonConfirmDialog" heading="Informations" transition="paper-dialog-transition-bottom" backdrop="true" layered="true">
+    	
+        <p>Votre abonnement EKIOSK a été pris en compte</p>
+     
+        <paper-button label="OK" affirmative on-tap="{{back}}"></paper-button>
+        
+    </paper-dialog>
+    
+	</template>
+	
+	<script>
+	Polymer('menuLayout-element', {
+	  
+		ready: function() {
+			console.log("ready");
+
+			var ref = this;
+		},
+		
+		isFirstResponseFromActivation:0,
+
+	    page: 0,
+		
+		username: '',
+		password: '',
+		ekcredit: 0,
+		selectedRecentPendant: 0,
+		selectedDeleteAfter:0,
+		selectedNbMaximum: 0, 
+		selectedExcluFavoris: 1,
+		
+		
+		xhrConnexion: null,
+		currentVisibleDialog:null,
+		
+		recentPendant: ['7 jours', '15 jours', '30 jours', 'Toujours'],
+		deleteAfter: ['15 jours', '30 jours', '60 jours', '90 jours', 'illimités'],
+		pubMaximum: ['30 publications', '60 publications', '90 publications', '120 publications', 'illimités'],
+		exclusFavoris: true,
+		
+		computed: {
+			textRecentPendant: 'recentPendant[selectedRecentPendant]',
+			textDeleteAfter: 'deleteAfter[selectedDeleteAfter]',
+			textPubMaximum: 'pubMaximum[selectedNbMaximum]',
+			textExcluFavoris: 'selectedExcluFavoris == 1',
+			pageToggleFavoris: 'selectedExcluFavoris',
+		},
+		
+		activateCode: function(e) {
+			this.$.ajaxSubmit.url = "http://api.ngser.gnetix.com/v1.1/AddCreditWithCode.php";
+			var params = '{"code":"' + this.code_value + '", "username":"' + this.username + '", "password":"' + this.password + '"}';	
+			params = "data=" + encodeURIComponent(params)
+			this.$.ajaxSubmit.body = params;
+			this.$.ajaxSubmit.go();
+		},
+
+		handleResponse : function(response, xhr) {
+			try {
+				if (response.detail.response.resultat == "true") {
+
+					try {
+						var total = response.detail.response.data.total;
+						console.log("Total : " + total);
+					}catch (e) {
+						console.log(e);
+					}
+					
+					this.currentVisibleDialog = this.shadowRoot.querySelector('#activatonConfirmDialog');
+					this.currentVisibleDialog.toggle();
+				}
+				else {	
+					if (this.isFirstResponseFromActivation == 0) {
+						this.isFirstResponseFromActivation = 1;
+						return;
+					}
+
+					alert(response.detail.response.data);
+				}
+
+			}catch(e) {
+				console.log(e);
+				alert(e);								
+			}
+		},
+
+		sectionCode: function(e) {
+			this.page=1;
+		},
+		
+		sectionRecent: function(e) {
+			this.page=2;
+		},
+		
+		sectionSupprimer: function(e) {
+			this.page=3;
+		},
+		
+		sectionPublication: function(e) {
+		    this.page=4;
+		},
+		
+		back: function(e) {
+			this.page=0;
+		},
+	  	
+		selectedRecentPendantChanged: function() {
+			
+			this.fire("SelectedRecentChanged");
+			
+		},
+		
+		toggleFavoris: function(e) {
+			var animatedpage = this.shadowRoot.querySelector('#animated-page-favoris');
+			
+			if(this.selectedExcluFavoris == true) {
+				this.selectedExcluFavoris = 0;
+				//this.pageToggleFavoris=1;
+				
+				animatedpage.style["height"] = "80px";
+			}
+			else {
+				this.selectedExcluFavoris = 1;
+				//this.pageToggleFavoris=0;
+				
+				animatedpage.style["height"] = "60px";
+			}
+		},
+		
+		connexion: function(e) {
+			this.currentVisibleDialog = this.shadowRoot.querySelector('#connexionDialog');
+			this.currentVisibleDialog.querySelector('#connexion-div').style['opacity'] = 1;
+			this.currentVisibleDialog.querySelector('#connexion-spinner').style['display'] = 'none';
+			this.currentVisibleDialog.querySelector('#error-div').style['display'] = 'none';
+			this.currentVisibleDialog.querySelector('#connexion-button').removeAttribute('disabled');
+			this.currentVisibleDialog.toggle();
+		},
+		cancelConnexionDialog: function(e) {
+			if(this.xhrConnexion != null) {
+				this.xhrConnexion.abort();
+			}
+			this.xhrConnexion = null;
+			
+			this.currentVisibleDialog.querySelector('#input-username').value = '';
+			this.currentVisibleDialog.querySelector('#input-password').value = '';
+			this.currentVisibleDialog.querySelector('#input-username').inputValue = '';
+			this.currentVisibleDialog.querySelector('#input-password').inputValue = '';
+			this.currentVisibleDialog.querySelector('#connexion-button').removeAttribute('disabled');
+			
+			this.currentVisibleDialog = null;
+			
+		},
+		connexionDialog: function(e) {
+			//this.username = "test";
+			//this.password = "test";
+			
+			
+			
+			var tempUsername = this.currentVisibleDialog.querySelector('#input-username').value;
+			var tempPassword = this.currentVisibleDialog.querySelector('#input-password').value;
+			
+			if(tempUsername == "" || tempPassword == "") {
+				this.currentVisibleDialog.querySelector('#error-div').style['display'] = '';
+				this.currentVisibleDialog.querySelector('#error-text').innerHTML = "Vérifier les champs obligatoires";
+			}
+			else {
+				
+				this.currentVisibleDialog.querySelector('#connexion-div').style['opacity'] = 0.2;
+				this.currentVisibleDialog.querySelector('#connexion-spinner').style['display'] = '';
+				this.currentVisibleDialog.querySelector('#connexion-button').setAttribute('disabled', '');
+				this.currentVisibleDialog.querySelector('#error-div').style['display'] = 'none';
+				
+				this.xhrConnexion = this.$.xhr.request({
+					url: 'http://api.ngser.gnetix.com/v1.1/Login.php', 
+					params: {'username': tempUsername, 'password': tempPassword, 'ekcredit':'0'}, 
+					callback: this.connexionDialogCallback.bind(this),
+					
+				});
+			}
+		},
+		
+		connexionDialogCallback: function(response, xhr) {
+			console.log(xhr.readyState);
+			console.log(xhr.getAllResponseHeaders());
+			if(xhr.getAllResponseHeaders()) {
+				console.log(this);
+				
+				console.log('connexionDialogCallback');
+				console.log(response);
+				console.log(xhr);
+				
+				this.xhrConnexion = null;
+				var jsonResponse;
+				
+				try{
+					jsonResponse = JSON.parse(response);
+					
+					console.log(jsonResponse);
+					
+					
+					if (jsonResponse.resultat == "true") {
+						this.username = jsonResponse.data.email;
+						this.password = jsonResponse.data.password;
+						this.ekcredit = jsonResponse.data.ek_credit;
+						
+						this.currentVisibleDialog.toggle();
+						
+						this.currentVisibleDialog.querySelector('#input-username').value = '';
+						this.currentVisibleDialog.querySelector('#input-password').value = '';
+						this.currentVisibleDialog.querySelector('#input-username').inputValue = '';
+						this.currentVisibleDialog.querySelector('#input-password').inputValue = '';
+						
+						this.currentVisibleDialog = null;
+						
+						this.fire('menuLayout-ConnexionChanged', {'username': jsonResponse.data.email, 'password': jsonResponse.data.password, 'ekcredit': jsonResponse.data.ek_credit});
+					}
+					else {
+						console.log('false');
+						//alert(jsonResponse.data);
+						this.currentVisibleDialog.querySelector('#error-div').style['display'] = '';
+						this.currentVisibleDialog.querySelector('#error-text').innerHTML = jsonResponse.data;
+						this.currentVisibleDialog.querySelector('#connexion-div').style['opacity'] = 1;
+						this.currentVisibleDialog.querySelector('#connexion-spinner').style['display'] = 'none';
+						this.currentVisibleDialog.querySelector('#connexion-button').removeAttribute('disabled');
+					}
+					
+				}catch(e){
+					console.log(e); //error in the above string(in this case,yes)!
+					//alert(response);
+					this.currentVisibleDialog.querySelector('#error-div').style['display'] = '';
+					this.currentVisibleDialog.querySelector('#error-text').innerHTML = response;
+					this.currentVisibleDialog.querySelector('#connexion-div').style['opacity'] = 1;
+					this.currentVisibleDialog.querySelector('#connexion-spinner').style['display'] = 'none';
+					this.currentVisibleDialog.querySelector('#connexion-button').removeAttribute('disabled');
+				}
+				
+				
+				
+			}
+			
+			
+			
+			
+		},
+		
+		activatonConfirmDialog: function(e) {
+			this.currentVisibleDialog.toggle();
+			this.currentVisibleDialog = null;			
+		},
+
+		deconnexion: function(e) {
+			//this.username = "";
+			//this.password = "";
+			this.currentVisibleDialog = this.shadowRoot.querySelector('#deconnexionDialog');
+			this.currentVisibleDialog.toggle();
+			
+		},
+		deconnexionDialog: function(e) {
+			console.log(e);
+			this.username = "";
+			this.password = "";
+			this.ekcredit = '0';
+			this.currentVisibleDialog = null;
+			
+			this.fire('menuLayout-ConnexionChanged', {'username': '', 'password': '', 'ekcredit': '0'});
+		},
+		
+		creerCompte: function(e) {
+			console.log('section');
+			console.log(this.username);
+			console.log(this.password);
+			
+			var gui = require('nw.gui');
+			gui.Shell.openExternal("http://www.ekioskmobile.net/index.php?m=create");
+		},
+		
+		openGooglePlay: function() {
+			var gui = require('nw.gui');
+			gui.Shell.openExternal("https://play.google.com/store/apps/details?id=com.ngser.ekiosk&hl=fr");
+		},
+		openAppStore: function() {
+			var gui = require('nw.gui');
+			gui.Shell.openExternal("https://itunes.apple.com/us/app/ekiosk-mobile/id802179473?mt=8");
+		},
+		openSupport: function() {
+			var gui = require('nw.gui');
+			gui.Shell.openExternal("http://www.ekioskmobile.net/index.php?m=contact&f=fct6");
+		},
+		
+    });
+  	</script>
+	
+</polymer-element>

@@ -1,0 +1,70 @@
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
+  <div class="wrapper webrtcp2p">
+    <section class="chat center hidden">
+      <div class="streams">
+        <div class="localControls">
+          <span id="callerName"></span><br>
+          <video id="localVideo"></video>
+          <div class="mediacall-controls l-flexbox l-flexbox_flexcenter">
+            <button class="btn_mediacall btn_camera_off" data-action="mute" disabled><img class="btn-icon_mediacall" src="images/icon-camera-off.png" alt="camera"></button>
+            <button class="btn_mediacall btn_mic_off" data-action="mute" disabled><img class="btn-icon_mediacall" src="images/icon-mic-off.png" alt="mic"></button>
+          </div>
+        </div>
+        <div class="remoteControls">
+          <span id="calleeName"></span><br>
+          <video id="remoteVideo"></video>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="audiocall" type="button" class="btn btn-default">
+          <img class="icon-audiocall" src="images/icon-audiocall.png" alt="QuickBlox Samples">Audio call
+        </button>
+        <button id="videocall" type="button" class="btn btn-default">
+          <img class="icon-videocall" src="images/icon-videocall.png" alt="QuickBlox Samples">Video call
+        </button>
+        <button id="hangup" type="button" class="btn btn-default" disabled>
+          <img class="icon-hangup" src="images/icon-hangup.png" alt="QuickBlox Samples">Hangup
+        </button>
+      </div>
+    </section>
+    <div class="push"></div>
+  </div>
+
+  <section id="incomingCall" class="incoming modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="info-notice"><span class="incoming-callType"></span> Call from <span class="caller"></span></span>
+        </div>
+        <div class="modal-body">
+          <div class="incoming-call-controls l-flexbox l-flexbox_flexcenter">
+            <button id="reject" class="btn btn-default btn_decline">Decline</button>
+            <button id="accept" class="btn btn-default btn_accept">Accept</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <audio id="callingSignal" loop>
+    <source src="audio/calling.ogg"></source>
+    <source src="audio/calling.mp3"></source>
+  </audio>
+
+  <audio id="ringtoneSignal" loop>
+    <source src="audio/ringtone.ogg"></source>
+    <source src="audio/ringtone.mp3"></source>
+  </audio>
+
+  <audio id="endCallSignal">
+    <source src="audio/end_of_call.ogg"></source>
+    <source src="audio/end_of_call.mp3"></source>
+  </audio>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="quickblox.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

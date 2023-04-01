@@ -1,0 +1,4 @@
+.bloc-flickr .gallery { margin-top:2em; }
+.bloc-flickr .gallery.type-list .pretty_photo a { display:inline-block; padding:0.5em; }
+.bloc-flickr .gallery.type-carousel .pretty_photo a { /* Overwrite Slick styles here as needed */ }
+.bloc-flickr .gallery .flickr_button { display:block; margin-top:2em; }

@@ -1,0 +1,665 @@
+	
+	<!--<script src="/scripts/modules/jquery.js" type="text/javascript"></script>-->
+	 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css">
+
+	<div class="col-md-6 col-lg-7 col-sm-12">
+		<div id="map" class="mainmap-sec"></div>
+	</div>
+	<div class="col-md-6 col-lg-5 col-sm-12 contentpart">
+		<script>
+$( document ).ready(function() {
+  $('#shuffle1').click(function(){
+    $(".ad").css("width", "50%");
+    $(".ad").css("height", "180px");
+
+	  $('.ads').isotope({
+		layoutMode: 'fitRows',
+		itemSelector: '.ad'
+	  });
+  });
+  
+  $('#shuffle').click(function(){
+  $(".ad").css("width", "100%");
+	  $('.ads').isotope({
+		layoutMode: 'vertical',
+		itemSelector: '.ad'
+	  });
+  });
+
+	window.ads = {{-JSON.stringify this.data.ads.filter (item) -> item.avatar = if (item.seller_type is 'business') then item.seller.avatar else item.seller.avatar }};
+	window.filterAds = {{-JSON.stringify this.data.ads.filter (item) -> item.avatar = if (item.seller_type is 'business') then item.seller.avatar else item.seller.avatar }};
+
+	//window.ads = {{-JSON.stringify this.data.ads }};
+	//window.filterAds = {{-JSON.stringify this.data.ads }};
+	window.query = {{-JSON.stringify this.query}};
+    	{{if this.account:}}
+        {{currentId = if this.account.business then this.account.business.id else this.account.id}}
+					
+        window.currentId = '{{-currentId}}'
+        {{end}}
+        window.map;
+        window.maxPriceLast = {}
+        window.lowPriceLast = {}
+        window.maxPriceLast.price = 0
+        window.lowPriceLast.price = 0
+
+        if (window.ads.length>0){
+    window.maxPrice = getMax(window.ads,"price")
+    window.lowPrice = getLow(window.ads,"price")
+        window.maxPriceLast = window.maxPrice.price
+        window.lowPriceLast = window.lowPrice.price
+        }
+    function getMax(arr, prop) {
+    var max;
+    for (var i=0 ; i<arr.length ; i++) {
+        if (!max || parseInt(arr[i][prop]) > parseInt(max[prop]))
+            max = arr[i];
+    }
+    return max;
+}
+    function getLow(arr, prop) {
+    var max;
+    for (var i=0 ; i<arr.length ; i++) {
+        if (!max || parseInt(arr[i][prop]) < parseInt(max[prop]))
+            max = arr[i];
+    }
+    return max;
+}
+})
+</script>
+
+{{-@get '/classifieds', id:'search' }}
+	{{-this.input false, 'country_short', 'hidden' }}
+	{{-this.input false, 'country_long', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_1_short', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_1_long', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_2_short', 'hidden' }}
+	{{-this.input false, 'administrative_area_level_2_long', 'hidden' }}
+	{{-this.input false, 'locality_short', 'hidden' }}
+	{{-this.input false, 'locality_long', 'hidden' }}
+	{{-this.input false, 'postal_code_short', 'hidden' }}
+	{{-this.input false, 'postal_code_long', 'hidden' }}
+	{{-this.input false, 'neighborhood_short', 'hidden' }}
+	{{-this.input false, 'neighborhood_long', 'hidden' }}
+	{{-this.input false, 'route_short', 'hidden' }}
+	{{-this.input false, 'route_long', 'hidden' }}
+	{{-this.input false, 'street_number_short', 'hidden' }}
+	{{-this.input false, 'street_number_long', 'hidden' }}
+	{{-this.input false, 'formatted_address', 'hidden' }}
+	{{-this.input false, 'latitude', 'hidden' }}
+	{{-this.input false, 'longitude', 'hidden' }}
+	{{-this.input false, 'amount', 'hidden' }}
+	
+	
+	<div class="wrap">
+		<h1>Search</h1>
+		<div class="clear"></div>
+		<div class="form-horizontal">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="form-group">
+						<label class="control-label col-md-3 col-lg-2 col-sm-3">Search</label><div class="col-md-9 col-lg-10 col-sm-9">{{-this.input 'What are you looking for?', 'search_value', 'text'}}</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-lg-2 col-sm-3">Location</label><div class="col-md-9 col-lg-10 col-sm-9">{{-this.input 'Where?', 'search_location', 'text'}}
+						
+						{{-this.input 'price', 'Price', 'hidden'}}
+						{{-this.input 'priceEndText', 'PriceEndText', 'hidden'}}
+						{{-this.input 'distance', 'Distance', 'hidden'}}
+						{{-this.input 'distanceEndText', 'DistanceEndText', 'hidden'}}
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						
+						<!--<label class="control-label col-md-2 col-sm-3">Category</label><div class="col-md-10 col-sm-9">{{-this.select placeholder:'Category', name:'category', options:this.categories }}</div>-->
+						<fieldset class="input-holder select outer">
+							<label for="category" class="control-label col-md-3 col-lg-2 col-sm-3">Categories</label>
+							<div class="col-md-9 col-lg-10 col-sm-9">{{-this.select placeholder:'Choose Category', id:'mainCategoryId',name:'category', options:this.categories }}</div>
+						</fieldset>
+						<div id="category_fields" style="display: none;"></div>
+						
+					</div>
+					<div class="form-group">
+							<label class="control-label col-md-3 col-lg-2 col-sm-3">Keywords</label><div class="col-md-9 col-lg-10 col-sm-9">{{-this.select placeholder:'Type', name:'trade_type', options:[[1, 'Selling'], [2, 'Buying']] }}</div>
+					</div>
+					
+						<!--
+						<h1><a onclick="showFilter()" style="color: #00baff;text-decoration: none;">Filter</a></h1>
+						<div class="setFilter" style="display:none">
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<h4>Filter By tag :</h4>
+									<div class="row">
+										<ul class="col-md-4 col-sm-5">
+											<li><span>Food</span><input type="checkbox"></li>
+											<li><span>Clothing</span><input type="checkbox"></li>
+											<li><span>Real Estate</span><input type="checkbox"></li>
+											<li><span>Smartphone</span><input type="checkbox"></li>
+										</ul>
+										<ul class="col-md-4 col-sm-5">
+											<li><span>Parking</span><input type="checkbox"></li>
+											<li><span>Out doors</span><input type="checkbox"></li>
+											<li><span>Kids</span><input type="checkbox"></li>
+											<li><span>Hardware</span><input type="checkbox"></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>-->
+						<div>
+							<h1 style="cursor:pointer; width:100%;" data-toggle="collapse" data-target="#toggle-example">
+								<div class="filterButton">
+									Filters  
+								</div>
+							</h1>
+							<div id="toggle-example" class="collapse"> 
+								<div class="filter form-group">
+									<div class="col-md-12 col-sm-12">
+										<label class="control-label col-xs-12 col-md-3 col-lg-2 col-sm-3" for="amount">Distance</label>
+										<div class="col-md-9 col-xs-12 col-lg-10 col-sm-9 range">
+											<div class="start_dis"><span id="spanDistance">5</span> <span>km </span></div>
+											<div class="end_dis"><span id="spanDistanceEnd">10000</span> <span>km</span></div>
+											<div id="distance" class="ui-slider ui-slider-horizontal ui-widget ui-widget- ui-corner-all"></div>
+										</div>
+									</div>
+								</div>
+								 <div class="filter form-group">
+									<div class="col-md-12 col-sm-12">
+										<label class="control-label col-xs-12 col-md-3 col-lg-2 col-sm-3" for="amount">Price</label>
+										<div class="col-md-9 col-xs-12 col-lg-10 col-sm-9 range">
+											<div class="start_dis"><span>$</span><span id="spanPrice">5</span></div>
+											<div class="end_dis"><span>$</span><span id="spanPriceEnd">10000</span></div>
+											<div id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget- ui-corner-all"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						 
+
+											
+					<div class="form-group" ><div class="col-md-12 col-sm-12"><button class="btn-block" type="submit">Show Result</button></div></div>
+			</div>
+		</div>
+	</div>	
+{{-@end}}
+
+<div id="classifieds" >
+	<div class="wrap">
+         <link rel="stylesheet" href="/styles/normalize.css" />
+<!--            <script src="/scripts/jquery-1.11.1.min.js"></script>-->
+            <link rel="stylesheet" href="/styles/jquery.range.css" />
+			<script src="/scripts/jquery.range.js"></script>
+		</div>
+        <script>
+            $(document).ready(function () {
+
+
+			// its code for sub category when on load then searching
+			
+				//var value = $(this).val();
+				
+			
+			
+			
+			//
+				
+				
+			//$("#ex16b").slider({ min: 0, max: 10, value: [0, 10], focus: true });
+			//new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
+            
+                $('.range-slider').val(window.lowPrice.price + "," + window.maxPrice.price)
+                /*$('.range-slider').jRange({
+                    from: window.lowPrice.price,
+                    to: window.maxPrice.price,
+                    step: 1,
+                    scale: [window.lowPrice.price, window.maxPrice.price],
+                    format: '%s',
+                    width: 300,
+                    showLabels: true,
+                    isRange: true
+                });4
+                */
+                var locations = [];
+                var loc = [];
+                for (var i = 0; i < window.filterAds.length; i++) {
+                    if (loc.indexOf(window.filterAds[i].administrative_area_level_1_short)==-1){
+                    locations.push({ short: [window.filterAds[i].administrative_area_level_1_short], "long": window.filterAds[i].administrative_area_level_1_long });
+                    loc.push(window.filterAds[i].administrative_area_level_1_short)
+                    }
+                    loadAdsDiv(window.ads[i])
+                }
+                $("#location").html("")
+                var contentLoc = '<option value="">Select Location</option>';
+                $("#location").append(contentLoc)
+                for (var k=0;k<locations.length;k++)
+                {    
+                var contentLoc = '<option value="' + locations[k].short + '">' + locations[k].long + '</option>';
+                $("#location").append(contentLoc)
+                }
+
+                /*
+                var category = [];
+                var cate = [];
+                for (var i = 0; i < window.filterAds.length; i++) {
+                    if (cate.indexOf(window.filterAds[i].administrative_area_level_1_short)==-1){
+                    locations.push({ short: [window.filterAds[i].administrative_area_level_1_short], "long": window.filterAds[i].administrative_area_level_1_long });
+                    loc.push(window.filterAds[i].administrative_area_level_1_short)
+                    }
+                    loadAdsDiv(window.ads[i])
+                }
+                $("#location").html("")
+                var contentLoc = '<option value="">Select Location</option>';
+                $("#location").append(contentLoc)
+                for (var k=0;k<locations.length;k++)
+                {    
+                var contentLoc = '<option value="' + locations[k].short + '">' + locations[k].long + '</option>';
+                $("#location").append(contentLoc)
+                }
+                */
+
+
+				
+
+               //$("#totalAds").html(window.ads.length)
+               // setInterval(checkPriceRange, 1000)
+
+                
+            });
+        </script>
+		
+		<div class="col-md-12 col-sm-12 mislery text-right">
+			<a href="#" id="shuffle"><i class="fa fa-th-list"></i></a>
+			<a href="#" id="shuffle1"><i class="fa fa-th-large"></i></a>
+		</div>
+        <h2 class="title"><span><span id="totalAds"></span> Classifieds{{-if this.inputs.search_location then ' around ' + this.inputs.search_location}}</span></h2>
+	    	
+		<div class="ads">
+		</div>
+		
+		{{if this.total_rows > this.ads.length:}}
+			
+			<div class="pagination">
+				{{if this.current_page > 1:}}	
+					{{this.query.page -= 1 }}
+					<a href="?{{-querystring.stringify this.query}}" class="icon-left"><i class="fa fa-angle-left"></i></a>
+				{{end}}
+				{{for index in [this.from_pages..this.to_pages]:}}
+					{{this.query.page = parseInt(index) }}
+					<a href="?{{-querystring.stringify this.query}}" {{-if index is this.current_page then 'class="selected"'}}>{{-index}}</a>
+				{{end}}
+				{{if this.current_page != this.total_pages:}}
+					{{this.query.page = this.query.page++}}
+					<a href="?{{-querystring.stringify this.query}}" class="icon-right"><i class="fa fa-angle-right"></i></a>
+				{{end}}
+			</div>
+		{{end}}
+	</div>
+	</div>
+    <script>
+
+        function checkPriceRange() {
+            var rangePrice = $("#rangePrice").val();
+            rangePrice = rangePrice.split(",")
+            if (window.lowPriceLast != rangePrice[0] || window.maxPriceLast != rangePrice[1]) {
+                window.filterAds = [];
+                window.maxPriceLast = rangePrice[1]
+                window.lowPriceLast = rangePrice[0]
+                var location = $("#location").val();
+
+                if (location != null) {
+                    if (location.indexOf(",") == -1) {
+                        location = location
+                    }
+                    else {
+                        location = location
+                    }
+                }
+                else {
+                    location = [];
+                }
+                for (var i = 0; i < window.ads.length; i++) {
+                    console.log(window.ads[i].price + " Low price ")
+                    if (window.ads[i].price >= rangePrice[0] && window.ads[i].price <= rangePrice[1]) {
+
+                        if (location.length > 0) {
+                            if (location.indexOf(window.ads[i].administrative_area_level_1_short) != -1) {
+                                console.log(window.ads[i].price + " Low price " + rangePrice[0] + " ================= " + rangePrice[1] + " Max Price ")
+                                window.filterAds.push(window.ads[i]);
+                            }
+
+
+                        }
+                        else {
+                            console.log(window.ads[i].price + " Low price " + rangePrice[0] + " ================= " + rangePrice[1] + " Max Price ")
+                            window.filterAds.push(window.ads[i]);
+
+                        }
+                    }
+                }
+
+                $('.ads').html("")
+                $("#totalAds").html(window.filterAds.length)
+                window.lowPrice = getLow(window.filterAds, "price")
+                window.maxPrice = getMax(window.filterAds, "price")
+                removeMarker("")
+
+                for (var i = 0; i < window.filterAds.length; i++) {
+                    loadAdsDiv(window.filterAds[i])
+                }
+
+            }
+        }
+        $("document").delegate(".slider-container theme-green", "click", function () {
+            var rangePrice = $("#rangePrice").val();
+
+
+        })
+                   function showFilter(){
+		   $(".setFilter").slideToggle("slow")
+		   }
+
+        function applyFilter() {
+            removeMarker("")
+            var keyword = $("#keyword").val();
+            keyword = keyword.trim();
+            var rangePrice = $("#rangePrice").val();
+            rangePrice = rangePrice.split(",")
+            window.filterAds = [];
+            window.maxPriceLast = rangePrice[1]
+            window.lowPriceLast = rangePrice[0]
+            var location = $("#location").val();
+            var iskeyword = false;
+            if (keyword != "") {
+                iskeyword = true;
+            }
+            if (location != null) {
+                if (location.indexOf(",") == -1) {
+                    location = location
+                }
+                else {
+                    location = location
+                }
+            }
+            else {
+                location = [];
+            }
+
+            window.filterAds = [];
+            for (var i = 0; i < window.ads.length; i++) {
+                if ( window.ads[i].route_long==null){
+                    window.ads[i].route_long = ""
+                }
+                if(window.ads[i].postal_code_long==null){
+                    window.ads[i].postal_code_long = ""
+                    
+                }
+                if(window.ads[i].neighborhood_long==null){
+                    window.ads[i].neighborhood_long = ""
+                    
+                }
+                if(window.ads[i].administrative_area_level_1_long==null){
+                    window.ads[i].administrative_area_level_1_long = ""
+                    
+                }
+                if ( window.ads[i].administrative_area_level_2_long==null){
+                    window.ads[i].administrative_area_level_2_long = ""
+                    
+                }
+                window.ads[i].description = window.ads[i].description
+                if (window.ads[i].price >= window.lowPriceLast && window.ads[i].price <= window.maxPriceLast) {
+                    if (location.length > 0) {
+                        if (location.indexOf(window.ads[i].administrative_area_level_1_short) != -1) {
+
+                            if (iskeyword) {
+
+                                if (window.ads[i].title.indexOf(keyword)!=-1 || 
+                                window.ads[i].slug.indexOf(keyword)!=-1 || 
+                                window.ads[i].description.indexOf(keyword)!=-1 ||
+                                window.ads[i].route_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].postal_code_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].neighborhood_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].administrative_area_level_1_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].administrative_area_level_2_long.indexOf(keyword)!=-1 
+                                ){
+                                window.filterAds.push(window.ads[i]);
+                                }
+
+                            }
+                            else {
+                                window.filterAds.push(window.ads[i]);
+                            }
+                        }
+                    }
+                    else {
+                        if (iskeyword) {
+                            if (window.ads[i].title.indexOf(keyword)!=-1 || 
+                                window.ads[i].slug.indexOf(keyword)!=-1 || 
+                                window.ads[i].description.indexOf(keyword)!=-1 ||
+                                window.ads[i].route_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].postal_code_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].neighborhood_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].administrative_area_level_1_long.indexOf(keyword)!=-1 ||
+                                window.ads[i].administrative_area_level_2_long.indexOf(keyword)!=-1 
+                                ){
+                                window.filterAds.push(window.ads[i]);
+                                }
+
+
+                        }
+                        else {
+
+                            window.filterAds.push(window.ads[i]);
+                        }
+                    }
+                }
+            }
+
+            $('.ads').html("")
+            $("#totalAds").html(window.filterAds.length)
+            window.lowPrice = getLow(window.filterAds, "price")
+            window.maxPrice = getMax(window.filterAds, "price")
+
+            for (var i = 0; i < window.filterAds.length; i++) {
+                loadAdsDiv(window.filterAds[i])
+            }
+
+
+
+        }
+
+        function loadAdsDiv(ad) {
+            addMarker(ad.id);
+
+            var content = '<div class="ad '+ad.id+'">';
+            content += '<div class="in"><a href="/classifieds/' + ad.id + '" class="picture"><div class="price">' + ad.formatted_price + '</div>';
+            if (ad.pictures.length > 0) {
+                content += '<img src="/uploads/pictures/original/' + ad.pictures[0].source + '" alt="picture"/>';
+            }
+			else
+				content += '<img src="/uploads/pictures/original/no-ad.png" alt="picture"/>';
+				
+            content += '</a><div class="content"><div class="info"><a href="/accounts/' + ad.seller.id + '"><span class="profile-pic"><img src="/uploads/profiles/original/'+ad.seller.avatarName+'" alt=""></span></a><h2><a href="/classifieds/' + ad.id + '">' + ad.title + '</a></h2>';
+            if (ad.description) {
+                content += '<div class="description">' + ad.description.substr(0, 90)
+                if (ad.description.length > 90) {
+                    content += '...</div>';
+                }
+            }
+            content += '<div class="actions">';
+            if (ad.seller.id == window.currentId) {
+                content += '<a href="/classifieds/' + ad.id + '/edit" class="fa fa-edit button">edit</a>';
+                content += '<a href="/classifieds/delete?id=' + ad.id + '" class="fa fa-trash-o button silver" onclick="return confirm(\'Are you sure?\')">delete</a>';
+            }
+            content += '</div></div>';
+            if (ad.seller.id) {
+                content += '<div class="seller">';
+                if (ad.seller_type == 'business') {
+                    content += '<a class="seller-picture" href="/' + ad.seller.address + '"><span class="profile-helper"></span>';
+                     if (typeof ad.seller.avatar != 'undefined')	
+                   content += '<img src="' + ad.seller.avatar + '" alt="Business Avatar"/>';
+                    content += '</a><div class="seller-name">by <a href="/' + ad.seller.address + '">' + ad.seller.name + '</a></div>';
+                }
+                else {
+                    content += '<a class="seller-picture" href="/accounts/' + ad.seller.id + '"><span class="profile-helper"></span>';                   
+                     if (typeof ad.seller.avatar != 'undefined')	
+                    content += ' <img src="' + ad.seller.avatar + '" alt="User Avatar"/>';
+                    content += '</a><div class="seller-name">by <a href="/accounts/' + ad.seller.id + '">' + ad.seller.full_name + '</a></div>';
+                }
+                content += '</div>';
+            }
+			if (ad.seller.online) {
+                content += '<a class="chatIdentity button live-state offline" data-user="' + ad.seller.id + '" href="http://192.241.239.235/chat/?r=' + ad.seller.id + '&id={{-this.account.id}}" >Chat</a>';
+            }
+            else {				
+				if($('#myID').val())
+                content += '<a class="chatIdentity button live-state offline" data-user="' + ad.seller.id + '" href="http://192.241.239.235/chat/?r=' + ad.seller.id + '&id={{-this.account.id}}" >Chat</a>';
+				else
+				content += '<a href="javascript:void();" class="chatIdentity button live-state offline" data-user="' + ad.seller.id + '" data-toggle="modal" data-target="#loginModal"  >Chat</a>';
+		   }
+            content += '</div>';
+            //content += '<div class="price">' + ad.formatted_price + '</div>';
+            content += '</div></div>';
+            $('.ads').append(content);
+        }
+   
+	$(window).load(function() {
+		if($('#Price').val()==''){
+			$("#spanPrice").text(0);
+		}else{
+			$("#spanPrice").text($('#Price').val());
+		}
+		if($('#PriceEndText').val()==''){
+			//$("#spanPrice").text(0);
+		}else{
+			$("#spanPriceEnd").text($('#PriceEndText').val());
+		}
+		
+		if($('#Distance').val()==''){
+			$("#spanDistance").text(0);
+		}else{
+			$("#spanDistance").text($('#Distance').val());
+		}
+		if($('#DistanceEndText').val()==''){
+			//$("#spanDistance").text(0);
+		}else{
+			$("#spanDistanceEnd").text($('#DistanceEndText').val());
+		}
+		
+	});	
+     $(document).ready(function () {
+		 //jquery.NoConflict();
+		//alert('ashk baghel');
+
+		
+
+		if($( "#mainCategoryId option:selected" ).val()>=1){
+			var value = $("#mainCategoryId option:selected" ).val();
+			//alert(value);
+			$.get('/html/parts/sub_category/'+value+'.html', function(response){
+				$('#category_fields').slideUp(200, function(){
+					if(response.replace(/\s+/g, ' ') != '<h3>Category Fields</h3>'){
+						$('#category_fields').html(response);
+						$('#category_fields').slideDown();
+						$('select').selectize();
+					} 
+				});
+			});
+			
+		}else{
+			
+		}
+	});	
+		
+	</script>
+	<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js" type="text/javascript"></script>
+	
+	<script>
+	
+	/*$(function() {
+    var options = 
+        {
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 50, 300 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            }
+        };
+    
+        $( "#slider" ).slider(
+            options
+        );
+        $( "#amount" ).val( "$" + $( "#slider" ).slider( "values", 0 ) +
+            " - $" + $( "#slider" ).slider( "values", 1 ) );
+      
+  
+ 
+    });*/
+
+		
+		
+
+$('#slider').slider({
+    range: true,
+    min: 0,
+    max: 10000,
+    values: [ 0, 10000 ],
+    slide: function(event, ui) {
+        
+        $('.ui-slider-handle:eq(0) .price-range-min').html('$' + ui.values[ 0 ]);
+        $('.ui-slider-handle:eq(1) .price-range-max').html('$' + ui.values[ 1 ]);
+        $('.price-range-both').html('<i>$' + ui.values[ 0 ] + ' - </i>$' + ui.values[ 1 ] );
+        
+        //
+        
+		if ( ui.values[0] == ui.values[1] ) {
+
+		  $('.price-range-both i').css('display', 'none');
+		} else {
+
+		  $('.price-range-both i').css('display', 'inline');
+		  $("#Price").val(ui.values[0]);
+		  $("#PriceEndText").val(ui.values[1]);
+		  $("#spanPrice").text(ui.values[0]);
+		  $("#spanPriceEnd").text(ui.values[1]);
+		}
+        
+        
+    }
+});
+
+$('#distance').slider({
+    range: true,
+    min: 0,
+    max: 10000,
+    values: [ 0, 10000 ],
+    slide: function(event, ui) {
+        
+        $('.ui-slider-handle:eq(0) .price-range-min').html('$' + ui.values[ 0 ]);
+        $('.ui-slider-handle:eq(1) .price-range-max').html('$' + ui.values[ 1 ]);
+        $('.price-range-both').html('<i>$' + ui.values[ 0 ] + ' - </i>$' + ui.values[ 1 ] );
+        
+        //
+        
+		if ( ui.values[0] == ui.values[1] ) {
+
+		  $('.price-range-both i').css('display', 'none');
+		} else {
+
+		  $('.price-range-both i').css('display', 'inline');
+		  $("#Distance").val(ui.values[0]);
+		  $("#DistanceEndText").val(ui.values[1]);
+		   $("#spanDistance").text(ui.values[0]);
+		   $("#spanDistanceEnd").text(ui.values[1]);
+		}
+        
+        
+    }
+});
+    </script>
+	
+</div>

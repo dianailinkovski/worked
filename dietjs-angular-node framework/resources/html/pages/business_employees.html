@@ -1,0 +1,91 @@
+<div class="wrap">
+	<div class="breadcrum-blue">
+		<ul>
+			<li><a href="#">Google</a></li>
+			<li><a href="#">Staff</a></li>
+		</ul>
+	</div>
+
+	<div class="top">
+		<h1 class="left">Staff</h1>
+		<div class="right">
+			{{if this.account.business.role == 0:}}
+				<a href="/businesses/employees/invite" class="button fa fa-plus">Invite Staff</a>
+			{{end}}
+		</div>
+	</div>
+	
+	<div class="employees">
+		{{for employee in this.account.business.employees:}}			
+			{{-@post '/businesses/employees/save', class:'employee', 'data-id':employee.id, values: employee }}
+			
+				<div class="ins">
+					<input type="hidden" name="id" value="{{-employee.id}}" />
+					<div class="top">
+						<div class="picture"><img src="{{-employee.avatar(40)}}" width="40" height="40" alt="Business Avatar"/></div>
+						
+					</div>
+					<div class="details">
+						<div class="content">
+							<div class="name">{{-employee.first_name + ' ' + employee.last_name}}</div>
+							<div class="address">
+								<p><i class="fa fa-phone"></i> 100-200-1900</p>
+								<p> <i class="fa fa-envelope"></i> leoash842@hotmail.com</p>
+							</div>
+						</div>
+						<div class="detail role">
+							<div class="in">
+								<div class="radio">
+									<input type="radio" value="0" name="role" id="role-0-{{-employee.id}}" {{-if employee.role is 0 then 'checked="checked"'}} {{-if this.account.business.role == 1 then 'disabled'}}/>
+									<label for="role-0-{{-employee.id}}">Management</label>
+								</div>
+							</div>
+							
+							<div class="in sales">
+								<div class="radio">
+									<input type="radio" value="1" name="role" id="role-1-{{-employee.id}}" {{-if employee.role is 1 then 'checked="checked"'}} {{-if this.account.business.role == 1 then 'disabled'}}/>
+									<label for="role-1-{{-employee.id}}">Sales</label>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="detail">
+							{{-this.select {placeholder:'Choose Store', name:'store', options:this.stores} }}
+						</div>
+						
+						<!--div class="detail">
+							<i class="fa fa-envelope"></i>
+							{{-this.input 'Contact Email', 'contact_email', 'text'}}
+						</div>
+						
+						<div class="detail">
+							<i class="fa fa-phone"></i>
+							{{-this.input 'Contact Number', 'contact_number', 'text'}}
+						</div-->
+						{{if this.account.business.role == 0 or this.account.id == employee.account:}}
+							<div class="detail actions">
+								<button type="submit" class="">Save</button>
+
+								<a href="/businesses/employees/delete?id={{-employee.id}}" class="button silver" onclick="return confirm('Are you sure you want to delete {{-employee.full_name}} from the business?')">Delete</a>
+								
+							</div>
+						{{end}}
+					</div>
+				</div>
+			{{-@end}}
+		{{end}}
+		{{for employee in this.account.business.pending_employees:}}
+			<div class="pending employee">
+				<div class="ins">
+					<span class="envlp"><i class="fa fa-envelope"></i></span>
+					<h2>Pending Invitation</h2>
+					
+					<h3>{{-employee.contact_email}}</h3>
+					<a href="/businesses/employees/invite/revoke?id={{-employee.id}}" onclick="return confirm('Are you sure?')">Revoke Invitation</a>
+				</div>
+			</div>
+		{{end}}
+	</div>
+	
+</div>

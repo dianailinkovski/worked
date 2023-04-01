@@ -1,0 +1,12 @@
+section.bloc-document dl { margin-left:0.8em; margin-bottom:1.5em; }
+section.bloc-document dt { padding-left:25px; background-repeat:no-repeat; background-position:left center; line-height:1.4em; font-size:1.1em; font-weight:normal; }
+section.bloc-document dt.application-pdf { background-image:url(/images/file_icons/pdf.gif); }
+section.bloc-document dt.application-msword { background-image:url(/images/file_icons/doc.gif); }
+section.bloc-document dt.application-vnd-ms-excel { background-image:url(/images/file_icons/xls.gif); }
+section.bloc-document dt.image-jpeg { background-image:url(/images/file_icons/jpg.gif); }
+section.bloc-document dt.image-png { background-image:url(/images/file_icons/png.gif); }
+section.bloc-document dt.image-gif { background-image:url(/images/file_icons/gif.gif); }
+section.bloc-document dt.image-bmp { background-image:url(/images/file_icons/bmp.gif); }	
+section.bloc-document dd { margin-left:25px; line-height:1.4em; }
+section.bloc-document dd.publication_date { font-size:0.85em; color:#888; }
+section.bloc-document dd.description { margin-top:0.3em; font-size:1em; font-weight:normal; }

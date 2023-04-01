@@ -1,0 +1,38 @@
+.head{
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.head h1{
+	font-size: 37px;
+	margin: 0 0 20px; color: #00baff;
+}
+
+.head .button{
+	margin-top: 7px; font-size: 14px; text-shadow:none;
+}
+
+#content{
+	padding-bottom: 20px;
+}
+
+.classifieds_mine .ad .picture img{ max-height: 175px;}
+.ad h2 a{ font-size: 20px;}
+
+.ad .live-state{background: #00baff url("../../images/chat.png") no-repeat scroll 13px 9px / 12px auto;
+    border-radius: 0;
+    bottom: 15px;
+    box-shadow: none;
+    padding: 6px 15px 6px 31px; font-size: 12px;}
+   h2{ margin: 0; line-height: 20px; max-width: 70%; }
+ h2 a{ text-overflow:ellipsis; overflow: hidden; white-space: nowrap; max-width: 100%; display: inline-block;}
+.classifieds_mine .ad .in .picture{ position: relative;}
+.classifieds_mine .ad .seller-picture{ position: absolute; z-index: 99; right: 10px; bottom: -30px; width: 75px; border:2px solid #fff; height: 75px; border-radius: 50%;}
+.classifieds_mine .ad .seller-picture img{ height: 73px; width: 73px;}
+.classifieds_mine .ad .seller-picture .profile-helper{ display: none;}
+.classifieds_mine .ad .seller{ border: none; background: none;}
+.classifieds_mine .ad{ width: 25%;}
+.classifieds_mine .ad .content .info{ padding: 10px 8px; border:none;}
+.classifieds_mine .ad .description{ text-overflow:ellipsis; overflow: hidden; white-space: nowrap;}
+.classifieds_mine .ad .seller-name a{  text-overflow:ellipsis; overflow: hidden; white-space: nowrap; max-width: 154px; display: inline-block; vertical-align: top;}

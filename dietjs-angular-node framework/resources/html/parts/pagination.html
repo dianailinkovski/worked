@@ -1,0 +1,16 @@
+{{if this.total_rows > this.pagination_subject.length:}}
+	<div class="pagination">
+		{{if this.current_page > 1:}}	
+			{{this.query.page -= 1 }}
+			<a href="?{{-querystring.stringify this.query}}" class="icon-left"><i class="fa fa-angle-left"></i></a>
+		{{end}}
+		{{for index in [this.from_pages..this.to_pages]:}}
+			{{this.query.page = parseInt(index) }}
+			<a href="?{{-querystring.stringify this.query}}" {{-if index is this.current_page then 'class="selected"'}}>{{-index}}</a>
+		{{end}}
+		{{if this.current_page != this.total_pages:}}
+			{{this.query.page = this.query.page++}}
+			<a href="?{{-querystring.stringify this.query}}" class="icon-right"><i class="fa fa-angle-right"></i></a>
+		{{end}}
+	</div>
+{{end}}

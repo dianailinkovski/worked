@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:id="@+id/scrollView" >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft ="20dp"
+    android:layout_marginRight ="20dp" >
+	
+    
+    
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_ekiosk"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop ="15dp"
+        android:layout_marginBottom ="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="2" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Solde actuel"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+            
+            <TextView
+			    android:id="@+id/currentTV"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:background="@drawable/bg_vc_textview"
+			    android:gravity="right|center_vertical"
+			    android:paddingRight="40dp"
+			    android:text="2876"
+			    android:textSize="22sp"
+			    android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/currentPB"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="50dp" />
+            
+        </RelativeLayout>
+		
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="2" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="Votre achat"
+            android:textSize="20sp"
+            android:gravity="center_vertical" />
+        
+		<TextView
+		    android:id="@+id/costTV"
+		    android:layout_width="0dp"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+		    android:background="@drawable/bg_vc_textview"
+		    android:gravity="right|center_vertical"
+		    android:paddingRight="40dp"
+		    android:text="-280"
+		    android:textColor="@color/redButton"
+		    android:textSize="22sp"
+		    android:textStyle="bold" />
+		
+    </LinearLayout>
+    
+    <View
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dp"
+	    android:background="@android:color/darker_gray"/>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="2" >
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="Nouveau solde"
+            android:textSize="20sp"
+            android:gravity="center_vertical" />
+        
+		<TextView
+            android:id="@+id/newSoldeTV"
+            android:layout_width="0dp"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+		    android:background="@drawable/bg_vc_textview"
+		    android:gravity="right|center_vertical"
+		    android:paddingRight="40dp"
+		    android:text="2876"
+		    android:textSize="22sp"
+		    android:textStyle="bold" />
+		
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearlayoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="2" >
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:background="@drawable/delete_button_background"
+            android:text="Annuler"
+            android:textColor="@color/drawer_menu_text_color"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp" />
+        
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp" >
+            
+            <Button
+	            android:id="@+id/confirmButton"
+	            android:layout_width="fill_parent"
+	            android:layout_height="46dp"
+	            android:background="@drawable/buy_button_background"
+	            android:text="Confirmer"
+	            android:textColor="@android:color/white"
+	            android:textSize="20dp"
+	            android:textStyle="bold"
+	             />
+
+            <ProgressBar
+                android:id="@+id/confirmPB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent ="true"
+                 />
+            
+        </RelativeLayout>
+        
+        
+		
+    </LinearLayout>
+	
+    <LinearLayout
+        android:id="@+id/bundleLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:visibility="gone" >
+    
+	    <TextView
+		    android:id="@+id/openBundleTextView"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="Vous n'avez pas suffisament de crédits pour cette transaction."
+		    android:textSize="18dp"
+		    android:gravity="center"
+		    android:textColor="#ff0000"
+		    android:layout_marginBottom="10dp" />
+	    
+	    <Button
+	        android:id="@+id/openBundleButton"
+	        android:layout_width="fill_parent"
+	        android:layout_height="46dp"
+	        android:background="@drawable/buy_button_background"
+	        android:text="Acheter des crédits"
+	        android:textColor="@android:color/white"
+	        android:textSize="20dp"
+	        android:textStyle="bold" />
+	    
+    </LinearLayout>
+    
+</LinearLayout>
+</ScrollView>

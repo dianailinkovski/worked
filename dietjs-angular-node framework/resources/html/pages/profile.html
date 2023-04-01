@@ -1,0 +1,349 @@
+<div class="body">
+	<div class="topprofile-sec fw">
+		<img src="../../images/profile-banner.jpg" alt="" class="bg">
+		<a href="#" class="upload"><img src="../../images/upload-btn.png" alt=""></a>
+	</div>
+	<div class="user-sec fw">
+		<ul class="follow">
+			<!--li> Following </li-->
+			<li> {{-this.followerCount}} Followers </li>
+		</ul>
+		<div class="user-account">
+			<span class="profile-pic">
+				<img src="{{-this.user.avatar(271)}}" />
+				<!--a href="#" class="upload"><img src="../../images/upload-btn.png" alt=""></a-->
+			</span>
+			<h3><a href="/accounts/{{-this.user.id}}">{{-this.user.full_name}}</a></h3>
+			<small>{{if this.user.gender:}}
+				
+				{{-capitalize this.user.gender}}
+			{{end}}</small>
+			<p>
+			{{if this.user.country_short and this.user.locality_long:}}
+				{{-this.user.locality_long + ','}} {{-this.user.country_short}}
+			{{end}}</p>
+		</div>
+		<ul class="links">
+			<!--<li><a href="#" class="btn btn-default lightblue">Chat</a></li>
+			<li><a href="#" class="btn btn-default green"><i class="fa fa-plus"></i> Follow</a></li>-->
+			{{if this.connection is 'stranger':}}
+						
+						<li>
+						<a class="chatIdentity btn btn-default lightblue" data-user="{{-this.user.id}}" href="http://192.241.239.235/chat/?r={{-this.user.id}}&id={{-this.account.id}}" >Chat</a></li>
+						<a href="/posts/follow?id={{-this.user.id}}&type=personal" class="follow button"><i class="fa fa-plus"></i> follow</a>
+					{{else if this.connection is 'following':}}
+						<a href="/posts/follow?id={{-this.user.id}}&type=personal" class="silver follow button">unfollow</a>
+					{{else if this.connection is 'you':}}
+						<div class="silver follow button">you</div>
+					{{end}}
+		</ul>
+		<ul class="tabs">
+			<a id="timelineActiveId" class="active" href="/accounts/{{-this.user.id}}?show=wall">Timeline</a>
+			<a id="classifiedActiveId" href="/accounts/{{-this.user.id}}?show=ads">Classifieds</a>
+			<li id="aboutmeActiveId" class=""><a href="#">About Me</a></li>
+		</ul>
+	</div>
+	<div class="tabdetail-container fw">
+	{{if this.account and this.account.id is this.user.id:}}
+	<div class="timeline_container maintab">
+	{{else:}}
+	<!--<div class="timeline_container maintab wlogin">-->
+	<div class="timeline_container maintab">
+	{{end}}
+		
+			<h2><a href="/accounts/{{-this.user.id}}">{{-this.user.full_name}}</a>'s Timeline</h2>
+			<div class="border"></div>
+			<!--<ul class="year-tabs">
+				<li class="active"><a href="#">2015</a></li>
+				<li><a href="#">2014</a></li>
+				<li><a href="#">2013</a></li>
+				<li><a href="#">2012</a></li>
+			</ul>-->
+			{{if this.account and this.account.id is this.user.id:}}
+				<div class="timebox left">
+					<img src="../../images/timearrow.png" alt="" class="arrow">
+					<img src="../../images/timecircle.png" alt="" class="circle">
+					
+						<div class="newpost tabs">
+								<div class="tab status active" onclick="wallField('status')"><i class="fa fa-pencil"></i> Status</div>
+								<div class="tab url" onclick="wallField('url')"><i class="fa fa-paperclip fa-flip-horizontal"></i> URL</div>
+								<div class="tab files" onclick="wallField('file')"><i class="fa fa-camera"></i> Photo/Video</div>
+							</div>
+							<div class="tabbed status">
+							{{-@post '/posts/save', {id: 'dropform3'} }}
+								{{-@textarea 'What is in your mind?', 'message' }}
+								<button id="submit" type="submit">Share</button>
+										{{-@end}}
+							</div>
+							<div style="display: none" class="tabbed url">
+							{{-@post '/posts/save', {id: 'dropfor2'} }}
+								{{-@textarea 'What is in your mind?', 'message' }}
+										<input style="width: 100%" type="text" name="url" placeholder="URL"/>
+										<button id="submit" type="submit">Share</button>
+										{{-@end}}
+							</div>
+
+							<div style="display: none" class="tabbed file">
+							{{-@post '/posts/savepic', {id: 'dropform1',enctype : 'multipart/form-data'} }}
+								{{-@textarea 'What is in your mind?', 'message' }}
+								<fieldset>
+									<h3 style="margin-bottom:8px;">Upload Pictures</h3>
+										
+											<div class="input-holder file">
+												<input type="file" id="avatar" name="avatar" placeholder="Avatar"/>					
+											</div>	
+											
+									
+								</fieldset>
+								<button id="submit" type="submit">Share</button>
+									{{-@end}}
+							</div>
+
+						
+				
+			{{end}}
+			{{if this.account and this.account.id is this.user.id:}}
+			</div>
+			{{end}}
+			
+			
+						{{if this.posts and this.posts.length:}}
+
+						{{i=0;}}
+							{{for post in this.posts:}}
+								
+								
+								{{ if i%2==0:}}
+									{{if this.account and this.account.id is this.user.id:}}
+										<div class="timebox right">
+										<img src="../../images/timearrowright.png" alt="" class="arrow">
+										<img src="../../images/timecircle.png" alt="" class="circle">
+                                       
+									{{else:}}
+										<div class="timebox left">
+										<img src="../../images/timearrow.png" alt="" class="arrow">
+										<img src="../../images/timecircle.png" alt="" class="circle">
+									{{end}}
+
+									
+											<div class="post-row fw">
+												<div class="list">
+													{{this.post = post}}
+													{{this.post.author = this.user}}
+													{{include 'html/parts/post.html'}}
+												</div>
+											</div>
+										</div>
+								
+								{{else:}}
+								
+									{{if this.account and this.account.id is this.user.id:}}
+										<div class="timebox left">
+										<img src="../../images/timearrow.png" alt="" class="arrow">
+										<img src="../../images/timecircle.png" alt="" class="circle">
+                                       
+									{{else:}}
+										<div class="timebox right">
+											<img src="../../images/timearrowright.png" alt="" class="arrow">
+											<img src="../../images/timecircle.png" alt="" class="circle">
+									{{end}}
+									
+											<div class="post-row fw">
+												<div class="list">
+													{{this.post = post}}
+													{{this.post.author = this.user}}
+													{{include 'html/parts/post.html'}}
+												</div>
+											</div>
+										</div>
+									
+
+								{{end}}
+								
+								{{i++}}
+								
+								
+							{{end}}
+							
+							{{this.pagination_subject = this.posts}}
+							{{include 'html/parts/pagination.html'}}
+						{{else:}}
+							<!--<h3 class="empty">{{-this.user.first_name}} doesn't have any posts yet.</h3>-->
+						{{end}}
+					
+		</div>
+		
+		<div class="classified_container maintab" style="display:none">
+			<!--{{ad = this.ad}}-->
+			<h2>Classified ADs <!--(1)--></h2>
+			
+			
+			
+					{{if this.ads and this.ads.length:}}
+						<div class="ads">
+							{{for ad in this.ads:}}
+								{{this.ad = ad}}
+								{{include 'html/parts/ad.html'}}
+							{{end}}
+						</div>
+					{{else:}}
+						<h2 class="title">Ads</h2>
+						<h3 class="empty">{{-this.user.first_name}} doesn't have any ads to show yet.</h3>
+					{{end}}
+			
+		</div>
+		
+		<div class="about_container maintab" style="display:none">
+			<h2>Personal Info</h2>
+			<ul>
+				<li><span><img src="../../images/calendr.png" alt=""> Date of Birth</span> <!--23-July-1997--></li>
+				<li><span><img src="../../images/lives.png" alt=""> Lives in</span> {{if this.user.country_short and this.user.locality_long:}}
+				{{-this.user.locality_long + ','}} {{-this.user.country_short}}
+			{{end}}</li>
+				<li><span><img src="../../images/usr.png" alt=""> Gender</span> {{if this.user.gender:}}
+				
+				{{-capitalize this.user.gender}}
+			{{end}}</li>
+			</ul>
+			<h2>VBOX Info</h2>
+			<ul>
+				<li><span>No. of Ads</span> <!--12--></li>
+				<li><span>No. of followers</span> <!--08--></li>
+				<li><span>No of Following</span> <!--16--></li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script>
+	function hitLike(like, referId) { 
+	$.post("/hitLikedislike",{referId:referId,hitLike:like,referType:"POST"},function(res){
+		res = $.parseJSON(res)
+	  $.get("/totallikedislike", {"postId":referId},function(resl){
+			resl = $.parseJSON(resl)
+			$("#like"+resl.postId).html(resl.totalLike)
+			
+			$("#dislike"+resl.postId).html(resl.totalDislike)
+			
+		})
+	})
+	}
+</script>
+
+<script >
+  function wallField(div) {
+	  if (div == 'status' ) {
+		  $(".tabbed").hide()
+		  $(".status").show();
+		  $( ".status" ).addClass( "active" );
+		   $( ".url" ).removeClass( "active" );
+		   $( ".files" ).removeClass( "active" );
+		  
+	  } 
+	  else if (div == 'file'){
+		  $(".tabbed").hide()
+		  $(".file").show();
+		  
+		  $( ".files" ).addClass( "active" );
+		  $( ".status" ).removeClass( "active" );
+		   $( ".url" ).removeClass( "active" );
+		  
+
+	  }
+	  else {
+		  $(".tabbed").hide()
+		  $(".url").show();
+		   $( ".url" ).addClass( "active" );
+		   $( ".files" ).removeClass( "active" );
+		   $( ".status" ).removeClass( "active" );
+		  
+	  }
+	  return false;
+  }
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$(function() {
+			$("a").on("click", function() {
+				$("a.active").removeClass("active");
+				$(this).addClass("active");
+			});
+			
+			$("#aboutmeActiveId").on("click",function(){
+				$(".timeline_container").css("display", "none");
+				$(".classified_container").css("display", "none");
+				$(".about_container").css("display", "block");
+				
+				$('#timelineActiveId').removeClass('active');
+				$('#storeActiveId').removeClass('active');
+				$('#classifiedActiveId').removeClass('active');
+				$('#aboutmeActiveId').addClass('active');
+			});
+		});
+		
+		var vars = [], hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		for(var i = 0; i < hashes.length; i++)
+		{
+			hash = hashes[i].split('=');
+			//alert(hash);
+			vars.push(hash[0]);
+			vars[hash[0]] = hash[1];
+		}
+		
+			
+		if(hash[1]=='wall'){
+			$(".timeline_container").css("display", "block");
+			$(".classified_container").css("display", "none");
+			$(".about_container").css("display", "none");
+			
+			
+			$('#timelineActiveId').removeClass('active');
+			$('#classifiedActiveId').removeClass('active');
+			$('#aboutmeActiveId').removeClass('active');
+			
+			$('a#timelineActiveId').addClass('active');
+			
+			
+		}else if(hash[1]=='stores'){
+			$(".timeline_container").css("display", "none");
+			$(".classified_container").css("display", "none");
+			$(".stores_container").css("display", "block");
+			
+			$('#timelineActiveId').removeClass('active');
+			$('#storeActiveId').addClass('active');
+			$('#classifiedActiveId').removeClass('active');
+			$('#descriptionActiveId').removeClass('active');
+		}else if(hash[1]=='ads'){
+			$(".timeline_container").css("display", "none");
+			$(".classified_container").css("display", "block");
+			$(".about_container").css("display", "none");
+			
+			$('#timelineActiveId').removeClass('active');
+			$('#storeActiveId').removeClass('active');
+			$('#classifiedActiveId').addClass('active');
+			$('#aboutmeActiveId').removeClass('active');
+		}
+		
+		
+		$('.user-sec .tabs li').click(function(){
+		   var indx = $(this).index();
+			$('.user-sec .tabs li').removeClass('active');
+			$('.user-sec .tabs li').eq(indx).addClass('active');
+			$('.tabdetail-container .maintab').hide();
+			$('.tabdetail-container .maintab').eq(indx).show();
+			return false;
+		  });
+		  
+		  $(window).scroll(function() {
+			if($(window).scrollTop() > 10) {
+				$(".home-header").addClass("fixed");
+			} else {
+			   $(".home-header").removeClass("fixed");
+			}
+		});
+	})
+</script>

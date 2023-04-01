@@ -1,0 +1,9 @@
+/* CMS Styles overwrites */
+table { margin:0; }
+th, td { padding:0; }
+table, th, td { vertical-align:top; }
+#email-main-table { width:640px; margin:0 auto; }
+#email-background-table img { outline: none; text-decoration: none; display: block;}
+#email-background-table br { line-height:100%; }
+#email-background-table table, #email-background-table table td, #email-background-table table tr { border-collapse: collapse; }
+#email-background-table a:hover { text-decoration:underline !important; }

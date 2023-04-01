@@ -1,0 +1,14 @@
+<div class="subheader">
+	<div class="wrap">
+		<a href="/accounts/settings/details" class="{{-if this.subpage == 'details' then 'selected'}}">Details</a>
+		<a href="/accounts/settings/password" class="{{-if this.subpage == 'password' then 'selected'}}">Password</a>
+		<a href="/accounts/settings/picture" class="{{-if this.subpage == 'picture' then 'selected'}}">Picture</a>
+	</div>
+</div>
+<div class="center-in">
+	<div id="signup" class="wrap {{-this.subpage}}">
+		
+			{{include 'html/pages/settings/'+this.subpage+'.html'}}
+		
+	</div>
+</div>

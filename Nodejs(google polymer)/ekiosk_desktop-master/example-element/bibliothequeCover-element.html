@@ -1,0 +1,408 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-tooltip/core-tooltip.html">
+
+<link rel="import" href="loadingSpinner-element.html">
+
+<polymer-element name="bibliothequeCover-element" attributes="publication">
+  <template>
+
+    <style>
+      .chip-container {
+        text-align: center;
+		background:url('../img/tablette_simple_2.png') repeat; 
+      }
+
+      .chip {
+        display: inline-block;
+        position: relative;
+        margin: 0 4px;
+        overflow: visible;
+        text-align: start;
+		height:251px;
+      }
+
+      .chip-top {
+        width: 160px;
+        height: 200px;
+		text-align:center;
+		margin:31px 0 0;
+      }
+	  
+	  .chip-top img {
+		  box-sizing:border-box;
+		  border:1px solid #888;
+		  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+	  }
+	  
+	  .bottom {
+	    position: absolute;
+		bottom: 0px;
+		width: 100%;
+	  }
+	  
+	  .bottom_text{
+		height: 26px;
+		text-align: center;
+		font-size: 20px;
+		font-weight: bold;
+	  }
+	  
+	  .hidden {
+		  visibility:hidden;
+	  }
+	  
+	  
+	  .over {
+		  background:black;
+		  opacity:0.3;
+		  
+		  width: 160px;
+          height: 200px;
+		  text-align:center;
+		  margin:31px 0 0;		
+	  }
+
+	  #abonnement_mark {
+	  	position: absolute;
+	  	left: 1px;
+	  	top: 27px;
+	  	width: 120px;
+	  	height: 120px;
+	  	background-image: url('../img/ic_nouveau.png');
+	  }
+      
+    </style>
+
+    <div class="chip" hero-id="publication-div-hero" data-id-"{{publication.id}}" on-tap="{{transition}}" on-dblclick="{{doubleClickToReader}}" >
+        <div layout vertical style="position: relative;">
+          <div class="chip-top">
+            <img style="max-width:100%; max-height:100%;" id="{{publication.nom}}-{{publication.id}}-img" class="img-publication" alt="{{publication.nom}}-{{publication.datePublication}}" src="{{publication.coverPath}}" />
+            
+            <div id="over_black" class="hidden" fit></div>
+            
+            <template if="{{localFileFounded == 0}}">
+            	<div class="over" fit></div>
+            	<loadingSpinner-element style="position: absolute; top: 50%; left: 50%; margin-top: -15px; margin-left: -30px;"></loadingSpinner-element>
+            </template>
+            
+            
+            <template if="{{publication.favoris == 1}}">
+            	<div style="background: url('../img/favico_over.png'); position: absolute; background-size: contain; top: 31px; right: 15px; width: 20px; height: 40px;"></div>
+            </template>
+            
+            <template if="{{publication.openDate == 0}}">
+            	<div id="abonnement_mark"/>
+            </template>
+
+          </div>          
+          
+          <div id="bottom" class="hidden" flex vertical center>
+          	<div horizontal around-justified layout style="background: black; height: 40px;">
+                <core-tooltip large label='Lecture' position="top">
+               		<div on-tap="{{reader}}" id="read-icon" style="width:26px; height:21px; background:url('../img/read-icon.png'); margin-top:10px; opacity:0.5;"></div>
+                </core-tooltip>
+				<template if="{{publication.favoris == 0}}">
+                    <core-tooltip large label='Favoris' position="top">
+                        <div on-tap="{{addfavorisTap}}" id="favoris-icon" style="width:22px; height:23px; background:url('../img/favoris-off-icon.png'); margin-top:10px; opacity:0.5;"></div>
+                    </core-tooltip>
+                </template>
+                <template if="{{publication.favoris == 1}}">
+                    <core-tooltip large label='Favoris' position="top">
+                        <div on-tap="{{removefavorisTap}}" id="favoris-icon" style="width:22px; height:23px; background:url('../img/favoris-on-icon.png'); margin-top:10px; opacity:0.5;"></div>
+                    </core-tooltip>
+                </template>
+                
+                <core-tooltip large label='Supprimer' position="top">
+	                <div on-tap="{{deleteTap}}" id="delete-icon" style="width:21px; height:25px; background:url('../img/delete-icon.png'); margin-top:7px; opacity:0.5;"></div>
+                </core-tooltip>
+            </div>
+            
+          	
+          </div>
+      </div>
+    </div>
+	
+    <paper-dialog id="deleteDialog" heading="Avertissement" transition="paper-dialog-transition-bottom" backdrop="true" layered="true">
+    	<style>
+			
+			paper-button[autofocus] {
+				font-weight: bold;
+				color: red;
+			}
+		</style>
+        <p>Voulez-vous vraiment supprimer cette publication ?<br /><br />Vous pourrez la télécharger de nouveau dans le Kiosque.</p>
+        
+        <paper-button label="Non" dismissive></paper-button>
+        <paper-button label="Oui" affirmative autofocus on-tap="{{deletePublication}}"></paper-button>
+        
+    </paper-dialog>
+    
+  </template>
+  <script>
+
+    Polymer('bibliothequeCover-element', {
+	  publication: null, 
+	  localFileFounded: null,
+	  
+	  
+	  
+	  ready: function() {
+		//console.log('bibliothequeCover');
+		//console.log(this.publication);
+		  
+		var path = require('path');
+		var cwd = path.dirname( process.execPath );
+		var fs = require('fs');
+		var directory = cwd+"/issues/"+this.publication.id+"/";
+		if( fs.existsSync(directory+"issue.encrypted") ) {
+			this.localFileFounded = 1;
+		}
+		else {
+			this.localFileFounded = 0;
+		}
+		
+		var ref = this;
+		/*
+		this.addEventListener('masterFrame-downloadTrackingProgress', function(e) {
+			try {
+				console.log('masterFrame-downloadTrackingProgress - 2');
+				console.log(e);
+				var sendedPublication = e.detail.publication;
+				var sendedProgress = e.detail.progress;
+				
+				var spinner = ref.shadowRoot.querySelector("loadingSpinner-element");
+				console.log(spinner);
+				console.log("afterspinner");
+				
+				console.log(sendedPublication);
+				console.log(sendedProgress);
+				console.log(sendedProgress.percent);
+				
+				if(ref.publication.id == sendedPublication.id) {
+					spinner.renderProgress(sendedProgress.percent);
+				}
+			} catch (err) {
+		      console.log("Error:", err);
+		    }
+			
+			
+			
+			
+		});
+		
+		this.addEventListener('masterFrame-downloadTrackingCompleted', function(e) {
+			var path = require('path');
+			var cwd = path.dirname( process.execPath );
+			var fs = require('fs');
+			var directory = cwd+"/issues/"+ref.publication.id+"/";
+			if( fs.existsSync(directory+"issue.encrypted") ) {
+				ref.localFileFounded = 1;
+			}
+			else {
+				ref.localFileFounded = 0;
+			}
+		});
+		*/
+		  var image = this.shadowRoot.querySelector('.chip-top');
+		  var bottom = this.shadowRoot.querySelector('#bottom');
+		  var over = this.shadowRoot.querySelector('#over_black');
+		  
+		  var read_icon = this.shadowRoot.querySelector('#read-icon');
+		  var favoris_icon = this.shadowRoot.querySelector('#favoris-icon');
+		  var delete_icon = this.shadowRoot.querySelector('#delete-icon');
+		  
+		  
+		  image.addEventListener('mouseover', function(e) {
+			  bottom.className  = "bottom";
+			  over.className  = "over";
+		  });
+		  image.addEventListener("mouseout",  function(e) {
+			  bottom.className  = "bottom hidden";
+			  over.className  = "over hidden";
+		  });
+		  
+		  bottom.addEventListener('mouseover', function(e) {
+			  bottom.className  = "bottom";
+			  over.className  = "over";
+		  });
+		  bottom.addEventListener("mouseout",  function(e) {
+			  bottom.className  = "bottom hidden";
+			  over.className  = "over hidden";
+		  });
+		  
+		  read_icon.addEventListener('mouseover', function(e) {
+			  read_icon.style.opacity  = "1";
+			  //bottom_text.innerHTML = "Lecture";
+		  });
+		  read_icon.addEventListener("mouseout",  function(e) {
+			  read_icon.style.opacity  = "0.5";
+			  //bottom_text.innerHTML = "";
+		  });
+		  
+		  favoris_icon.addEventListener('mouseover', function(e) {
+			  favoris_icon.style.opacity  = "1";
+			  //bottom_text.innerHTML = "Favoris";
+		  });
+		  favoris_icon.addEventListener("mouseout",  function(e) {
+			  favoris_icon.style.opacity  = "0.5";
+			  //bottom_text.innerHTML = "";
+		  });
+		  
+		  delete_icon.addEventListener('mouseover', function(e) {
+			  delete_icon.style.opacity  = "1";
+			  //bottom_text.innerHTML = "Supprimer";
+		  });
+		  delete_icon.addEventListener("mouseout",  function(e) {
+			  delete_icon.style.opacity  = "0.5";
+			  //bottom_text.innerHTML = "";
+		  });
+		  
+	  },
+	  
+	  reader: function() {
+		var ref = this;
+		var local_db = getDB();
+
+		if (this.publication.openDate == 0 || this.publication.openDate == "0") {
+			var curdate = new Date();
+			db.update({ id: this.publication.id }, {$set: { "openDate": curdate } }, {}, function (err, numReplaced) {
+			  
+			});		  	
+		}		
+
+		var path = require('path');
+		var cwd = path.dirname( process.execPath );
+		
+		var crypto = require('crypto');
+		var fs = require('fs');
+		
+		// get your password from safe store
+		var password = new Buffer('eKioskMobile20140822');
+		var aes = crypto.createDecipher('aes-256-cbc', password);
+		var directory = cwd+"/issues/"+this.publication.id+"/";
+		if( fs.existsSync(directory+"issue.encrypted") ) {
+			
+			var rstream = fs.createReadStream(directory+"issue.encrypted");
+		
+			rstream   // reads from myfile.txt
+			.pipe(aes)  // decrypt with aes256
+			.pipe(fs.createWriteStream("issue-for-reader.pdf"));  // output stdout
+			
+			if( fs.existsSync("issue-for-reader.pdf") ) {
+				window.location = "./reader/index2.html?nom="+encodeURIComponent(this.publication.nom)+"&date="+encodeURIComponent(this.publication.datePublication);
+			}
+			else {
+				alert("Erreur lors de la décryption du journal");
+			}
+		}
+		else {
+			alert("Erreur d'ouverture\nFermer l'application et essayer de nouveau ou retélécharger le journal dans le kiosque.");
+		}
+		
+		  //console.log("./reader/index2.html?nom="+encodeURIComponent(this.publication.nom));
+		  //window.location = "./reader/index.html";
+	  },
+	  addfavorisTap: function() {
+		  var ref = this;
+		  var local_db = getDB();
+		  
+		  db.update({ id: this.publication.id }, {$set: { "favoris": 1 } }, {}, function (err, numReplaced) {
+			  ref.fire("reloadBibliotheque");
+		  });
+		  
+		  
+	  },
+	  removefavorisTap: function() {
+		  var ref = this;
+		  var local_db = getDB();
+		  
+		  db.update({ id: this.publication.id }, {$set: { "favoris": 0 } }, {}, function (err, numReplaced) {
+			  ref.fire("reloadBibliotheque");
+		  });
+	  },
+	  deleteTap: function() {
+		  var temp = this.shadowRoot.querySelector('#deleteDialog');
+		  temp.toggle();
+	  },
+	  
+	  deletePublication: function() {
+		  console.log("deletePublication");
+		  console.log(this.publication);
+		  //deleteIssue(this.publication.id);
+		  
+		  var ref = this;
+		  
+		  var path = require('path');
+		  var cwd = path.dirname( process.execPath );
+		  var fs = require('fs');
+		  
+		  var directory = cwd+"/issues/"+this.publication.id+"/";
+		  //var rstream = fs.createReadStream(directory+"issue.encrypted");
+		  //deleteFolderRecursive(directory);
+		  //fs.unlinkSync('/tmp/hello');
+		  //console.log('successfully deleted /tmp/hello');
+			deleteFolderRecursive = function(path) {
+				var files = [];
+				if( fs.existsSync(path) ) {
+					files = fs.readdirSync(path);
+					files.forEach(function(file,index){
+						var curPath = path + "/" + file;
+						if(fs.lstatSync(curPath).isDirectory()) { // recurse
+							deleteFolderRecursive(curPath);
+						} else { // delete file
+							fs.unlinkSync(curPath);
+						}
+					});
+					fs.rmdirSync(path);
+				}
+			};
+			deleteFolderRecursive(directory);
+		  
+		  var local_db = getDB();		  
+		  local_db.remove({ id: this.publication.id }, {}, function (err, numRemoved) {
+			  // numRemoved = 1
+			  console.log(err);
+			  console.log(numRemoved);
+			  ref.fire("reloadBibliotheque");
+			});
+			
+			
+	  },
+	  
+	  doubleClickToReader: function() {
+	  	  this.reader();
+	  },
+	  
+	  progressReceived:function(sendedPublication, sendedProgress) {
+		  try {
+				var spinner = this.shadowRoot.querySelector("loadingSpinner-element");
+				
+				if(this.publication.id == sendedPublication.id) {
+					spinner.renderProgress(sendedProgress.percent);
+				}
+			} catch (err) {
+		      console.log("Error:", err);
+		    }
+	  },
+	  
+	  progressCompletedReceived:function() {
+		  try {
+				var path = require('path');
+				var cwd = path.dirname( process.execPath );
+				var fs = require('fs');
+				var directory = cwd+"/issues/"+this.publication.id+"/";
+				if( fs.existsSync(directory+"issue.encrypted") ) {
+					this.localFileFounded = 1;
+				}
+				else {
+					this.localFileFounded = 0;
+				}
+			} catch (err) {
+		      console.log("Error:", err);
+		    }
+	  },
+	  
+    });
+
+  </script>
+</polymer-element>

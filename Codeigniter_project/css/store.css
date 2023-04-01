@@ -1,0 +1,171 @@
+.dashboard {
+    clear: both;
+    position: relative;
+    border: 3px solid #e4eaef;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 20px 7px 20px 7px;
+    margin: 5px 0 25px 0;
+}
+.graph_group{
+    float:left;
+    width:auto;
+}
+
+.graph_container {
+    float: left;
+}
+
+.graph {
+    width: 250px;
+    height: 110px;
+}
+
+.graph_detail {
+    padding-left: 10px;
+    margin-top: 24px;
+    overflow: hidden;
+    width: 230px;
+    float: left;
+}
+
+.dashboard .clicks {
+    margin: 0px 0px 0px 40px;
+}
+
+.dashboard .sales .graph_detail {
+    width: 320px;
+}
+
+.clicks,
+.visits,
+.device_types,
+.shares{
+    float: left;
+    margin: 0 0 0 15px;
+    width: 455px;
+}
+.dashboard .sales {
+    float: left;
+    margin: 0 0 0 15px;
+    width: 570px;
+}
+.clearboth {
+    clear: both;
+}
+.total {
+    clear: both;
+    text-align: left;
+    padding-left: 37px;
+    font-weight: bold;
+    font-size: 11px;
+    color: #999;
+}
+.graph_detail .summary_label {
+    color: #00599C;
+    font-weight: bold;
+    font-size: 14px;
+}
+.total a, .total a:active, .total a:visited {
+    color: #999;
+}
+.graph_detail .summary_value {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.referral_program {
+    border-bottom: 1px #F2F1F1 solid;
+    padding-bottom: 15px;
+}
+
+.recent_activity {
+    border-bottom: 1px #F2F1F1 solid;
+    padding-bottom: 15px;
+}
+
+#recent-activity-column {
+	margin: 0px 60px;
+}
+
+#recent-activity-column h2,
+#referral-programs-column h2 {
+	margin: 0px 0px 30px 0px;
+	padding: 0px 0px 4px 0px;
+  border-bottom: 2px solid #ccc;	
+}
+
+
+.referral_program_data .graph{
+    width: 350px;
+    height: 220px;
+}
+
+.referral_program_data .sales,
+.referral_program_data .clicks,
+.referral_program_data .visits,
+.referral_program_data .device_types,
+.referral_program_data .shares{
+    width: 450px;
+    /*height: 220px;*/
+}
+
+.graph.pie-graph{
+    width: 435px;
+    height: 220px;
+}
+
+.report-item {
+    float: left;
+    margin: 10px 10px 10px 15px;
+    padding: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc #ccc #999 #ccc;
+    -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+    -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+    box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+    width: auto;
+}
+
+.report-item .map {
+    width: 910px;
+    height: 320px;
+}
+
+.social-channel-badge {
+	padding: 8px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+#facebook-share-dashboard-data .social-channel-badge {
+	background-color: #7288B5; /* #3b5998 */
+}
+
+#twitter-share-dashboard-data .social-channel-badge {
+  background-color: #00a0d1;
+}
+
+#email-share-dashboard-data .social-channel-badge {
+  background-color: #7070DB;
+}
+
+#total-share-dashboard-data .social-channel-badge {
+  background-color: #81b71a;
+}
+
+.social-channel-icon {
+	display: inline;
+	float: left;
+}
+
+.social-channel-data {
+	display: inline;
+	float: left;
+	margin: 0px 0px 0px 10px;
+}
+
+.social-channel-data h3 {
+	margin: 0px 0px 6px 0px;
+}

@@ -1,0 +1,27 @@
+.validetta-bubble { 
+	position: absolute;
+	background-color: #E43838;
+	border-radius: 3px;
+	color: #FFF;
+	padding: 8px 15px;
+	font-size: 12px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+	box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.1);
+	font-weight: bold;
+}
+.validetta-bubble:before { content:''; display:block; position:absolute; top:7px; left:-5px; width:0; height:0; border-right:5px solid #E43838; border-bottom: 5px solid transparent; border-top:5px solid transparent; }
+.validetta-bubbleClose { 
+	display: block;
+	cursor: pointer;
+	position: absolute;
+	top: 2px;
+	right: 6px;
+	color: #A50000;
+	font-weight: bold;
+	text-shadow: none;
+}
+.validetta-bubbleClose:hover{
+	color: #FFF;
+}
+.validetta-inline, .validetta-bubble { display:block; }
+.validetta-inline { color:#E43838; }

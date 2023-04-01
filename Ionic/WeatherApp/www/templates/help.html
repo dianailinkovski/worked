@@ -1,0 +1,45 @@
+<ion-view title="{{'HELP' | translate}}" hide-back-button="true" class="blue-bar">
+  <ion-nav-buttons side="left">
+    <button menu-and-drawer-toggle class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-header width-control">
+    <div class="list help-list">
+        <div class="item item-divider">
+         <h5>{{'LOVE_SWORKIT' | translate}}</h5>
+        </div>
+        <a class="item" ng-click="shareTwitter()">
+          {{'TWEET' | translate}}
+        </a>
+        <a class="item" ng-click="shareFacebook()">
+          {{'FACEBOOK' | translate}}
+        </a>
+        <a class="item" ng-click="shareEmail()">
+          {{'EMAIL' | translate}}
+        </a>
+        <a class="item" ng-click="launchGear()">
+          {{'GET_GEAR' | translate}}
+        </a>
+        <a class="item" ng-click="rateSworkit()">
+          {{'RATE_SWORKIT_SM_LITE' | translate}}
+        </a>
+        <div class="item item-divider">
+          <h5>{{'FIND_ANSWER' | translate}}</h5>
+        </div>
+        <a class="item" ng-click="sendFeedback()">
+          {{'CONTACT' | translate}}
+        </a>
+        <div class="item item-divider">
+          <h5>{{'FINE_PRINT' | translate}}</h5>
+        </div>
+        <a class="item item-icon-right" ng-click="openTOS()">
+          {{'TERMS' | translate}}
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+        <a class="item item-icon-right" ng-click="openPrivacy()">
+          {{'PRIVACY' | translate}}
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+      </div>
+  </ion-content>
+</ion-view>

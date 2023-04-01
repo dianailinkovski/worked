@@ -1,0 +1,42 @@
+.custom-theme-dialog {
+
+    md-dialog-content {
+        max-width: 648px;
+
+        md-select {
+
+            &:not([disabled]) {
+
+                &:focus {
+
+                    .md-select-value {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+
+        .type {
+            width: 100px;
+        }
+
+        md-input-container {
+            width: 100px;
+        }
+
+        .theme-object {
+            height: 120px;
+            min-height: 120px;
+            max-height: 120px;
+            width: 100%;
+            resize: none;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: #F3F4F5;
+        }
+    }
+
+    .md-actions {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+}

@@ -1,0 +1,36 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+	  <ion-nav-back-button class="button-clear">
+      </ion-nav-back-button>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+  
+  <ion-side-menu side="right">
+    <ion-content id="menu">
+      <ion-list>
+		<ion-item style="font-size: 20px;color: white;" href="#" menu-toggle="right">
+			<i class="icon ion-person"></i>			   
+			<span style="margin-left:16px;">Fahrenheit</span>
+		</ion-item>
+		<ion-item style="font-size: 20px;color: white;" href="#" menu-toggle="right">
+			<i class="icon ion-android-chat"></i>	
+			<span style="margin-left:10px;">Celsius</span>			
+		</ion-item>
+		<ion-item style="font-size: 20px;color: white;" href="#/app/about" menu-toggle="right">
+			<i class="icon ion-android-chat"></i>	
+			<span style="margin-left:10px;">About</span>			
+		</ion-item>
+		<ion-item style="font-size: 20px;color: white;" href="#/app/contact" menu-toggle="right">
+			<i class="icon ion-android-chat"></i>	
+			<span style="margin-left:10px;">Contact</span>			
+		</ion-item>
+	  </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

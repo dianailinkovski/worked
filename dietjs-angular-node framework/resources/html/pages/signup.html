@@ -1,0 +1,85 @@
+<div class="wrap">
+	
+	<!-- sign up -->
+	<div id="signup">
+		{{-@post '/accounts/create'}}
+			{{-this.input false, 'invite_code', 'hidden'}}
+			{{-this.input false, 'email_verified', 'hidden'}}
+			
+			<!-- title -->
+			<h1>Sign Up</h1>
+			<div class="break short"></div>
+			
+			<!-- name -->
+			<fieldset class="FLname">
+				<h3>Name</h3>
+				{{-this.input 'First Name', 'first_name', 'text'}}
+				{{-this.input 'Last Name', 'last_name', 'text'}}
+			</fieldset>	
+			
+			<!-- email-->
+			<fieldset>
+				<h3>Email</h3>
+				{{if !isset this.inputs.email_verified:}}
+					{{-this.input 'Your Email', 'email', 'email'}}
+				{{else:}}
+					<input type="text" value="{{-this.inputs.email}}" disabled="disabled"/>
+					<input type="hidden" value="{{-this.inputs.email}}" name="email"/>
+					<i class="fa fa-check" style="color: green; margin-right: 5px;"></i><span style="font-size: 13px; color: #999;">email verified</span>
+				{{end}}
+				
+			</fieldset>
+			
+			<!-- password -->
+			<fieldset>
+				<h3>Contact Number</h3>
+				{{-this.input 'Phone Number', 'contact_number', 'text'}}
+			</fieldset>
+			
+			<!-- password -->
+			<fieldset>
+				<h3>Password</h3>
+				{{-this.input 'New Password', 'password', 'password'}}
+			</fieldset>
+			
+			<!-- location -->
+			<fieldset id="location_holder" >
+				<h3>Location</h3>
+				{{-this.input 'Your City', 'location', 'text'}}
+				
+				<input type="hidden" name="country_short" />
+				<input type="hidden" name="administrative_area_level_1_short" />
+				<input type="hidden" name="administrative_area_level_2_short" />
+				<input type="hidden" name="locality_short" />
+				
+				<input type="hidden" name="country_long" />
+				<input type="hidden" name="administrative_area_level_1_long" />
+				<input type="hidden" name="administrative_area_level_2_long" />
+				<input type="hidden" name="locality_long" />
+				
+				<input type="hidden" name="formatted_address" />
+			</fieldset>
+			
+			<fieldset>	
+				<h3>Gender</h3>
+				<!-- gender -->
+				<div id="gender-select">
+					<div class="radio male validetta-bubble-left">
+						<input id="gender-male" type="radio" name="gender" value="male" data-validetta="required" checked="true" />
+						<label for="gender-male">Male</label>
+					</div>
+					<div class="radio female">
+						<input id="gender-female" type="radio" name="gender" value="female" data-validetta="required" />
+						<label for="gender-female">Female</label>
+					</div>
+				</div>
+			</fieldset>
+			<div class="break short"></div>
+			
+			<!-- actions -->
+			<div id="signup-actions">
+				<button type="submit" class="accept">create account</button>
+			</div>
+		{{-@end}}
+	</div>
+</div>

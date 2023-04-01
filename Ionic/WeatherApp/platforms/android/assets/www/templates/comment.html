@@ -1,0 +1,47 @@
+<ion-view view-title="Friend Info">
+<ion-nav-bar>
+  <ion-nav-back-button class="button-clear">
+    <i class="ion-arrow-left-c"></i> Back
+  </ion-nav-back-button>
+</ion-nav-bar>
+ <ion-content has-header="true" has-footer="true" padding="true" on-swipe-left="onSwipeLeft();"  on-swipe-right="onSwipeRight();">
+	  <img style="width:100px;float:left;" ng-src="img/avatar/{{friend.img}}" />
+	  <h1>{{ friend.name }}</h1>
+	  <dl>
+		<dt>Description:</dt>
+		<dd>{{ friend.description }}</dd>
+	  </dl>
+	  <dl>
+		<dt>Released:</dt>
+		<dd>{{ friend.birth }}</dd>
+	  </dl>
+	  <!--<dl>
+		<dt>Rating:</dt>
+		<dd>{{ friend.rating }}</dd>
+	  </dl>
+	  <dl>
+		<rating ng-model="friend.rating" rate=5 max="5" style="disabled: disabled"></rating>
+	  </dl>-->
+	  <dl>
+		<dt>Comment:</dt>
+		<dt><textarea ng-model="friend.comment" rows="4" cols="30" style="border:solid 1px grey;"></textarea></dt>
+	  </dl>
+	   <dl>
+		<dt>
+			<input type="button" value="Leave comment" ng-click="friend.comment = ''"/>
+		</dt>
+	  </dl>
+	</ion-content>
+	<div class="bar bar-footer row tab-buttons-bar">
+		<div class="tabs tabs-icon-top " >
+		  <a class="tab-item" href="#/app/map" style="color:#FF9600;font-size:15px;">
+			<i class="icon ion-home"></i>
+			Map
+		  </a>
+		  <a class="tab-item" href="#/app/friendlist" style="color:#FF9600;font-size:15px;">
+			<i class="icon ion-star"></i>
+			Friend List
+		  </a>
+		</div>
+    </div>
+</ion-view>

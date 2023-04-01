@@ -1,0 +1,139 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/core-localstorage/core-localstorage.html" rel="import">
+
+<polymer-element name="downloadManager-element">
+    
+    
+      
+  <template>
+	<core-localstorage id="StorageUsername" name="StorageUsername" value="{{username}}" autoSaveDisabled="true"></core-localstorage>
+    <core-localstorage id="StoragePassword" name="StoragePassword" value="{{password}}" autoSaveDisabled="true"></core-localstorage>
+  </template>
+  <script>
+	
+	Polymer('downloadManager-element', {
+		masterRef: null,
+		username: null,
+		password: null,
+		
+		ready: function() {
+			console.log("downloadManager - ready");
+			
+			this.addEventListener("downloadManager-addedPublication", this.addedPublication);
+			this.masterRef = this;
+			
+			/*
+			ajax.addEventListener("core-response", 	
+			function(e) {
+			
+			}
+			);
+			*/
+			
+		},
+		
+
+		
+		addedPublication: function(e) {
+			var fs = require('fs');
+			var request = require('request');
+			var progress = require('request-progress');
+			
+			var path = require('path');
+			var cwd = path.dirname( process.execPath );
+			
+			var ref = this.masterRef;
+			
+			var urlString = "";
+			
+			if (this.username != null && this.password != null && this.username != '' && this.password != '') {
+				urlString = 'http://api.ngser.gnetix.com/v1.1/getEditionDownload.php?editionid='+e.detail.publication.id+'&username='+this.username+'&password='+this.password;
+			}
+			else {
+				urlString = 'http://api.ngser.gnetix.com/v1.1/getEditionDownload.php?editionid='+e.detail.publication.id;
+			}
+			
+			// Note that the options argument is optional
+			console.log(urlString);
+			console.log(cwd+"/issue.pdf");
+			progress(request(urlString), {
+				throttle: 1000,  // Throttle the progress event to 2000ms, defaults to 1000ms
+				delay: 1000        // Only start to emit after 1000ms delay, defaults to 0ms
+			})
+			.on('progress', function (state) {
+				console.log(state);
+				console.log(e.detail.publication);
+				console.log('received size in bytes', state.received);
+				console.log('total size in bytes', state.total);
+				console.log('percent', state.percent);
+				
+				ref.fire("downloadManager-downloadTrackingProgress", {publication: e.detail.publication, progress:state});
+				
+			})
+			.on('error', function (err) {
+				// Do something with err
+				console.log('error1');
+			})
+			.pipe(fs.createWriteStream(cwd+"/issue-"+e.detail.publication.id+".zip"))
+			.on('error', function (err) {
+				// Do something with err
+				console.log('error2');
+			})
+			.on('close', function (err) {
+				// Saved to doogle.png!
+				console.log('close');
+				
+				
+				var directory = cwd+"/issues/"+e.detail.publication.id+"/";
+				
+				var mkdirp = require('mkdirp');
+
+				mkdirp(directory, function (err) {
+					if (err) {
+						 console.error(err);
+					}
+					else {
+						
+						var AdmZip = require('adm-zip');
+						
+						// reading archives
+						var zip = new AdmZip(cwd+"/issue-"+e.detail.publication.id+".zip");
+						
+						// extracts everything
+						zip.extractAllTo(directory, true);
+						
+						var crypto = require('crypto');
+						var fs = require('fs');
+						fs.unlink(cwd+"/issue-"+e.detail.publication.id+".zip");
+						
+						// get your password from safe store
+						var password = new Buffer('eKioskMobile20140822');
+						var aes = crypto.createCipher('aes-256-cbc', password);
+						var rstream = fs.createReadStream(directory+"issue.pdf");
+						var wstream = fs.createWriteStream(directory+"issue.encrypted");
+
+						rstream   // reads from myfile.txt
+							.pipe(aes)  // encrypts with aes256
+							.pipe(wstream)  // writes to myfile.encrypted
+							.on('finish', function () {  // finished
+								console.log('done encrypting');
+								fs.unlink(directory+"issue.pdf");
+								
+								ref.asyncFire('show-toast', {textToShow: "Téléchargement complété"});
+								ref.asyncFire("downloadManager-downloadTrackingCompleted");
+						});
+						
+						
+					}
+					
+				});
+				
+			});
+		},
+		
+		
+	});
+	
+  </script>
+</polymer-element>

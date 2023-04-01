@@ -1,0 +1,118 @@
+#signup{
+	width: 100%;
+	margin: 20px auto;
+	max-width: 490px; background:rgba(0, 0, 0, 0.1); padding:1px 20px 25px;
+}
+
+#signup h1{
+	font-size: 37px;
+	color: #00baff;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#signup input[type="text"], #signup input[type="password"], #signup input[type="email"]{
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+}
+
+#name{
+	width: 100%;
+	float: left;
+	clear: both;
+}
+
+#first_name_in{
+	margin-right: 5px;
+	position: relative;
+}
+
+#last_name_in{
+	margin-left: 5px;
+}
+
+#gender-select{
+	
+	float: left; font-size:20px;
+}
+
+#gender-select-text{
+	float: left;
+	color: #a5a5a5;
+	font-weight: bold;
+	margin-right: 15px;
+}
+
+#gender-select .validetta-bubble{
+	top: -4px !important;
+}
+
+#gender-select .female.radio .validetta-bubble{
+	left: 100% !important;
+	margin-left: 10px;
+	min-width: 120px !important;
+}
+
+#gender-select .radio{
+	float: left;
+	margin-right: 10px;
+	margin-top: 1px;
+	position: relative;
+}
+
+#signup-actions{
+	clear: both;
+	margin-bottom: 30px;
+	
+}
+
+#signup-actions a{
+	float: left;
+	margin: 10px 15px;
+	color: #848484;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.error input{
+	border: 1px solid #FD5B5B;
+	background: #FFF;
+	border-radius: 3px 3px 0 0;
+	margin: 0 !important;
+}
+
+.error input:focus{
+	box-shadow: inset 0 1px 0 #E2E2E2, 0 0 4px 1px #FD5B5B;
+	position: relative;
+	z-index: 10;
+}
+
+.error .error{
+	background: #FD5B5B;
+	color: #FFF;
+	border-radius: 0 0 3px 3px;
+	padding: 6px 10px;
+	margin-bottom: 10px;
+	font-size: 13px;
+	line-height: 13px;
+	clear: both;
+}
+
+#content.signup fieldset{
+	border: none; width: 100%;
+}
+
+#content.signup fieldset h3{
+	text-align: left;
+	margin-bottom: 10px;
+	margin-top: 0;
+	font-weight: normal;
+	color: #444; font-size:20px; line-height:25px;
+}
+
+#signup .FLname .input-holder{ width:48%; float:left;}
+#signup .FLname .input-holder:last-child{ float:right;}
+
+#signup .radio label::before{ margin-top:8px; margin-right:6px;}

@@ -1,0 +1,527 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>CMS Documentation » \FormManager</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">CMS Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    CMS Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Action.html"><i class="icon-folder-open"></i> Action</a></li>
+<li><a href="../packages/Behavior.html"><i class="icon-folder-open"></i> Behavior</a></li>
+<li><a href="../packages/Bloc.html"><i class="icon-folder-open"></i> Bloc</a></li>
+<li><a href="../packages/Controller.html"><i class="icon-folder-open"></i> Controller</a></li>
+<li><a href="../packages/Core.html"><i class="icon-folder-open"></i> Core</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Filter.html"><i class="icon-folder-open"></i> Filter</a></li>
+<li><a href="../packages/Helper.html"><i class="icon-folder-open"></i> Helper</a></li>
+<li><a href="../packages/Module.html"><i class="icon-folder-open"></i> Module</a></li>
+<li><a href="../packages/Other.html"><i class="icon-folder-open"></i> Other</a></li>
+<li><a href="../packages/Widget.html"><i class="icon-folder-open"></i> Widget</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1544</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div xmlns:php="http://php.net/xsl" class="btn-toolbar">
+<div class="btn-group visibility" data-toggle="buttons-checkbox">
+<button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button>
+</div>
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+</div>
+<ul xmlns:php="http://php.net/xsl" class="side-nav nav nav-list">
+<li class="nav-header">
+<i title="Methods" class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Constructor."><span class="description">Constructor.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_getForm" title="getForm() :: Get a form by specifying its id."><span class="description">Get a form by specifying its id.</span><pre>getForm()</pre></a></li>
+<li class="method public "><a href="#method_getModels" title="getModels() :: Get models from a particular form by specifying its id."><span class="description">Get models from a particular form by specifying its id.</span><pre>getModels()</pre></a></li>
+<li class="method public "><a href="#method_onAfterSaveAll" title="onAfterSaveAll() :: Event, called after saving all forms before redirecting."><span class="description">Event, called after saving all forms before redirecting.</span><pre>onAfterSaveAll()</pre></a></li>
+<li class="method public "><a href="#method_onAfterValidateAll" title="onAfterValidateAll() :: Event, called after the validation of all forms."><span class="description">Event, called after the validation of all forms.</span><pre>onAfterValidateAll()</pre></a></li>
+<li class="method public "><a href="#method_onBeforeSaveAll" title="onBeforeSaveAll() :: Event, called after everything is valid before saving."><span class="description">Event, called after everything is valid before saving.</span><pre>onBeforeSaveAll()</pre></a></li>
+<li class="method public "><a href="#method_onBeforeValidateAll" title="onBeforeValidateAll() :: Event, called before the validation of all forms."><span class="description">Event, called before the validation of all forms.</span><pre>onBeforeValidateAll()</pre></a></li>
+<li class="method public "><a href="#method_onBeginProcess" title="onBeginProcess() :: Event, called at the beginning of the process."><span class="description">Event, called at the beginning of the process.</span><pre>onBeginProcess()</pre></a></li>
+<li class="method public "><a href="#method_onEndProcess" title="onEndProcess() :: Event, called at the end of the process or just before redirecting if that's the case."><span class="description">Event, called at the end of the process or just before redirecting if that's the case.</span><pre>onEndProcess()</pre></a></li>
+<li class="method public "><a href="#method_onInvalidAll" title="onInvalidAll() :: Event, called after validation when any form is invalid."><span class="description">Event, called after validation when any form is invalid.</span><pre>onInvalidAll()</pre></a></li>
+<li class="method public "><a href="#method_onPosted" title="onPosted() :: Event, called when the process begins and considers the form posted."><span class="description">Event, called when the process begins and considers the form posted.</span><pre>onPosted()</pre></a></li>
+<li class="method public "><a href="#method_process" title="process() :: Process the form(s)."><span class="description">Process the form(s).</span><pre>process()</pre></a></li>
+<li class="method public "><a href="#method_setStopProcess" title="setStopProcess() :: stopProcess setter"><span class="description">stopProcess setter</span><pre>setStopProcess()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_initForm" title="initForm() :: Initiate a form."><span class="description">Initiate a form.</span><pre>initForm()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i title="Properties" class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_checkIfPosted" title="$checkIfPosted() :: "><span class="description">whether or not to use the internal mechanism to check if the form was posted.
+There are scenarios where this can be problematic. In this case, set this to false and do your own logic in the controller
+and don't call FormManager::process() if it's not posted and call it if it is.
+Defaults to true.</span><pre>$checkIfPosted</pre></a></li>
+<li class="property public "><a href="#property_forms" title="$forms() :: "><span class="description">the forms.
+Can be an array of FormManagerForm parameters or a FormManagerForm object or an array of either (if multiple forms).</span><pre>$forms</pre></a></li>
+<li class="property public "><a href="#property_method" title="$method() :: "><span class="description">the form method, post or get. Defaults to 'post'.</span><pre>$method</pre></a></li>
+<li class="property public "><a href="#property_redirect" title="$redirect() :: "><span class="description">the url it will redirect to after the form is successfully sent and validated and saved.</span><pre>$redirect</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property__forms" title="$_forms() :: "><span class="description">internal referencing to the forms, used for the getForm and getModels function.</span><pre>$_forms</pre></a></li>
+<li class="property private "><a href="#property__posted" title="$_posted() :: "><span class="description">whether the form is considered posted or not. Defaults to false.</span><pre>$_posted</pre></a></li>
+<li class="property private "><a href="#property__stopProcess" title="$_stopProcess() :: "><span class="description">when events set this variable to true, the process is stopped at that point and won't go any further. Defaults to false.</span><pre>$_stopProcess</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a xmlns:php="http://php.net/xsl" id="\FormManager"></a><ul xmlns:php="http://php.net/xsl" class="breadcrumb">
+<li>
+<a href="../index.html"><i title="Classes" class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/FormManager.html">FormManager</a>
+</li>
+</ul>
+<div xmlns:php="http://php.net/xsl" class="element class">
+<p class="short_description">FormManager facilitates the back-end operations of managing a form.</p>
+<div class="details">
+<div class="long_description"><p>This class is especially useful for managing "tabular" style forms and forms that have a hiarchy relationship to one another.
+You can have an infinite amount of nesting within your forms.
+It has built-in support for UploadingBehavior and NestedSetBehavior.
+A myriad of events are at your disposal if you need to interrupt the execution at some point during the processing to add in your own functionality.
+Although this class can work independently, to help you with the front-end and javascript for listing / adding / deleting items and more, you should use the TabularInputWidget.</p>
+<p>Note that no property is mandatory in this class, however in your forms, "id" and "models" are (models can also be an empty array).</p>
+<p>Here's an example of what a controller would look like.
+In this example, the top parent book is a single model, you might have actions creating/updating books with GET variable to get the model like you would normally do.
+The chapters are children to a book parented with book_id, but because only one book is edited in the page at a time, all chapters share the same book_id.
+The pages are children to the chapters and they can be parented to different chapters.
+Because of this, the id of your form must contain {formId} and {itemId} because multiple forms might be created if there are multiple chapters.
+The script needs this in order to differentiate the different forms and make proper parenting.
+In your view file, any form with an array of models must send the fields as an associative array containing both the form id and the item id.
+Ex : $form->textField($model,'['.$formId.']['.$itemId.']title');
+Where $formId is the id of the form ex : chapterForm, chapterForm-1-pageForm and $itemId the id of an item.
+Note that no model will save unless all models are validated.</p>
+<p>See the class properties for more details</p>
+<pre>
+        // Assuming we got $book model, getting chapters and pages arrays.
+        $chapters = Chapter::model()->with(array(
+            'pages'=>array('index'=>'id', 'order'=>'pages.rank ASC')
+        ))->findAllByAttributes(array('book_id'=>$book->id), array('index'=>'id', 'order'=>'t.rank ASC'));
+        $pages = array();
+        foreach ($chapters as $id => $chapter)
+            $pages[$id] = $chapter->pages;
+        // This initializes the FormManager (and subsequent FormManagerForm).
+        $formManager = new FormManager(array(
+            'redirect'=>$this->createUrl('admin'),
+            'forms' => array(
+                array(
+                    'id'=>'bookForm',
+                    'models'=>$book,
+                    'forms' => array(
+                        'id'=>'chapterForm',
+                        'models'=>$chapters,
+                        'parentIdAttribute'=>'book_id',
+                        'forms' => array(
+                            'id'=>'{formId}-{itemId}-pageForm',
+                            'models'=>$pages,
+                            'parentIdAttribute'=>'chapter_id',
+                            'onInvalid'=>function($event) { // Example of an event
+                                $model = $event->params['model'];
+                                $paramName = $event->params['paramName'];
+                                $formId = substr(explode('[', $paramName)[1], 0, -1);
+                                if ($model->isNewRecord && $formId = 'chapterForm-3-pageForm')
+                                    $event->sender->stopProcess = true; // Stops the processing, no more models will be validated after this one (you don't have to do this).
+                            },
+                        ),
+                    ),
+                ),
+            ),
+        ));
+        // The process function does the actual validating, saving, etc.
+        $formManager->process();
+        // Rendering with models we get from the form manager.
+        $this->render(($book->isNewRecord ? 'create' : 'update'),array(
+         'book'=>$formManager->getModels('bookForm'),
+            'chapters'=>$formManager->getModels('chapterForm'),
+            'pages'=>$formManager->getModels('{formId}-{itemId}-pageForm'),
+        ));
+</pre>
+<p>Book view file contains :</p>
+<p>&lt;?php echo $form->errorSummary(array_merge(array($book), $chapters, array_reduce(array_map('array_values', $pages), 'array_merge', array()))); ?></p>
+<div class="row">
+    <?php echo $form->labelEx($book,'title'); ?>
+    <?php echo $form->textField($book,'title'); ?>
+    <?php echo $form->error($book,'title'); ?>
+</div>
+<p>&lt;?php $this->widget('application.components.widgets.TabularInput.TabularInputWidget', array(</p>
+<pre><code>    'id'=&gt;'chapterForm',
+    'form'=&gt;$form,
+    'models'=&gt;$chapters,
+    'renderData'=&gt;array('pages'=&gt;$pages),
+    'layout'=&gt;array('_chapter'=&gt;new Chapter),
+    'nestedWidgets'=&gt;array('_chapter'=&gt;'{formId}-{itemId}-pageForm'),
+    'orderAttribute'=&gt;'rank',</code></pre>
+<p>)); ?></p>
+<p>Chapters view file contains :</p>
+<div class="row">
+        <?php echo $form->labelEx($model,'['.$formId.']['.$itemId.']title'); ?>
+        <?php echo $form->textField($model,'['.$formId.']['.$itemId.']title'); ?>
+        <?php echo $form->error($model,'['.$formId.']['.$itemId.']title'); ?>
+</div>
+<p>&lt;?php echo $form->hiddenField($model,'['.$formId.']['.$itemId.']rank'); ?></p>
+<p>&lt;?php $this->widget('application.components.widgets.TabularInput.TabularInputWidget', array(</p>
+<pre><code>    'id'=&gt;$formId.'-'.$itemId.'-pageForm',
+    'form'=&gt;$form,
+    'layout'=&gt;array('_page'=&gt;new Page),
+    'models'=&gt;(isset($pages[$itemId]) ? $pages[$itemId] : array()),
+    'orderAttribute'=&gt;'rank',</code></pre>
+<p>)); ?></p>
+<p>Pages view file contains :</p>
+<div class="row">
+        <?php echo $form->labelEx($model,'['.$formId.']['.$itemId.']title'); ?>
+        <?php echo $form->textField($model,'['.$formId.']['.$itemId.']title'); ?>
+        <?php echo $form->error($model,'['.$formId.']['.$itemId.']title'); ?>
+</div>
+<p>&lt;?php echo $form->hiddenField($model,'['.$formId.']['.$itemId.']rank'); ?></p></div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Bruno LL. <https://github.com/brunoll></a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/todo">https://github.com/todo</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright © 2015 Societe G-NeTiX Inc. - All Rights Reserved</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://opensource.org/licenses/MIT">The MIT License (MIT)</a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CUploadingBehavior"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CNestedSetBehavior"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CFormManagerFrom"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CTabularInputWidget"></a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Other.html">Other</a></td>
+</tr>
+</table>
+<h3>
+<i title="Methods" class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct " data-toggle="collapse" data-target=".method___construct .collapse" title="public">
+<h2>Constructor.</h2>
+<pre>__construct(array $properties<code> = array()</code>) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Initiates properties and initiates all forms</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$properties</h4>
+<code>array</code><p>the properties to initiate the class with</p></div>
+</div></div>
+</div>
+<a id="method_getForm"></a><div class="element clickable method public method_getForm " data-toggle="collapse" data-target=".method_getForm .collapse" title="public">
+<h2>Get a form by specifying its id.</h2>
+<pre>getForm(string $id) : false | \FormManagerForm</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This is just a shorthand to not have to do ex: $formManager->forms[0]->forms[0]->forms[1].</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>the id of the form.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>false</code><code>\FormManagerForm</code>false if not found.</div>
+</div></div>
+</div>
+<a id="method_getModels"></a><div class="element clickable method public method_getModels " data-toggle="collapse" data-target=".method_getModels .collapse" title="public">
+<h2>Get models from a particular form by specifying its id.</h2>
+<pre>getModels(string $id) : array | \CActiveRecord</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This is just a shorthand to not have to do ex: $formManager->forms[0]->forms[1]->models.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>the id of the form.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>\CActiveRecord</code>the model(s) or empty array if not found.</div>
+</div></div>
+</div>
+<a id="method_onAfterSaveAll"></a><div class="element clickable method public method_onAfterSaveAll " data-toggle="collapse" data-target=".method_onAfterSaveAll .collapse" title="public">
+<h2>Event, called after saving all forms before redirecting.</h2>
+<pre>onAfterSaveAll(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_onAfterValidateAll"></a><div class="element clickable method public method_onAfterValidateAll " data-toggle="collapse" data-target=".method_onAfterValidateAll .collapse" title="public">
+<h2>Event, called after the validation of all forms.</h2>
+<pre>onAfterValidateAll(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_onBeforeSaveAll"></a><div class="element clickable method public method_onBeforeSaveAll " data-toggle="collapse" data-target=".method_onBeforeSaveAll .collapse" title="public">
+<h2>Event, called after everything is valid before saving.</h2>
+<pre>onBeforeSaveAll(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_onBeforeValidateAll"></a><div class="element clickable method public method_onBeforeValidateAll " data-toggle="collapse" data-target=".method_onBeforeValidateAll .collapse" title="public">
+<h2>Event, called before the validation of all forms.</h2>
+<pre>onBeforeValidateAll(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_onBeginProcess"></a><div class="element clickable method public method_onBeginProcess " data-toggle="collapse" data-target=".method_onBeginProcess .collapse" title="public">
+<h2>Event, called at the beginning of the process.</h2>
+<pre>onBeginProcess(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_onEndProcess"></a><div class="element clickable method public method_onEndProcess " data-toggle="collapse" data-target=".method_onEndProcess .collapse" title="public">
+<h2>Event, called at the end of the process or just before redirecting if that's the case.</h2>
+<pre>onEndProcess(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_onInvalidAll"></a><div class="element clickable method public method_onInvalidAll " data-toggle="collapse" data-target=".method_onInvalidAll .collapse" title="public">
+<h2>Event, called after validation when any form is invalid.</h2>
+<pre>onInvalidAll(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_onPosted"></a><div class="element clickable method public method_onPosted " data-toggle="collapse" data-target=".method_onPosted .collapse" title="public">
+<h2>Event, called when the process begins and considers the form posted.</h2>
+<pre>onPosted(\CEvent $event) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$event</h4>
+<code>\CEvent</code><p>the event object</p></div>
+</div></div>
+</div>
+<a id="method_process"></a><div class="element clickable method public method_process " data-toggle="collapse" data-target=".method_process .collapse" title="public">
+<h2>Process the form(s).</h2>
+<pre>process() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Step 1 check for deleted form items (for tabular type forms) and deletes them regardless of validation
+(because it's weird for them to come back if the form is invalid).
+Step 2 validates all forms.
+Step 3 if all forms are valid, save everything (and add new items if new ones are present).
+Step 4 redirect the user to whatever url specified (if valid).
+You can interrupt and add functionality to the process at any time with events.</p></div></div></div>
+</div>
+<a id="method_setStopProcess"></a><div class="element clickable method public method_setStopProcess " data-toggle="collapse" data-target=".method_setStopProcess .collapse" title="public">
+<h2>stopProcess setter</h2>
+<pre>setStopProcess(boolean $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>boolean</code><p>the value to set</p></div>
+</div></div>
+</div>
+<a id="method_initForm"></a><div class="element clickable method private method_initForm " data-toggle="collapse" data-target=".method_initForm .collapse" title="private">
+<h2>Initiate a form.</h2>
+<pre>initForm($forms) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Function is recursive and initiates all subforms.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$forms</h4></div>
+</div></div>
+</div>
+<h3>
+<i title="Properties" class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_checkIfPosted"> </a><div class="element clickable property public property_checkIfPosted" data-toggle="collapse" data-target=".property_checkIfPosted .collapse" title="public">
+<h2>whether or not to use the internal mechanism to check if the form was posted.
+There are scenarios where this can be problematic. In this case, set this to false and do your own logic in the controller
+and don't call FormManager::process() if it's not posted and call it if it is.
+Defaults to true.</h2>
+<pre>$checkIfPosted : boolean</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>true</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_forms"> </a><div class="element clickable property public property_forms" data-toggle="collapse" data-target=".property_forms .collapse" title="public">
+<h2>the forms.
+Can be an array of FormManagerForm parameters or a FormManagerForm object or an array of either (if multiple forms).</h2>
+<pre>$forms : array | \FormManagerForm</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_method"> </a><div class="element clickable property public property_method" data-toggle="collapse" data-target=".property_method .collapse" title="public">
+<h2>the form method, post or get. Defaults to 'post'.</h2>
+<pre>$method : string</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>'post'</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_redirect"> </a><div class="element clickable property public property_redirect" data-toggle="collapse" data-target=".property_redirect .collapse" title="public">
+<h2>the url it will redirect to after the form is successfully sent and validated and saved.</h2>
+<pre>$redirect : mixed</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CCController::redirect()"></a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="property__forms"> </a><div class="element clickable property private property__forms" data-toggle="collapse" data-target=".property__forms .collapse" title="private">
+<h2>internal referencing to the forms, used for the getForm and getModels function.</h2>
+<pre>$_forms : array</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__posted"> </a><div class="element clickable property private property__posted" data-toggle="collapse" data-target=".property__posted .collapse" title="private">
+<h2>whether the form is considered posted or not. Defaults to false.</h2>
+<pre>$_posted : boolean</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__stopProcess"> </a><div class="element clickable property private property__stopProcess" data-toggle="collapse" data-target=".property__stopProcess .collapse" title="private">
+<h2>when events set this variable to true, the process is stopped at that point and won't go any further. Defaults to false.</h2>
+<pre>$_stopProcess : boolean</pre>
+<div class="row collapse"><div class="detail-description">
+<h3>Default</h3>
+<div class="subelement argument"><code>false</code></div>
+</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.8.1</a> and<br>
+            generated on 2015-07-31T16:11:39-04:00.<br></footer></div>
+</div>
+</body>
+</html>

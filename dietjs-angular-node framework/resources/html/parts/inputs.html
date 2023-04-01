@@ -1,0 +1,96 @@
+{{errors = if isset this.errors then this.errors else {} }}
+{{inputs = if isset this.inputs then this.inputs else {} }}
+{{this.inputs = inputs}}
+{{this.errors = errors}}
+{{this.currentForm = 0}}
+
+{{this.errorForm = if this.inputs and this.inputs.form then this.inputs.form else 1}}
+
+{{this.get = (action, options) ->}}
+	{{this.currentForm += 1}}
+	{{this.inputs[this.currentForm] = this.inputs[this.currentForm] || {} }}
+	{{this.errors[this.currentForm] = if (parseInt(this.errorForm) == this.currentForm) then JSON.parse(JSON.stringify(this.errors)) else {} }}
+	{{attributes = ''}}
+	{{if options:}}
+		{{for key, value of options:}}
+			{{attributes += if key != 'values' then key+'="'+value+'"' else ''}}
+		{{end}}
+	{{end}}
+	{{this.inputs[this.currentForm] = if options and options.values then options.values else this.inputs }}
+	<form method="get" action="{{-action}}" {{-attributes}}>
+		<input type="hidden" value="{{-this.currentForm}}" name="form" />
+{{end}}
+
+{{this.post = (action, options) ->}}
+	{{console.log 'this.errors =', this.errors}}
+	{{this.currentForm += 1}}
+	{{this.inputs[this.currentForm] = this.inputs[this.currentForm] || {} }}
+	{{this.errors[this.currentForm] = if (parseInt(this.errorForm) == this.currentForm) then JSON.parse(JSON.stringify(this.errors)) else {} }}
+	{{console.log 'this.errors['+this.currentForm+']=', this.errors[this.currentForm]}}
+	{{console.log 'this.errors['+this.currentForm+'] :: this.errors =', this.errors}}
+	{{attributes = ''}}
+	{{if options:}}
+		{{for key, value of options:}}
+			{{attributes += if key != 'values' then key+'="'+value+'"' else ''}}
+		{{end}}
+	{{end}}
+	{{this.inputs[this.currentForm] = if options and options.values then options.values else this.inputs }}
+	<form method="post" action="{{-action}}" {{-attributes}} >
+		<input name="form" value="{{-this.currentForm}}" type="hidden" />
+{{end}}
+
+{{this.end = '</form>'}}
+
+{{this.input = (placeholder, name, type, uniqueValue) ->}}
+	<div class="input-holder {{-type}} {{-if this.errors[this.currentForm][name] then ' error'}}{{-if type is 'radio' then ' radio'}}">
+		<input type="{{-type}}" id="{{-if !uniqueValue then name else name+'_'+uniqueValue}}" name="{{-name}}" placeholder="{{-placeholder}}" 
+			{{-if type is 'password' then 'autocomplete="off"'}} 
+			{{-if type != 'radio' and isset this.inputs[this.currentForm][name] then 'value="'+this.inputs[this.currentForm][name]+'"' else if type is 'radio' then 'value="'+uniqueValue+'"' }} 
+			{{-if type is 'radio' and this.inputs[this.currentForm][name] is uniqueValue then 'checked'}} 
+			{{-if type is 'checkbox' and isset this.inputs[this.currentForm][name] then 'checked'}} 
+		/>
+		{{if type is 'checkbox' or type is 'radio':}}
+			<label for="{{-if !uniqueValue then name else name+'_'+uniqueValue}}">{{-placeholder}}</label>
+		{{end}}
+		
+		{{if this.errors[this.currentForm][name]:}}
+			<div class="error">{{-errors[name]}}</div>
+		{{end}}
+	</div>
+{{end}}
+{{this.textarea = (placeholder, name) ->}}
+	<div class="input-holder textarea {{-if this.errors[this.currentForm][name] then 'error'}}">
+		<textarea id="{{-name}}" name="{{-name}}" placeholder="{{-placeholder}}" >{{- if this.inputs[this.currentForm][name] then this.inputs[this.currentForm][name] }}</textarea>
+		{{if this.errors[this.currentForm][name]:}}
+			<div class="error">{{-errors[name]}}</div>
+		{{end}}
+	</div>
+{{end}}
+{{this.select = (options) ->}}
+	<div class="input-holder select {{-if this.errors[this.currentForm][options.name] then 'error'}}">
+		
+		{{attributes = ''}}
+		{{if options:}}
+			{{for key, value of options:}}
+				{{attributes += if key != 'options' then key+'="'+value+'"' else ''}}
+			{{end}}
+		{{end}}
+		
+		<select {{-attributes}} >
+			{{if options.placeholder:}}<option value="">{{-options.placeholder}}</option>{{end}}
+			{{if options.options:}}
+				{{for value in options.options:}}
+					{{if !global.Array.isArray(value) :}}
+						<optgroup label="{{-value.label}}">
+							{{for option in value.options:}}
+								<option value="{{-option[0]}}" {{-if this.inputs[this.currentForm][options.name] and this.inputs[this.currentForm][options.name].toString() == option[0].toString() then 'selected="true"'}}>{{-option[1]}}</option>
+							{{end}}
+						</optgroup>
+					{{else if global.Array.isArray(value):}}
+						<option value="{{-value[0]}}" {{-if this.inputs[this.currentForm][options.name] and this.inputs[this.currentForm][options.name].toString() == value[0].toString() then 'selected="true"'}}>{{-value[1]}}</option>
+					{{end}}
+				{{end}}
+			{{end}}
+		</select>
+	</div>
+{{end}}

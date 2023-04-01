@@ -1,0 +1,60 @@
+<ion-view view-title="Country detail" >
+  <ion-header-bar class="bar-calm">
+	 <button class="button icon-left" ng-click="$ionicGoBack($event)"></button>		
+  </ion-header-bar>
+  <ion-nav-buttons>
+     <button class="icon-right button" style="position:absolute;right:45px;" ng-click="shareDetail()">
+			<i class="icon ion-ios7-upload-outline"></i>	
+	 </button>
+  </ion-nav-buttons>
+  <ion-content class="has-header" id="country">
+	<div style="text-align:center;padding:10px;">
+		<h4>
+		Here is the forecast* for September
+		in The Former Yugoslav Republic of Macedonia
+		</h4>
+	</div>
+	<div style="float:left;width:50%;background:#cc0033;height: 60px;">
+		 <div class="center" style="width:50%;float:left;">
+			<div class="lbl">Average</div>
+			<div class="lbl">Maximum</div>
+		 </div>
+		 <div class="center" style="width:50%;float:left;">
+			<p class="deg">28&degc</p>
+		 </div>
+	</div>		
+	<div style="float:right;width:50%;background:#007fff;height: 60px;">
+		<div class="center" style="width:50%;float:left;">
+			<p class="deg">-3&degc</p>
+		 </div>
+		 <div class="center" style="width:50%;float:left;">
+			<div class="lbl">Average</div>
+			<div class="lbl">Minimum</div>
+		 </div>		 
+	</div>
+	<div>
+		<!-- map directive-->
+		<app-map style="width:100%;height:170px;box-shadow:0 3px 25px black;"
+		center="basel"
+		zoom="15"
+		markers="whoiswhere"
+		/> 
+	</div>
+	<div class="zoom right" >
+		<img ng-src="img/zoom.png" alt="zoom" ng-click="goCountryMap();"/>
+	</div>
+	<ion-list id="countryData" ng-repeat="data in countryData">
+		<ion-item>
+			<div class="title">{{data.title}}</div>
+			<div class="val">{{data.val}}</div>
+			<div class="image">
+				<img ng-src="{{data.imgUrl}}" alt="status"/ >
+			</div>
+		</ion-item>
+	</ion-list>
+	<div class="center" style="padding:20px;color:#0066cc">
+		*Based on historial global averages which can vary. 
+		Please allow for natural fluctuation when planning travel.
+	</div>	
+  </ion-content>  
+</ion-view>

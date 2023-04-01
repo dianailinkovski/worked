@@ -1,0 +1,46 @@
+<ion-view title="{{'SETTINGS_MENU' | translate}}">
+  <ion-content class="has-header settings-page width-control">
+    <div class="list help-list">
+      <div class="item item-divider">
+       <h5>{{'ADV_AUDIO' | translate}}<span><i class="icon ion-ios-help-outline" ng-click="data.showInfo = !data.showInfo"></i></span></h5>
+      </div>
+        <ion-toggle ng-model="timeSettings.warningAudio" class="toggle-energized">
+        <h2>{{'NEXT_CUE' | translate}}</h2>
+        <p ng-if="data.showInfo">{{'ANNOUNCE' | translate}}</p>
+        </ion-toggle>
+        <ion-toggle ng-model="timeSettings.countdownBeep" class="toggle-energized">
+        <h2>{{'NEXT_COUNT' | translate}}</h2>
+        <p ng-if="data.showInfo">{{'COUNT_SUB' | translate}}</p>
+        </ion-toggle>
+        <ion-toggle ng-model="timeSettings.countdownStyle" class="toggle-energized">
+        <h2>{{'COUNTDOWN' | translate}}</h2>
+        <p ng-if="data.showInfo">{{'ALTERNATIVE' | translate}}</p>
+        </ion-toggle>
+        <ion-toggle ng-model="timeSettings.audioOption" class="toggle-energized">
+        <h2>{{'SPOKEN' | translate}}</h2>
+        <p ng-if="data.showInfo">{{'ALT_BELL' | translate}}</p>
+        </ion-toggle>
+        <ion-toggle ng-model="timeSettings.welcomeAudio" class="toggle-energized">
+        <h2>{{'WEL_AUDIO' | translate}}</h2>
+        <p ng-if="data.showInfo">{{'WEL_SUB' | translate}}</p>
+        </ion-toggle>
+        <div ng-if="!androidPlatform">
+            <div class="item item-divider">
+                <h5>{{'BK_AUD' | translate}}<span><i class="icon ion-ios-help-outline" ng-click="data.showInfo = !data.showInfo"></i></span></h5>
+            </div>
+            <ion-checkbox ng-model="audioSettings.duckOnce" ng-change="changeAudio(0)" class="item-checkbox-right item-text-wrap">
+                <h2>{{'BK_AUD_1' | translate}}</h2>
+                <p ng-if="data.showInfo">{{'BK_AUD_1_D' | translate}}</p>
+            </ion-checkbox>
+            <ion-checkbox ng-model="audioSettings.ignoreDuck" ng-change="changeAudio(1)" class="item-checkbox-right item-text-wrap">
+                <h2>{{'BK_AUD_2' | translate}}</h2>
+                <p ng-if="data.showInfo">{{'BK_AUD_2_D' | translate}}</p>
+            </ion-checkbox>
+            <ion-checkbox ng-model="audioSettings.duckEverything" ng-change="changeAudio(2)" class="item-checkbox-right item-text-wrap">
+                <h2>{{'BK_AUD_3' | translate}}</h2>
+                <p ng-if="data.showInfo">{{'BK_AUD_3_D' | translate}}</p>
+            </ion-checkbox>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,15 @@
+<ion-view view-title="{{countryName}}" >
+  <ion-header-bar class="bar-calm">
+	 <button class="button icon-left" ng-click="$ionicGoBack($event)"></button>		
+  </ion-header-bar>
+  <ion-content class="has-header" id="country_map">
+	<div>
+		<!-- map directive-->
+		<app-map style="width:100%;height:100%;box-shadow:0 3px 25px black;"
+		center="basel"
+		zoom="15"
+		markers="whoiswhere"
+		/> 
+	</div>
+  </ion-content>  
+</ion-view>

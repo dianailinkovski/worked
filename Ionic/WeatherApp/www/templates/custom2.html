@@ -1,0 +1,35 @@
+<ion-view title="{{ 'CP_WORKOUT' | translate }}">
+    <ion-content class="has-header custom-workout-page width-control full-length">
+        <div>
+            <div class="list workout-type-list padding-top">
+                <div class="button-bar feature-popular">
+                    <a class="button button-small button-outline button-energized"
+                        ng-repeat="button in listOptions"
+                        ng-click="optionSelected.listType = button.value;toggleLists()"
+                        ng-class="{'active' : button.value === optionSelected.listType}"
+                        >{{button.text | translate}}</a>
+                </div>
+                <div class="item item-divider nexercise-grey-light item-icon-right white-text">
+                    <h3>{{optionSelected.listType == 'featured' ? ('BY_NEXERCISE' | translate) : (optionSelected.listType == 'popular' ? ('BY_USERS' | translate) : ('STANDARD_DESC' | translate) )}}</h3>
+                    <i class="icon ion-refresh icon-accessory" ng-click="updateDownloads()" ng-if="!standardSelected"></i>
+                    <p></p>
+                </div>
+                <p ng-if="downloadedWorkouts.length === 0" class="page-instructions extra-top">{{'CONNECTION_UNAVAILABLE' | translate}}</p>
+                <div class="downloadable-customs">
+                    <div ng-repeat="workout in downloadedWorkouts|orderBy:'priority':true track by $index">
+                        <div class="item item-text-wrap item-icon-right">
+                            <h3 ng-click="toggleExercises(workout, $index)">{{workout.name}}</h3>
+                            <span ng-click="toggleExercises(workout, $index)">{{workout.description}}</span>
+                            <p ng-if="workout.show" ng-click="toggleExercises(workout, $index)"><span>{{workout.exercises_view}}</span></p>
+                            <p class="show-exercises" ng-click="showExercises(workout, $index)" ng-if="!workout.show">{{'VIEW_EX' | translate}}</p>
+                            <p class="show-exercises" ng-click="hideExercises(workout)" ng-if="workout.show">{{'HIDE_EX' | translate}}</p>
+                            <p class="share-exercises" ng-click="shareWorkout(workout.shortURI)">{{'SHARE' | translate}}</p>
+                            <i class="icon ion-plus icon-accessory" ng-click="addCustomWorkout(workout.shortURI, $index)" id="{{'item' + $index}}" ng-if="!standardSelected"></i>
+                            <i class="icon ion-plus icon-accessory" ng-click="addCustomWorkout(workout.shortURI, $index, true)" id="{{'item' + $index}}" ng-if="standardSelected"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

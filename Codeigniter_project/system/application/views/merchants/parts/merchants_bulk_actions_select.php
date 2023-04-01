@@ -1,0 +1,1 @@
+<i class="fa fa-lg fa-arrow-circle-down"></i> Violation Notifications: <select name="merchants-bulk-action-select" id="merchants-bulk-action-select"><option value="">Bulk Action</option><option value="0">Turn On</option><option value="1">Turn Off</option></select>

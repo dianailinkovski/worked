@@ -1,0 +1,158 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/paper-toast/paper-toast.html" rel="import">
+
+<polymer-element name="masterFrame-element">
+  
+  <template>
+    <style>
+    	#splash{
+    		background-image: url("../img/splash.jpg");
+    		background-size: 100%;
+    		position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+    	}
+    	.show-splash{
+    		display: block;
+    	}
+    	.hide-splash{
+    		display: none;
+    	}
+    	.show-frame{
+    		position: absolute;
+    	}
+    	.hide-frame{
+    		position: inherit;
+    	}
+    </style>
+    <div id="splash" class="{{show_splash}}">
+    	
+    </div>
+    
+    <iframe id="masterFrame" src="../bibliotheque.html" class="{{show_frame}}" style="border:0; overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+    
+    <iframe id="downloadFrame" src="../downloadFrame.html" style="border:0; overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:0%;width:0%;position:absolute;" width="0" height="0"></iframe>
+    
+    <paper-toast id="MasterToast" text="" duration="5000"></paper-toast>
+    
+  </template>
+  <script>
+
+    Polymer('masterFrame-element', {
+	  testValue:'test',
+	  
+	  masterBody:null,
+	  refBiblio: null,
+	  
+	  downloadBody:null,
+	  
+	  show_splash: "show-splash",
+	  show_frame: "hide-frame",
+	  
+	  ready: function() {
+		var elementRef = this;
+		
+		
+		
+		var masterFrame = elementRef.shadowRoot.querySelector('#masterFrame');
+		masterFrame.addEventListener('load',function(){
+
+			var elementRef2 = elementRef;
+			
+		    setTimeout(function(){
+				
+				elementRef.show_splash = "hide-splash";
+				elementRef.show_frame = "show-frame";
+				
+		    }.bind(this),2000);
+			
+			elementRef.masterBody = masterFrame.contentWindow.document.querySelector('body');
+			elementRef.refBiblio = null;
+			elementRef.refBiblio = elementRef.masterBody.querySelector('bibliothequeLayout-element');
+			elementRef.masterBody.addEventListener("downloadManager-addedPublication", function(e) {
+				//addedPublication(e.detail.publication);
+				elementRef2.sendToDownload(e.detail);
+		    });
+			
+			elementRef.masterBody.addEventListener("show-toast", function(e) {
+				elementRef2.showToast(e.detail.textToShow);
+			});
+		});
+		
+		
+		
+		var downloadFrame = elementRef.shadowRoot.querySelector('#downloadFrame');
+		downloadFrame.addEventListener('load',function(){
+			var elementRef2 = elementRef;
+			elementRef.downloadBody = downloadFrame.contentWindow.document.querySelector('downloadManager-element');
+			elementRef.downloadBody.addEventListener("show-toast", function(e) {
+				elementRef2.showToast(e.detail.textToShow);
+			});
+			
+			elementRef.downloadBody.addEventListener("downloadManager-downloadTrackingProgress", function(e) {
+				elementRef2.sendDownloadTracking(e.detail);
+			});
+			
+			elementRef.downloadBody.addEventListener("downloadManager-downloadTrackingCompleted", function(e) {
+				elementRef2.sendDownloadTrackingCompleted();
+			});
+			
+		});
+		
+		
+	  },
+	  
+	  sendDownloadTracking: function(data) {
+		  try {
+			
+			var masterFrame = this.shadowRoot.querySelector('#masterFrame');
+			var masterFrameBody = masterFrame.contentWindow.document.querySelector('body');
+			var masterFrameBodyLayout = masterFrameBody.querySelector('bibliothequeLayout-element');
+			//masterFrameBodyLayout.shadowRoot.querySelector('bibliothequeTabView-element').asyncFire("masterFrame-downloadTrackingProgress2", {publication: data.publication, progress: data.progress});
+			
+			var temp = masterFrameBodyLayout.shadowRoot.querySelector('bibliothequeTabView-element').shadowRoot.querySelectorAll('bibliothequeCover-element');
+			for (var i = 0; i < temp.length; i++) {
+				//test[i].asyncFire("masterFrame-downloadTrackingProgress", {publication: data.publication, progress: data.progress});
+				temp[i].progressReceived(data.publication,data.progress);
+			}
+			
+		  } catch (err) {
+		    console.log("Error:", err);
+		  }
+		
+	  },
+	  
+	  sendDownloadTrackingCompleted: function() {
+		try {
+			
+			var masterFrame = this.shadowRoot.querySelector('#masterFrame');
+			var masterFrameBody = masterFrame.contentWindow.document.querySelector('body');
+			var masterFrameBodyLayout = masterFrameBody.querySelector('bibliothequeLayout-element');
+			var temp = masterFrameBodyLayout.shadowRoot.querySelector('bibliothequeTabView-element').shadowRoot.querySelectorAll('bibliothequeCover-element');
+			for (var i = 0; i < temp.length; i++) {
+				//test[i].asyncFire("masterFrame-downloadTrackingCompleted");
+				temp[i].progressCompletedReceived();
+			}
+			
+		} catch (err) {
+		  console.log("Error:", err);
+		}
+	  },
+	  
+	  sendToDownload: function(data) {
+		this.downloadBody.fire('downloadManager-addedPublication', {publication: data.publication, databaseid: data.dataBaseId});
+	  },
+	  
+	  showToast: function(textToShow) {
+		  var toast = this.shadowRoot.querySelector('#MasterToast');
+		  toast.setAttribute('text',textToShow);
+		  toast.show();
+	  },
+	  
+    });
+
+  </script>
+</polymer-element>

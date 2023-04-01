@@ -1,0 +1,265 @@
+
+#content{
+	padding-bottom: 30px;
+	padding: 0 0 30px 0; background:#fff;
+}
+
+.subheader .wrap{
+	margin: 0 auto;
+	padding: 0;
+	max-width: 500px;
+}
+
+#signup .center{
+	width: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 auto;
+	padding: 0 !important;
+}
+
+#signup .center-in{
+	text-align: left;
+	padding: 0 30px;
+	margin-top: 0;
+}
+
+#content .center-in h1{
+	font-size: 37px;
+	color: #00BAFF;
+	font-weight: 400;
+	text-align: center;
+}
+
+.subheader{
+	background: #FFF;
+	height: 40px;
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.04);
+	border-bottom: 1px solid #ddd;
+}
+
+.subheader .wrap{
+	
+
+}
+
+.subheader a{
+	width: 50%;
+	padding: 0;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	float: left;
+	box-shadow: inset -1px 0px 0px rgba(0, 0, 0, 0.06);
+}
+
+.subheader a:first-child{
+	box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.06), inset -1px 0px 0px rgba(0, 0, 0, 0.06);
+}
+
+.subheader a.selected{
+	color: #777;
+	background: #f2f2f2;	
+	box-shadow: inset -1px 0px 0px rgba(0, 0, 0, 0.06), inset 0 10px 3px rgba(255, 255, 255, 0.7);
+}
+
+
+.subheader a.selected:first-child{
+	box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.06), inset -1px 0px 0px rgba(0, 0, 0, 0.06), inset 0 10px 3px rgba(255, 255, 255, 0.7);
+}
+
+.subheader a:hover{
+	color: #777;
+	background: #f2f2f2;
+	text-decoration: none;
+}
+
+#signup{
+
+	margin: 20px auto;
+	max-width: 490px; background:rgba(0, 0, 0, 0.1); padding:2px 20px 25px;
+}
+
+#content h1{
+	font-size: 37px;
+	color: #198CCE;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#content input[type="text"], #content input[type="password"], #content input[type="email"], textarea{
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+}
+
+#content form{
+	clear: both;
+}
+
+#content small{
+	color: #999;
+}
+
+#content fieldset h3{
+	text-align: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-weight: normal;
+	color: #444;
+}
+#content fieldset h3 label{ font-weight: normal;}
+
+fieldset{
+	border: none; width:100%;
+}
+
+#name{
+	width: 100%;
+	float: left;
+	clear: both;
+}
+
+#first_name_in{
+	margin-right: 5px;
+	position: relative;
+}
+
+#last_name_in{
+	margin-left: 5px;
+}
+
+#gender-select{
+	padding-top: 5px;
+	padding-bottom: 15px;
+	float: left;
+}
+
+#gender-select-text{
+	float: left;
+	color: #a5a5a5;
+	font-weight: bold;
+	margin-right: 15px;
+}
+
+#gender-select .validetta-bubble{
+	top: -4px !important;
+}
+
+#gender-select .female.radio .validetta-bubble{
+	left: 100% !important;
+	margin-left: 10px;
+	min-width: 120px !important;
+}
+
+#gender-select .radio{
+	float: left;
+	margin-right: 10px;
+	margin-top: 1px;
+	position: relative;
+}
+
+#signup-actions{
+	clear: both;
+	margin-bottom: 30px;
+	float: left;
+}
+
+#signup-actions a{
+	float: left;
+	margin: 10px 15px;
+	color: #848484;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.error input{
+	border: 1px solid #FD5B5B;
+	background: #FFF;
+	border-radius: 3px 3px 0 0;
+	margin: 0 !important;
+}
+#signup button{ float:none; margin: 0 0 0 10px;}
+
+.error input:focus{
+	box-shadow: inset 0 1px 0 #E2E2E2, 0 0 4px 1px #FD5B5B;
+	position: relative;
+	z-index: 10;
+}
+
+.error .error{
+	background: #FD5B5B;
+	color: #FFF;
+	border-radius: 0 0 3px 3px;
+	padding: 6px 10px;
+	margin-bottom: 10px;
+	font-size: 13px;
+	line-height: 13px;
+	clear: both;
+}
+
+#content.signup fieldset{
+	border: none;
+}
+
+#content.signup fieldset h3{
+	text-align: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-weight: normal;
+	color: #444;
+}
+
+
+.avatar img{
+	max-width: 100%;
+}
+.error-message{
+	background: #FF5252;
+	color: #FFF;
+	text-align: center;
+	padding: 10px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+.success-message{
+	background: #37A85C;
+	color: #FFF;
+	text-align: center;
+	padding: 10px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+
+@media all and (max-width:768px){
+	#content:before {
+		content: '';
+		display: inline-block;
+	
+		vertical-align: middle;
+		margin-right: -0.25em; /* Adjusts for spacing */
+	}
+	
+	#content{
+		top: 92px !important;
+	}
+	
+	.subheader{
+		position: fixed;
+		top: 51px;
+		left: 0;
+		right: 0;
+	}
+	
+	.subheader .wrap{
+		width: 100%;
+		max-width: 100%;
+	}
+	
+	.subheader a{
+		width: 50%;
+		padding: 0;
+		text-align: center;
+	}
+} 

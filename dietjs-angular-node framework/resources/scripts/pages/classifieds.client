@@ -1,0 +1,275 @@
+$(function(){
+	
+	$('select[name="category"]').change(function(){
+		console.log($(this).val(), 'selected');
+		var value = $(this).val();
+		$.get('/html/parts/sub_category/'+value+'.html', function(response){
+			console.log(response);
+			$('#category_fields').slideUp(200, function(){
+				if(response.replace(/\s+/g, ' ') != '<h3>Category Fields</h3>'){
+					$('#category_fields').html(response);
+					$('#category_fields').slideDown();
+					$('select').selectize();
+				} 
+			});
+		});
+		
+	});
+	
+	
+	
+	
+	$('#classifieds .ads').imagesLoaded(function(){
+		$('#classifieds .ads').masonry({
+	  		itemSelector: '.ad'
+		});
+	});
+	$('select').selectize();
+	
+	// select location
+	$('#search_location').geocomplete().bind("geocode:result", function(event, result){
+		var form = $(this).closest('form');
+		if(result.geometry && result.geometry.location){
+			var geometry = result.geometry.location.toString();
+			var pos = geometry.substr(1, geometry.length-2).split(', ');
+			form.find('input[name="latitude"]').val(pos[0]);
+			form.find('input[name="longitude"]').val(pos[1]);
+		}
+		
+		form.find('input[name="formatted_address"]').val(result.formatted_address);
+		for(var i = 0; i < result.address_components.length; i++){
+			var component = result.address_components[i];
+			var type = component.types[0];
+			form.find('input[name="'+type+'_short"]').val(component.short_name);
+			form.find('input[name="'+type+'_long"]').val(component.long_name);
+		}
+	});
+	
+});
+
+var map;
+window.markers = []
+
+function initialize() {
+	console.log('initialize map');
+	if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+}
+} 
+function errorFunction(){
+    alert("Geocoder failed");
+	geocoder(false,false);
+}
+//Get the latitude and the longitude;
+function geocoder(lat,lng){
+	if(!lat && !lng)
+	{
+		lat =1;
+		lng =1;
+	}
+	
+	var latitude = window.query && window.query.latitude ? query.latitude : lat ;
+	var longitude = window.query && window.query.longitude ? query.longitude : lng ;
+
+	console.log('map lat/long positions:', latitude, longitude);
+	var mapOptions = {
+		zoom: 10,
+		center: new google.maps.LatLng(latitude, longitude)
+	};
+	map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	var bounds = new google.maps.LatLngBounds();
+	
+	var infowindow = new google.maps.InfoWindow({
+		maxWidth: 400,
+		minHeight: 100,
+	});
+	window.ads.forEach(function(item){ 
+		console.log("sayeed:"+item.category);
+		var pinImg='/images/pin.png';
+		if(item.category >=1 && item.category <=6)
+			pinImg='/images/car.png';
+		else if(item.category >=7 && item.category <=13)
+					pinImg='/images/home.png';
+		else if(item.category >=14 && item.category <=18)
+					pinImg='/images/phone.png';
+		else if(item.category >=19 && item.category <=25)
+					pinImg='/images/home.png';
+		else if(item.category >=26 && item.category <=31)
+					pinImg='/images/food.png';
+		else if(item.category >=32 && item.category <=40)
+					pinImg='/images/animals.png';
+		else if(item.category >=41 && item.category <=46)
+					pinImg='/images/leisure.png';
+		else if(item.category >=47 && item.category <=48)
+					pinImg='/images/job.png';
+		else if(item.category >=49 && item.category <=55)
+					pinImg='/images/edu.png';
+	
+				console.log("PinImg:"+pinImg)
+				
+		var position = new google.maps.LatLng(item.latitude, item.longitude);
+		console.log('set marker to', position, item); 
+		bounds.extend(position);
+		var marker = new google.maps.Marker({
+			position: position,
+			map: map,
+            id:item.id,
+			icon: pinImg
+		});
+        window.markers.push(marker);
+		makeInfoWindowEvent(map, infowindow, item, marker);
+		if(window.query && window.query.latitude)
+		map.panTo(position);
+	});
+	console.log("map is");
+	if(window.query && window.query.latitude)
+	{
+		if(isset(query.locality_long)){
+			if (!window.ads.length){
+				map.setZoom(11);
+			} else if(window.ads.length == 1){ 
+				map.setZoom(11);
+			} else {
+				center = bounds.getCenter();
+				map.fitBounds(bounds);
+			}
+		} else {
+			if (window.ads.length == 1){
+				map.setZoom(11);
+			} else {
+				map.setZoom(4);
+			}
+		}
+		console.log("laaaadadtt"+lat);
+
+		map.setZoom(14);
+	}
+			if(lat==1)
+		map.setZoom(1);
+function filterAds(map){
+console.log("mapis");
+console.log(map);
+
+var bounds = new google.maps.LatLngBounds();
+var markers; // your markers
+var markerId="";
+for (var i=0; i<window.markers.length; i++){
+
+    if( map.getBounds().contains(window.markers[i].getPosition()) ){
+		console.log(window.markers[i].id);
+		markerId += "."+window.markers[i].id+" , ";
+        // code for showing your object, associated with markers[i]
+    }
+
+}
+	 markerId = markerId.replace(/,\s*$/, '');
+	console.log(markerId);
+	$('.ads').isotope({
+		filter: markerId
+	});
+}
+google.maps.event.addListener(map,'bounds_changed',function(){
+filterAds(map);
+
+});
+
+
+google.maps.event.addListenerOnce(map, 'idle', function(){
+filterAds(map);
+});
+
+	}
+
+function successFunction(position) {
+   var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+ geocoder(lat,lng);
+}
+function addMarker(id){
+for(var i=0;i<window.markers.length;i++){
+
+if (window.markers[i].id==id){
+
+window.markers[i].setMap(map);
+
+}
+}
+
+}
+function removeMarker(id){
+for(var i=0;i<window.markers.length;i++){
+window.markers[i].setMap(null);
+
+}
+}
+function makeInfoWindowEvent(map, infowindow, input, marker) {
+	google.maps.event.addListener(marker, 'click', function(event) {
+		console.log(marker);
+		var c=render('html/parts/ad_window.html', {ad:input,myID:$("#myID").val()});
+		console.log(c);
+		infowindow.setContent(c);
+		console.log(infowindow);
+		window.infowindow = infowindow;
+		window.marker = marker;
+
+		
+		infowindow.open(map, marker, {disableAutoPan: true});
+			$( ".chatIdentity" ).each(function( index ) {
+			var user=$(this).data("user");
+			console.log( index + ": " + $( this ).text() );
+			console.log(user);
+			if(users.indexOf(user.toString())>-1)
+			$(this).css("background-color","#00baff");
+		});
+		//var latLng = merge(event.latLng, {k:event.latLng})
+		console.log('#event.latLng', event.latLng)
+		infowindow.setPosition(event.latLng);
+		//console.log(event.latLng.k+30, event.latLng.A);
+		//map.panTo(new google.maps.LatLng(event.latLng.k, event.latLng.A));
+		map_recenter(event.latLng, 0, -180);
+	});
+}
+
+function map_recenter(latlng,offsetx,offsety) {
+    var point1 = map.getProjection().fromLatLngToPoint(
+        (latlng instanceof google.maps.LatLng) ? latlng : map.getCenter()
+    );
+    var point2 = new google.maps.Point(
+        ( (typeof(offsetx) == 'number' ? offsetx : 0) / Math.pow(2, map.getZoom()) ) || 0,
+        ( (typeof(offsety) == 'number' ? offsety : 0) / Math.pow(2, map.getZoom()) ) || 0
+    );  
+    map.panTo(map.getProjection().fromPointToLatLng(new google.maps.Point(
+        point1.x - point2.x,
+        point1.y + point2.y
+    )));
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+/*
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', {'packages':['geomap']});
+google.setOnLoadCallback(drawMap);
+window.currentRegion = 'world';
+function drawMap() {
+	var mapData = [['Country', 'Classifieds']]; 
+	
+	for(index in coreData){
+		mapData.push([index, coreData[index]]);
+	}
+	
+	var data = google.visualization.arrayToDataTable(mapData);
+	var geomap = new google.visualization.GeoMap(document.getElementById('map'));
+	
+	geomap.draw(data, {region: window.currentRegion, dataMode: 'regions', showZoomOut: true, showLegend: true});
+	google.visualization.events.addListener(geomap, 'regionClick', function(event){
+		window.prevRegion.push(window.currentRegion);
+		window.currentRegion = event.region;
+		console.log(window.currentRegion, window.prevRegion);
+		drawMap(currentRegion);
+	});
+	google.visualization.events.addListener(geomap, 'zoomOut', function(event){
+		window.currentRegion = window.prevRegion[];
+		drawMap();
+	});
+}*/

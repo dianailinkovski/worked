@@ -1,0 +1,46 @@
+<ion-view title="{{categoryTitle | translate}}">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-ios-information-outline right" ng-click="data.showInfo = !data.showInfo"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header width-control full-length" scrollbar-y="false">
+  <div id="category-header" ng-class="{'strength-back': thisCategory == 0,'cardio-back': thisCategory == 1,'yoga-back': thisCategory == 2,'stretch-back': thisCategory == 3,'category-rate': showRateOption}" ng-if="!showRateOption && showShareOption !== 4  && showShareOption !== 8 && showShareOption !== 13">
+    <span class="header-span">
+      <h3>{{'GET_TO_SWORK' | translate}}</h3>
+    </span>
+  </div>
+  <div id="category-header" ng-class="{'strength-back': thisCategory == 0,'cardio-back': thisCategory == 1,'yoga-back': thisCategory == 2,'stretch-back': thisCategory == 3,'category-rate': showRateOption}" class="rate-category" ng-if="showRateOption || showShareOption == 4 || showShareOption == 8 || showShareOption == 13">
+    <span class="header-span">
+      <h3 style="display:inline-block;width:300px;font-size:20px;" auto-font-size="resizeOptions" class="center white-text">{{rateHeader}}</h3>
+      <div style="width:100%;text-align:center;margin:0px auto">
+      <button class="button button-small new-button rate-buttons button-outline" ng-click="noOption()">{{noButton}}</button>
+      <button class="button button-small new-button rate-buttons" ng-click="yesOption()">{{yesButton}}</button>
+      </div>
+    </span>
+  </div>
+    <div class="list workout-type-list padding-top">
+      <p class="page-instructions" translate="SELECT_WORKOUT"></p>
+      <a class="item item-content item-icon-right item-text-wrap" ng-repeat="type in categories" type="item-text-wrap" href="#/app/home/{{thisCategory}}/{{type}}">
+        <span class="extra-color-left">
+          <div class="category-icon" style="background-image:url(img/small/{{workoutTypes[type].icon}});">
+          </div>
+        </span>
+        <div class="extra-left category-title" ng-class="{'category-align' : data.showInfo}">
+          <h2>{{(workoutTypes[type].activityNames | translate)}}</h2>
+          <p class="extra-left" ng-if="data.showInfo">{{(workoutTypes[type].description | translate)}}
+          </p>
+        </div>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </a>
+      <a class="item item-content item-icon-right item-text-wrap" type="item-text-wrap"  href="#/app/sworkitpro" ng-if="thisCategory == 0">
+        <span class="extra-color-left">
+          <div class="category-icon" style="background-image:url(img/small/sevenMinute.png);">
+          </div>
+        </span>
+        <div class="extra-left category-title" ng-class="{'category-align' : data.showInfo}">
+          <h2 style="font-size:15px">{{'SEVEN_MINUTE' | translate}} ({{'PRO_ONLY' | translate}})</h2>
+        </div>
+        <i class="icon ion-locked icon-accessory"></i>
+      </a>
+  </div>
+  </ion-content>
+</ion-view>
